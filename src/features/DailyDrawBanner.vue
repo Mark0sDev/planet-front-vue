@@ -30,7 +30,7 @@ onMounted(() => {
 
     index = (index + 1) % animations.length
     currentAnimation.value = animations[index]
-  }, 5000)
+  }, 3000)
 })
 
 onBeforeUnmount(() => {

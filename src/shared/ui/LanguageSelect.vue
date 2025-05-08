@@ -9,23 +9,19 @@ interface Flag {
 }
 
 enum Language {
-  EN = 'gb',
+  EN = 'en',
   RU = 'ru',
-  JA = 'jp',
-  ZH = 'cn',
   UA = 'ua',
 }
 
 const isOpen = ref<boolean>(false)
 const containerRef = ref<HTMLElement | null>(null)
 
-const getFlagUrl = (lang: Language): string => `https://flagcdn.com/w40/${lang}.png`
+const getFlagUrl = (lang: Language): string => `/src/shared/assets/icons/${lang}.svg`
 
 const flags: { code: Language; label: string; src: string }[] = [
   { code: Language.EN, label: 'English', src: getFlagUrl(Language.EN) },
   { code: Language.RU, label: 'Русский', src: getFlagUrl(Language.RU) },
-  { code: Language.JA, label: '日本語', src: getFlagUrl(Language.JA) },
-  { code: Language.ZH, label: '中文', src: getFlagUrl(Language.ZH) },
   { code: Language.UA, label: 'Українська', src: getFlagUrl(Language.UA) },
 ]
 

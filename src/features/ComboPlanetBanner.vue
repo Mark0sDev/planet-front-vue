@@ -42,13 +42,11 @@ const handleButtonClick = () => {
         </filter>
       </defs>
     </svg>
-    <div class="bg-image">
-      <img src="@/shared/assets/bg/combo-planet-bg.png" alt="" />
-    </div>
+   
     <div class="combo-text">Атакуй планеты и зарабатывай TON</div>
 
     <div class="combo-accent">
-      <img src="@/shared/assets/currency/ton.webp" />
+    
       Начни всего с <span>1 TON</span>
     </div>
 
@@ -105,7 +103,7 @@ const handleButtonClick = () => {
   margin-bottom: 14px;
   position: relative;
   z-index: 10;
-  font-size: 16px;
+  font-size: 20px;
 
   img {
     width: 31px;
@@ -123,7 +121,7 @@ const handleButtonClick = () => {
   position: relative;
   padding-left: 40px;
   padding-right: 40px;
-  width: auto;
+  width: 100%;
   z-index: 10;
 }
 </style>
