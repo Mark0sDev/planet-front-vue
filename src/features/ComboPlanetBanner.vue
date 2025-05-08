@@ -11,44 +11,36 @@ const handleButtonClick = () => {
 
 <template>
   <div class="combo-planet-card">
-    <svg
-      class="decor"
-      width="236"
-      height="126"
-      viewBox="0 0 236 126"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg class="decor" width="236" height="126" viewBox="0 0 236 126" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_f_2265_5200)">
         <path
           d="M143.586 83.2565L185.036 46.488L94.1225 -55.9999L52.6728 -19.2314C32.1494 35.6736 176.067 -19.0642 143.586 83.2565Z"
-          fill="#38B6FA"
-          fill-opacity="0.8"
-        />
+          fill="#38B6FA" fill-opacity="0.8" />
       </g>
       <defs>
-        <filter
-          id="filter0_f_2265_5200"
-          x="0.660156"
-          y="-106"
-          width="234.375"
-          height="239.256"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
+        <filter id="filter0_f_2265_5200" x="0.660156" y="-106" width="234.375" height="239.256"
+          filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_2265_5200" />
         </filter>
       </defs>
     </svg>
-   
-    <div class="combo-text">Атакуй планеты и зарабатывай TON</div>
 
-    <div class="combo-accent">
-    
-      Начни всего с <span>1 TON</span>
+    <div class="combo-text">Атакуй планеты и зарабатывай TON</div>
+    <div class="card-div">
+      <div class="statistics-icon" style="background-color: rgb(39, 175, 249);"><svg data-v-d639372b=""
+          xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none" stroke-width="0">
+          <path fill="#fff"
+            d="m21.161 7.22-7.846 12.494a1.058 1.058 0 0 1-1.794-.006L3.828 7.214A2.2 2.2 0 0 1 3.5 6.05a2.29 2.29 0 0 1 2.324-2.255h13.362c1.277 0 2.314 1.005 2.314 2.25 0 .412-.116.82-.339 1.175M5.718 6.8l5.723 8.826V5.912H6.316c-.592 0-.857.392-.598.89m7.84 8.826L19.283 6.8c.265-.497-.006-.89-.599-.89H13.56z">
+          </path>
+        </svg></div>
+      <div class="combo-accent">
+
+        Начни всего с <span>1 TON</span>
+      </div>
     </div>
+
 
     <UiButton class="combo-planet-button" @click="handleButtonClick" color="blue">
       НАЧАТЬ СЕЙЧАС
@@ -58,6 +50,21 @@ const handleButtonClick = () => {
 
 <style scoped lang="scss">
 @use '@/app/styles/mixins' as mixins;
+
+.card-div {
+  display: flex;
+
+  align-items: center;
+  margin-bottom: 16px;
+
+  .combo-accent {
+    margin-left: 10px;
+    font-weight: 400;
+    
+  }
+
+}
+
 .combo-planet-card {
   width: 100%;
   padding: 10px;
@@ -75,6 +82,7 @@ const handleButtonClick = () => {
     left: 50%;
     transform: translateX(-50%);
   }
+
   .bg-image {
     position: absolute;
     bottom: 0;
@@ -100,7 +108,7 @@ const handleButtonClick = () => {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 14px;
+  
   position: relative;
   z-index: 10;
   font-size: 20px;
@@ -112,7 +120,7 @@ const handleButtonClick = () => {
 
   span {
     color: #27aff9;
-    font-weight: 500;
+    font-weight: 700;
   }
 }
 

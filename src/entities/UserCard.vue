@@ -29,7 +29,7 @@ defineProps<UserCardProps>()
 
     <div class="user-balance">
       {{ user.score }}
-      <img src="@/shared/assets/currency/ton.webp" alt="TON" class="balance-icon" />
+      <img src="/icons/ton.svg" alt="TON" class="balance-icon" />
     </div>
   </div>
 </template>

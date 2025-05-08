@@ -29,7 +29,7 @@ const handleButtonClick = () => {
     </svg>
     <div class="daily-draw-inner">
       <div class="content">
-        <div class="title">Крути рулетку <br /><span>Выигрывай</span> призы</div>
+        <div class="title">Крути рулетку <span>Выигрывай</span> призы</div>
         <UiButton @click="handleButtonClick" class="green">Крутить</UiButton>
       </div>
 
@@ -68,7 +68,8 @@ const handleButtonClick = () => {
   }
 
   .title {
-    font-size: 16px;
+    text-align: center;
+    font-size: 18px;
     font-weight: 600;
     line-height: 1.1;
     margin-bottom: 8px;

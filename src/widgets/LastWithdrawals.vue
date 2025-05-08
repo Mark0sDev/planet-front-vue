@@ -15,7 +15,7 @@ const transactions: Transaction[] = [
     title: 'Oldest User',
     date: '2025-04-25',
     amount: '23.4',
-    type: 'income',
+    type: 'expense',
     status: 'success',
   },
   {

@@ -20,7 +20,7 @@ const variantClass = computed(() => {
     <div class="card-head">
       <div class="card-icon">
         <img v-if="variant === 'yellow'" src="@/shared/assets/icons/daily-1.png" alt="" />
-        <img v-else src="@/shared/assets/currency/ton.webp" alt="" />
+        <img v-else src="/icons/ton.svg" alt="" />
       </div>
       <div class="card-head-inner">
         <div class="tip">Ежедневная</div>
@@ -36,6 +36,7 @@ const variantClass = computed(() => {
 
 <style lang="scss">
 @use '@/app/styles/mixins' as mixins;
+
 .daily-action-card {
   width: 100%;
   padding: 16px;
@@ -67,11 +68,13 @@ const variantClass = computed(() => {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+
   .card-icon {
     flex: none;
     width: 31px;
     height: 31px;
   }
+
   .tip {
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7);
@@ -92,6 +95,7 @@ const variantClass = computed(() => {
   &.yellow span {
     color: #eda400;
   }
+
   &.blue span {
     color: #27aff9;
   }

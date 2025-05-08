@@ -8,7 +8,7 @@ defineProps<{
   <div class="level-card">
     <div class="level-info">Стоимость:</div>
     <div class="level-reward">
-      <img src="@/shared/assets/currency/ton.webp" alt="TON" class="reward-icon" />
+      <img src="/icons/ton.svg" alt="TON" class="reward-icon" />
       {{ price }} TON
     </div>
   </div>
@@ -16,6 +16,7 @@ defineProps<{
 
 <style scoped lang="scss">
 @use '@/app/styles/mixins' as mixins;
+
 .level-card {
   background-image: url('@/shared/assets/bg/level-card-bg.png');
   @include mixins.bg-cover;

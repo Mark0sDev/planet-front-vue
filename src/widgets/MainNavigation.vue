@@ -52,6 +52,7 @@ function isActive(path: string) {
   font-size: 12px;
   height: 100%;
   padding-top: 5px;
+
   padding-bottom: 12px;
   width: 64px;
   position: relative;
@@ -59,6 +60,9 @@ function isActive(path: string) {
 
   svg path {
     transition: all 0.2s;
+  }
+  span {
+    margin-top: 6px;
   }
   &.active {
     color: var(--accent);

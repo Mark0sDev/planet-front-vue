@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import BalanceActionCard, { type BalanceCardData } from '@/entities/BalanceActionCard.vue'
 import CityIcon from '@/shared/assets/currency/city.webp'
-import TonIcon from '@/shared/assets/currency/ton.webp'
+
 import WalletConnect from '@/features/WalletConnect.vue'
 import { transactions } from '@/shared/mock/transactions.ts'
 import TransactionCard from '@/entities/TransactionCard.vue'
 import UiModal from '@/shared/ui/UiModal.vue'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import WithdrawalModal from '@/features/modals/WithdrawalModal.vue'
 import TopUpBalanceModal from '@/features/modals/TopUpBalanceModal.vue'
 
@@ -24,7 +24,7 @@ const balanceActionCards: BalanceCardData[] = [
     name: 'TON',
     balance: '2.336',
     buttonLabel: 'Вывести',
-    icon: TonIcon,
+    icon: "/icons/ton.svg",
     variant: 'accent',
   },
 ]

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import CopyIcon from '@/shared/assets/icons/copy.svg'
 import CheckIcon from '@/shared/assets/icons/small-check.svg'
-import TonIcon from '@/shared/assets/icons/small-ton.svg'
+import TonIcon from '@/shared/assets/icons/mini-ton-vector.svg'
 
 interface CustomInput {
   type: 'max' | 'copy'
@@ -60,7 +60,7 @@ const handleCopyClick = async () => {
   <div class="ui-input">
     <div v-if="tip" class="ui-input-tip">{{ tip }}</div>
     <div class="ui-input-wrapper">
-      <input ref="inputRef" v-bind="$attrs" />
+      <input ref="inputRef" type="number" step="0.1" v-bind="$attrs" />
 
       <div class="ui-input-custom">
         <button v-if="custom?.type === 'max'" @click="handleMaxClick" class="max-value">
@@ -68,12 +68,7 @@ const handleCopyClick = async () => {
           MAX
         </button>
 
-        <button
-          v-if="custom?.type === 'copy'"
-          :disabled="isCopied"
-          @click="handleCopyClick"
-          class="copy"
-        >
+        <button v-if="custom?.type === 'copy'" :disabled="isCopied" @click="handleCopyClick" class="copy">
           <template v-if="isCopied">
             <CheckIcon />
           </template>
@@ -100,11 +95,13 @@ const handleCopyClick = async () => {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 7px;
   }
+
   &-wrapper {
     max-width: 100%;
     width: 100%;
     position: relative;
   }
+
   &-error {
     font-weight: 300;
     font-size: 14px;
@@ -112,6 +109,7 @@ const handleCopyClick = async () => {
     margin-top: 5px;
     text-align: center;
   }
+
   &-custom {
     position: absolute;
     top: 50%;
@@ -125,14 +123,16 @@ const handleCopyClick = async () => {
       justify-content: center;
       align-items: center;
     }
+
     .max-value {
-      color: rgba(255, 255, 255, 0.44);
+      color: white;
       font-size: 14px;
       display: flex;
       align-items: center;
       gap: 5px;
     }
   }
+
   .max-value-available {
     display: flex;
     align-items: center;
@@ -141,6 +141,7 @@ const handleCopyClick = async () => {
     font-weight: 300;
     margin-top: 5px;
   }
+
   input {
     border-radius: 8px;
     max-width: 100%;

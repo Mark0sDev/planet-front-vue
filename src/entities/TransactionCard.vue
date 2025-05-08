@@ -45,7 +45,7 @@ const amountClass = computed(() => {
 
     <div class="transaction-amount" :class="amountClass">
       <span>{{ formattedAmount }}</span>
-      <img src="@/shared/assets/currency/ton.webp" alt="TON Icon" class="transaction-icon" />
+      <img src="/icons/ton.svg" alt="TON Icon" class="transaction-icon" />
     </div>
   </div>
 </template>
@@ -69,6 +69,7 @@ const amountClass = computed(() => {
   &.income {
     background-image: url('@/shared/assets/bg/level-card-bg.png');
   }
+
   &.expense {
     background-image: url('@/shared/assets/bg/false-transaction.png');
   }

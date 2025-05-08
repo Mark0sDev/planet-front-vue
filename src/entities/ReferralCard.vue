@@ -22,7 +22,7 @@ defineProps<ReferralCardProps>()
       </div>
       <div class="referral-balance">
         {{ referral.balance }}
-        <img src="@/shared/assets/currency/ton.webp" alt="TON" class="balance-icon" />
+        <img src="/icons/ton.svg" alt="TON" class="balance-icon" />
       </div>
     </div>
   </div>
