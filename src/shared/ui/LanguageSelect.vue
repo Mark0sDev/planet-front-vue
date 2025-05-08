@@ -17,7 +17,7 @@ enum Language {
 const isOpen = ref<boolean>(false)
 const containerRef = ref<HTMLElement | null>(null)
 
-const getFlagUrl = (lang: Language): string => `/assets/icons/${lang}.svg`
+const getFlagUrl = (lang: Language): string => `/icons/${lang}.svg`;
 
 const flags: { code: Language; label: string; src: string }[] = [
   { code: Language.EN, label: 'English', src: getFlagUrl(Language.EN) },
