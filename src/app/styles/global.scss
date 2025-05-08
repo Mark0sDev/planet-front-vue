@@ -1,0 +1,97 @@
+@use 'reset';
+@use 'variables';
+@use "animations";
+@use "mixins" as mixins;
+
+html {
+  scroll-behavior: smooth;
+  margin: 0 !important;
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+a {
+  display: inline-block;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+body {
+  min-width: 320px;
+  position: relative;
+  overflow-x: clip !important;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.25 !important;
+  color: var(--font);
+  font-weight: 300;
+  background-color: var(--background);
+
+  height: 100%;
+}
+
+html, body, #app {
+  height: 100%;
+  overflow: hidden;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.page {
+  background-image: url('@/shared/assets/bg/bg.webp');
+  @include mixins.bg-cover;
+
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+  padding-bottom: 84px;
+
+  &.home-page {
+    background-image: url('@/shared/assets/bg/home.webp');
+  }
+}
+
+.scrolled-list {
+  flex: 1;
+  overflow: auto;
+  padding-bottom: 56px;
+  padding-right: 2px;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #4746c8;
+    border-radius: 10px;
+  }
+}
+
+.title-1 {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 600;
+}
+
