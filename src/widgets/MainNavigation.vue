@@ -61,6 +61,7 @@ function isActive(path: string) {
   svg path {
     transition: all 0.2s;
   }
+  
   span {
     margin-top: 6px;
   }

@@ -29,7 +29,7 @@ const handleButtonClick = () => {
     </svg>
     <div class="daily-draw-inner">
       <div class="content">
-        <div class="title">Крути рулетку <span>Выигрывай</span> призы</div>
+        <div v-html="$t('roulette.title')" class="title"></div>
         <UiButton @click="handleButtonClick" class="green">Крутить</UiButton>
       </div>
 

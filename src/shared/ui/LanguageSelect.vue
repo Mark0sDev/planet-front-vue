@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ArrowDownIcon from '@/shared/assets/icons/chevron-down.svg'
 
 interface Flag {
@@ -14,18 +15,23 @@ enum Language {
   UA = 'ua',
 }
 
+const { locale } = useI18n()
+
 const isOpen = ref<boolean>(false)
 const containerRef = ref<HTMLElement | null>(null)
 
-const getFlagUrl = (lang: Language): string => `/icons/${lang}.svg`;
+const getFlagUrl = (lang: Language): string => `/icons/${lang}.svg`
 
-const flags: { code: Language; label: string; src: string }[] = [
+const flags: Flag[] = [
   { code: Language.EN, label: 'English', src: getFlagUrl(Language.EN) },
   { code: Language.RU, label: 'Русский', src: getFlagUrl(Language.RU) },
   { code: Language.UA, label: 'Українська', src: getFlagUrl(Language.UA) },
 ]
 
-const selectedFlag = ref<Flag>(flags[0])
+const currentLang = (localStorage.getItem('lang') as Language) || Language.EN
+const selectedFlag = ref<Flag>(
+  flags.find(flag => flag.code === currentLang) || flags[0]
+)
 
 function toggleDropdown(): void {
   isOpen.value = !isOpen.value
@@ -33,6 +39,8 @@ function toggleDropdown(): void {
 
 function selectFlag(flag: Flag): void {
   selectedFlag.value = flag
+  locale.value = flag.code
+  localStorage.setItem('lang', flag.code)
   isOpen.value = false
 }
 
@@ -49,6 +57,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
 })
+
 </script>
 
 <template>
