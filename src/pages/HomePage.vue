@@ -15,7 +15,6 @@ const leaderRouter = () => {
 
 
 const tg = window.Telegram.WebApp;
-tg.showAlert(tg.toString());
 
 
 </script>
@@ -24,7 +23,7 @@ tg.showAlert(tg.toString());
   <div class="home-page page">
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />
-
+    <span>{{ tg.initData }}</span>
     <div class="page-wrapper">
       <MainDashboard />
       <MainStatistics />
