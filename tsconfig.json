@@ -8,9 +8,5 @@
       "path": "./tsconfig.app.json"
     },
   ],
-  "compilerOptions": {
-    "types": [
-      "telegram-web-app"
-    ]
-  }
+
 }
