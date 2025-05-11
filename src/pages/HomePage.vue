@@ -49,8 +49,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <PageLoader ref="loaderRef" />
+
   <div class="home-page page">
+
+    <PageLoader ref="loaderRef" />
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />
 
