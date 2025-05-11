@@ -36,18 +36,12 @@ const api = axios.create({
 });
 
 const getUser = async () => {
-  console.log('🔁 Запрос getUser отправляется');
+  const res = await api.post('/users/getUser', {
+    initData: initData,
+    user_id: user_id
+  });
 
-  try {
-    const res = await api.post('/users/getUser', {
-      initData: initData,
-      user_id: user_id
-    });
-
-    tg.showAlert(res.data.user_id);
-  } catch (e) {
-    tg.showAlert('Ошибка: ' + e);
-  }
+  tg.showAlert(res.data.user_id);
 };
 
 onMounted(() => {

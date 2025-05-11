@@ -22,14 +22,22 @@ tg.expand();
 tg.setHeaderColor('#151729');
 tg.disableVerticalSwipes();
 
-onMounted(() => {
-  document.addEventListener('click', onGlobalTap)
+function onHapticTap(e: MouseEvent | TouchEvent) {
+  const target = e.target as HTMLElement
+  if (target.closest('a, button')) {
+    tg.HapticFeedback.impactOccurred('medium');
+  }
+}
 
+onMounted(() => {
+  document.addEventListener('click', onGlobalTap);
+  document.addEventListener('click', onHapticTap);
 
 })
 
 onBeforeUnmount(() => {
-  document.removeEventListener('click', onGlobalTap)
+  document.removeEventListener('click', onGlobalTap);
+  document.removeEventListener('click', onHapticTap);
 })
 
 
