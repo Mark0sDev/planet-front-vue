@@ -3,8 +3,8 @@ import MainNavigation from '@/widgets/MainNavigation.vue'
 
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 
-
 const isAllowed = ref(true);
+
 function onGlobalTap(e: TouchEvent | MouseEvent) {
   const target = e.target as HTMLElement
   if (!target.closest('input, textarea, [contenteditable]')) {

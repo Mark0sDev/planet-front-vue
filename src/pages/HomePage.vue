@@ -4,10 +4,13 @@ import MainDashboard from '@/widgets/MainDashboard.vue'
 import MainStatistics from '@/widgets/MainStatistics.vue'
 import LastWithdrawals from '@/widgets/LastWithdrawals.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
+import PageLoader from './PageLoader.vue';
 
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+
+const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
 
 const router = useRouter()
 
@@ -22,7 +25,6 @@ const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
 
-
 const api = axios.create({
   baseURL: 'https://api-ton.dev/',
   headers: {
@@ -31,12 +33,13 @@ const api = axios.create({
 });
 
 const getUser = async () => {
-  const res = await api.post('/users/getUser', {
-    initData: initData,
-    user_id: user_id
+  await loaderRef.value?.withLoader(async () => {
+    const res = await api.post('/users/getUser', {
+      initData,
+      user_id,
+    });
+    console.log(res);
   });
-
-  console.log(res);
 };
 
 onMounted(() => {
@@ -46,6 +49,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <PageLoader ref="loaderRef" />
   <div class="home-page page">
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />
