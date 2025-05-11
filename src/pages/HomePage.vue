@@ -12,6 +12,14 @@ const router = useRouter()
 const leaderRouter = () => {
   router.push(AppRoutes.LEADERS)
 }
+import tg from '@/utils/telegram';
+
+tg?.MainButton.setText('Купить');
+tg?.MainButton.show();
+tg?.MainButton.onClick(() => {
+  tg.sendData(JSON.stringify({ action: 'buy' }));
+});
+
 
 </script>
 
