@@ -12,8 +12,11 @@ const isLoading = ref(false);
 // Тип: функция без параметров, возвращающая промис без результата
 const withLoader = async (callback: () => Promise<void>) => {
     try {
-        isLoading.value = true;
-        await callback();
+        setTimeout(() => {
+            isLoading.value = true;
+            await callback();
+        }, 1000);
+
     } finally {
         isLoading.value = false;
     }
