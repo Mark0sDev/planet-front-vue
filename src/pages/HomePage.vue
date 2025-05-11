@@ -7,7 +7,7 @@ import UiButton from '@/shared/ui/UiButton.vue'
 
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const isAllowed = ref(true);
 
@@ -33,15 +33,24 @@ const api = axios.create({
   },
 });
 
-api.post('/users/getUser', {
-  initData: initData,
-  user_id: user_id,
-})
-  .then((response) => {
-    const data = response.data;
-    tg.showAlert('Ответ от сервера: ' + JSON.stringify(data));
-  });
+const getUser = async () => {
+  console.log('🔁 Запрос getUser отправляется');
 
+  try {
+    const res = await api.post('/users/getUser', {
+      initData: tg.initData,
+      user_id: tg.initDataUnsafe?.user?.id,
+    });
+
+    console.log(res);
+  } catch (e) {
+    tg.showAlert('Ошибка: ' + e);
+  }
+};
+
+onMounted(() => {
+  getUser();
+});
 
 </script>
 
