@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import MainNavigation from '@/widgets/MainNavigation.vue'
 
-
 import { onMounted, onBeforeUnmount } from 'vue'
 
 function onGlobalTap(e: TouchEvent | MouseEvent) {
@@ -24,6 +23,11 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('click', onGlobalTap)
 })
+
+const tg = window.Telegram.WebApp;
+tg.expand();
+tg.setHeaderColor('#151729');
+
 </script>
 
 <template>
