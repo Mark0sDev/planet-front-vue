@@ -52,11 +52,12 @@ onMounted(() => {
 
   <div class="home-page page">
 
-    <PageLoader ref="loaderRef" />
+
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />
 
     <div class="page-wrapper">
+      <PageLoader ref="loaderRef" />
       <MainDashboard />
       <MainStatistics />
       <div data-v-971a35de="" class="top-users">
