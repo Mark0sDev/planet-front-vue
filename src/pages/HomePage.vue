@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import axios from 'axios';
 import MainDashboard from '@/widgets/MainDashboard.vue'
 import MainStatistics from '@/widgets/MainStatistics.vue'
 import LastWithdrawals from '@/widgets/LastWithdrawals.vue'
@@ -14,6 +15,15 @@ const leaderRouter = () => {
 }
 
 
+const tg = window.Telegram.WebApp;
+
+axios.create({
+  baseURL: 'https://example.com/api', // 🔁 замени на свой URL
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  // можно добавить токен или initData здесь, если нужно
+});
 
 
 </script>

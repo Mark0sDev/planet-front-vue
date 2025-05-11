@@ -16,19 +16,25 @@ function onGlobalTap(e: TouchEvent | MouseEvent) {
   }
 }
 
+const tg = window.Telegram.WebApp;
+tg.expand();
+tg.setHeaderColor('#151729');
+tg.disableVerticalSwipes();
+
 onMounted(() => {
   document.addEventListener('click', onGlobalTap)
+
+  if (tg.initDataUnsafe.user?.id != 856873356) {
+    return;
+  }
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onGlobalTap)
 })
 
-const tg = window.Telegram.WebApp;
-tg.expand();
-tg.setHeaderColor('#151729');
 
-alert(tg.initDataUnsafe.user?.id);
+
 
 </script>
 
