@@ -23,16 +23,28 @@ if (tg.initDataUnsafe.user?.id != 6967658199) {
   isAllowed.value = false;
 }
 
+const initData = tg.initData;
+const user_id = tg.initDataUnsafe?.user?.id;
 
-axios.create({
-  baseURL: 'https://example.com/api', // 🔁 замени на свой URL
+const api = axios.create({
+  baseURL: 'https://api-ton.dev/', 
   headers: {
     'Content-Type': 'application/json',
   },
-  // можно добавить токен или initData здесь, если нужно
 });
 
-
+api.post('/users/getUser', {
+  initData: initData,
+  user_id: user_id,
+})
+  .then((response) => {
+    const data = response.data;
+    tg.showAlert('Ответ от сервера: ' + JSON.stringify(data));
+  })
+  .catch((error) => {
+    console.error(error);
+    tg.showAlert('Ошибка при запросе: ' + (error.response?.data?.message || error.message));
+  });
 
 
 </script>
