@@ -14,9 +14,7 @@ const leaderRouter = () => {
 }
 
 
-const tg = window.Telegram.WebApp;
 
-alert(tg);
 </script>
 
 <template>
