@@ -52,6 +52,10 @@ const leaderRouter = () => {
 </template>
 
 <style scoped lang="scss">
+.top-user-card.first-place[data-v-0ca09cec] {
+  height: 100%;
+}
+
 .top-user-card {
   width: 100%;
   height: 87px;
@@ -86,7 +90,6 @@ const leaderRouter = () => {
     bottom: -11px;
   }
 }
-
 .user-avatar {
   width: 70px;
   height: 70px;
@@ -119,29 +122,11 @@ const leaderRouter = () => {
 .first-place {
   order: 2;
   background-image: url('@/shared/assets/bg/top-user-1.png');
-
   .user-avatar {
     border: 3px solid #ebc945;
   }
 }
 
-.second-place {
-  order: 1;
-  background-image: url('@/shared/assets/bg/top-user-2.png');
-
-  .user-avatar {
-    border: 3px solid #748189;
-  }
-}
-
-.third-place {
-  order: 3;
-  background-image: url('@/shared/assets/bg/top-user-3.png');
-
-  .user-avatar {
-    border: 3px solid #af7a63;
-  }
-}
 
 .title {
   font-size: 16px;
