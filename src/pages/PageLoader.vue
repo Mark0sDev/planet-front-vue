@@ -12,11 +12,8 @@ const isLoading = ref(false);
 // Тип: функция без параметров, возвращающая промис без результата
 const withLoader = async (callback: () => Promise<void>) => {
     try {
-        setTimeout(() => {
-            isLoading.value = true;
-            await callback();
-        }, 1000);
-
+        isLoading.value = true;
+        await callback();
     } finally {
         isLoading.value = false;
     }
@@ -37,7 +34,8 @@ defineExpose({
     z-index: 9999;
     width: 100vw;
     height: 100vh;
-    background: white;
+    background-image: url('@/shared/assets/bg/bg.webp');
+    background-color: #151729;
     display: flex;
     align-items: center;
     justify-content: center;
