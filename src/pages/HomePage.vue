@@ -59,10 +59,8 @@ const leaderRouter = () => {
 .top-user-card {
   width: 100%;
   height: 87px;
-
   border-radius: 16px;
-  padding: 8px;
-  padding-top: 0;
+  padding: 0 8px 8px;
   text-align: center;
   position: relative;
   display: flex;
@@ -70,12 +68,11 @@ const leaderRouter = () => {
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  color: #ffffff;
+  color: #fff;
   border: 1px solid #32315f;
-
-  &.first-place {
-    height: 99px;
-  }
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 /* Аватар */
