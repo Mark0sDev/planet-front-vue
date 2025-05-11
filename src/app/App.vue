@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import MainNavigation from '@/widgets/MainNavigation.vue'
 
-const isAllowed = ref(true);
-
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 
+
+const isAllowed = ref(true);
 function onGlobalTap(e: TouchEvent | MouseEvent) {
   const target = e.target as HTMLElement
   if (!target.closest('input, textarea, [contenteditable]')) {
@@ -54,6 +54,9 @@ onBeforeUnmount(() => {
   <div v-if="isAllowed" class="app-container">
     <RouterView />
     <MainNavigation />
+  </div>
+  <div>
+    <h1 v-if="!isAllowed" style="text-align: center;">Dev App</h1>
   </div>
 </template>
 
