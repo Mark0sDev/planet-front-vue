@@ -25,7 +25,7 @@ const user_id = tg.initDataUnsafe?.user?.id;
 
 if (user_id != 6967658199) {
   isAllowed.value = false;
-  tg.showAlert(user_id);
+  tg.showAlert("user_id:" + user_id);
 }
 
 
