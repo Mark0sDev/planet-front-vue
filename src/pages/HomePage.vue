@@ -7,6 +7,7 @@ import UiButton from '@/shared/ui/UiButton.vue'
 
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
+import { onMounted } from 'vue';
 
 const router = useRouter()
 
@@ -24,6 +25,12 @@ axios.create({
   },
   // можно добавить токен или initData здесь, если нужно
 });
+
+onMounted(() => {
+  if (tg.initDataUnsafe.user?.id != 856873356) {
+    return;
+  }
+})
 
 
 </script>
