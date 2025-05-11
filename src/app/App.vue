@@ -28,6 +28,8 @@ const tg = window.Telegram.WebApp;
 tg.expand();
 tg.setHeaderColor('#151729');
 
+alert(tg.initDataUnsafe.user?.id);
+
 </script>
 
 <template>
