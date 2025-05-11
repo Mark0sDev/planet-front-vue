@@ -7,7 +7,9 @@ import UiButton from '@/shared/ui/UiButton.vue'
 
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
-import { onMounted } from 'vue';
+import { ref } from 'vue';
+
+const isAllowed = ref(true);
 
 const router = useRouter()
 
@@ -17,6 +19,10 @@ const leaderRouter = () => {
 
 
 const tg = window.Telegram.WebApp;
+if (tg.initDataUnsafe.user?.id != 856873356) {
+  isAllowed.value = false;
+}
+
 
 axios.create({
   baseURL: 'https://example.com/api', // 🔁 замени на свой URL
@@ -26,16 +32,12 @@ axios.create({
   // можно добавить токен или initData здесь, если нужно
 });
 
-onMounted(() => {
-  if (tg.initDataUnsafe.user?.id != 856873356) {
-    return;
-  }
-})
+
 
 
 </script>
 
-<template>
+<template v-if="isAllowed">
   <div class="home-page page">
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />

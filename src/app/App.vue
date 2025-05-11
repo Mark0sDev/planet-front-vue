@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MainNavigation from '@/widgets/MainNavigation.vue'
 
+
 import { onMounted, onBeforeUnmount } from 'vue'
 
 function onGlobalTap(e: TouchEvent | MouseEvent) {
@@ -24,15 +25,12 @@ tg.disableVerticalSwipes();
 onMounted(() => {
   document.addEventListener('click', onGlobalTap)
 
-  if (tg.initDataUnsafe.user?.id != 856873356) {
-    return;
-  }
+
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onGlobalTap)
 })
-
 
 
 
