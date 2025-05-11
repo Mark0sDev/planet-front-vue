@@ -51,7 +51,7 @@ onMounted(() => {
 
 </script>
 
-<template v-if="isAllowed == true">
+<template v-if="isAllowed.value == true">
   <div class="home-page page">
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />
