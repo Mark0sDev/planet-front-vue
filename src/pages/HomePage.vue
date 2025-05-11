@@ -14,6 +14,8 @@ const leaderRouter = () => {
 }
 
 
+const tg = window.Telegram.WebApp;
+tg.showAlert('Привет!');
 
 </script>
 
