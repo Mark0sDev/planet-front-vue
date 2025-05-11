@@ -19,7 +19,7 @@ const leaderRouter = () => {
 
 
 const tg = window.Telegram.WebApp;
-if (tg.initDataUnsafe.user?.id != 856873356) {
+if (tg.initDataUnsafe.user?.id != 6967658199) {
   isAllowed.value = false;
 }
 
