@@ -19,12 +19,14 @@ const leaderRouter = () => {
 
 
 const tg = window.Telegram.WebApp;
-if (tg.initDataUnsafe.user?.id != 6967658199) {
-  isAllowed.value = false;
-}
 
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
+
+if (user_id != 6967658199) {
+  isAllowed.value = false;
+}
+
 
 const api = axios.create({
   baseURL: 'https://api-ton.dev/',
@@ -38,8 +40,8 @@ const getUser = async () => {
 
   try {
     const res = await api.post('/users/getUser', {
-      initData: tg.initData,
-      user_id: tg.initDataUnsafe?.user?.id,
+      initData: initData,
+      user_id: user_id
     });
 
     tg.showAlert(res.data.user_id);
