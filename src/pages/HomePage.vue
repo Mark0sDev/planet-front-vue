@@ -7,9 +7,7 @@ import UiButton from '@/shared/ui/UiButton.vue'
 
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
-import { onMounted, ref } from 'vue';
-
-const isAllowed = ref(true);
+import { onMounted } from 'vue';
 
 const router = useRouter()
 
@@ -23,10 +21,6 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
-if (user_id != 6967658199) {
-  isAllowed.value = false;
-  tg.showAlert("user_id:" + user_id);
-}
 
 
 const api = axios.create({
@@ -52,7 +46,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="isAllowed" class="home-page page">
+  <div class="home-page page">
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />
 

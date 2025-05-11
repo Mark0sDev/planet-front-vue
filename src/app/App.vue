@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import MainNavigation from '@/widgets/MainNavigation.vue'
 
+const isAllowed = ref(true);
 
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 function onGlobalTap(e: TouchEvent | MouseEvent) {
   const target = e.target as HTMLElement
@@ -21,6 +22,11 @@ const tg = window.Telegram.WebApp;
 tg.expand();
 tg.setHeaderColor('#151729');
 tg.disableVerticalSwipes();
+
+if (tg.initDataUnsafe?.user?.id != 6967658199) {
+  isAllowed.value = false;
+  tg.showAlert("user_id:" + tg.initDataUnsafe?.user?.id);
+}
 
 function onHapticTap(e: MouseEvent | TouchEvent) {
   const target = e.target as HTMLElement
@@ -45,7 +51,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="app-container">
+  <div v-if="isAllowed" class="app-container">
     <RouterView />
     <MainNavigation />
   </div>
