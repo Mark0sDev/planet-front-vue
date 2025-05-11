@@ -56,6 +56,38 @@ const leaderRouter = () => {
   height: 100%;
 }
 
+.first-place {
+  order: 2;
+  background-image: url('@/shared/assets/bg/top-user-1.png');
+
+  .user-avatar {
+    border: 3px solid #ebc945;
+  }
+}
+
+
+.top-user-card {
+  width: 100%;
+  height: 87px;
+
+  border-radius: 16px;
+  padding: 8px;
+  padding-top: 0;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  color: #ffffff;
+  border: 1px solid #32315f;
+
+  &.first-place {
+    height: 99px;
+  }
+}
+
 .title {
   font-size: 16px;
   font-weight: 600;
