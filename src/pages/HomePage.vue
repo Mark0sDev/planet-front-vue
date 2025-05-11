@@ -25,6 +25,7 @@ const user_id = tg.initDataUnsafe?.user?.id;
 
 if (user_id != 6967658199) {
   isAllowed.value = false;
+  tg.showAlert(user_id);
 }
 
 
@@ -41,7 +42,7 @@ const getUser = async () => {
     user_id: user_id
   });
 
-  tg.showAlert(res.data.user_id);
+  console.log(res);
 };
 
 onMounted(() => {
