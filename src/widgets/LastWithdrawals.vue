@@ -10,22 +10,6 @@ const transactions: Transaction[] = [
     type: 'income',
     status: 'success',
   },
-  {
-    id: 2,
-    title: 'Oldest User',
-    date: '2025-04-25',
-    amount: '23.4',
-    type: 'expense',
-    status: 'success',
-  },
-  {
-    id: 3,
-    title: 'Tester',
-    date: '2025-04-25',
-    amount: '0.12',
-    type: 'income',
-    status: 'success',
-  },
 ]
 </script>
 
@@ -41,6 +25,7 @@ const transactions: Transaction[] = [
 <style scoped lang="scss">
 .last-withdrawals {
   margin-top: 20px;
+
   .title {
     margin-bottom: 10px;
   }

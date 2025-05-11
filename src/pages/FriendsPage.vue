@@ -1,9 +1,23 @@
 <script setup lang="ts">
-import { referrals } from '@/shared/mock/referals.ts'
-
 import InviteFriendBanner from '@/features/InviteFriendBanner.vue'
 import ReferralInfoBanner from '@/features/ReferralInfoBanner.vue'
 import ReferralCard from '@/entities/ReferralCard.vue'
+
+import avatar1 from '@/shared/assets/avatars/avatar-1.jpg'
+
+import type { Referral } from '@/entities/ReferralCard.vue'
+
+
+const referrals: Referral[] = [
+  {
+    id: 1,
+    name: 'Alex Planet',
+    avatar: avatar1,
+    balance: '0.00012',
+  },
+];
+
+
 </script>
 
 <template>
@@ -23,9 +37,11 @@ import ReferralCard from '@/entities/ReferralCard.vue'
 .title-1 {
   margin-bottom: 12px;
 }
+
 .friends-title {
   text-align: center;
 }
+
 .friends-text {
   text-align: center;
   font-size: 16px;

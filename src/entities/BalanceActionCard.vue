@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import UiButton from '@/shared/ui/UiButton.vue'
 
 export interface BalanceCardData {
   id: number
@@ -15,15 +14,8 @@ interface BalanceActionCardProps {
 }
 
 const { card } = defineProps<BalanceActionCardProps>()
-const emit = defineEmits<{
-  (e: 'action', cardId: number): void
-}>()
 
-// обработчик клика по кнопке
-function onButtonClick() {
-  // эмитим событие и передаём туда id карточки
-  emit('action', card.id)
-}
+
 </script>
 
 <template>
@@ -38,9 +30,7 @@ function onButtonClick() {
     <div class="balance-description">
       <slot name="description"></slot>
     </div>
-    <UiButton @click="onButtonClick" class="balance-action" size="sm" :color="card.variant">
-      {{ card.buttonLabel }}
-    </UiButton>
+   
   </div>
 </template>
 

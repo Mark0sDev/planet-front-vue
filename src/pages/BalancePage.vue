@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import BalanceActionCard, { type BalanceCardData } from '@/entities/BalanceActionCard.vue'
 import CityIcon from '@/shared/assets/currency/city.webp'
+import type { Transaction } from '@/entities/TransactionCard.vue'
 
 import WalletConnect from '@/features/WalletConnect.vue'
-import { transactions } from '@/shared/mock/transactions.ts'
+
+import outBalance from '@/features/outBalance.vue'
+
 import TransactionCard from '@/entities/TransactionCard.vue'
 import UiModal from '@/shared/ui/UiModal.vue'
 import { ref } from 'vue'
-import WithdrawalModal from '@/features/modals/WithdrawalModal.vue'
-import TopUpBalanceModal from '@/features/modals/TopUpBalanceModal.vue'
+
 
 const balanceActionCards: BalanceCardData[] = [
   {
@@ -27,6 +29,18 @@ const balanceActionCards: BalanceCardData[] = [
     icon: "/icons/ton.svg",
     variant: 'accent',
   },
+]
+
+const transactions: Transaction[] = [
+  {
+    id: 1,
+    title: 'Пополнение',
+    date: '2025-04-25',
+    amount: '0.005',
+    type: 'income',
+    status: 'success',
+  },
+
 ]
 
 const showWithdrawal = ref<boolean>(false)
@@ -60,12 +74,12 @@ function handleCardAction(cardId: number) {
     </div>
     <div class="title-1">Кошелек</div>
     <WalletConnect />
+    <div class="title-1">Кошелек</div>
+    <outBalance />
     <div class="title-1">История транзакций</div>
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
   </div>
-  <UiModal v-model="showWithdrawal" title="Вывести баланс">
-    <WithdrawalModal />
-  </UiModal>
+
   <UiModal v-model="showTopUp" title="Пополнить баланс">
     <TopUpBalanceModal />
   </UiModal>
@@ -74,11 +88,15 @@ function handleCardAction(cardId: number) {
 <style scoped>
 .title-1 {
   margin-bottom: 10px;
+  text-align: center;
 }
+
+
 
 .balance-title {
   text-align: center;
 }
+
 .balance-cards {
   display: flex;
   align-items: center;

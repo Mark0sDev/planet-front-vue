@@ -60,7 +60,7 @@ const handleCopyClick = async () => {
   <div class="ui-input">
     <div v-if="tip" class="ui-input-tip">{{ tip }}</div>
     <div class="ui-input-wrapper">
-      <input ref="inputRef" type="number" step="0.1" v-bind="$attrs" />
+      <input ref="inputRef"  v-bind="$attrs" />
 
       <div class="ui-input-custom">
         <button v-if="custom?.type === 'max'" @click="handleMaxClick" class="max-value">
@@ -89,6 +89,7 @@ const handleCopyClick = async () => {
 
 <style scoped lang="scss">
 .ui-input {
+  padding: 5px;
   &-tip {
     font-weight: 400;
     font-size: 12px;

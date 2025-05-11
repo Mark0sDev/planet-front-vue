@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MainNavigation from '@/widgets/MainNavigation.vue'
 
+
 import { onMounted, onBeforeUnmount } from 'vue'
 
 function onGlobalTap(e: TouchEvent | MouseEvent) {

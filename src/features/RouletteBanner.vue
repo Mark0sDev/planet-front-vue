@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import UiButton from '@/shared/ui/UiButton.vue'
 
+import SlotsIcon from '@/shared/assets/icons/slot-machine.svg'
+
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
 
@@ -29,20 +31,18 @@ const handleButtonClick = () => {
     </svg>
     <div class="daily-draw-inner">
       <div class="content">
-        <div v-html="$t('roulette.title')" class="title"></div>
+        <div class="title">Крути рулетку <br /><span>Выигрывай</span> призы</div>
         <UiButton @click="handleButtonClick" class="green">Крутить</UiButton>
       </div>
-
+      <div class="banner-icon-wrapper">
+        <SlotsIcon />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @use '@/app/styles/mixins' as mixins;
-
-.green {
-  background: #bdd756;
-}
 
 .daily-draw-banner {
   width: 100%;
@@ -53,6 +53,10 @@ const handleButtonClick = () => {
   border: 1px solid #32315f;
   position: relative;
   overflow: hidden;
+
+  .green {
+    background-color: #bdd756;
+  }
 
   .decor {
     position: absolute;
@@ -68,8 +72,7 @@ const handleButtonClick = () => {
   }
 
   .title {
-    text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     line-height: 1.1;
     margin-bottom: 8px;

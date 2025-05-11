@@ -12,7 +12,6 @@ import NftImage1 from '@/shared/assets/nfts/nft-1.webp'
 import NftImage2 from '@/shared/assets/nfts/nft-2.webp'
 import NftImage3 from '@/shared/assets/nfts/nft-3.webp'
 import NftImage4 from '@/shared/assets/nfts/nft-4.webp'
-import NftImage5 from '@/shared/assets/nfts/nft-5.webp'
 
 const PASSES = 8 // «пустых» оборотов
 const TOTAL_DURATION = 4500 // длительность спина, мс
@@ -28,11 +27,10 @@ interface Prize {
 }
 
 const basePrizes: Prize[] = [
-  { id: 1, image: NftImage1, title: 'PEPE' },
+  { id: 1, image: NftImage1, title: 'CALENDAR' },
   { id: 2, image: NftImage2, title: 'HAPPY' },
   { id: 3, image: NftImage3, title: 'COIN' },
   { id: 4, image: NftImage4, title: 'ROCKET' },
-  { id: 5, image: NftImage5, title: 'DIAMOND' },
 ]
 const CYCLE = basePrizes.length
 
@@ -164,7 +162,7 @@ function recenter() {
     </div>
 
     <div class="roulette-controls">
-      <SpinPriceCard :price="10" />
+      <SpinPriceCard :price="0" />
       <UiButton class="spin-btn" :disabled="isSpinning" @click="spin">
         {{ isSpinning ? 'Крутим…' : 'Крутить' }}
       </UiButton>

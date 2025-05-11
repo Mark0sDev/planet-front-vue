@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
+
+
+
+
+
 import { ref, onBeforeUnmount } from 'vue'
 import PlanetCard, { type Planet } from '@/entities/PlanetCard.vue'
 import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/AttackScene.vue'
-import { planets } from '@/shared/mock/planets'
+
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 
 const SCENE_DURATION_MS = 4_500
@@ -47,6 +53,17 @@ onBeforeUnmount(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   dialogTimerId.value && clearTimeout(dialogTimerId.value)
 })
+
+const planets: Planet[] = [
+  {
+    name: 'Меркурий',
+    imageSrc: PlanetImage1,
+    income: 1.1,
+    cost: 0.6,
+    cycleTime: 3,
+    earned: 10,
+  },
+];
 </script>
 
 <template>
