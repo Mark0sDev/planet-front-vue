@@ -90,6 +90,7 @@ const leaderRouter = () => {
     bottom: -11px;
   }
 }
+
 .user-avatar {
   width: 70px;
   height: 70px;
@@ -120,8 +121,11 @@ const leaderRouter = () => {
 
 /* Специальные стили для мест */
 .first-place {
+  margin-top: 10px;
   order: 2;
   background-image: url('@/shared/assets/bg/top-user-1.png');
+  background-size: cover;
+
   .user-avatar {
     border: 3px solid #ebc945;
   }
