@@ -37,7 +37,7 @@ const leaderRouter = () => {
               Займи место в TOP-100<br /><span>и получай призы</span>
             </div>
             <UiButton style="margin-bottom: 5px; width: 100%;" @click="leaderRouter" color="yellow">
-              Test
+              Go
             </UiButton>
           </div>
 
@@ -119,9 +119,17 @@ const leaderRouter = () => {
   height: 42px;
 }
 
+.top-users {
+  display: flex;
+  align-items: end;
+  padding-top: 70px;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
 /* Специальные стили для мест */
 .first-place {
-  margin-top: 10px;
+
   order: 2;
   background-image: url('@/shared/assets/bg/top-user-1.png');
   background-size: cover;
