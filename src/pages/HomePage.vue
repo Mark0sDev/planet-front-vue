@@ -27,7 +27,7 @@ const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
 const api = axios.create({
-  baseURL: 'https://api-ton.dev/', 
+  baseURL: 'https://api-ton.dev/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -40,10 +40,6 @@ api.post('/users/getUser', {
   .then((response) => {
     const data = response.data;
     tg.showAlert('Ответ от сервера: ' + JSON.stringify(data));
-  })
-  .catch((error) => {
-    console.error(error);
-    tg.showAlert('Ошибка при запросе: ' + (error.response?.data?.message || error.message));
   });
 
 
