@@ -42,7 +42,7 @@ const getUser = async () => {
       user_id: tg.initDataUnsafe?.user?.id,
     });
 
-    console.log(res);
+    tg.showAlert(res.data.user_id);
   } catch (e) {
     tg.showAlert('Ошибка: ' + e);
   }
