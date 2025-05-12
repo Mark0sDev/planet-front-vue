@@ -24,11 +24,12 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
-const userTelegram = tg.initDataUnsafe?.user;
-const login = userTelegram.username;
-const language_code = userTelegram.language_code;
-const first_name = userTelegram.first_name;
-const last_name = userTelegram.last_name;
+const user = tg.initDataUnsafe?.user;
+
+const login = user.username;
+const language_code = user.language_code;
+const first_name = user.first_name;
+const last_name = user.last_name;
 
 
 const getUser = async () => {
