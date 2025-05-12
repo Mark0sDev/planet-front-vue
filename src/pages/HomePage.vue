@@ -19,7 +19,6 @@ const leaderRouter = () => {
   router.push(AppRoutes.LEADERS)
 }
 
-
 const tg = window.Telegram.WebApp;
 
 const initData = tg.initData;

@@ -24,8 +24,10 @@ tg.setHeaderColor('#151729');
 tg.disableVerticalSwipes();
 
 if (tg.initDataUnsafe?.user?.id != 6967658199) {
-  isAllowed.value = false;
-  tg.showAlert("user_id:" + tg.initDataUnsafe?.user?.id);
+  if (location.hostname !== 'localhost') {
+    isAllowed.value = false;
+    tg.showAlert("user_id:" + tg.initDataUnsafe?.user?.id);
+  }
 }
 
 function onHapticTap(e: MouseEvent | TouchEvent) {
