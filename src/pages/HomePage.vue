@@ -25,7 +25,6 @@ const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
 const userTelegram = tg.initDataUnsafe?.user.first_name;
-console.log(userTelegram);
 
 /*if (userTelegram) {
   console.log('ID:', user.id);
@@ -40,7 +39,7 @@ const getUser = async () => {
     const res = await api.post('/users/getUser', {
       initData,
       user_id,
-
+      userTelegram
     });
     tg.showAlert(res.data.login);
   });
