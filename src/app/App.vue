@@ -19,9 +19,6 @@ function onGlobalTap(e: TouchEvent | MouseEvent) {
 }
 
 const tg = window.Telegram.WebApp;
-
-const initData = tg.initData;
-
 tg.expand();
 tg.setHeaderColor('#151729');
 tg.disableVerticalSwipes();
@@ -61,7 +58,7 @@ onBeforeUnmount(() => {
     <MainNavigation />
   </div>
   <div>
-    <h1 v-if="!isAllowed" style="text-align: center;">{{ initData }}</h1>
+    <h1 v-if="!isAllowed" style="text-align: center;">Dev App</h1>
   </div>
 </template>
 
