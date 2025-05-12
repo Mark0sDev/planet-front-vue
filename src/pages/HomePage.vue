@@ -24,9 +24,16 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
-const user = tg.initDataUnsafe?.user;
+const userTelegram = tg.initDataUnsafe?.user.first_name;
+console.log(userTelegram);
 
-console.log('Язык:', user.language_code);
+/*if (userTelegram) {
+  console.log('ID:', user.id);
+  console.log('Имя:', user.first_name);
+  console.log('Фамилия:', user.last_name);
+  console.log('Username:', user.username); // <-- это то, что тебе нужно
+  console.log('Язык:', user.language_code);
+}*/
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
