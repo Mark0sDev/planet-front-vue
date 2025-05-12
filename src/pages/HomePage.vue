@@ -24,15 +24,18 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
+const initDataJson = JSON.parse(decodeURIComponent(tg.initData));
 
-const login = tg.initData.username;
+const login = initDataJson.username;
+const language_code = initDataJson.language_code;
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const res = await api.post('/users/getUser', {
       initData,
       user_id,
-      login
+      login,
+      language_code
     });
     tg.showAlert(res.data.login);
   });
