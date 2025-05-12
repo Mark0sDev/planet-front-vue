@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@tonconnect/ui": "^2.1.0",
     "@tsparticles/vue3": "^3.0.1",
     "@types/axios": "^0.14.4",
     "@types/gsap": "^3.0.0",

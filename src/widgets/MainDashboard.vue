@@ -1,4 +1,34 @@
+<template>
+  <section class="dashboard">
+    <div class="home-header">
+      <button @click="handleButtonClick" class="faq-button">
+        <FaqIcon /> FAQ
+      </button>
+
+      <UiButton class="home-header-button" size="sm" color="blue" @click="onWalletClick">
+        <TonIcon />
+        {{ isWalletConnected ? formattedAddress : 'Connect Wallet' }}
+      </UiButton>
+
+      <LanguageSelect />
+    </div>
+
+    <DailyDrawBanner />
+    <RouletteBanner />
+    <ComboPlanetCard />
+  </section>
+</template>
+
 <script setup lang="ts">
+declare const TonWeb: {
+  utils: {
+    Address: new (addr: string) => {
+      toString: (friendly?: boolean) => string;
+    };
+  };
+};
+
+
 import ComboPlanetCard from '@/features/ComboPlanetBanner.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import LanguageSelect from '@/shared/ui/LanguageSelect.vue'
@@ -9,27 +39,58 @@ import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
 import RouletteBanner from '@/features/RouletteBanner.vue'
 import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
+import { TonConnectUI } from '@tonconnect/ui'
+import type { Wallet } from '@tonconnect/ui'
+
+import { onMounted, ref, computed } from 'vue'
 
 const router = useRouter()
+
 const handleButtonClick = () => {
   router.push(AppRoutes.FAQ)
 }
-</script>
 
-<template>
-  <section class="dashboard">
-    <div class="home-header">
-      <button @click="handleButtonClick" class="faq-button"><FaqIcon /> FAQ</button>
-      <UiButton class="home-header-button" size="sm" color="blue">
-        <TonIcon />Connect Wallet
-      </UiButton>
-      <LanguageSelect />
-    </div>
-    <DailyDrawBanner />
-    <RouletteBanner />
-    <ComboPlanetCard />
-  </section>
-</template>
+const isWalletConnected = ref(false)
+const walletAddress = ref('')
+
+const tonConnectUI = new TonConnectUI({
+  manifestUrl: 'https://bot.sven-ton.com/tonconnect-manifest.json'
+})
+
+const formattedAddress = computed(() => {
+  if (!walletAddress.value) return ''
+
+  const address = new TonWeb.utils.Address(walletAddress.value)
+  const friendly = address.toString(true)
+    .replace(/\//g, '_')
+    .replace(/\+/g, '-')
+
+  return `${friendly.slice(0, 5)}...${friendly.slice(-5)}`
+
+});
+
+const onWalletClick = async () => {
+  if (isWalletConnected.value) {
+    await tonConnectUI.disconnect()
+    isWalletConnected.value = false
+    walletAddress.value = ''
+  } else {
+    await tonConnectUI.openModal()
+  }
+}
+
+onMounted(() => {
+  tonConnectUI.onStatusChange((wallet: Wallet | null) => {
+    if (wallet) {
+      isWalletConnected.value = true
+      walletAddress.value = wallet.account.address
+    } else {
+      isWalletConnected.value = false
+      walletAddress.value = ''
+    }
+  })
+})
+</script>
 
 <style scoped lang="scss">
 .home-header {
@@ -68,21 +129,18 @@ const handleButtonClick = () => {
   gap: 10px;
 }
 
-/* Сетка для балансов */
 .balances {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9px;
 }
 
-/* Сетка для daily actions */
 .daily-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9px;
 }
 
-/* Стили для иконок валют */
 .balance-icon {
   width: 24px;
   height: 24px;

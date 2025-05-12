@@ -41,6 +41,8 @@ const getUser = async () => {
       username,
       language_code
     });
+
+    
     tg.showAlert(res.data.login);
   });
 };
