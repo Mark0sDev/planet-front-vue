@@ -24,7 +24,7 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
-console.log(tg.initData.username);
+console.log(tg.initData);
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
