@@ -9,7 +9,6 @@ import { ref } from 'vue';
 
 const isLoading = ref(false);
 
-// Тип: функция без параметров, возвращающая промис без результата
 const withLoader = async (callback: () => Promise<void>) => {
     try {
         isLoading.value = true;

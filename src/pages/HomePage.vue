@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import axios from 'axios';
+
+import api from '@/utils/api';
 import MainDashboard from '@/widgets/MainDashboard.vue'
 import MainStatistics from '@/widgets/MainStatistics.vue'
 import LastWithdrawals from '@/widgets/LastWithdrawals.vue'
@@ -24,13 +25,6 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
-
-const api = axios.create({
-  baseURL: 'https://api-ton.dev/',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
