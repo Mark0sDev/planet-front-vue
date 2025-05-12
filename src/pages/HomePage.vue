@@ -24,10 +24,7 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 
 const user = tg.initDataUnsafe?.user;
-console.log(tg.initDataUnsafe);
-console.log('\n\n------  ------')
-console.log(tg.initData);
-console.log('------   ------\n\n')
+
 const user_id = user?.id;
 const first_name = user?.first_name || '';
 const last_name = user?.last_name || '';
