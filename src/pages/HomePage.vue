@@ -24,14 +24,14 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
-const userTelegram = tg.initDataUnsafe?.user;
+const user = tg.initDataUnsafe?.user;
 
 if (user) {
-  console.log('ID:', userTelegram.id);
-  console.log('Имя:', userTelegram.first_name);
-  console.log('Фамилия:', userTelegram.last_name);
-  console.log('Username:', userTelegram.username); // <-- это то, что тебе нужно
-  console.log('Язык:', userTelegram.language_code);
+  console.log('ID:', user.id);
+  console.log('Имя:', user.first_name);
+  console.log('Фамилия:', user.last_name);
+  console.log('Username:', user.username); // <-- это то, что тебе нужно
+  console.log('Язык:', user.language_code);
 } else {
   console.log('Пользователь не авторизован');
 }
