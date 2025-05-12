@@ -25,12 +25,14 @@ const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 const lang = tg.initDataUnsafe?.user?.lang;
 
+console.log(tg.initDataUnsafe);
+
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const res = await api.post('/users/getUser', {
       initData,
       user_id,
-      lang
+      lang,
     });
     tg.showAlert(res.data.login);
   });
