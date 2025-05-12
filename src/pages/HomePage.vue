@@ -22,7 +22,9 @@ const leaderRouter = () => {
 const tg = window.Telegram.WebApp;
 
 const initData = tg.initData;
+
 const user = tg.initDataUnsafe?.user;
+console.log(tg.initDataUnsafe);
 
 const user_id = user?.id;
 const first_name = user?.first_name || '';
