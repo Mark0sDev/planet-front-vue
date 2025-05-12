@@ -24,23 +24,22 @@ const tg = window.Telegram.WebApp;
 const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
-const user = tg.initDataUnsafe?.user;
+const userTelegram = tg.initDataUnsafe?.user;
+const login = userTelegram.username;
+const language_code = userTelegram.language_code;
+const first_name = userTelegram.first_name;
+const last_name = userTelegram.last_name;
 
-if (user) {
-  console.log('ID:', user.id);
-  console.log('Имя:', user.first_name);
-  console.log('Фамилия:', user.last_name);
-  console.log('Username:', user.username); // <-- это то, что тебе нужно
-  console.log('Язык:', user.language_code);
-} else {
-  console.log('Пользователь не авторизован');
-}
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const res = await api.post('/users/getUser', {
       initData,
       user_id,
+      login,
+      language_code,
+      first_name,
+      last_name
     });
     tg.showAlert(res.data.login);
   });
