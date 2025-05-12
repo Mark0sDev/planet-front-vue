@@ -39,7 +39,7 @@ import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
 import RouletteBanner from '@/features/RouletteBanner.vue'
 import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
-import { TonConnectUI } from '@tonconnect/ui'
+
 import type { Wallet } from '@tonconnect/ui'
 
 import { onMounted, ref, computed } from 'vue'
@@ -53,9 +53,7 @@ const handleButtonClick = () => {
 const isWalletConnected = ref(false)
 const walletAddress = ref('')
 
-const tonConnectUI = new TonConnectUI({
-  manifestUrl: 'https://bot.sven-ton.com/tonconnect-manifest.json'
-})
+import { tonConnectUI } from '@/utils/tonconnect';
 
 const formattedAddress = computed(() => {
   if (!walletAddress.value) return ''
