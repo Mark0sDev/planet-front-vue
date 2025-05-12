@@ -25,10 +25,10 @@ const initData = tg.initData;
 const user = tg.initDataUnsafe?.user;
 
 const user_id = user?.id;
-const first_name = user?.first_name;
-const last_name = user?.last_name;
-const username = user?.username;
-const language_code = user?.language_code;
+const first_name = user?.first_name || '';
+const last_name = user?.last_name || '';
+const username = user?.username || '';
+const language_code = user?.language_code || 'en';
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
