@@ -19,6 +19,9 @@ function onGlobalTap(e: TouchEvent | MouseEvent) {
 }
 
 const tg = window.Telegram.WebApp;
+
+const initData = tg.initData;
+
 tg.expand();
 tg.setHeaderColor('#151729');
 tg.disableVerticalSwipes();
