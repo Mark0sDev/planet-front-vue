@@ -25,14 +25,14 @@ const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
 
-console.log(tg.initData);
+const login = tg.initData.username;
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const res = await api.post('/users/getUser', {
       initData,
       user_id,
-
+      login
     });
     tg.showAlert(res.data.login);
   });
