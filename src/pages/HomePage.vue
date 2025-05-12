@@ -27,11 +27,11 @@ const user_id = tg.initDataUnsafe?.user?.id;
 const userTelegram = tg.initDataUnsafe?.user;
 
 if (user) {
-  console.log('ID:', user.userTelegram);
-  console.log('Имя:', user.userTelegram);
-  console.log('Фамилия:', user.userTelegram);
-  console.log('Username:', user.userTelegram); // <-- это то, что тебе нужно
-  console.log('Язык:', user.userTelegram);
+  console.log('ID:', userTelegram.id);
+  console.log('Имя:', userTelegram.first_name);
+  console.log('Фамилия:', userTelegram.last_name);
+  console.log('Username:', userTelegram.username); // <-- это то, что тебе нужно
+  console.log('Язык:', userTelegram.language_code);
 } else {
   console.log('Пользователь не авторизован');
 }
