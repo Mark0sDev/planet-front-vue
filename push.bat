@@ -3,7 +3,7 @@ setlocal
 
 :: Получаем дату и время
 for /f "tokens=1-3 delims=/: " %%a in ("%date% %time%") do (
-    set "datetime=%%a-%%b-%%c_%%d-%%e-%%f"
+    set "datetime=%%a-%%b-%%c"
 )
 
 :: Сообщение коммита
