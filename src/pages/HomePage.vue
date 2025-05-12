@@ -22,24 +22,23 @@ const leaderRouter = () => {
 const tg = window.Telegram.WebApp;
 
 const initData = tg.initData;
-const user_id = tg.initDataUnsafe?.user?.id;
+const user = tg.initDataUnsafe?.user;
 
-const userTelegram = tg.initDataUnsafe?.user.first_name;
-
-/*if (userTelegram) {
-  console.log('ID:', user.id);
-  console.log('Имя:', user.first_name);
-  console.log('Фамилия:', user.last_name);
-  console.log('Username:', user.username); // <-- это то, что тебе нужно
-  console.log('Язык:', user.language_code);
-}*/
+const user_id = user?.id;
+const first_name = user?.first_name;
+const last_name = user?.last_name;
+const username = user?.username;
+const language_code = user?.language_code;
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const res = await api.post('/users/getUser', {
       initData,
       user_id,
-      userTelegram
+      first_name,
+      last_name,
+      username,
+      language_code
     });
     tg.showAlert(res.data.login);
   });
