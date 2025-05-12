@@ -25,7 +25,7 @@ const initData = tg.initData;
 const user_id = tg.initDataUnsafe?.user?.id;
 
 
-console.log(tg.initDataUnsafe);
+console.log(tg.initData);
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
