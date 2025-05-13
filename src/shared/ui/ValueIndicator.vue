@@ -1,5 +1,5 @@
 <template>
-  <div class="value-indicator" :class="directionClass">
+  <div class="value-indicator">
     <span class="value">{{ value }}</span>
   </div>
 </template>
