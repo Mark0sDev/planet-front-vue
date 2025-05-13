@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ValueIndicator from '@/shared/ui/ValueIndicator.vue'
 
 interface StatisticsCard {
   value: string
