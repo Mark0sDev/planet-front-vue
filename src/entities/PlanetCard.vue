@@ -41,9 +41,7 @@ function handleClick() {
         </div>
         <div class="card-line">
           <span>Стоимость</span>
-          <span
-            >{{ planet.cost }} TON <img src="@/shared/assets/currency/custom-ton.png" alt="ton"
-          /></span>
+          <span>{{ planet.cost }} TON <img src="/icons/ton.svg" alt="ton" /></span>
         </div>
         <div class="card-line">
           <span>Время цикла</span>
@@ -51,9 +49,7 @@ function handleClick() {
         </div>
         <div class="card-line card-line--accent">
           <span>Заработано</span>
-          <span
-            >{{ planet.earned }} TON <img src="@/shared/assets/currency/custom-ton.png" alt="ton"
-          /></span>
+          <span>{{ planet.earned }} TON <img src="/icons/ton.svg" alt="ton" /></span>
         </div>
       </div>
     </div>
@@ -88,10 +84,12 @@ function handleClick() {
   gap: 5px;
   margin-bottom: 5px;
 }
+
 .card-content {
   max-width: 100%;
   width: 100%;
 }
+
 .card-image {
   width: 96px;
 

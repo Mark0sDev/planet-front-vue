@@ -74,7 +74,7 @@ onMounted(() => {
               Займи место в TOP-100<br /><span>и получай призы</span>
             </div>
             <UiButton style="margin-bottom: 5px; width: 100%;" @click="leaderRouter" color="yellow">
-              Go
+              Перейти
             </UiButton>
           </div>
 

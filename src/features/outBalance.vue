@@ -14,7 +14,7 @@ import UiInput from '@/shared/ui/UiInput.vue'
                 <UiInput :custom="{
                     type: 'max',
                     maxValue: 8.9623,
-                }" tip="TON" placeholder="Введите количество" />
+                }" tip="TON" type="number" step="0.1" min="0.1" placeholder="Введите количество" />
             </div>
             <UiButton class="withdrawal-modal-button" color="white">Вывести</UiButton>
             <div class="withdrawal-all-time">

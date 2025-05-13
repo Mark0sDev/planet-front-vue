@@ -10,17 +10,16 @@ import UiInput from '@/shared/ui/UiInput.vue'
     <UiDivider value="Пополнить вручную" />
     <UiInput :custom="{
       type: 'copy',
-    }" tip="Адрес кошелька TON" placeholder="Введите адрес" class="input"
-      value="0x40afb83b623333a005885758e1bea78d45314642" />
+    }" tip="Адрес кошелька TON" placeholder="Введите адрес" class="input" value="0x" disabled />
     <UiInput :custom="{
       type: 'copy',
     }" tip="Комментарий (MEMO)" placeholder="Введите MEMO" error="*Обязательно при переводе укажите комментарий MEMO"
-      class="input" value="MEMO" />
+      class="input" value="MEMO" disabled />
     <UiDivider value="Пополнить другим способом" />
     <UiInput :custom="{
       type: 'copy',
     }" tip="USDT BEP-20" placeholder="Введите адрес" error="*USDT будут конвертированы автоматически в $PLANET"
-      class="input" value="0x40afb83b623333a005885758e1bea78d45314642" />
+      class="input" disabled value="0x" />
     <UiButton class="button" color="blue">Пополнить</UiButton>
   </div>
 </template>

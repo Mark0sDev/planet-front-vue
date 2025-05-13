@@ -11,26 +11,17 @@ import TonIcon from '@/shared/assets/icons/ton.svg'
   <div class="statistics">
     <div class="title title-1">Статистика</div>
     <div class="statistics-inner">
-      <StatisticsCard
-        value="245 210"
-        color="#763FF1"
-        count="1 613"
-        text="Пользователи, которые уже зарабатывают с PlanetCTon"
-      >
+      <StatisticsCard value="245 210" color="#763FF1"
+        text="Пользователи, которые уже зарабатывают">
         <UsersIcon />
       </StatisticsCard>
-      <StatisticsCard
-        count="46.24"
-        value="1583.20"
-        color="#17d686"
-        text="Общая доходность всех планет"
-      >
+      <StatisticsCard value="1583.20" color="#17d686" text="Новых пользователей за 24 часа">
         <LightningIcon />
       </StatisticsCard>
-      <StatisticsCard value="326" color="#FBA704" count="7" text="Всего куплено планет">
+      <StatisticsCard value="326" color="#FBA704" text="Всего куплено планет">
         <PlanetIcon />
       </StatisticsCard>
-      <StatisticsCard value="2 903" count="14" color="#27aff9" text="Пройдено уровней">
+      <StatisticsCard value="2 903" color="#27aff9" text="Всего выведено TON">
         <TonIcon stroke-width="0" />
       </StatisticsCard>
     </div>

@@ -1,25 +1,6 @@
-<script setup lang="ts">
-import { computed } from 'vue'
-
-const props = defineProps<{
-  value: number | string
-  direction: 'up' | 'down' | null
-  showArrow?: boolean
-}>()
-
-const directionClass = computed(() => {
-  return props.direction === 'up' ? 'positive' : props.direction === 'down' ? 'negative' : ''
-})
-</script>
-
 <template>
   <div class="value-indicator" :class="directionClass">
     <span class="value">{{ value }}</span>
-    <template v-if="direction && showArrow">
-      <span class="arrow">
-        {{ direction === 'up' ? '▲' : '▼' }}
-      </span>
-    </template>
   </div>
 </template>
 

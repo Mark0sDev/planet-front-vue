@@ -5,7 +5,6 @@ interface StatisticsCard {
   value: string
   text: string
   color: string
-  count: string
 }
 
 defineProps<StatisticsCard>()
