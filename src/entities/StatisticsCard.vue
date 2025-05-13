@@ -15,7 +15,7 @@ defineProps<StatisticsCard>()
       <div class="statistics-icon" :style="{ backgroundColor: color }">
         <slot></slot>
       </div>
-      <ValueIndicator :value="count" direction="up" show-arrow />
+   
     </div>
     <div class="statistics-value">{{ value }}</div>
     <div class="statistics-text">{{ text }}</div>
