@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { NAVIGATION } from '@/app/router/navigation.ts'
+import MiniGameIcon from '@/shared/assets/icons/minigame.svg'
 
 const route = useRoute()
 
@@ -13,7 +14,8 @@ function isActive(path: string) {
   <nav class="bottom-nav">
     <router-link v-for="item in NAVIGATION" :key="item.path" :to="item.path" :class="{ active: isActive(item.path) }"
       class="nav-item">
-      <component :is="item.icon" class="nav-icon" />
+      <component :is="item.icon" :class="['nav-icon', { 'no-fill': item.icon === MiniGameIcon }]" />
+
       <span>{{ item.label }}</span>
     </router-link>
   </nav>
@@ -64,7 +66,7 @@ function isActive(path: string) {
   &.active {
     color: var(--accent);
 
-    svg path {
+    svg:not(.no-fill) path {
       fill: #6ceaf1;
     }
   }
