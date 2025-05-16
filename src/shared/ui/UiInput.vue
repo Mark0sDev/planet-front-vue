@@ -9,19 +9,25 @@ interface CustomInput {
   maxValue?: number
 }
 
-interface UiInputProps {
+const props = defineProps<{
   tip?: string
   error?: string
   custom?: CustomInput
-}
+  modelValue?: string | number
+}>()
+
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void
+}>()
 
 const inputRef = ref<HTMLInputElement | null>(null)
 const isCopied = ref(false)
-const props = defineProps<UiInputProps>()
 
-// Обработчик для кнопки "Max"
 const handleMaxClick = () => {
   const v = props.custom?.maxValue?.toString() ?? ''
+  emit('update:modelValue', v)
+
   if (inputRef.value) {
     inputRef.value.value = v
     inputRef.value.dispatchEvent(new Event('input'))
@@ -38,21 +44,19 @@ const handleCopyClick = async () => {
   try {
     await navigator.clipboard.writeText(text)
     isCopied.value = true
-
-    setTimeout(() => {
-      isCopied.value = false
-    }, 1000)
+    setTimeout(() => (isCopied.value = false), 1000)
   } catch (e) {
     console.log(e)
-
     inputRef.value.select()
     document.execCommand('copy')
     isCopied.value = true
-
-    setTimeout(() => {
-      isCopied.value = false
-    }, 1000)
+    setTimeout(() => (isCopied.value = false), 1000)
   }
+}
+
+const onInput = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  emit('update:modelValue', target.value)
 }
 </script>
 
@@ -60,7 +64,7 @@ const handleCopyClick = async () => {
   <div class="ui-input">
     <div v-if="tip" class="ui-input-tip">{{ tip }}</div>
     <div class="ui-input-wrapper">
-      <input ref="inputRef"  v-bind="$attrs" />
+      <input ref="inputRef" :value="modelValue" @input="onInput" v-bind="$attrs" />
 
       <div class="ui-input-custom">
         <button v-if="custom?.type === 'max'" @click="handleMaxClick" class="max-value">
@@ -83,6 +87,7 @@ const handleCopyClick = async () => {
       <span>Доступно:</span>
       <span>{{ custom?.maxValue || 0 }}</span>
     </div>
+
     <div v-if="error" class="ui-input-error">{{ error }}</div>
   </div>
 </template>
@@ -90,6 +95,7 @@ const handleCopyClick = async () => {
 <style scoped lang="scss">
 .ui-input {
   padding: 5px;
+
   &-tip {
     font-weight: 400;
     font-size: 12px;

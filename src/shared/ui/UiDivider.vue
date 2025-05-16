@@ -21,7 +21,8 @@ defineProps<UiDividerProps>()
   display: flex;
   align-items: center;
   gap: 11px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 
   .ui-divider-line {
     height: 1px;

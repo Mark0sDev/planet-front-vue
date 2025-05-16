@@ -11,6 +11,10 @@ import BalanceActionCard, { type BalanceCardData } from '@/entities/BalanceActio
 
 import type { Transaction } from '@/entities/TransactionCard.vue'
 
+import { useTonWallet } from '@/utils/useTonWallet'
+
+const { isWalletConnected } = useTonWallet()
+
 import PageLoader from './PageLoader.vue';
 import ConnectWalletBanner from '@/features/ConnectWalletBanner.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
@@ -22,6 +26,7 @@ import SmallTonIcon from '@/shared/assets/icons/ton-vector.svg'
 import TransactionCard from '@/entities/TransactionCard.vue'
 
 import { ref } from 'vue'
+import axios from 'axios';
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
 
@@ -81,6 +86,16 @@ function handleCardAction(cardId: number) {
   }
 }
 
+const amountDepositTon = ref('')
+
+async function depositFormTon() {
+  const { data } = await axios.get(`https://www.api-dev.dev/api/getMemo?comment=${user_id}`)
+  alert(user_id);
+  console.log(data);
+
+  console.log('Пополняем на', amountDepositTon.value, 'TON')
+}
+
 onMounted(() => {
   getUser();
 });
@@ -111,7 +126,22 @@ onMounted(() => {
     <div class="title-1">Кошелек</div>
     <div class="wallet-connect">
       <ConnectWalletBanner />
+
+      <div v-if="isWalletConnected">
+        <form @submit.prevent="depositFormTon">
+          <UiDivider value="WEB3 Пополнение" />
+
+          <UiInput v-model="amountDepositTon" required tip="Введите сумму TON:" class="input" type="number" step="0.1"
+            placeholder="TON" min="0.1" />
+
+          <UiButton style="margin-top: 10px; margin-bottom: 10px;" class="button" color="blue" type="submit">
+            Пополнить
+          </UiButton>
+        </form>
+      </div>
+
       <UiDivider value="Пополнить вручную" />
+
       <UiInput :custom="{
         type: 'copy',
       }" tip="Адрес кошелька TON" class="input" value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
