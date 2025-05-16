@@ -20,7 +20,7 @@ import UiInput from '@/shared/ui/UiInput.vue'
 import SmallTonIcon from '@/shared/assets/icons/ton-vector.svg'
 
 import TransactionCard from '@/entities/TransactionCard.vue'
-import UiModal from '@/shared/ui/UiModal.vue'
+
 import { ref } from 'vue'
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
@@ -78,6 +78,7 @@ function handleCardAction(cardId: number) {
 
 onMounted(() => {
   getUser();
+  alert('test');
 });
 
 </script>
@@ -143,9 +144,7 @@ onMounted(() => {
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
   </div>
 
-  <UiModal v-model="showTopUp" title="Пополнить баланс">
-    <TopUpBalanceModal />
-  </UiModal>
+
 </template>
 
 <style scoped lang="scss">
