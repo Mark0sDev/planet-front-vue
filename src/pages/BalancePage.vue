@@ -132,7 +132,7 @@ onMounted(() => {
           <UiInput tip="TON wallet address" placeholder="Введите адрес" />
           <UiInput :custom="{
             type: 'max',
-            maxValue: 8.9623,
+            maxValue: balanceActionCards[1].payments,
           }" tip="TON" type="number" step="0.1" min="0.1" placeholder="Введите количество" />
         </div>
         <UiButton class="withdrawal-modal-button" color="white">Вывести</UiButton>
