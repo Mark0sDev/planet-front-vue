@@ -48,7 +48,7 @@ const getUser = async () => {
       initData,
       user_id,
     });
-
+    alert(res.data.balance_stars);
     balanceActionCards.value[0].balance = res.data.balance_stars;
   });
 };
