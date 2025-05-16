@@ -1,5 +1,15 @@
 <script setup lang="ts">
 
+import {
+  initData,
+  user_id,
+  first_name,
+  last_name,
+  username,
+  language_code,
+  tg
+} from '@/utils/telegramUser'
+
 import api from '@/utils/api';
 import MainDashboard from '@/widgets/MainDashboard.vue'
 
@@ -25,17 +35,6 @@ const router = useRouter()
 const leaderRouter = () => {
   router.push(AppRoutes.LEADERS)
 }
-
-const tg = window.Telegram.WebApp;
-
-const initData = tg.initData;
-const user = tg.initDataUnsafe?.user;
-
-const user_id = user?.id;
-const first_name = user?.first_name || '';
-const last_name = user?.last_name || '';
-const username = user?.username || '';
-const language_code = user?.language_code || 'en';
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {

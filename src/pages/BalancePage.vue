@@ -1,8 +1,17 @@
 <script setup lang="ts">
+
+import {
+  initData,
+  user_id,
+} from '@/utils/telegramUser';
+
+import { onMounted } from 'vue';
+import api from '@/utils/api';
 import BalanceActionCard, { type BalanceCardData } from '@/entities/BalanceActionCard.vue'
 
 import type { Transaction } from '@/entities/TransactionCard.vue'
 
+import PageLoader from './PageLoader.vue';
 import ConnectWalletBanner from '@/features/ConnectWalletBanner.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import UiDivider from '@/shared/ui/UiDivider.vue'
@@ -14,22 +23,35 @@ import TransactionCard from '@/entities/TransactionCard.vue'
 import UiModal from '@/shared/ui/UiModal.vue'
 import { ref } from 'vue'
 
+const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
+
 const balanceActionCards = ref<BalanceCardData[]>([
   {
     id: 1,
-    name: '$CITY',
-    balance: '2.336',
+    name: 'STARS',
+    balance: 0,
     icon: "/icons/stars.svg",
     variant: 'white',
   },
   {
     id: 2,
     name: 'TON',
-    balance: '2.336',
+    balance: 0,
     icon: "/icons/ton.svg",
     variant: 'accent',
   },
-])
+]);
+
+const getUser = async () => {
+  await loaderRef.value?.withLoader(async () => {
+    const res = await api.post('/users/getUser', {
+      initData,
+      user_id,
+    });
+
+    balanceActionCards.value[0].balance = res.data.balance_stars.toString()
+  });
+};
 
 
 const transactions: Transaction[] = [
@@ -54,7 +76,9 @@ function handleCardAction(cardId: number) {
   }
 }
 
-const user_id = 456546;
+onMounted(() => {
+  getUser();
+});
 
 </script>
 
