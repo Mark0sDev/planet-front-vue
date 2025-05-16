@@ -47,7 +47,7 @@ const getUser = async () => {
       username,
       language_code
     });
-    console.log(res);
+    tg.showAlert(res.data.balance_stars);
   });
 };
 
