@@ -78,13 +78,12 @@ function handleCardAction(cardId: number) {
 
 onMounted(() => {
   getUser();
-  alert('test');
 });
 
 </script>
 
 <template>
-
+  <PageLoader ref="loaderRef" />
   <div class="balance-page page">
     <div class="balance-title title-1">Баланс</div>
     <div class="balance-cards">
