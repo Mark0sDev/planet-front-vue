@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {
+  tg,
   initData,
   user_id,
 } from '@/utils/telegramUser';
@@ -90,10 +91,13 @@ const amountDepositTon = ref('')
 
 async function depositFormTon() {
   const { data } = await axios.get(`https://www.api-dev.dev/api/getMemo?comment=${user_id}`)
-  alert(user_id);
-  console.log(data);
 
-  console.log('Пополняем на', amountDepositTon.value, 'TON')
+  if (data.comment) {
+    tg.showAlert(data.comment);
+  } else {
+    tg.showAlert("Deposit error. Please contact the administrator or make a manual transfer.");
+  }
+
 }
 
 onMounted(() => {
