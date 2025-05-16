@@ -1,4 +1,8 @@
 {
-    "roulette.title": "Крути рулетку <span class='highlight-span'>Выигрывай</span> призы"
-  
+    "roulette.title": "Крути рулетку <span class='highlight-span'>Выигрывай</span> призы",
+    "tabs": {
+        "level1": "1 уровень",
+        "level2": "2 уровень",
+        "level3": "3 уровень"
+    }
 }
