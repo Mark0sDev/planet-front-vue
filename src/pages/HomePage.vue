@@ -6,8 +6,7 @@ import {
   first_name,
   last_name,
   username,
-  language_code,
-  tg
+  language_code
 } from '@/utils/telegramUser'
 
 import api from '@/utils/api';
