@@ -194,40 +194,6 @@ onMounted(() => {
   text-align: center;
 }
 
-.wallet-connect {
-  @include mixins.bg-cover;
-  background-image: url('@/shared/assets/bg/wallet-connect-bg.jpg');
-  border: 1px solid #32315f;
-  padding: 12px;
-  border-radius: 20px;
-  flex: none;
-  margin-bottom: 10px;
-
-  p {
-    font-weight: 300;
-
-    span {
-      color: #28aff9;
-      font-weight: 500;
-    }
-
-    b {
-      color: #f48d96;
-    }
-  }
-}
-
-.wallet-title {
-  margin-bottom: 6px;
-}
-
-.wallet-buttons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 15px;
-}
-
 .balance-title {
   text-align: center;
 }
@@ -239,24 +205,6 @@ onMounted(() => {
   margin-bottom: 10px;
 }
 
-
-.value {
-  display: flex;
-  align-items: center;
-
-  .SmallTonIcon {
-    margin-left: 5px;
-  }
-}
-
-.withdrawal-all-time {
-  display: flex;
-
-  justify-content: space-between;
-  margin-top: 10px;
-  align-items: center;
-}
-
 .wallet-connect {
   @include mixins.bg-cover;
   background-image: url('@/shared/assets/bg/wallet-connect-bg.jpg');
@@ -289,5 +237,21 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   margin-top: 15px;
+}
+
+.withdrawal-all-time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+
+  .SmallTonIcon {
+    margin-left: 5px;
+  }
 }
 </style>
