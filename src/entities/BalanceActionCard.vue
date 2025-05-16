@@ -4,7 +4,6 @@ export interface BalanceCardData {
   id: number
   name: string
   balance: string
-  buttonLabel: string
   icon: string
   variant: 'white' | 'accent'
 }
