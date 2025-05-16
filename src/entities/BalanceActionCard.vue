@@ -3,7 +3,8 @@
 export interface BalanceCardData {
   id: number
   name: string
-  balance: number
+  balance: number,
+  payments: number,
   icon: string
   variant: 'white' | 'accent'
 }

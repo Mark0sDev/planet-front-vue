@@ -30,6 +30,7 @@ const balanceActionCards = ref<BalanceCardData[]>([
     id: 1,
     name: 'STARS',
     balance: 0,
+    payments: 0,
     icon: "/icons/stars.svg",
     variant: 'white',
   },
@@ -37,6 +38,7 @@ const balanceActionCards = ref<BalanceCardData[]>([
     id: 2,
     name: 'TON',
     balance: 0,
+    payments: 0,
     icon: "/icons/ton.svg",
     variant: 'accent',
   },
@@ -49,6 +51,8 @@ const getUser = async () => {
       user_id,
     });
 
+    balanceActionCards.value[0].payments = res.data.balance_payments_stars;
+    balanceActionCards.value[1].payments = res.data.balance_payments_ton;
     balanceActionCards.value[1].balance = res.data.balance_ton;
     balanceActionCards.value[0].balance = res.data.balance_stars;
   });
@@ -91,17 +95,18 @@ onMounted(() => {
 
       <BalanceActionCard :card="balanceActionCards[1]" @action="handleCardAction">
         <template #description>
-          Доступно к выводу:<br>
-          <span class="ton">10</span> TON
+          Доступно к выводу:<br />
+          <span class="ton">{{ balanceActionCards[1].payments }} TON</span>
         </template>
       </BalanceActionCard>
 
       <BalanceActionCard :card="balanceActionCards[0]" @action="handleCardAction">
         <template #description>
-          Доступно к выводу:<br>
-          <span class="stars">10</span> STARS
+          Доступно к выводу:<br />
+          <span class="stars">{{ balanceActionCards[0].payments }} STARS</span>
         </template>
       </BalanceActionCard>
+
     </div>
     <div class="title-1">Кошелек</div>
     <div class="wallet-connect">
