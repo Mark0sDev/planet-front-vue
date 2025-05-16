@@ -49,7 +49,7 @@ const getUser = async () => {
       user_id,
     });
 
-    balanceActionCards.value[0].balance = res.data.balance_stars.toString()
+    balanceActionCards.value[0].balance = res.data.balance_stars;
   });
 };
 

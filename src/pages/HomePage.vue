@@ -38,7 +38,7 @@ const leaderRouter = () => {
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
-    const res = await api.post('/users/getUser', {
+    await api.post('/users/getUser', {
       initData,
       user_id,
       first_name,
@@ -46,7 +46,7 @@ const getUser = async () => {
       username,
       language_code
     });
-    tg.showAlert(res.data.balance_stars);
+
   });
 };
 
