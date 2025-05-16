@@ -11,13 +11,8 @@ function isActive(path: string) {
 
 <template>
   <nav class="bottom-nav">
-    <router-link
-      v-for="item in NAVIGATION"
-      :key="item.path"
-      :to="item.path"
-      :class="{ active: isActive(item.path) }"
-      class="nav-item"
-    >
+    <router-link v-for="item in NAVIGATION" :key="item.path" :to="item.path" :class="{ active: isActive(item.path) }"
+      class="nav-item">
       <component :is="item.icon" class="nav-icon" />
       <span>{{ item.label }}</span>
     </router-link>
@@ -61,10 +56,11 @@ function isActive(path: string) {
   svg path {
     transition: all 0.2s;
   }
-  
+
   span {
     margin-top: 6px;
   }
+
   &.active {
     color: var(--accent);
 

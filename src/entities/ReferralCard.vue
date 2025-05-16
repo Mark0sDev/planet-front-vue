@@ -31,6 +31,12 @@ defineProps<ReferralCardProps>()
 <style scoped lang="scss">
 @use '@/app/styles/mixins' as mixins;
 
+.referral-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .referral-card {
   display: flex;
   align-items: center;
@@ -61,9 +67,9 @@ defineProps<ReferralCardProps>()
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  color: white;
 }
 
 .balance-icon {

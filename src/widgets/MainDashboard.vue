@@ -1,73 +1,25 @@
 <script setup lang="ts">
-declare const TonWeb: {
-  utils: {
-    Address: new (addr: string) => {
-      toString: (friendly?: boolean) => string;
-    };
-  };
-};
-
-import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import type { Wallet } from '@tonconnect/ui'
+import { AppRoutes } from '@/app/router/router.ts'
+
+import { useTonWallet } from '@/utils/useTonWallet'
 
 import ComboPlanetCard from '@/features/ComboPlanetBanner.vue'
 import RouletteBanner from '@/features/RouletteBanner.vue'
 import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import LanguageSelect from '@/shared/ui/LanguageSelect.vue'
+
 import FaqIcon from '@/shared/assets/icons/faq-icon.svg'
 import TonIcon from '@/shared/assets/icons/ton.svg'
-import { AppRoutes } from '@/app/router/router.ts'
-import { tonConnectUI } from '@/utils/tonconnect'
 
 const router = useRouter()
 
-const isWalletConnected = ref(false)
-const walletAddress = ref('')
+const { isWalletConnected, formattedAddress, onWalletClick } = useTonWallet()
 
 const handleButtonClick = () => {
   router.push(AppRoutes.FAQ)
 }
-
-const formattedAddress = computed(() => {
-  if (!walletAddress.value) return ''
-
-  const address = new TonWeb.utils.Address(walletAddress.value)
-  const friendly = address.toString(true)
-    .replace(/\//g, '_')
-    .replace(/\+/g, '-')
-  return `${friendly.slice(0, 5)}...${friendly.slice(-5)}`
-
-})
-
-const onWalletClick = async () => {
-  if (isWalletConnected.value) {
-    await tonConnectUI.disconnect()
-    isWalletConnected.value = false
-    walletAddress.value = ''
-  } else {
-    await tonConnectUI.openModal()
-  }
-}
-
-onMounted(() => {
-  // восстановление при заходе на страницу
-  if (tonConnectUI.connected && tonConnectUI.wallet) {
-    isWalletConnected.value = true
-    walletAddress.value = tonConnectUI.wallet.account.address
-  }
-
-  tonConnectUI.onStatusChange((wallet: Wallet | null) => {
-    if (wallet) {
-      isWalletConnected.value = true
-      walletAddress.value = wallet.account.address
-    } else {
-      isWalletConnected.value = false
-      walletAddress.value = ''
-    }
-  })
-})
 </script>
 
 <template>

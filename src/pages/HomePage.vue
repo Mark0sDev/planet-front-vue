@@ -2,7 +2,14 @@
 
 import api from '@/utils/api';
 import MainDashboard from '@/widgets/MainDashboard.vue'
-import MainStatistics from '@/widgets/MainStatistics.vue'
+
+import StatisticsCard from '@/entities/StatisticsCard.vue'
+import UsersIcon from '@/shared/assets/icons/users.svg'
+import LightningIcon from '@/shared/assets/icons/lightning.svg'
+import PlanetIcon from '@/shared/assets/icons/planet.svg'
+
+import TonIcon from '@/shared/assets/icons/ton.svg'
+
 import LastWithdrawals from '@/widgets/LastWithdrawals.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import PageLoader from './PageLoader.vue';
@@ -22,7 +29,6 @@ const leaderRouter = () => {
 const tg = window.Telegram.WebApp;
 
 const initData = tg.initData;
-
 const user = tg.initDataUnsafe?.user;
 
 const user_id = user?.id;
@@ -45,6 +51,7 @@ const getUser = async () => {
   });
 };
 
+
 onMounted(() => {
   getUser();
 });
@@ -59,7 +66,23 @@ onMounted(() => {
 
     <div class="page-wrapper">
       <MainDashboard />
-      <MainStatistics />
+      <div class="statistics">
+        <div class="title title-1">Статистика</div>
+        <div class="statistics-inner">
+          <StatisticsCard value="245 210" color="#763FF1" text="Пользователи, которые уже зарабатывают">
+            <UsersIcon />
+          </StatisticsCard>
+          <StatisticsCard value="1583.20" color="#17d686" text="Новых пользователей за 24 часа">
+            <LightningIcon />
+          </StatisticsCard>
+          <StatisticsCard value="326" color="#FBA704" text="Всего куплено планет">
+            <PlanetIcon />
+          </StatisticsCard>
+          <StatisticsCard value="2 903" color="#27aff9" text="Всего выведено TON">
+            <TonIcon stroke-width="0" />
+          </StatisticsCard>
+        </div>
+      </div>
       <div data-v-971a35de="" class="top-users">
 
         <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card first-place">
@@ -112,7 +135,7 @@ onMounted(() => {
   background-size: cover;
 }
 
-/* Аватар */
+
 .user-avatar-wrapper {
   margin-top: -35px;
   position: relative;
@@ -125,6 +148,20 @@ onMounted(() => {
   }
 }
 
+.statistics {
+  margin-top: 20px;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.statistics-inner {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .user-avatar {
   width: 70px;
   height: 70px;
@@ -132,20 +169,18 @@ onMounted(() => {
   object-fit: cover;
 }
 
-/* Имя */
+
 .user-name {
   font-size: 12px;
   font-weight: 400;
 }
 
-/* Счёт */
 .user-score {
   font-size: 12px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Корона для первого места */
 .crown {
   position: absolute;
   top: -72px;
@@ -161,7 +196,7 @@ onMounted(() => {
   margin-bottom: 12px;
 }
 
-/* Специальные стили для мест */
+
 .first-place {
 
   order: 2;

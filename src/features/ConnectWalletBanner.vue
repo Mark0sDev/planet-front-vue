@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import WalletIcon from '@/shared/assets/icons/wallet.svg'
 import UiButton from '@/shared/ui/UiButton.vue'
+
+import { useTonWallet } from '@/utils/useTonWallet'
+
+const { isWalletConnected, formattedAddress, onWalletClick } = useTonWallet()
 </script>
 
 <template>
@@ -10,7 +14,9 @@ import UiButton from '@/shared/ui/UiButton.vue'
       Подключить <br />
       кошелек
     </div>
-    <UiButton class="wallet-button" size="sm" color="accent"> Connect</UiButton>
+    <UiButton class="wallet-button" @click="onWalletClick" size="sm" color="accent"> {{ isWalletConnected ?
+      formattedAddress : 'Connect Wallet'
+      }}</UiButton>
   </div>
 </template>
 
@@ -35,6 +41,7 @@ import UiButton from '@/shared/ui/UiButton.vue'
     font-size: 16px;
     font-weight: 500;
   }
+
   .wallet-button {
     display: inline-block;
     width: auto;

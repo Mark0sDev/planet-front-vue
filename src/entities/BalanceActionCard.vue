@@ -30,7 +30,7 @@ const { card } = defineProps<BalanceActionCardProps>()
     <div class="balance-description">
       <slot name="description"></slot>
     </div>
-   
+
   </div>
 </template>
 
@@ -41,6 +41,7 @@ const { card } = defineProps<BalanceActionCardProps>()
   width: 100%;
   border-radius: 15px;
   padding: 10px;
+  padding-bottom: 2px;
   color: #ffffff;
   border: 1px solid #32315f;
   @include mixins.bg-cover;
@@ -48,6 +49,7 @@ const { card } = defineProps<BalanceActionCardProps>()
   &.white {
     background-image: url('@/shared/assets/bg/benefit-1-bg.png');
   }
+
   &.accent {
     background-image: url('@/shared/assets/bg/benefit-2-bg.png');
   }
@@ -85,10 +87,16 @@ const { card } = defineProps<BalanceActionCardProps>()
   margin-bottom: 10px;
   margin-right: -10px;
   margin-left: -10px;
+  font-weight: 500;
 
-  span {
+  .ton {
     color: #27aff9;
-    font-weight: 500;
+
+  }
+
+  .stars {
+    color: #FFCD1D;
+
   }
 }
 </style>

@@ -112,7 +112,9 @@ const planets: Planet[] = [
 }
 
 .title {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+
+  text-align: center;
 }
 .planets-list {
   display: flex;

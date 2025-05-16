@@ -17,7 +17,7 @@ const tabs = [
 
 <template>
   <div class="leaders-page page">
-    <h2 class="leaders-title title-1">Мой рейтинг</h2>
+    <h2 class="leaders-title text-center title-1">Мой рейтинг</h2>
     <UserCard :user="myUser" :is-me="true" />
     <TabsSwitcher :tabs="tabs" v-model="activeTab" />
     <div class="top-users">
@@ -32,11 +32,16 @@ const tabs = [
 .leaders-title {
   margin-bottom: 12px;
 }
+
 .top-users {
   display: flex;
   align-items: end;
   padding-top: 70px;
   gap: 10px;
   margin-bottom: 12px;
+}
+
+.text-center {
+  text-align: center;
 }
 </style>

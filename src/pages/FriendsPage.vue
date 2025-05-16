@@ -47,10 +47,11 @@ const currentReferrals = computed(() => {
 <template>
   <div class="friends-page page">
     <h2 class="friends-title title-1">Друзья</h2>
-    <p class="friends-text">Зарабатывай вместе с друзьями!</p>
 
     <InviteFriendBanner />
     <ReferralInfoBanner />
+
+
 
     <h2 class="title-1">Ваши рефералы</h2>
 
@@ -67,7 +68,7 @@ const currentReferrals = computed(() => {
 
 <style scoped lang="scss">
 .title-1 {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .friends-title {

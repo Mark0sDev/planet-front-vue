@@ -22,7 +22,7 @@ import CopyButton from '@/shared/ui/CopyButton.vue'
 @use '@/app/styles/mixins' as mixins;
 
 .invite-friend-banner {
-  margin-top: 10px;
+ 
   width: 100%;
   @include mixins.bg-cover;
   background-image: url('@/shared/assets/bg/invite-friend-bg.jpg');

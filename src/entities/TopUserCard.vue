@@ -35,24 +35,7 @@ const placeClass = computed(() => {
 
     <div class="user-avatar-wrapper">
       <img :src="user.avatar" alt="Avatar" class="user-avatar" />
-      <img
-        v-if="user.place === 1"
-        src="@/shared/assets/icons/medal-1.png"
-        alt="medal"
-        class="medal"
-      />
-      <img
-        v-else-if="user.place === 2"
-        src="@/shared/assets/icons/medal-2.png"
-        alt="medal"
-        class="medal"
-      />
-      <img
-        v-else-if="user.place === 3"
-        src="@/shared/assets/icons/medal-3.png"
-        alt="medal"
-        class="medal"
-      />
+      
     </div>
 
     <div class="user-info">
