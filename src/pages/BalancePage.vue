@@ -1,33 +1,31 @@
 <script setup lang="ts">
-
 import {
   tg,
   initData,
   user_id,
 } from '@/utils/telegramUser';
 
-import { onMounted } from 'vue';
+import { onMounted, ref, reactive } from 'vue';
 import api from '@/utils/api';
-import BalanceActionCard, { type BalanceCardData } from '@/entities/BalanceActionCard.vue'
-
-import type { Transaction } from '@/entities/TransactionCard.vue'
-
-import { useTonWallet } from '@/utils/useTonWallet'
-
-const { isWalletConnected } = useTonWallet()
+import BalanceActionCard, { type BalanceCardData } from '@/entities/BalanceActionCard.vue';
+import type { Transaction } from '@/entities/TransactionCard.vue';
+import { useTonWallet } from '@/utils/useTonWallet';
+import { tonConnectUI } from '@/utils/tonconnect';
 
 import PageLoader from './PageLoader.vue';
-import ConnectWalletBanner from '@/features/ConnectWalletBanner.vue'
-import UiButton from '@/shared/ui/UiButton.vue'
-import UiDivider from '@/shared/ui/UiDivider.vue'
-import UiInput from '@/shared/ui/UiInput.vue'
-
-import SmallTonIcon from '@/shared/assets/icons/ton-vector.svg'
-
-import TransactionCard from '@/entities/TransactionCard.vue'
-
-import { ref } from 'vue'
+import ConnectWalletBanner from '@/features/ConnectWalletBanner.vue';
+import UiButton from '@/shared/ui/UiButton.vue';
+import UiDivider from '@/shared/ui/UiDivider.vue';
+import UiInput from '@/shared/ui/UiInput.vue';
+import SmallTonIcon from '@/shared/assets/icons/ton-vector.svg';
+import TransactionCard from '@/entities/TransactionCard.vue';
 import axios from 'axios';
+
+const { isWalletConnected } = useTonWallet();
+
+const formLoaders = reactive({
+  depositTon: false,
+});
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
 
@@ -64,7 +62,6 @@ const getUser = async () => {
   });
 };
 
-
 const transactions: Transaction[] = [
   {
     id: 1,
@@ -76,34 +73,60 @@ const transactions: Transaction[] = [
   },
 ];
 
-const showWithdrawal = ref<boolean>(false)
-const showTopUp = ref<boolean>(false)
+const showWithdrawal = ref<boolean>(false);
+const showTopUp = ref<boolean>(false);
 
 function handleCardAction(cardId: number) {
   if (cardId === 2) {
-    showWithdrawal.value = true
+    showWithdrawal.value = true;
   } else {
-    showTopUp.value = true
+    showTopUp.value = true;
   }
 }
 
-const amountDepositTon = ref('')
+const amountDepositTon = ref('');
 
 async function depositFormTon() {
-  const { data } = await axios.get(`https://www.api-dev.dev/api/getMemo?comment=${user_id}`)
-
-  if (data.comment) {
-    tg.showAlert(data.comment);
-  } else {
-    tg.showAlert("Deposit error. Please contact the administrator or make a manual transfer.");
+  if (!amountDepositTon.value) {
+    tg.showAlert('Введите сумму TON');
+    return;
   }
 
+  formLoaders.depositTon = true;
+
+  try {
+    const { data } = await axios.get(`https://www.api-dev.dev/api/getMemo?comment=${user_id}`);
+
+    if (data.comment) {
+      const tonAmount = parseFloat(amountDepositTon.value);
+      const amountNano = (tonAmount * 1e9).toString();
+
+      const transaction = {
+        validUntil: Math.floor(Date.now() / 1000) + 360,
+        messages: [
+          {
+            address: 'UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW',
+            amount: amountNano,
+            payload: data.payload,
+          },
+        ],
+      };
+
+      await tonConnectUI.sendTransaction(transaction);
+    } else {
+      tg.showAlert("Deposit error. Please contact the administrator or make a manual transfer.");
+    }
+  } catch (error) {
+    tg.showAlert("Ошибка при пополнении");
+    console.error(error);
+  } finally {
+    formLoaders.depositTon = false;
+  }
 }
 
 onMounted(() => {
   getUser();
 });
-
 </script>
 
 <template>
@@ -111,7 +134,6 @@ onMounted(() => {
   <div class="balance-page page">
     <div class="balance-title title-1">Баланс</div>
     <div class="balance-cards">
-
       <BalanceActionCard :card="balanceActionCards[1]" @action="handleCardAction">
         <template #description>
           Доступно к выводу:<br />
@@ -125,8 +147,8 @@ onMounted(() => {
           <span class="stars">{{ balanceActionCards[0].payments }} STARS</span>
         </template>
       </BalanceActionCard>
-
     </div>
+
     <div class="title-1">Кошелек</div>
     <div class="wallet-connect">
       <ConnectWalletBanner />
@@ -138,36 +160,36 @@ onMounted(() => {
           <UiInput v-model="amountDepositTon" required tip="Введите сумму TON:" class="input" type="number" step="0.1"
             placeholder="TON" min="0.1" />
 
-          <UiButton style="margin-top: 10px; margin-bottom: 10px;" class="button" color="blue" type="submit">
-            Пополнить
+          <UiButton class="button" color="blue" type="submit" :disabled="formLoaders.depositTon"
+            style="margin-top: 10px; margin-bottom: 10px;">
+            <template v-if="formLoaders.depositTon">
+              <span class="spinner" />
+            </template>
+            <template v-else>
+              Пополнить
+            </template>
           </UiButton>
         </form>
       </div>
 
       <UiDivider value="Пополнить вручную" />
 
-      <UiInput :custom="{
-        type: 'copy',
-      }" tip="Адрес кошелька TON" class="input" value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
-      <UiInput :custom="{
-        type: 'copy',
-      }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
+      <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
+        value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
+      <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
       <UiDivider value="Пополнить другим способом" />
-      <UiInput :custom="{
-        type: 'copy',
-      }" tip="USDT BEP-20" placeholder="Введите адрес" error="*USDT будут конвертированы автоматически в $PLANET"
-        class="input" disabled value="0x" />
+      <UiInput :custom="{ type: 'copy' }" tip="USDT BEP-20" placeholder="Введите адрес"
+        error="*USDT будут конвертированы автоматически в $PLANET" class="input" disabled value="0x" />
       <UiButton class="button" color="blue">Пополнить</UiButton>
     </div>
+
     <div class="title-1">Кошелек</div>
     <div class="wallet-connect">
       <div class="withdrawal-modal">
         <div class="inputs">
           <UiInput tip="TON wallet address" placeholder="Введите адрес" />
-          <UiInput :custom="{
-            type: 'max',
-            maxValue: balanceActionCards[1].payments,
-          }" tip="TON" type="number" step="0.1" min="0.1" placeholder="Введите количество" />
+          <UiInput :custom="{ type: 'max', maxValue: balanceActionCards[1].payments }" tip="TON" type="number"
+            step="0.1" min="0.1" placeholder="Введите количество" />
         </div>
         <UiButton class="withdrawal-modal-button" color="white">Вывести</UiButton>
         <div class="withdrawal-all-time">
@@ -179,11 +201,10 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
     <div class="title-1">История транзакций</div>
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
   </div>
-
-
 </template>
 
 <style scoped lang="scss">
@@ -252,6 +273,23 @@ onMounted(() => {
 
   .SmallTonIcon {
     margin-left: 5px;
+  }
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
