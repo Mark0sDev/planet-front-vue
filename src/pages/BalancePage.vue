@@ -160,7 +160,7 @@ onMounted(() => {
           <UiInput v-model="amountDepositTon" required tip="Введите сумму TON:" class="input" type="number" step="0.1"
             placeholder="TON" min="0.1" />
 
-          <UiButton class="button" color="blue" type="submit" :disabled="formLoaders.depositTon"
+          <UiButton class="button" type="submit" :disabled="formLoaders.depositTon"
             style="margin-top: 10px; margin-bottom: 10px;">
             <template v-if="formLoaders.depositTon">
               <span class="spinner" />

@@ -3,6 +3,12 @@ import MainNavigation from '@/widgets/MainNavigation.vue'
 
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 
+import UiButton from '@/shared/ui/UiButton.vue'
+
+import { useTonWallet } from '@/utils/useTonWallet'
+
+const { isWalletConnected, formattedAddress, onWalletClick } = useTonWallet()
+
 const isAllowed = ref(true);
 
 function onGlobalTap(e: TouchEvent | MouseEvent) {
@@ -59,6 +65,9 @@ onBeforeUnmount(() => {
   </div>
   <div>
     <h1 v-if="!isAllowed" style="text-align: center;">Dev App</h1>
+    <UiButton class="wallet-button" @click="onWalletClick" size="sm" color="accent"> {{ isWalletConnected ?
+      formattedAddress : 'Connect Wallet'
+      }}</UiButton>
   </div>
 </template>
 
