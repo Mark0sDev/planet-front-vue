@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { initData } from '@/utils/telegramUser';
 import MainNavigation from '@/widgets/MainNavigation.vue'
 
 import { onMounted, onBeforeUnmount, ref } from 'vue'
@@ -59,8 +58,7 @@ onBeforeUnmount(() => {
     <MainNavigation />
   </div>
   <div>
-    <h3 v-if="!isAllowed" style="text-align: center;">{{ initData }}</h3>
-
+    <h1 v-if="!isAllowed" style="text-align: center;">Dev App</h1>
   </div>
 </template>
 
