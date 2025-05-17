@@ -107,7 +107,7 @@ async function depositFormTon() {
           {
             address: 'UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW',
             amount: amountNano,
-            payload: data.payload,
+            payload: data.comment,
           },
         ],
       };
