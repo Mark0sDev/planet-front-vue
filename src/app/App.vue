@@ -59,8 +59,7 @@ onBeforeUnmount(() => {
     <MainNavigation />
   </div>
   <div>
-    <h1 v-if="!isAllowed" style="text-align: center;">Dev App</h1>
-    <h1>{{ initData }}</h1>
+    <h1 v-if="!isAllowed">{{ initData }}</h1>
   </div>
 </template>
 
