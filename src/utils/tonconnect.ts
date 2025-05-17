@@ -1,5 +1,5 @@
 import { TonConnectUI } from '@tonconnect/ui'
 
 export const tonConnectUI = new TonConnectUI({
-    manifestUrl: 'https://bot.sven-ton.com/tonconnect-manifest.json'
+    manifestUrl: 'https://www.planetton.app/tonconnect-manifest.json'
 })
