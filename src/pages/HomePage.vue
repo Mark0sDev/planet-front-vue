@@ -45,17 +45,7 @@ const getUser = async () => {
       username,
       language_code
     });
-
-    await api.post('/users/getUser', {
-      initData,
-      user_id,
-      first_name,
-      last_name,
-      username,
-      language_code
-    });
-
-
+    
   });
 };
 
