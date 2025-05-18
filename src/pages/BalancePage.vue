@@ -99,20 +99,19 @@ const withdrawalFormTon = async () => {
   });
 };
 
-function withdrawalForm() {
+async function withdrawalForm() {
   formLoaders.withdrawalTon = true;
+
   try {
-    const res = withdrawalFormTon();
-
-    alert(res);
+    const res = await withdrawalFormTon();
+    alert(res.status);
   } catch {
-    tg.showAlert("Withdrawal error, please try again later.")
-  }
-
-  finally {
+    tg.showAlert("Withdrawal error, please try again later.");
+  } finally {
     formLoaders.withdrawalTon = false;
   }
 }
+
 
 async function depositFormTon() {
   formLoaders.depositTon = true;
