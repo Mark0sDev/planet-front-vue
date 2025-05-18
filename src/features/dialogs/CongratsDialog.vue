@@ -24,7 +24,7 @@ function close() {
 <template>
   <UiDialog :model-value="props.modelValue" @update:modelValue="emit('update:modelValue', $event)">
     <div class="congrats-modal">
-      <h2 class="modal-title title-1">Поздравляем!</h2>
+      <h2 class="modal-title title-1">Успешно!</h2>
       <img class="congrats-modal-image" v-if="imageSrc" :src="imageSrc" alt="" />
       <p class="modal-text">{{ text }}</p>
       <UiButton @click="close" color="accent" class="congrats-modal-btn"> Продолжить </UiButton>

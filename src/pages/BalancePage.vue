@@ -19,6 +19,7 @@ import UiDivider from '@/shared/ui/UiDivider.vue';
 import UiInput from '@/shared/ui/UiInput.vue';
 import SmallTonIcon from '@/shared/assets/icons/ton-vector.svg';
 import TransactionCard from '@/entities/TransactionCard.vue';
+import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 import axios from 'axios';
 
 const { isWalletConnected } = useTonWallet();
@@ -74,6 +75,8 @@ const transactions: Transaction[] = [
   },
 ];
 
+const showWithdrawalTon = ref<boolean>(false);
+
 const showWithdrawal = ref<boolean>(false);
 const showTopUp = ref<boolean>(false);
 
@@ -104,7 +107,12 @@ async function withdrawalForm() {
 
   try {
     const res = await withdrawalFormTon();
-    alert(res.data.status);
+
+    if (res.data.status == 1) {
+      wallet_withdrawal.value = '';
+      sum_withdrawal.value = '';
+      showWithdrawalTon.value = true
+    }
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
   } finally {
@@ -232,6 +240,7 @@ onMounted(() => {
 
     <div class="title-1">История транзакций</div>
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
+    <CongratsDialog text="D" v-model="showWithdrawalTon" />
   </div>
 </template>
 
