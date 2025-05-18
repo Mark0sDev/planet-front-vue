@@ -5,7 +5,7 @@ import {
   user_id,
 } from '@/utils/telegramUser';
 
-import { onMounted, ref, reactive } from 'vue';
+import { onMounted, ref, reactive, computed } from 'vue';
 import api from '@/utils/api';
 import BalanceActionCard, { type BalanceCardData } from '@/entities/BalanceActionCard.vue';
 import type { Transaction } from '@/entities/TransactionCard.vue';
@@ -34,25 +34,6 @@ const formLoaders = reactive({
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
 
-const balanceActionCards = ref<BalanceCardData[]>([
-  {
-    id: 1,
-    name: 'STARS',
-    balance: 0,
-    payments: 0,
-    icon: "/icons/stars.svg",
-    variant: 'white',
-  },
-  {
-    id: 2,
-    name: 'TON',
-    balance: 0,
-    payments: 0,
-    icon: "/icons/ton.svg",
-    variant: 'accent',
-  },
-]);
-
 const user = ref({
   balance_ton: 0,
   balance_stars: 0,
@@ -68,11 +49,6 @@ const getUser = async () => {
       user_id,
     });
 
-    balanceActionCards.value[0].payments = res.data.balance_payments_stars;
-    balanceActionCards.value[1].payments = res.data.balance_payments_ton;
-    balanceActionCards.value[1].balance = res.data.balance_ton;
-    balanceActionCards.value[0].balance = res.data.balance_stars;
-
     user.value = {
       balance_ton: res.data.balance_ton,
       balance_stars: res.data.balance_stars,
@@ -83,6 +59,26 @@ const getUser = async () => {
 
   });
 };
+
+const balanceActionCards = computed<BalanceCardData[]>(() => [
+  {
+    id: 1,
+    name: 'STARS',
+    balance: user.value.balance_stars,
+    payments: user.value.balance_payments_stars,
+    icon: "/icons/stars.svg",
+    variant: 'white',
+  },
+  {
+    id: 2,
+    name: 'TON',
+    balance: user.value.balance_ton,
+    payments: user.value.balance_payments_ton,
+    icon: "/icons/ton.svg",
+    variant: 'accent',
+  },
+]);
+
 
 const transactions: Transaction[] = [
   {
