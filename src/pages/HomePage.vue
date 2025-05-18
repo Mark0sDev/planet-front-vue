@@ -2,7 +2,6 @@
 
 import {
   photo_url,
-  tg,
   initData,
   user_id,
   first_name,
@@ -51,7 +50,6 @@ const getUser = async () => {
   });
 };
 
-tg.showAlert(photo_url + '');
 onMounted(() => {
   getUser();
 
@@ -68,7 +66,7 @@ onMounted(() => {
     <div class="page-wrapper">
       <MainDashboard />
       <div class="statistics">
-        <div class="title title-1">Статистика</div>
+        <div class="title title-1">Статистика {{ photo_url }}</div>
         <div class="statistics-inner">
           <StatisticsCard value="245 210" color="#763FF1" text="Пользователи, которые уже зарабатывают">
             <UsersIcon />
