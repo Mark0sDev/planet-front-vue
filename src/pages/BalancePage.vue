@@ -25,6 +25,7 @@ const { isWalletConnected } = useTonWallet();
 
 const formLoaders = reactive({
   depositTon: false,
+  withdrawalTon: false,
 });
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
@@ -89,7 +90,16 @@ const wallet_withdrawal = ref('');
 const sum_withdrawal = ref('');
 
 function withdrawalForm() {
-  alert(sum_withdrawal.value);
+  formLoaders.withdrawalTon = true;
+  try {
+    alert('test');
+  } catch {
+    tg.showAlert("Withdrawal error, please try again later.")
+  }
+
+  finally {
+    formLoaders.depositTon = false;
+  }
 }
 
 async function depositFormTon() {
@@ -185,11 +195,19 @@ onMounted(() => {
       <form @submit.prevent="withdrawalForm">
         <div class="withdrawal-modal">
           <div class="inputs">
-            <UiInput tip="TON wallet address" v-model="wallet_withdrawal" required="" placeholder="Введите адрес" />
+            <UiInput tip="TON wallet address" v-model="wallet_withdrawal" required="" type="text"
+              placeholder="Введите адрес" />
             <UiInput v-model="sum_withdrawal" :custom="{ type: 'max', maxValue: balanceActionCards[1].payments }"
               tip="TON" type="number" step="0.00001" min="0.00001" required="" placeholder="Введите количество" />
           </div>
-          <UiButton class="withdrawal-modal-button" color="blue">Вывести</UiButton>
+          <UiButton :disabled="formLoaders.withdrawalTon" class="withdrawal-modal-button" color="blue">
+            <template v-if="formLoaders.withdrawalTon">
+              <span class="spinner" />
+            </template>
+            <template v-else>
+              Вывести
+            </template>
+          </UiButton>
           <div class="withdrawal-all-time">
             <span>Выведено за все время:</span>
             <div class="value">
