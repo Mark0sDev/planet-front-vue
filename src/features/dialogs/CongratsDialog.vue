@@ -26,7 +26,7 @@ function close() {
     <div class="congrats-modal">
       <h2 class="modal-title title-1">Успешно!</h2>
       <img class="congrats-modal-image" v-if="imageSrc" :src="imageSrc" alt="" />
-      <p class="modal-text">{{ text }}</p>
+      <p class="modal-text" v-html="text"></p>
       <UiButton @click="close" color="accent" class="congrats-modal-btn"> Продолжить </UiButton>
     </div>
   </UiDialog>
@@ -34,6 +34,7 @@ function close() {
 
 <style scoped lang="scss">
 @use '@/app/styles/mixins' as mixins;
+
 .congrats-modal {
   background: #1e2237;
   border-radius: 16px;
@@ -48,6 +49,7 @@ function close() {
   .modal-title {
     margin-bottom: 6px;
   }
+
   .modal-text {
     margin-bottom: 18px;
   }
