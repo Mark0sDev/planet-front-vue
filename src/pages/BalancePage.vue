@@ -85,6 +85,12 @@ function handleCardAction(cardId: number) {
 }
 
 const amountDepositTon = ref('');
+const wallet_withdrawal = ref('');
+const sum_withdrawal = ref('');
+
+function withdrawalForm() {
+  alert(sum_withdrawal.value);
+}
 
 async function depositFormTon() {
   formLoaders.depositTon = true;
@@ -176,21 +182,23 @@ onMounted(() => {
 
     <div class="title-1">Кошелек</div>
     <div class="wallet-connect">
-      <div class="withdrawal-modal">
-        <div class="inputs">
-          <UiInput tip="TON wallet address" placeholder="Введите адрес" />
-          <UiInput :custom="{ type: 'max', maxValue: balanceActionCards[1].payments }" tip="TON" type="number"
-            step="0.1" min="0.1" placeholder="Введите количество" />
-        </div>
-        <UiButton class="withdrawal-modal-button" color="blue">Вывести</UiButton>
-        <div class="withdrawal-all-time">
-          <span>Выведено за все время:</span>
-          <div class="value">
-            <span>805</span>
-            <SmallTonIcon class="SmallTonIcon" />
+      <form @submit.prevent="withdrawalForm">
+        <div class="withdrawal-modal">
+          <div class="inputs">
+            <UiInput tip="TON wallet address" v-model="wallet_withdrawal" required="" placeholder="Введите адрес" />
+            <UiInput v-model="sum_withdrawal" :custom="{ type: 'max', maxValue: balanceActionCards[1].payments }"
+              tip="TON" type="number" step="0.00001" min="0.00001" required="" placeholder="Введите количество" />
+          </div>
+          <UiButton class="withdrawal-modal-button" color="blue">Вывести</UiButton>
+          <div class="withdrawal-all-time">
+            <span>Выведено за все время:</span>
+            <div class="value">
+              <span>805</span>
+              <SmallTonIcon class="SmallTonIcon" />
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
 
     <div class="title-1">История транзакций</div>
