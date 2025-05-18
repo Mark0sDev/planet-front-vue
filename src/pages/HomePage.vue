@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import {
+  photo_url,
+  tg,
   initData,
   user_id,
   first_name,
@@ -45,11 +47,11 @@ const getUser = async () => {
       username,
       language_code
     });
-    
+
   });
 };
 
-
+tg.showAlert(photo_url + '');
 onMounted(() => {
   getUser();
 

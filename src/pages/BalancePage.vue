@@ -87,11 +87,6 @@ function handleCardAction(cardId: number) {
 const amountDepositTon = ref('');
 
 async function depositFormTon() {
-  if (!amountDepositTon.value) {
-    tg.showAlert('Введите сумму TON');
-    return;
-  }
-
   formLoaders.depositTon = true;
 
   try {
@@ -116,9 +111,8 @@ async function depositFormTon() {
     } else {
       tg.showAlert("Deposit error. Please contact the administrator or make a manual transfer.");
     }
-  } catch (error) {
-    tg.showAlert("Ошибка при пополнении");
-    console.error(error);
+  } catch {
+    tg.showAlert("The deposit has been canceled.");
   } finally {
     formLoaders.depositTon = false;
   }
@@ -177,10 +171,7 @@ onMounted(() => {
       <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
         value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
       <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
-      <UiDivider value="Пополнить другим способом" />
-      <UiInput :custom="{ type: 'copy' }" tip="USDT BEP-20" placeholder="Введите адрес"
-        error="*USDT будут конвертированы автоматически в $PLANET" class="input" disabled value="0x" />
-      <UiButton class="button" color="blue">Пополнить</UiButton>
+
     </div>
 
     <div class="title-1">Кошелек</div>
@@ -191,7 +182,7 @@ onMounted(() => {
           <UiInput :custom="{ type: 'max', maxValue: balanceActionCards[1].payments }" tip="TON" type="number"
             step="0.1" min="0.1" placeholder="Введите количество" />
         </div>
-        <UiButton class="withdrawal-modal-button" color="white">Вывести</UiButton>
+        <UiButton class="withdrawal-modal-button" color="blue">Вывести</UiButton>
         <div class="withdrawal-all-time">
           <span>Выведено за все время:</span>
           <div class="value">
