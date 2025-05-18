@@ -67,7 +67,7 @@ const onInput = (event: Event) => {
       <input ref="inputRef" :value="modelValue" @input="onInput" v-bind="$attrs" />
 
       <div class="ui-input-custom">
-        <button v-if="custom?.type === 'max'" @click="handleMaxClick" class="max-value">
+        <button v-if="custom?.type === 'max'" @click.stop.prevent="handleMaxClick" class="max-value">
           <TonIcon />
           MAX
         </button>
