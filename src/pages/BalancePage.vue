@@ -104,7 +104,7 @@ async function withdrawalForm() {
 
   try {
     const res = await withdrawalFormTon();
-    alert(res.status);
+    alert(res.data.status);
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
   } finally {
