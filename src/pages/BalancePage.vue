@@ -89,10 +89,22 @@ const amountDepositTon = ref('');
 const wallet_withdrawal = ref('');
 const sum_withdrawal = ref('');
 
+
+const withdrawalFormTon = async () => {
+  await loaderRef.value?.withLoader(async () => {
+    await api.post('/users/getUser', {
+      initData,
+      user_id,
+     
+    });
+
+  });
+};
+
 function withdrawalForm() {
   formLoaders.withdrawalTon = true;
   try {
-    alert('test');
+    withdrawalFormTon();
   } catch {
     tg.showAlert("Withdrawal error, please try again later.")
   }
