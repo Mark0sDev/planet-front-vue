@@ -21,6 +21,9 @@ import SmallTonIcon from '@/shared/assets/icons/ton-vector.svg';
 import TransactionCard from '@/entities/TransactionCard.vue';
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 import axios from 'axios';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const { isWalletConnected } = useTonWallet();
 
@@ -240,8 +243,7 @@ onMounted(() => {
 
     <div class="title-1">История транзакций</div>
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
-    <CongratsDialog text="Заявка на вывод успешно создана<br><br>TON поступят на кошелёк в течении 30-и секунд"
-      v-model="showWithdrawalTon" />
+    <CongratsDialog :text="t('withdrawal_success')" v-model="showWithdrawalTon" />
   </div>
 </template>
 
