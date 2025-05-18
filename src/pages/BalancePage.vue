@@ -98,7 +98,7 @@ function withdrawalForm() {
   }
 
   finally {
-    formLoaders.depositTon = false;
+    formLoaders.withdrawalTon = false;
   }
 }
 
