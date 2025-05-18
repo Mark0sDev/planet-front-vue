@@ -132,6 +132,8 @@ async function withdrawalForm() {
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
       showWithdrawalTon.value = true
+
+      user.value.withdrawal_ton += parseFloat(sum_withdrawal.value);
     }
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
