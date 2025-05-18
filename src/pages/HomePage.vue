@@ -4,8 +4,6 @@ import {
   photo_url,
   initData,
   user_id,
-  first_name,
-  last_name,
   username,
   language_code
 } from '@/utils/telegramUser'
@@ -41,10 +39,9 @@ const getUser = async () => {
     await api.post('/users/getUser', {
       initData,
       user_id,
-      first_name,
-      last_name,
       username,
-      language_code
+      language_code,
+      photo_url
     });
 
   });
@@ -66,7 +63,7 @@ onMounted(() => {
     <div class="page-wrapper">
       <MainDashboard />
       <div class="statistics">
-        <div class="title title-1">Статистика {{ photo_url }}</div>
+        <div class="title title-1">Статистика</div>
         <div class="statistics-inner">
           <StatisticsCard value="245 210" color="#763FF1" text="Пользователи, которые уже зарабатывают">
             <UsersIcon />
