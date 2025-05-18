@@ -91,7 +91,7 @@ const sum_withdrawal = ref('');
 
 
 const withdrawalFormTon = async () => {
-  await api.post('/users/withdrawalTon', {
+  return await api.post('/users/withdrawalTon', {
     initData,
     user_id,
     wallet_withdrawal: wallet_withdrawal.value,
@@ -104,7 +104,7 @@ function withdrawalForm() {
   try {
     const res = withdrawalFormTon();
 
-    console.log(res);
+    alert(res);
   } catch {
     tg.showAlert("Withdrawal error, please try again later.")
   }
