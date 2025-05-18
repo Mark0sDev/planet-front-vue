@@ -12,4 +12,4 @@ export const last_name = user?.last_name ?? '';
 export const username = user?.username ?? '';
 export const language_code = user?.language_code ?? 'en';
 export const photo_url = user?.photo_url ?? null;
-export const startParam = user?.start_param;
+export const startParam = tg.initDataUnsafe.start_param || 0;

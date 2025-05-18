@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {
+  startParam,
   photo_url,
   initData,
   user_id,
@@ -41,7 +42,8 @@ const getUser = async () => {
       user_id,
       username,
       language_code,
-      photo_url
+      photo_url,
+      startParam
     });
 
   });
@@ -63,7 +65,7 @@ onMounted(() => {
     <div class="page-wrapper">
       <MainDashboard />
       <div class="statistics">
-        <div class="title title-1">Статистика</div>
+        <div class="title title-1">Статистика {{ startParam }}</div>
         <div class="statistics-inner">
           <StatisticsCard value="245 210" color="#763FF1" text="Пользователи, которые уже зарабатывают">
             <UsersIcon />
