@@ -53,6 +53,14 @@ const balanceActionCards = ref<BalanceCardData[]>([
   },
 ]);
 
+const user = ref({
+  balance_ton: 0,
+  balance_stars: 0,
+  balance_payments_ton: 0,
+  balance_payments_stars: 0,
+  withdrawal_ton: 0
+});
+
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const res = await api.post('/users/getUser', {
@@ -64,6 +72,15 @@ const getUser = async () => {
     balanceActionCards.value[1].payments = res.data.balance_payments_ton;
     balanceActionCards.value[1].balance = res.data.balance_ton;
     balanceActionCards.value[0].balance = res.data.balance_stars;
+
+    user.value = {
+      balance_ton: res.data.balance_ton,
+      balance_stars: res.data.balance_stars,
+      balance_payments_ton: res.data.balance_payments_ton,
+      balance_payments_stars: res.data.balance_payments_stars,
+      withdrawal_ton: res.data.withdrawal_ton
+    };
+
   });
 };
 
@@ -233,7 +250,7 @@ onMounted(() => {
           <div class="withdrawal-all-time">
             <span>Выведено за все время:</span>
             <div class="value">
-              <span>805</span>
+              <span>{{ user.withdrawal_ton }}</span>
               <SmallTonIcon class="SmallTonIcon" />
             </div>
           </div>
