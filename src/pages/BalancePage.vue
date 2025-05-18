@@ -94,6 +94,8 @@ const withdrawalFormTon = async () => {
   await api.post('/users/withdrawalTon', {
     initData,
     user_id,
+    wallet_withdrawal: wallet_withdrawal.value,
+    sum_withdrawal: sum_withdrawal.value
   });
 };
 
