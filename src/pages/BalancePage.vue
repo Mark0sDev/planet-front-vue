@@ -240,7 +240,8 @@ onMounted(() => {
 
     <div class="title-1">История транзакций</div>
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
-    <CongratsDialog text="Заявка на вывод успешно создана<br><br>test" v-model="showWithdrawalTon" />
+    <CongratsDialog text="Заявка на вывод успешно создана<br><br>TON поступят на кошелёк в течении 30-и секунд"
+      v-model="showWithdrawalTon" />
   </div>
 </template>
 
