@@ -24,7 +24,7 @@ const { card } = defineProps<BalanceActionCardProps>()
       <img class="balance-icon" :src="card.icon" alt="" />
       <div class="balance-info">
         <div class="balance-name">{{ card.name }}</div>
-        <div class="balance-amount">{{ card.balance }}</div>
+        <div class="balance-amount">{{ card.balance.toFixed(2) }}</div>
       </div>
     </div>
     <div class="balance-description">
