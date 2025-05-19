@@ -68,7 +68,7 @@ const getUser = async () => {
       title:
         item.type === 1 ? 'Вывод' : item.type === 2 ? 'Пополнение' :
           item.type === 3 ? 'Доход' : item.type === 4 ? 'Штраф' : 'Транзакция',
-      date: item.date.split(' ')[0],
+      date: item.date,
       amount: item.sum,
       type: item.type === 1 ? 'expense' : 'income'
     }));
