@@ -40,31 +40,15 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="daily-draw-banner">
-    <svg
-      class="decor"
-      width="236"
-      height="126"
-      viewBox="0 0 236 126"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg class="decor" width="236" height="126" viewBox="0 0 236 126" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_f_2265_5200)">
         <path
           d="M143.586 83.2565L185.036 46.488L94.1225 -55.9999L52.6728 -19.2314C32.1494 35.6736 176.067 -19.0642 143.586 83.2565Z"
-          fill="#38B6FA"
-          fill-opacity="0.8"
-        />
+          fill="#38B6FA" fill-opacity="0.8" />
       </g>
       <defs>
-        <filter
-          id="filter0_f_2265_5200"
-          x="0.660156"
-          y="-106"
-          width="234.375"
-          height="239.256"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
+        <filter id="filter0_f_2265_5200" x="0.660156" y="-106" width="234.375" height="239.256"
+          filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_2265_5200" />
@@ -94,7 +78,9 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 @use '@/app/styles/mixins' as mixins;
+
 .daily-draw-banner {
+
   width: 100%;
   padding: 10px;
   background: rgba(30, 34, 55, 0.84);
@@ -110,6 +96,7 @@ onBeforeUnmount(() => {
     left: 50%;
     transform: translateX(-50%);
   }
+
   .bg-image {
     position: absolute;
     bottom: 0;
@@ -129,6 +116,9 @@ onBeforeUnmount(() => {
 
   .content {
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
   }
 }
@@ -165,6 +155,7 @@ onBeforeUnmount(() => {
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

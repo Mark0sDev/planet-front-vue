@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import UiButton from '@/shared/ui/UiButton.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 import SlotsIcon from '@/shared/assets/icons/slot-machine.svg'
 
 import { useRouter } from 'vue-router'
@@ -31,7 +33,7 @@ const handleButtonClick = () => {
     </svg>
     <div class="daily-draw-inner">
       <div class="content">
-        <div class="title">Крути рулетку <br /><span>Выигрывай</span> призы</div>
+        <div class="title" v-html="t('roulette.title')"></div>
         <UiButton @click="handleButtonClick" class="green">Крутить</UiButton>
       </div>
       <div class="banner-icon-wrapper">
@@ -45,6 +47,8 @@ const handleButtonClick = () => {
 @use '@/app/styles/mixins' as mixins;
 
 .daily-draw-banner {
+
+
   width: 100%;
   padding: 10px;
   background: rgba(30, 34, 55, 0.84);
@@ -85,6 +89,10 @@ const handleButtonClick = () => {
   .content {
     max-width: 100%;
     width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 
