@@ -32,6 +32,15 @@ const formLoaders = reactive({
   withdrawalTon: false,
 });
 
+interface HistoryItem {
+  id: number;
+  user_id: number;
+  type: number;
+  sum: string;
+  date: string;
+}
+
+
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
 
 const user = ref({
@@ -41,6 +50,8 @@ const user = ref({
   balance_payments_stars: 0,
   withdrawal_ton: 0
 });
+
+const transactions = ref<Transaction[]>([]);
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
@@ -58,7 +69,15 @@ const getUser = async () => {
       withdrawal_ton: +userApi.data.withdrawal_ton
     };
 
-    console.log(historyApi.data);
+    transactions.value = (historyApi.data as HistoryItem[]).map((item) => ({
+      id: item.id,
+      title: item.type === 1 ? 'Пополнение' : 'Вывод',
+      date: item.date.split(' ')[0],
+      amount: item.sum,
+      type: item.type === 1 ? 'income' : 'expense',
+      status: 'success',
+    }));
+
 
   });
 };
@@ -83,16 +102,6 @@ const balanceActionCards = computed<BalanceCardData[]>(() => [
 ]);
 
 
-const transactions: Transaction[] = [
-  {
-    id: 1,
-    title: 'Пополнение',
-    date: '2025-04-25',
-    amount: '0.005',
-    type: 'income',
-    status: 'success',
-  },
-];
 
 const showWithdrawalTon = ref<boolean>(false);
 
