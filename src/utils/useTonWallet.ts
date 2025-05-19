@@ -21,7 +21,7 @@ export function useTonWallet() {
         const friendly = address.toString(true)
             .replace(/\//g, '_')
             .replace(/\+/g, '-')
-        return `${friendly.slice(0, 3)}...${friendly.slice(-3)}`
+        return `${friendly.slice(0, 5)}...${friendly.slice(-5)}`
     })
 
     const onWalletClick = async () => {
