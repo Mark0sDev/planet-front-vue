@@ -50,10 +50,10 @@ const getUser = async () => {
     });
 
     user.value = {
-      balance_ton: res.data.balance_ton,
-      balance_stars: res.data.balance_stars,
-      balance_payments_ton: res.data.balance_payments_ton,
-      balance_payments_stars: res.data.balance_payments_stars,
+      balance_ton: +res.data.balance_ton,
+      balance_stars: +res.data.balance_stars,
+      balance_payments_ton: +res.data.balance_payments_ton,
+      balance_payments_stars: +res.data.balance_payments_stars,
       withdrawal_ton: +res.data.withdrawal_ton
     };
 
@@ -127,9 +127,13 @@ async function withdrawalForm() {
     if (res.data.status == 1) {
 
       const sum = parseFloat(sum_withdrawal.value);
-      const current = parseFloat(String(user.value.withdrawal_ton));
-      user.value.withdrawal_ton = current + sum;
 
+
+      const current_withdrawal_ton = parseFloat(String(user.value.withdrawal_ton));
+      user.value.withdrawal_ton = current_withdrawal_ton + sum;
+
+      user.value.balance_ton = - sum;
+      user.value.balance_payments_ton = - sum;
 
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
