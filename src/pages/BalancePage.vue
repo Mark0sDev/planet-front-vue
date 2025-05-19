@@ -126,7 +126,10 @@ async function withdrawalForm() {
 
     if (res.data.status == 1) {
 
-      user.value.withdrawal_ton += parseFloat(sum_withdrawal.value);
+      const sum = parseFloat(sum_withdrawal.value);
+      const current = parseFloat(String(user.value.withdrawal_ton));
+      user.value.withdrawal_ton = current + sum;
+
 
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
