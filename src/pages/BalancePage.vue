@@ -125,12 +125,12 @@ async function withdrawalForm() {
     const res = await withdrawalFormTon();
 
     if (res.data.status == 1) {
+
+      user.value.withdrawal_ton += parseFloat(wallet_withdrawal.value);
+
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
       showWithdrawalTon.value = true
-
-      const sum = parseFloat(sum_withdrawal.value);
-      user.value.withdrawal_ton += sum;
     }
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
