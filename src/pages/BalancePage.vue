@@ -44,18 +44,21 @@ const user = ref({
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
-    const res = await api.post('/users/getUser', {
-      initData,
-      user_id,
-    });
+    const [userApi, historyApi] = await Promise.all([
+      api.post('/users/getUser', { initData, user_id }),
+      api.post('/users/getHistory', { initData, user_id })
+    ])
+
 
     user.value = {
-      balance_ton: +res.data.balance_ton,
-      balance_stars: +res.data.balance_stars,
-      balance_payments_ton: +res.data.balance_payments_ton,
-      balance_payments_stars: +res.data.balance_payments_stars,
-      withdrawal_ton: +res.data.withdrawal_ton
+      balance_ton: +userApi.data.balance_ton,
+      balance_stars: +userApi.data.balance_stars,
+      balance_payments_ton: +userApi.data.balance_payments_ton,
+      balance_payments_stars: +userApi.data.balance_payments_stars,
+      withdrawal_ton: +userApi.data.withdrawal_ton
     };
+
+    console.log(historyApi);
 
   });
 };
@@ -234,7 +237,7 @@ onMounted(() => {
 
     </div>
 
-    <div class="title-1">Кошелек</div>
+    <div class="title-1">{{ t('withdraw_title') }}</div>
     <div class="wallet-connect">
       <form @submit.prevent="withdrawalForm">
         <div class="withdrawal-modal">
@@ -263,7 +266,7 @@ onMounted(() => {
       </form>
     </div>
 
-    <div class="title-1">История транзакций</div>
+    <div class="title-1">{{ t('transactions_history_title') }}</div>
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
     <CongratsDialog :text="t('withdrawal_success')" v-model="showWithdrawalTon" />
   </div>
