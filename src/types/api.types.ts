@@ -3,7 +3,7 @@ export interface ReferralFromApi {
     user_id: number
     login: string | null
     avatar_url_telegram: string | null
-    balance_payments_ton: string | number
+    deposit_ton: string | number
 }
 
 export interface HistoryItemApi {

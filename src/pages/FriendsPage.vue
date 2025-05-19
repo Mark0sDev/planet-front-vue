@@ -39,7 +39,6 @@ const loadedLevels = ref<{ [key: string]: boolean }>({
   level3: false,
 })
 
-
 const getUserReferral = async (level: 'level1' | 'level2' | 'level3') => {
   if (loadedLevels.value[level]) return
 
@@ -53,8 +52,8 @@ const getUserReferral = async (level: 'level1' | 'level2' | 'level3') => {
     referrals.value[level] = (data as ReferralFromApi[]).map((item) => ({
       id: item.user_id,
       name: item.login || 'No Name',
-      avatar: item.avatar_url_telegram || '', // можно задать дефолт
-      balance: String(item.balance_payments_ton || '0'),
+      avatar: item.avatar_url_telegram || '',
+      balance: String(item.deposit_ton),
     }))
 
     loadedLevels.value[level] = true
