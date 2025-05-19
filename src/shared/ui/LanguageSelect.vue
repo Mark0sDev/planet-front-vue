@@ -29,6 +29,8 @@ const flags: Flag[] = [
 ]
 
 const currentLang = (localStorage.getItem('lang') as Language) || Language.RU
+
+alert(currentLang);
 const selectedFlag = ref<Flag>(
   flags.find(flag => flag.code === currentLang) || flags[0]
 )
