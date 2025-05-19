@@ -1,22 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+</script>
 
 <template>
   <div class="referral-info-banner">
-    <div class="info-box">
-      <h2 class="info-title">
-        За прокачку своей <br />
-        планеты - ваш <span>реферальный</span> <br />
-        <span>процент</span> будет увеличиваться
-      </h2>
-      <p class="info-description">
-        Чем выше уровень вашей планеты - тем больше вы получаете со своих рефералов
-      </p>
+    <div v-html="t('friends_banner')" class="info-box">
+
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use '@/app/styles/mixins' as mixins;
+
 .referral-info-banner {
   margin-top: 10px;
   flex: none;
@@ -32,6 +30,7 @@
 
 .info-box {
   max-width: 276px;
+
   span {
     color: #27aff9;
   }
@@ -42,6 +41,7 @@
   font-size: 16px;
   margin-bottom: 7px;
 }
+
 .info-description {
   color: rgba(255, 255, 255, 0.7);
   max-width: 225px;

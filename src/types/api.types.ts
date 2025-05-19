@@ -1,8 +1,15 @@
 // Ответ от /users/getHistory
+export interface ReferralFromApi {
+    user_id: number
+    login: string | null
+    avatar_url_telegram: string | null
+    balance_payments_ton: string | number
+}
+
 export interface HistoryItemApi {
-    id: number;
-    user_id: number;
-    type: number; // 1 — пополнение, 2 — вывод
-    sum: string;
-    date: string;
+    id: number
+    user_id: number
+    type: number
+    sum: string
+    date: string
 }

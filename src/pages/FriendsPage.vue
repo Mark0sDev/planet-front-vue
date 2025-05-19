@@ -1,52 +1,85 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import {
+  initData,
+  user_id,
+} from '@/utils/telegramUser';
 
+import { ref, computed, onMounted, watch } from 'vue'
+import type { ReferralFromApi } from '@/types/api.types';
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
-
 import InviteFriendBanner from '@/features/InviteFriendBanner.vue'
 import ReferralInfoBanner from '@/features/ReferralInfoBanner.vue'
 import ReferralCard from '@/entities/ReferralCard.vue'
-
-import avatar1 from '@/shared/assets/avatars/avatar-1.jpg'
-import avatar2 from '@/shared/assets/avatars/avatar-2.jpg'
-
+import PageLoader from './PageLoader.vue'
+import api from '@/utils/api';
 
 import type { Referral } from '@/entities/ReferralCard.vue'
 
-const activeTab = ref('tones')
+const { t } = useI18n()
+
+const activeTab = ref('level1')
+const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
+
 
 const tabs = [
-  { id: 'tones', label: 'tabs.level1' },
-  { id: 'referrals', label: 'tabs.level2' },
-  { id: 'tokens', label: 'tabs.level3' },
+  { id: 'level1', label: 'tabs.level1' },
+  { id: 'level2', label: 'tabs.level2' },
+  { id: 'level3', label: 'tabs.level3' },
 ]
 
-const referralsTones: Referral[] = [
-  { id: 1, name: 'Tone Master', avatar: avatar1, balance: '0.005' }
-]
-
-const referralsReferrals: Referral[] = [
-  { id: 3, name: 'Alex Planet', avatar: avatar1, balance: '0.00012' }
-]
-
-const referralsTokens: Referral[] = [
-  { id: 5, name: 'Token Mike', avatar: avatar2, balance: '10.5' }
-]
-
-const currentReferrals = computed(() => {
-  if (activeTab.value === 'tones') return referralsTones
-  if (activeTab.value === 'referrals') return referralsReferrals
-  if (activeTab.value === 'tokens') return referralsTokens
-  return []
+const referrals = ref<{ [key: string]: Referral[] }>({
+  level1: [],
+  level2: [],
+  level3: [],
 })
+
+const loadedLevels = ref<{ [key: string]: boolean }>({
+  level1: false,
+  level2: false,
+  level3: false,
+})
+
+
+const getUserReferral = async (level: 'level1' | 'level2' | 'level3') => {
+  if (loadedLevels.value[level]) return
+
+  await loaderRef.value?.withLoader(async () => {
+    const { data } = await api.post('/users/getRefferal', {
+      user_id,
+      initData,
+      level: parseInt(level.replace('level', '')),
+    })
+
+    referrals.value[level] = (data as ReferralFromApi[]).map((item) => ({
+      id: item.user_id,
+      name: item.login || 'No Name',
+      avatar: item.avatar_url_telegram || '', // можно задать дефолт
+      balance: String(item.balance_payments_ton || '0'),
+    }))
+
+    loadedLevels.value[level] = true
+  })
+}
+
+const currentReferrals = computed(() => referrals.value[activeTab.value] || [])
+
+watch(activeTab, (tab) => {
+  getUserReferral(tab as 'level1' | 'level2' | 'level3')
+})
+
+onMounted(() => {
+  getUserReferral('level1')
+})
+
 
 
 </script>
 
 <template>
+  <PageLoader ref="loaderRef" />
+
   <div class="friends-page page">
-    <h2 class="friends-title title-1">Друзья</h2>
+    <h2 class="friends-title title-1">{{ t('friends_text') }}</h2>
 
     <InviteFriendBanner />
     <ReferralInfoBanner />

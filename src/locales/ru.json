@@ -5,6 +5,8 @@
         "level2": "2 уровень",
         "level3": "3 уровень"
     },
+    "friends_banner": "<h2 class='info-title'>Получай <span>10%</span> за <span>каждую<br/>покупку</span> планеты вашим рефералом</h2><p class='info-description'>Вы получаете реферальную награду каждый раз, когда Ваш реферал покупает планету</p>",
+    "friends_text": "Друзья",
     "withdrawal_success": "Заявка на вывод успешно создана<br><br>TON поступят на кошелёк в течение 30 секунд",
     "withdraw_title": "Вывод баланса",
     "transactions_history_title": "История транзакций",
