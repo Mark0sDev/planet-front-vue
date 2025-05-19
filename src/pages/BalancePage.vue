@@ -54,7 +54,7 @@ const getUser = async () => {
       balance_stars: res.data.balance_stars,
       balance_payments_ton: res.data.balance_payments_ton,
       balance_payments_stars: res.data.balance_payments_stars,
-      withdrawal_ton: res.data.withdrawal_ton
+      withdrawal_ton: +res.data.withdrawal_ton
     };
 
   });
