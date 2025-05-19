@@ -252,7 +252,7 @@ onMounted(() => {
           <div class="withdrawal-all-time">
             <span>Выведено за все время:</span>
             <div class="value">
-              <span>{{ user.withdrawal_ton }}</span>
+              <span>{{ user.withdrawal_ton.toFixed(5) }}</span>
               <SmallTonIcon class="SmallTonIcon" />
             </div>
           </div>
