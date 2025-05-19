@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import CheckIcon from '@/shared/assets/icons/check.svg'
-import CloseIcon from '@/shared/assets/icons/close.svg'
 
 export interface Transaction {
   id: number
@@ -9,7 +8,6 @@ export interface Transaction {
   date: string
   amount: string
   type: 'income' | 'expense'
-  status: 'success' | 'failed'
 }
 
 interface TransactionCardProps {
@@ -32,10 +30,9 @@ const amountClass = computed(() => {
 </script>
 
 <template>
-  <div class="transaction-card" :class="[transaction.type, transaction.status]">
+  <div class="transaction-card" :class="[transaction.type]">
     <div class="transaction-info">
-      <CheckIcon class="transaction-status" v-if="transaction.status === 'success'" />
-      <CloseIcon class="transaction-status" v-else />
+      <CheckIcon class="transaction-status" />
 
       <div class="transaction-texts">
         <div class="transaction-title">{{ transaction.title }}</div>
