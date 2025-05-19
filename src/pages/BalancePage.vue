@@ -64,16 +64,16 @@ const balanceActionCards = computed<BalanceCardData[]>(() => [
   {
     id: 1,
     name: 'STARS',
-    balance: user.value.balance_stars,
-    payments: user.value.balance_payments_stars,
+    balance: +user.value.balance_stars,
+    payments: +user.value.balance_payments_stars,
     icon: "/icons/stars.svg",
     variant: 'white',
   },
   {
     id: 2,
     name: 'TON',
-    balance: user.value.balance_ton,
-    payments: user.value.balance_payments_ton,
+    balance: +user.value.balance_ton,
+    payments: +user.value.balance_payments_ton,
     icon: "/icons/ton.svg",
     variant: 'accent',
   },
@@ -191,14 +191,14 @@ onMounted(() => {
       <BalanceActionCard :card="balanceActionCards[1]" @action="handleCardAction">
         <template #description>
           Доступно к выводу:<br />
-          <span class="ton">{{ balanceActionCards[1].payments }} TON</span>
+          <span class="ton">{{ balanceActionCards[1].payments.toFixed(5) }} TON</span>
         </template>
       </BalanceActionCard>
 
       <BalanceActionCard :card="balanceActionCards[0]" @action="handleCardAction">
         <template #description>
           Доступно к выводу:<br />
-          <span class="stars">{{ balanceActionCards[0].payments }} STARS</span>
+          <span class="stars">{{ balanceActionCards[0].payments.toFixed(5) }} STARS</span>
         </template>
       </BalanceActionCard>
     </div>
