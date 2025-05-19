@@ -3,6 +3,9 @@ import MainNavigation from '@/widgets/MainNavigation.vue'
 
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 
+import { useMusic } from '@/utils/useMusic';
+
+const { initMusic } = useMusic()
 const isAllowed = ref(true);
 
 function onGlobalTap(e: TouchEvent | MouseEvent) {
@@ -40,7 +43,7 @@ function onHapticTap(e: MouseEvent | TouchEvent) {
 onMounted(() => {
   document.addEventListener('click', onGlobalTap);
   document.addEventListener('click', onHapticTap);
-
+  initMusic()
 })
 
 onBeforeUnmount(() => {

@@ -4,11 +4,19 @@ import { AppRoutes } from '@/app/router/router.ts'
 
 import { useTonWallet } from '@/utils/useTonWallet'
 
+import { useMusic } from '@/utils/useMusic'
+
 import ComboPlanetCard from '@/features/ComboPlanetBanner.vue'
 import RouletteBanner from '@/features/RouletteBanner.vue'
 import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import LanguageSelect from '@/shared/ui/LanguageSelect.vue'
+
+
+import MuteIcon from '@/shared/assets/icons/volume-off.svg'
+import NoMute from '@/shared/assets/icons/volume-on.svg'
+
+const { isMuted, toggleMusic } = useMusic()
 
 import FaqIcon from '@/shared/assets/icons/faq-icon.svg'
 import TonIcon from '@/shared/assets/icons/ton.svg'
@@ -29,12 +37,17 @@ const handleButtonClick = () => {
         <FaqIcon /> FAQ
       </button>
 
+      <button @click="toggleMusic" class="faq-button">
+        <component :is="isMuted ? MuteIcon : NoMute" />
+      </button>
+
       <UiButton class="home-header-button" size="sm" color="blue" @click="onWalletClick">
         <TonIcon />
         {{ isWalletConnected ? formattedAddress : 'Connect Wallet' }}
       </UiButton>
 
       <LanguageSelect />
+
     </div>
 
     <DailyDrawBanner />
@@ -48,7 +61,7 @@ const handleButtonClick = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 9px;
 
   .home-header-button {
     display: flex;
