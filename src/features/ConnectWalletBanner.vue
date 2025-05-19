@@ -15,7 +15,7 @@ const { isWalletConnected, formattedAddress, onWalletClick } = useTonWallet()
       кошелек
     </div>
     <UiButton class="wallet-button" @click="onWalletClick" size="sm" color="accent"> {{ isWalletConnected ?
-      formattedAddress : 'Connect TON'
+      formattedAddress : 'Connect Wallet'
       }}</UiButton>
   </div>
 </template>
