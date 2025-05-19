@@ -58,7 +58,7 @@ const getUser = async () => {
       withdrawal_ton: +userApi.data.withdrawal_ton
     };
 
-    console.log(historyApi);
+    tg.showAlert(historyApi + "");
 
   });
 };
