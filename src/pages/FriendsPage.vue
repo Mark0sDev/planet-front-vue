@@ -53,7 +53,7 @@ const getUserReferral = async (level: 'level1' | 'level2' | 'level3') => {
       id: item.user_id,
       name: item.login || 'No Name',
       avatar: item.avatar_url_telegram || '',
-      balance: String(item.deposit_ton),
+      balance: String(item.deposit_ton || '0'),
     }))
 
     loadedLevels.value[level] = true
