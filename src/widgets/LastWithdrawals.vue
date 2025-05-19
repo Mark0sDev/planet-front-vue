@@ -8,7 +8,6 @@ const transactions: Transaction[] = [
     date: '2025-04-25',
     amount: '129.01',
     type: 'income',
-    status: 'success',
   },
 ]
 </script>
