@@ -12,6 +12,8 @@ import type { Transaction } from '@/entities/TransactionCard.vue';
 import { useTonWallet } from '@/utils/useTonWallet';
 import { tonConnectUI } from '@/utils/tonconnect';
 
+import type { HistoryItemApi } from '@/types/api.types';
+
 import PageLoader from './PageLoader.vue';
 import ConnectWalletBanner from '@/features/ConnectWalletBanner.vue';
 import UiButton from '@/shared/ui/UiButton.vue';
@@ -31,14 +33,6 @@ const formLoaders = reactive({
   depositTon: false,
   withdrawalTon: false,
 });
-
-interface HistoryItem {
-  id: number;
-  user_id: number;
-  type: number;
-  sum: string;
-  date: string;
-}
 
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
@@ -69,7 +63,7 @@ const getUser = async () => {
       withdrawal_ton: +userApi.data.withdrawal_ton
     };
 
-    transactions.value = (historyApi.data as HistoryItem[]).map((item) => ({
+    transactions.value = (historyApi.data as HistoryItemApi[]).map((item) => ({
       id: item.id,
       title: item.type === 1 ? 'Пополнение' : 'Вывод',
       date: item.date.split(' ')[0],
