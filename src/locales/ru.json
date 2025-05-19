@@ -7,5 +7,7 @@
     },
     "withdrawal_success": "Заявка на вывод успешно создана<br><br>TON поступят на кошелёк в течение 30 секунд",
     "withdraw_title": "Вывод баланса",
-    "transactions_history_title": "История транзакций"
+    "transactions_history_title": "История транзакций",
+    "invite_btn_text": "Пригласить друзей",
+    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> ПРЯМО <span style='color: #27aff9;'>В TON</span><br>ОТ ВАШИХ ДРУЗЕЙ"
 }

@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import UiButton from '@/shared/ui/UiButton.vue'
 import CopyButton from '@/shared/ui/CopyButton.vue'
+
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <div class="invite-friend-banner">
     <div class="banner-inner">
-      <div class="invite-text">
-        <span>30%</span> ПРЯМО <span>В TON</span>
-        ОТ ВАШИХ ДРУЗЕЙ
+      <div v-html="t('refferal_text_banner')" class="invite-text">
+
       </div>
       <div class="banner-buttons">
-        <UiButton class="invite-button">Пригласить друга</UiButton>
+        <UiButton class="invite-button">{{ t('invite_btn_text') }}</UiButton>
         <CopyButton />
       </div>
     </div>
@@ -22,7 +25,7 @@ import CopyButton from '@/shared/ui/CopyButton.vue'
 @use '@/app/styles/mixins' as mixins;
 
 .invite-friend-banner {
- 
+
   width: 100%;
   @include mixins.bg-cover;
   background-image: url('@/shared/assets/bg/invite-friend-bg.jpg');
@@ -42,6 +45,7 @@ import CopyButton from '@/shared/ui/CopyButton.vue'
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  width: 100%;
   text-align: center;
 }
 
@@ -52,10 +56,12 @@ import CopyButton from '@/shared/ui/CopyButton.vue'
   max-width: 100%;
   width: 100%;
 }
+
 .invite-button {
   font-size: 13px;
   font-weight: 500;
   border-radius: 8px;
+  text-transform: uppercase;
 }
 
 .invite-text {
