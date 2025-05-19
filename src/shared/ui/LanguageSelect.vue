@@ -28,7 +28,7 @@ const flags: Flag[] = [
   { code: Language.UA, label: 'Українська', src: getFlagUrl(Language.UA) },
 ]
 
-const currentLang = (localStorage.getItem('lang') as Language) || Language.EN
+const currentLang = (localStorage.getItem('lang') as Language) || Language.RU
 const selectedFlag = ref<Flag>(
   flags.find(flag => flag.code === currentLang) || flags[0]
 )
