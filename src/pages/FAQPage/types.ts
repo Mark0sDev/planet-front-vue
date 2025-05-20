@@ -4,3 +4,5 @@ export enum ETabsID {
   REFS = 'refs',
   WITHDRAWAL = 'withdrawal',
 }
+
+export { };
