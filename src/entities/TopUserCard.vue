@@ -19,6 +19,8 @@ const placeClass = computed(() => {
   switch (user.place) {
     case 1:
       return 'first-place'
+    case 4:
+      return 'first-place'
     case 2:
       return 'second-place'
     case 3:
@@ -35,7 +37,7 @@ const placeClass = computed(() => {
 
     <div class="user-avatar-wrapper">
       <img :src="user.avatar" alt="Avatar" class="user-avatar" />
-      
+
     </div>
 
     <div class="user-info">
@@ -85,6 +87,7 @@ const placeClass = computed(() => {
     bottom: -11px;
   }
 }
+
 .user-avatar {
   width: 70px;
   height: 70px;
@@ -117,6 +120,7 @@ const placeClass = computed(() => {
 .first-place {
   order: 2;
   background-image: url('@/shared/assets/bg/top-user-1.png');
+
   .user-avatar {
     border: 3px solid #ebc945;
   }

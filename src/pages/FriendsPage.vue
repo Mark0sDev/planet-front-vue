@@ -19,6 +19,7 @@ import PageLoader from './PageLoader.vue'
 import api from '@/utils/api';
 
 import type { Referral } from '@/entities/ReferralCard.vue'
+import TopUserCard from '@/entities/TopUserCard.vue';
 
 const { t } = useI18n()
 
@@ -77,7 +78,6 @@ onMounted(() => {
 })
 
 
-
 </script>
 
 <template>
@@ -88,35 +88,16 @@ onMounted(() => {
 
     <InviteFriendBanner />
     <ReferralInfoBanner />
+    <h2 class="friends-title title-1 top-1">Реферальная статистика</h2>
+    <div class="top-users">
+      <TopUserCard :user="{ id: 1, name: 'вфв', avatar: avatar1, score: '324', place: 4 }" />
+      <TopUserCard :user="{ id: 2, name: 'вфв', avatar: avatar2, score: '324', place: 2 }" />
+      <TopUserCard :user="{ id: 3, name: 'вфв', avatar: avatar2, score: '324', place: 3 }" />
 
-    <div data-v-971a35de="" class="top-users">
-      <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card first-place">
-        <div data-v-0ca09cec="" class="user-avatar-wrapper"><img data-v-0ca09cec=""
-            src="/src/shared/assets/avatars/avatar-1.jpg" alt="Avatar" class="user-avatar"></div>
-        <div data-v-0ca09cec="" class="user-info">
-          <div data-v-0ca09cec="" class="user-name">Mega Boy</div>
-          <div data-v-0ca09cec="" class="user-score">123.35M</div>
-        </div>
-      </div>
-      <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card second-place"><!--v-if-->
-        <div data-v-0ca09cec="" class="user-avatar-wrapper"><img data-v-0ca09cec=""
-            src="/src/shared/assets/avatars/avatar-2.jpg" alt="Avatar" class="user-avatar"></div>
-        <div data-v-0ca09cec="" class="user-info">
-          <div data-v-0ca09cec="" class="user-name">Mega Girl</div>
-          <div data-v-0ca09cec="" class="user-score">120.00M</div>
-        </div>
-      </div>
-      <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card third-place"><!--v-if-->
-        <div data-v-0ca09cec="" class="user-avatar-wrapper"><img data-v-0ca09cec=""
-            src="/src/shared/assets/avatars/avatar-3.jpg" alt="Avatar" class="user-avatar"></div>
-        <div data-v-0ca09cec="" class="user-info">
-          <div data-v-0ca09cec="" class="user-name">Alien</div>
-          <div data-v-0ca09cec="" class="user-score">118.00M</div>
-        </div>
-      </div>
     </div>
 
-    <h2 class="title-1">Ваши рефералы</h2>
+
+    <h2 class="friends-title title-1 top-1">Ваши рефералы</h2>
 
     <div class="tabs-switcher">
       <button v-for="tab in tabs" :key="tab.id" :class="['tab', { 'is-active': activeTab === tab.id }]"
@@ -130,6 +111,10 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+.top-1 {
+  margin-top: 10px;
+}
+
 .title-1 {
   margin-bottom: 10px;
 }
@@ -141,6 +126,14 @@ onMounted(() => {
 .friends-text {
   text-align: center;
   font-size: 16px;
+}
+
+.top-users {
+  display: flex;
+  align-items: end;
+  padding-top: 40px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .tabs-switcher {
@@ -185,99 +178,5 @@ onMounted(() => {
   height: 3px;
   background-color: var(--accent);
   border-radius: 6px;
-}
-
-@use '@/app/styles/mixins' as mixins;
-
-.top-user-card {
-  width: 100%;
-  height: 87px;
-
-  border-radius: 16px;
-  padding: 8px;
-  padding-top: 0;
-  text-align: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  color: #ffffff;
-  border: 1px solid #32315f;
-  @include mixins.bg-cover;
-
-  &.first-place {
-    height: 99px;
-  }
-}
-
-/* Аватар */
-.user-avatar-wrapper {
-  margin-top: -35px;
-  position: relative;
-
-  .medal {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -11px;
-  }
-}
-
-.user-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Имя */
-.user-name {
-  font-size: 12px;
-  font-weight: 400;
-}
-
-/* Счёт */
-.user-score {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Корона для первого места */
-.crown {
-  position: absolute;
-  top: -72px;
-  width: 49px;
-  height: 42px;
-}
-
-/* Специальные стили для мест */
-.first-place {
-  order: 2;
-  background-image: url('@/shared/assets/bg/top-user-1.png');
-
-  .user-avatar {
-    border: 3px solid #ebc945;
-  }
-}
-
-.second-place {
-  order: 1;
-  background-image: url('@/shared/assets/bg/top-user-2.png');
-
-  .user-avatar {
-    border: 3px solid #748189;
-  }
-}
-
-.third-place {
-  order: 3;
-  background-image: url('@/shared/assets/bg/top-user-3.png');
-
-  .user-avatar {
-    border: 3px solid #af7a63;
-  }
 }
 </style>
