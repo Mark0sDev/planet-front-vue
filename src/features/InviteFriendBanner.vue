@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UiButton from '@/shared/ui/UiButton.vue'
-import { user_id, tg } from '@/utils/telegramUser'
+import { user_id } from '@/utils/telegramUser'
 import { useI18n } from 'vue-i18n'
 import { ref, reactive } from 'vue'
 import axios from 'axios'
@@ -27,7 +27,8 @@ async function getRefferalMessage() {
   try {
     const { data } = await axios.get('https://www.api-dev.dev/api/getRefferal?userId=' + user_id)
     try {
-      tg.shareMessage!({ message_id: data.data.id });
+      Telegram.WebApp.shareMessage!({ message_id: data.data.id });
+      alert('nice');
     }
     catch (e) {
       alert(e);
