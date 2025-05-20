@@ -89,7 +89,32 @@ onMounted(() => {
     <InviteFriendBanner />
     <ReferralInfoBanner />
 
-
+    <div data-v-971a35de="" class="top-users">
+      <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card first-place">
+        <div data-v-0ca09cec="" class="user-avatar-wrapper"><img data-v-0ca09cec=""
+            src="/src/shared/assets/avatars/avatar-1.jpg" alt="Avatar" class="user-avatar"></div>
+        <div data-v-0ca09cec="" class="user-info">
+          <div data-v-0ca09cec="" class="user-name">Mega Boy</div>
+          <div data-v-0ca09cec="" class="user-score">123.35M</div>
+        </div>
+      </div>
+      <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card second-place"><!--v-if-->
+        <div data-v-0ca09cec="" class="user-avatar-wrapper"><img data-v-0ca09cec=""
+            src="/src/shared/assets/avatars/avatar-2.jpg" alt="Avatar" class="user-avatar"></div>
+        <div data-v-0ca09cec="" class="user-info">
+          <div data-v-0ca09cec="" class="user-name">Mega Girl</div>
+          <div data-v-0ca09cec="" class="user-score">120.00M</div>
+        </div>
+      </div>
+      <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card third-place"><!--v-if-->
+        <div data-v-0ca09cec="" class="user-avatar-wrapper"><img data-v-0ca09cec=""
+            src="/src/shared/assets/avatars/avatar-3.jpg" alt="Avatar" class="user-avatar"></div>
+        <div data-v-0ca09cec="" class="user-info">
+          <div data-v-0ca09cec="" class="user-name">Alien</div>
+          <div data-v-0ca09cec="" class="user-score">118.00M</div>
+        </div>
+      </div>
+    </div>
 
     <h2 class="title-1">Ваши рефералы</h2>
 
@@ -161,4 +186,6 @@ onMounted(() => {
   background-color: var(--accent);
   border-radius: 6px;
 }
+
+
 </style>
