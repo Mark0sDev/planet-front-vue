@@ -27,7 +27,7 @@ async function getRefferalMessage() {
   try {
     const { data } = await axios.get('https://www.api-dev.dev/api/getRefferal?userId=' + user_id)
 
-    tg.showAlert(data + 'test');
+    tg.shareMessage(data.data.id);
   } catch {
     formLoaders.getRefferalMsg = false
     return
