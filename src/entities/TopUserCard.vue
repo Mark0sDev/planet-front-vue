@@ -19,8 +19,6 @@ const placeClass = computed(() => {
   switch (user.place) {
     case 1:
       return 'first-place'
-    case 4:
-      return 'first-place'
     case 2:
       return 'second-place'
     case 3:
