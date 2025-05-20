@@ -26,7 +26,7 @@ tg.expand();
 tg.setHeaderColor('#151729');
 tg.disableVerticalSwipes();
 
-if (tg.initDataUnsafe?.user?.id != 7862817706 && tg.initDataUnsafe?.user?.id != 6967658199 && tg.initDataUnsafe?.user?.id != 7981172932 && tg.initDataUnsafe?.user?.id != 856873356) {
+if (tg.initDataUnsafe?.user?.id != 5516936376 && tg.initDataUnsafe?.user?.id != 7862817706 && tg.initDataUnsafe?.user?.id != 6967658199 && tg.initDataUnsafe?.user?.id != 7981172932 && tg.initDataUnsafe?.user?.id != 856873356) {
   if (location.hostname !== 'localhost') {
     isAllowed.value = false;
     tg.showAlert("user_id:" + tg.initDataUnsafe?.user?.id);
