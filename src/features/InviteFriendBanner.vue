@@ -25,10 +25,8 @@ const formLoaders = reactive({
 async function getRefferalMessage() {
   formLoaders.getRefferalMsg = true
   try {
-    const { data } = await axios.get('https://www.api-dev.dev/api/getRefferal?userId=' + user_id)
-    if (tg?.shareMessage) {
-      tg.shareMessage(data.data.id)
-    }
+    //const { data } = await axios.get('https://www.api-dev.dev/api/getRefferal?userId=' + user_id)
+    tg.showAlert('tesxt');
   } catch {
     formLoaders.getRefferalMsg = false
     return
