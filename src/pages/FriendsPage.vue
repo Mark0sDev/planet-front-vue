@@ -43,7 +43,36 @@ const loadedLevels = ref<{ [key: string]: boolean }>({
   level3: false,
 })
 
+const referralCount1 = ref(0);
+const referralIncome1 = ref(0);
+
+const referralCount2 = ref(0);
+const referralIncome2 = ref(0);
+
+const referralCount3 = ref(0);
+const referralIncome3 = ref(0);
+
 const avatars = [avatar1, avatar2, avatar3, avatar4]
+
+const getUser = async () => {
+  await loaderRef.value?.withLoader(async () => {
+    const response = await api.post('/users/getUser', {
+      initData,
+      user_id
+    });
+
+    const data = response.data;
+
+    referralCount1.value = data.referral_count_level1 || 0;
+    referralIncome1.value = data.referral_income_level1 || 0;
+
+    referralCount2.value = data.referral_count_level2 || 0;
+    referralIncome2.value = data.referral_income_level2 || 0;
+
+    referralCount3.value = data.referral_count_level3 || 0;
+    referralIncome3.value = data.referral_income_level3 || 0;
+  });
+};
 
 const getUserReferral = async (level: 'level1' | 'level2' | 'level3') => {
   if (loadedLevels.value[level]) return
@@ -74,6 +103,7 @@ watch(activeTab, (tab) => {
 
 onMounted(() => {
   getUserReferral('level1')
+  getUser();
 })
 
 
@@ -101,7 +131,7 @@ onMounted(() => {
         <div class="user-info">
           <div class="user-name">1 Уровень</div>
           <div class="user-statistic">
-            <div class="user-score">900</div>
+            <div class="user-score">{{ referralCount1 }}</div>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
               class="lucide lucide-users-icon lucide-users">
@@ -114,7 +144,7 @@ onMounted(() => {
 
           <div class="user-statistic">
 
-            <div class="user-score">900</div>
+            <div class="user-score">{{ referralIncome1 }}</div>
             <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
           </div>
         </div>
@@ -129,7 +159,7 @@ onMounted(() => {
           <div class="user-name">2 Уровень</div>
           <div class="user-statistic">
 
-            <div class="user-score">900</div>
+            <div class="user-score">{{ referralCount2 }}</div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -143,7 +173,7 @@ onMounted(() => {
 
           <div class="user-statistic">
 
-            <div class="user-score">900</div>
+            <div class="user-score">{{ referralIncome2 }}</div>
             <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
           </div>
         </div>
@@ -158,7 +188,7 @@ onMounted(() => {
           <div class="user-name">3 Уровень</div>
           <div class="user-statistic">
 
-            <div class="user-score">900</div>
+            <div class="user-score">{{ referralCount3 }}</div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -172,7 +202,7 @@ onMounted(() => {
 
           <div class="user-statistic">
 
-            <div class="user-score">900</div>
+            <div class="user-score">{{ referralIncome3 }}</div>
             <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
           </div>
         </div>
@@ -317,9 +347,9 @@ onMounted(() => {
   font-size: 12px;
   font-weight: 500;
   color: white;
+  margin-right: 5px;
 }
 
-/* Корона для первого места */
 .crown {
   position: absolute;
   top: -72px;
