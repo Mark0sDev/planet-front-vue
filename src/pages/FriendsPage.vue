@@ -92,9 +92,9 @@ onMounted(() => {
     <h2 class="friends-title title-1 top-1">Реферальная статистика</h2>
 
     <div class="top-users">
-      <!-- Первая карта -->
+
       <div class="top-user-card first-place">
-        <img src="@/shared/assets/icons/crown.png" alt="Crown" class="crown" />
+
         <div class="user-avatar-wrapper">
           <img :src="avatar1" alt="Avatar" class="user-avatar" />
         </div>
@@ -104,7 +104,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Вторая карта -->
+
       <div class="top-user-card second-place">
         <div class="user-avatar-wrapper">
           <img :src="avatar2" alt="Avatar" class="user-avatar" />
@@ -115,7 +115,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Третья карта -->
+
       <div class="top-user-card third-place">
         <div class="user-avatar-wrapper">
           <img :src="avatar3" alt="Avatar" class="user-avatar" />
@@ -224,7 +224,7 @@ onMounted(() => {
 .top-users {
   display: flex;
   align-items: end;
-  padding-top: 70px;
+  padding-top: 40px;
   gap: 10px;
   margin-bottom: 12px;
 }
