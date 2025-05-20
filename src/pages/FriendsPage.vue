@@ -25,7 +25,6 @@ const { t } = useI18n()
 const activeTab = ref('level1')
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 
-
 const tabs = [
   { id: 'level1', label: 'tabs.level1' },
   { id: 'level2', label: 'tabs.level2' },
