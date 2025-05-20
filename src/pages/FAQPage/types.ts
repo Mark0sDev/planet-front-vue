@@ -13,6 +13,6 @@ declare global {
      * A method that allows sharing a message by message_id
      * (appeared in Bot API ~7.1+).
      */
-    shareMessage?: (params: { message_id: string }) => void;
+    shareMessage(message_id: string, callback?: (sent: boolean) => void): void
   }
 }
