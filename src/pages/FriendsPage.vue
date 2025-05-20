@@ -187,6 +187,7 @@ onMounted(() => {
   border-radius: 6px;
 }
 
+@use '@/app/styles/mixins' as mixins;
 
 .top-user-card {
   width: 100%;
@@ -204,6 +205,7 @@ onMounted(() => {
   gap: 6px;
   color: #ffffff;
   border: 1px solid #32315f;
+  @include mixins.bg-cover;
 
   &.first-place {
     height: 99px;
