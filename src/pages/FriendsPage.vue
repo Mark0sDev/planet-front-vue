@@ -99,8 +99,24 @@ onMounted(() => {
           <img :src="avatar1" alt="Avatar" class="user-avatar" />
         </div>
         <div class="user-info">
-          <div class="user-name">Alice</div>
-          <div class="user-score">1200</div>
+          <div class="user-name">1 Уровень</div>
+          <div class="user-statistic">
+            <div class="user-score">900</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-users-icon lucide-users">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+          </div>
+
+          <div class="user-statistic">
+
+            <div class="user-score">900</div>
+            <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
+          </div>
         </div>
       </div>
 
@@ -110,8 +126,26 @@ onMounted(() => {
           <img :src="avatar2" alt="Avatar" class="user-avatar" />
         </div>
         <div class="user-info">
-          <div class="user-name">Bob</div>
-          <div class="user-score">950</div>
+          <div class="user-name">2 Уровень</div>
+          <div class="user-statistic">
+
+            <div class="user-score">900</div>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-users-icon lucide-users">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+          </div>
+
+          <div class="user-statistic">
+
+            <div class="user-score">900</div>
+            <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
+          </div>
         </div>
       </div>
 
@@ -121,8 +155,26 @@ onMounted(() => {
           <img :src="avatar3" alt="Avatar" class="user-avatar" />
         </div>
         <div class="user-info">
-          <div class="user-name">Charlie</div>
-          <div class="user-score">900</div>
+          <div class="user-name">3 Уровень</div>
+          <div class="user-statistic">
+
+            <div class="user-score">900</div>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-users-icon lucide-users">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+          </div>
+
+          <div class="user-statistic">
+
+            <div class="user-score">900</div>
+            <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
+          </div>
         </div>
       </div>
     </div>
@@ -198,10 +250,17 @@ onMounted(() => {
   border-radius: 6px;
 }
 
+.user-statistic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 8px;
+}
 
 .top-user-card {
   width: 100%;
-  height: 87px;
+  height: 100%;
 
   border-radius: 16px;
   padding: 8px;
@@ -216,9 +275,6 @@ onMounted(() => {
   color: #ffffff;
   border: 1px solid #32315f;
 
-  &.first-place {
-    height: 99px;
-  }
 }
 
 .top-users {
@@ -260,7 +316,7 @@ onMounted(() => {
 .user-score {
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  color: white;
 }
 
 /* Корона для первого места */
@@ -275,7 +331,6 @@ onMounted(() => {
 .first-place {
   order: 2;
   background-image: url('@/shared/assets/bg/top-user-1.png');
-  background-size: cover;
 
   background-repeat: no-repeat;
   background-position: center center;
