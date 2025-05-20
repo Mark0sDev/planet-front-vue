@@ -30,10 +30,11 @@ async function getRefferalMessage() {
       tg.shareMessage!({ message_id: data.data.id });
     }
     catch (e) {
-      console.log(e);
+      alert(e);
     }
-  } catch {
+  } catch (e) {
     formLoaders.getRefferalMsg = false
+    alert(e);
     return
   } finally {
     formLoaders.getRefferalMsg = false
