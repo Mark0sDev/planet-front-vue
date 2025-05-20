@@ -359,7 +359,7 @@ onMounted(() => {
 
 /* Специальные стили для мест */
 .first-place {
-  order: 2;
+
   background-image: url('@/shared/assets/bg/top-user-1.png');
 
   background-repeat: no-repeat;
