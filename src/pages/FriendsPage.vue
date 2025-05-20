@@ -275,6 +275,11 @@ onMounted(() => {
 .first-place {
   order: 2;
   background-image: url('@/shared/assets/bg/top-user-1.png');
+  background-size: cover;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 
   .user-avatar {
     border: 3px solid #ebc945;
@@ -285,6 +290,10 @@ onMounted(() => {
   order: 1;
   background-image: url('@/shared/assets/bg/top-user-2.png');
 
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
   .user-avatar {
     border: 3px solid #748189;
   }
@@ -293,6 +302,9 @@ onMounted(() => {
 .third-place {
   order: 3;
   background-image: url('@/shared/assets/bg/top-user-3.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 
   .user-avatar {
     border: 3px solid #af7a63;
