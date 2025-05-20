@@ -4,6 +4,11 @@ import {
   user_id,
 } from '@/utils/telegramUser';
 
+import avatar1 from '@/shared/assets/avatars/avatar-1.jpg'
+import avatar2 from '@/shared/assets/avatars/avatar-2.jpg'
+import avatar3 from '@/shared/assets/avatars/avatar-3.jpg'
+import avatar4 from '@/shared/assets/avatars/avatar-4.jpg'
+
 import { ref, computed, onMounted, watch } from 'vue'
 import type { ReferralFromApi } from '@/types/api.types';
 import { useI18n } from 'vue-i18n'
@@ -39,6 +44,8 @@ const loadedLevels = ref<{ [key: string]: boolean }>({
   level3: false,
 })
 
+const avatars = [avatar1, avatar2, avatar3, avatar4]
+
 const getUserReferral = async (level: 'level1' | 'level2' | 'level3') => {
   if (loadedLevels.value[level]) return
 
@@ -52,7 +59,7 @@ const getUserReferral = async (level: 'level1' | 'level2' | 'level3') => {
     referrals.value[level] = (data as ReferralFromApi[]).map((item) => ({
       id: item.user_id,
       name: item.login || 'No Name',
-      avatar: item.avatar_url_telegram || '',
+      avatar: item.avatar_url_telegram || avatars[Math.floor(Math.random() * avatars.length)],
       balance: String(item.deposit_ton || '0'),
     }))
 
