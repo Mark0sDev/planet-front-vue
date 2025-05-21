@@ -5,7 +5,7 @@ import CheckIcon from '@/shared/assets/icons/small-check.svg'
 import TonIcon from '@/shared/assets/icons/mini-ton-vector.svg'
 
 interface CustomInput {
-  type: 'max' | 'copy'
+  type: 'max' | 'copy' | 'icon'
   maxValue?: number
 }
 
@@ -80,6 +80,9 @@ const onInput = (event: Event) => {
             <CopyIcon />
           </template>
         </button>
+        <div v-if="custom?.type === 'icon'">
+          <slot />
+        </div>
       </div>
     </div>
 

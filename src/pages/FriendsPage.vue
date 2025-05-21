@@ -209,7 +209,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <h2 class="title-1">Ваши рефералы</h2>
+    <h2 class="friends-title title-1">Ваши рефералы</h2>
 
     <div class="tabs-switcher">
       <button v-for="tab in tabs" :key="tab.id" :class="['tab', { 'is-active': activeTab === tab.id }]"
