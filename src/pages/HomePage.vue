@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import {
   startParam,
   photo_url,
@@ -16,16 +15,17 @@ import StatisticsCard from '@/entities/StatisticsCard.vue'
 import UsersIcon from '@/shared/assets/icons/users.svg'
 import LightningIcon from '@/shared/assets/icons/lightning.svg'
 import PlanetIcon from '@/shared/assets/icons/planet.svg'
-
 import TonIcon from '@/shared/assets/icons/ton.svg'
 
-import LastWithdrawals from '@/widgets/LastWithdrawals.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import PageLoader from './PageLoader.vue';
 
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
 import { onMounted, ref } from 'vue';
+
+import TransactionCard, { type Transaction } from '@/entities/TransactionCard.vue'
+import { type LastWithdrawalItem } from '@/types/api.types'
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
 
@@ -38,6 +38,7 @@ const leaderRouter = () => {
 const usersCount = ref('0');
 const withdrawalCount = ref('0');
 const withdrawalSum = ref('0');
+const transactions = ref<Transaction[]>([])
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
@@ -48,7 +49,6 @@ const getUser = async () => {
       language_code,
       photo_url,
       startParam
-
     });
 
     const { data } = await api.post('/users/getStatistic', {
@@ -60,15 +60,22 @@ const getUser = async () => {
     withdrawalCount.value = data.withdrawalCount;
     withdrawalSum.value = data.withdrawalSum;
 
+    transactions.value = data.lastsWithdrawal.map((item: LastWithdrawalItem) => ({
+      id: item.id,
+      title: item.login ?? 'Пользователь',
+      amount: item.sum,
+      date: new Date().toISOString().slice(0, 10),
+      type: 'withdrawal',
+    }))
+    
   });
 };
 
 onMounted(() => {
   getUser();
-
 });
-
 </script>
+
 
 <template>
   <PageLoader ref="loaderRef" />
@@ -116,7 +123,12 @@ onMounted(() => {
 
         </div>
       </div>
-      <LastWithdrawals />
+      <div class="last-withdrawals">
+        <h2 class="title title-1">Последние выводы</h2>
+        <div class="last-withdrawals-list">
+          <TransactionCard v-for="transaction in transactions" :key="transaction.id" :transaction="transaction" />
+        </div>
+      </div>
 
 
     </div>

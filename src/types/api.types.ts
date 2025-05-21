@@ -1,4 +1,3 @@
-// Ответ от /users/getHistory
 export interface ReferralFromApi {
     user_id: number
     login: string | null
@@ -12,4 +11,11 @@ export interface HistoryItemApi {
     type: number
     sum: string
     date: string
+}
+
+export interface LastWithdrawalItem {
+    id: number
+    user_id: number
+    login: string | null
+    sum: string
 }
