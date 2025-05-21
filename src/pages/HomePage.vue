@@ -62,7 +62,7 @@ const getUser = async () => {
 
     transactions.value = data.lastsWithdrawal.map((item: LastWithdrawalItem) => ({
       id: item.id,
-      title: item.login ?? item.user_id,
+      title: item.login || item.user_id,
       amount: item.sum,
       date: new Date().toISOString().slice(0, 10),
       type: 'income',
