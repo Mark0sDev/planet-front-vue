@@ -44,7 +44,15 @@ const getUser = async () => {
       language_code,
       photo_url,
       startParam
+
     });
+
+    const getStatistic = await api.post('/users/getStatistic', {
+      initData,
+      user_id,
+    });
+
+    console.log(getStatistic);
 
   });
 };
@@ -70,7 +78,7 @@ onMounted(() => {
           <StatisticsCard value="245 210" color="#763FF1" text="Пользователи, которые уже зарабатывают">
             <UsersIcon />
           </StatisticsCard>
-          <StatisticsCard value="1583.20" color="#17d686" text="Новых пользователей за 24 часа">
+          <StatisticsCard value="1583.20" color="#17d686" text="Всего выводов">
             <LightningIcon />
           </StatisticsCard>
           <StatisticsCard value="326" color="#FBA704" text="Всего куплено планет">
