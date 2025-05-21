@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 interface StatisticsCard {
-  value: string
+  value?: string
   text: string
   color: string
 }

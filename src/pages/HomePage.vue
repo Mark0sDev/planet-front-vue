@@ -35,6 +35,10 @@ const leaderRouter = () => {
   router.push(AppRoutes.LEADERS)
 }
 
+const usersCount = ref('0');
+const withdrawalCount = ref('0');
+const withdrawalSum = ref('0');
+
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     await api.post('/users/getUser', {
@@ -47,12 +51,14 @@ const getUser = async () => {
 
     });
 
-    const getStatistic = await api.post('/users/getStatistic', {
+    const { data } = await api.post('/users/getStatistic', {
       initData,
       user_id,
     });
 
-    console.log(getStatistic);
+    usersCount.value = data.usersCount;
+    withdrawalCount.value = data.withdrawalCount;
+    withdrawalSum.value = data.withdrawalSum;
 
   });
 };
@@ -75,16 +81,16 @@ onMounted(() => {
       <div class="statistics">
         <div class="title title-1">Статистика</div>
         <div class="statistics-inner">
-          <StatisticsCard value="245 210" color="#763FF1" text="Пользователи, которые уже зарабатывают">
+          <StatisticsCard :value="usersCount" color="#763FF1" text="Пользователи, которые уже зарабатывают">
             <UsersIcon />
           </StatisticsCard>
-          <StatisticsCard value="1583.20" color="#17d686" text="Всего выводов">
+          <StatisticsCard :value="withdrawalCount" color="#17d686" text="Всего выводов">
             <LightningIcon />
           </StatisticsCard>
           <StatisticsCard value="326" color="#FBA704" text="Всего куплено планет">
             <PlanetIcon />
           </StatisticsCard>
-          <StatisticsCard value="2 903" color="#27aff9" text="Всего выведено TON">
+          <StatisticsCard :value="withdrawalSum" color="#27aff9" text="Всего выведено TON">
             <TonIcon stroke-width="0" />
           </StatisticsCard>
         </div>
