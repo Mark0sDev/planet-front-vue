@@ -65,9 +65,9 @@ const getUser = async () => {
       title: item.login ?? 'Пользователь',
       amount: item.sum,
       date: new Date().toISOString().slice(0, 10),
-      type: 'expense',
+      type: 'income',
     }))
-
+    
   });
 };
 
