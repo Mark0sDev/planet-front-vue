@@ -42,66 +42,105 @@ const startFlip = async () => {
     modalText.value = win.value ? 'Вы выиграли!' : 'Увы, не повезло...'
   }, 2600)
 }
-
 </script>
 
 <template>
-  <div class="page crash-page">
-    <div class="page-wrapper">
-      <div class="title title-1">Coin Flip</div>
+  <div class="page coinflip-page">
+    <h2 class="title title-1">Мини-Игры</h2>
+    <div class="game-card">
+      <div class="card-header">
+        <h3>Выбор стороны</h3>
 
-      <div class="coin-wrapper">
-        <div class="coin" ref="coinEl"></div>
+      </div>
 
-        <div class="bet-block">
-          <div class="bet-row">
-            <span class="bet-label">Ваша ставка:</span>
-            <UiInput placeholder="Ставка" value="0.1" :custom="{ type: 'icon' }">
-              <TonIcon class="coin-bet-icon" />
-            </UiInput>
-          </div>
+      <div class="coin" ref="coinEl"></div>
 
-          <div class="choice-row">
-            <div class="choice-options">
-              <label :class="{ selected: selectedSide === 1 }">
-                <input type="radio" :value="1" v-model="selectedSide" />
-                <img src="/src/shared/assets/coinFlip/coin-1.png" alt="Front" />
-                <span>Орел</span>
-              </label>
-              <label :class="{ selected: selectedSide === 2 }">
-                <input type="radio" :value="2" v-model="selectedSide" />
-                <img src="/src/shared/assets/coinFlip/coin-2.png" alt="Back" />
-                <span>Решка</span>
-              </label>
-            </div>
+      <div class="bet-block">
+        <div class="bet-row">
+          <span class="bet-label">Ваша ставка:</span>
+          <UiInput placeholder="Ставка" value="0.1" :custom="{ type: 'icon' }">
+            <TonIcon class="coin-bet-icon" />
+          </UiInput>
+        </div>
+
+        <div class="choice-row">
+          <div class="choice-options">
+            <label :class="{ selected: selectedSide === 1 }">
+              <input type="radio" :value="1" v-model="selectedSide" />
+              <img src="/src/shared/assets/coinFlip/coin-1.png" alt="Front" />
+
+            </label>
+            <label :class="{ selected: selectedSide === 2 }">
+              <input type="radio" :value="2" v-model="selectedSide" />
+              <img src="/src/shared/assets/coinFlip/coin-2.png" alt="Back" />
+
+            </label>
           </div>
         </div>
 
-        <UiButton color="yellow" @click="startFlip" :disabled="rotating">Крутить</UiButton>
+        <UiButton color="yellow" @click="startFlip" :disabled="rotating">
+          Крутить
+        </UiButton>
       </div>
     </div>
+
     <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
   </div>
 </template>
 
 <style scoped lang="scss">
 .title {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.coin-wrapper {
-  background: rgba(18, 20, 30, 0.8);
-  border: 1px solid #2a2e44;
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-card {
+  background: #1f1f35;
   border-radius: 16px;
   padding: 20px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  color: white;
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  margin-inline: auto;
-  backdrop-filter: blur(12px);
-  position: relative;
-  overflow: hidden;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  line-height: 1;
+  color: white;
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .coin {
@@ -111,45 +150,37 @@ const startFlip = async () => {
   position: relative;
   z-index: 10;
   transform-style: preserve-3d;
-  margin-bottom: 28px;
+  margin: 0 auto;
   transition: transform 0s;
-  box-shadow: 0 0 26px rgba(0, 0, 0, 0.5);
-}
+  box-shadow: 0 0 32px rgba(0, 255, 255, 0.2);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent);
 
-.coin::after {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  background: radial-gradient(rgba(255, 255, 255, 0.1), transparent 60%);
-  z-index: -1;
-}
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+  }
 
-.coin::before,
-.coin::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  backface-visibility: hidden;
-  background-size: cover;
-  background-position: center;
-  top: 0;
-  left: 0;
-}
+  &::before {
+    background-image: url('/src/shared/assets/coinFlip/coin-1.png');
+  }
 
-.coin::before {
-  background-image: url('/src/shared/assets/coinFlip/coin-1.png');
-}
-
-.coin::after {
-  background-image: url('/src/shared/assets/coinFlip/coin-2.png');
-  transform: rotateX(180deg);
+  &::after {
+    background-image: url('/src/shared/assets/coinFlip/coin-2.png');
+    transform: rotateX(180deg);
+  }
 }
 
 .bet-block {
-  width: 100%;
   background: linear-gradient(145deg, rgba(40, 44, 60, 0.6), rgba(25, 27, 40, 0.6));
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -157,11 +188,8 @@ const startFlip = async () => {
   padding: 16px;
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.02);
   display: flex;
-  align-items: end;
-  gap: 20px;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 10;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .bet-label {
@@ -171,62 +199,49 @@ const startFlip = async () => {
   margin-bottom: 6px;
 }
 
-.bet-row,
-.choice-row {
-  display: flex;
-  flex-direction: column;
-}
-
 .choice-options {
   display: flex;
   justify-content: center;
-  gap: 8px;
-}
+  gap: 12px;
 
-.choice-options label {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #1d1f2b, #1a1c28);
-  box-shadow:
-    inset 2px 2px 4px rgba(0, 0, 0, 0.4),
-    inset -2px -2px 4px rgba(255, 255, 255, 0.05),
-    0 0 0 2px transparent;
-  transition: 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  label {
+    width: 88px;
+    height: 88px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1d1f2b, #1a1c28);
+    box-shadow:
+      inset 2px 2px 4px rgba(0, 0, 0, 0.4),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: 0.3s ease;
 
-  &:hover {
-    transform: scale(1.08);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
+    &.selected {
+      border: 2px solid var(--accent);
+      transform: scale(1.08);
+    }
 
-  &.selected {
-    border: 1px solid var(--accent);
-  }
+    input {
+      display: none;
+    }
 
-  input {
-    display: none;
-  }
+    img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+    }
 
-  img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
-    pointer-events: none;
-  }
-
-  span {
-    position: absolute;
-    bottom: -20px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #aaa;
-    display: none;
+    span {
+      position: absolute;
+      bottom: -18px;
+      font-size: 12px;
+      color: #aaa;
+    }
   }
 }
 

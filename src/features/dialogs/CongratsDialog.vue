@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { computed } from 'vue'
+import { defineProps, defineEmits, withDefaults } from 'vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import UiDialog from '@/shared/ui/UiDialog.vue'
 
 interface Props {
   modelValue: boolean
-  text?: string
+  textTemplate?: string
+  textParams?: Record<string, string | number>
   imageSrc?: string
 }
+
 const props = withDefaults(defineProps<Props>(), {
-  text: 'Вы успешно атаковали планету!',
+  textTemplate: 'Действие выполнено успешно!',
+  textParams: () => ({}),
 })
 
 const emit = defineEmits<{
@@ -19,6 +23,13 @@ const emit = defineEmits<{
 function close() {
   emit('update:modelValue', false)
 }
+
+const renderedText = computed(() => {
+  return props.textTemplate.replace(/\{\{(.*?)\}\}/g, (_, key) => {
+    const trimmedKey = key.trim()
+    return props.textParams[trimmedKey]?.toString() ?? `{{${trimmedKey}}}`
+  })
+})
 </script>
 
 <template>
@@ -26,8 +37,8 @@ function close() {
     <div class="congrats-modal">
       <h2 class="modal-title title-1">Успешно!</h2>
       <img class="congrats-modal-image" v-if="imageSrc" :src="imageSrc" alt="" />
-      <p class="modal-text" v-html="text"></p>
-      <UiButton @click="close" color="accent" class="congrats-modal-btn"> Продолжить </UiButton>
+      <p class="modal-text" v-html="renderedText"></p>
+      <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
     </div>
   </UiDialog>
 </template>
