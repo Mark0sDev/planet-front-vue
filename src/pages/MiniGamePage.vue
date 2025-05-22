@@ -13,6 +13,10 @@ const spinRouter = () => {
 const crashRouter = () => {
     router.push(AppRoutes.CRASH)
 }
+
+const coinFlipRouter = () => {
+    router.push(AppRoutes.COIN_FLIP)
+}
 </script>
 
 
@@ -55,7 +59,7 @@ const crashRouter = () => {
                     <span class="title-1">Выбирай правильную сторону и получай выигрыш</span>
                 </div>
             </div>
-            <UiButton>Играть в Орёл и Решку</UiButton>
+            <UiButton @click="coinFlipRouter">Играть в Орёл и Решку</UiButton>
         </div>
 
 
