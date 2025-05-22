@@ -5,13 +5,14 @@ import UiButton from '@/shared/ui/UiButton.vue'
 import UiInput from '@/shared/ui/UiInput.vue'
 import TonIcon from '@/shared/assets/icons/ton.svg'
 import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
+
 const rotating = ref(false)
 const selectedSide = ref<number>(1)
 const coinEl = ref<HTMLElement | null>(null)
 const win = ref(false)
 const showResult = ref(false)
 const modalText = ref<string>('')
-const lastFlipResult = ref<number>(1) // Храним последний результат
+const lastFlipResult = ref<number>(1)
 
 const startFlip = async () => {
   if (rotating.value || !coinEl.value) return
@@ -19,15 +20,13 @@ const startFlip = async () => {
   rotating.value = true
   showResult.value = false
 
-  // Сбрасываем монетку к последнему выпавшему результату без анимации
   coinEl.value.style.transition = 'none'
   coinEl.value.style.transform = `rotateX(${lastFlipResult.value === 1 ? 0 : 180}deg)`
-  
-  // Принудительное применение стилей
-  await new Promise(requestAnimationFrame)
-  
+
+  await new Promise(resolve => setTimeout(resolve, 50))
+
   const { data } = await axios.get('https://twinbyai.ru/flip')
-  lastFlipResult.value = data.flip // Сохраняем новый результат
+  lastFlipResult.value = data.flip
 
   const fullSpins = 6
   const finalAngle = data.flip === 1 ? 0 : 180
@@ -40,10 +39,10 @@ const startFlip = async () => {
     rotating.value = false
     win.value = data.flip === selectedSide.value
     showResult.value = true
-
     modalText.value = win.value ? 'Вы выиграли!' : 'Увы, не повезло...'
   }, 2600)
 }
+
 </script>
 
 <template>
@@ -89,6 +88,7 @@ const startFlip = async () => {
 .title {
   margin-bottom: 20px;
 }
+
 .coin-wrapper {
   background: rgba(18, 20, 30, 0.8);
   border: 1px solid #2a2e44;
@@ -102,29 +102,6 @@ const startFlip = async () => {
   backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    width: 240px;
-    height: 240px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 235, 255, 0.6) 0%, rgba(18, 20, 30, 0) 70%);
-    z-index: 0;
-    pointer-events: none;
-    filter: blur(40px);
-  }
-
-  &::after {
-    top: 30%;
-    left: 70%;
-    width: 120px;
-    height: 120px;
-  }
 }
 
 .coin {
