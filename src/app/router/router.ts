@@ -9,5 +9,5 @@ export enum AppRoutes {
   CRASH = '/crash',
   FAQ = '/faq',
   ROULETTE = '/roulette',
-
+  COIN_FLIP = '/coin-flip',
 }

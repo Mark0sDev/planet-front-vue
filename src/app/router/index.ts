@@ -12,6 +12,7 @@ import PlanetsPage from '@/pages/PlanetsPage.vue'
 import CrashPage from '@/pages/crashPage.vue'
 import FAQPage from '@/pages/FAQPage/FAQPage.vue'
 import RoulettePage from '@/pages/RoulettePage.vue'
+import CoinFlipPage from '@/pages/CoinFlipPage.vue'
 
 const routes = [
   { path: AppRoutes.HOME, component: HomePage },
@@ -24,6 +25,7 @@ const routes = [
   { path: AppRoutes.FAQ, component: FAQPage },
   { path: AppRoutes.CRASH, component: CrashPage },
   { path: AppRoutes.ROULETTE, component: RoulettePage },
+  { path: AppRoutes.COIN_FLIP, component: CoinFlipPage },
 ]
 
 export const router = createRouter({
