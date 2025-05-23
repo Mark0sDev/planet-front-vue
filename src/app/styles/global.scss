@@ -96,27 +96,36 @@ body,
       z-index: -1;
       animation: float 6s ease-in-out infinite;
       animation-delay: 0s;
+      animation-fill-mode: both;
     }
 
-    // Центральная (смещённая влево)
+    // Центральная планета (без дёргания)
     &::after {
       content: '';
       position: absolute;
       top: 55%;
       left: 20%;
-      transform: translate(-50%, -50%);
       width: 180px;
       height: 180px;
-      background-image: url('@/shared/assets/planets/planet-2/level-0.png');
+      background-image: url('@/shared/assets/planets/planet-4/level-0.png');
       background-size: cover;
       background-repeat: no-repeat;
       opacity: 0.3;
       pointer-events: none;
       z-index: -1;
-      animation: float 7s ease-in-out infinite;
+      animation: float-center 7s ease-in-out infinite;
       animation-delay: 1s;
+      animation-fill-mode: both;
+      transform: translate(-50%, -50%);
     }
   }
+}
+
+// Анимация без дёргания (учтён начальный translate)
+@keyframes float-center {
+  0%   { transform: translate(-50%, -50%) scale(1); }
+  50%  { transform: translate(-50%, -60%) scale(1.02); }
+  100% { transform: translate(-50%, -50%) scale(1); }
 }
 
 @keyframes float {
