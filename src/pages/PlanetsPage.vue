@@ -126,9 +126,11 @@ async function handleBuyConfirm() {
     const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
     if (res.data.status == 1) {
       showBuyModal.value = false;
+    } else {
+      alert('test');
     }
   } catch (error) {
-    tg.showAlert(error);
+    tg.showAlert("Error:" + error);
   } finally {
     formLoaders.buyPlanet = false;
   }
