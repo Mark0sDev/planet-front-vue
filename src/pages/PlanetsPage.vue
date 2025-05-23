@@ -35,7 +35,7 @@ const planetLevel = ref(-1)
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 const planets = [
   {
-    id: 0,
+    id: 1,
     planetDisplayId: 1,
     name: 'Аурелия',
     imageSrc: PlanetImage1,
@@ -43,7 +43,7 @@ const planets = [
     cost: '1 TON',
     cycleTime: '4 ч',
     earned: '10 TON',
-  },
+  }
 ]
 
 const planet1 = ref(0)
@@ -92,14 +92,28 @@ onMounted(() => {
 })
 
 const showBuyModal = ref(false)
-const modalTest = () => {
-  showBuyModal.value = true
+const selectedPlanetId = ref<number | null>(null)
+
+const buyPlanet = ({ index }: { index: number }) => {
+  const planet = planets.find(p => p.id === index)
+  if (!planet) return
+
+  if (planet1.value === 0) {
+    selectedPlanetId.value = index
+    showBuyModal.value = true
+  } else {
+    handlePlanetClick({ index, planet }) // <-- здесь исправление
+  }
 }
+
 
 const handleBuyConfirm = () => {
-  alert('Покупка подтверждена!')
+  if (selectedPlanetId.value !== null) {
+    alert(`Покупка планеты #${selectedPlanetId.value} подтверждена!`)
+  } else {
+    alert('Ошибка: ID планеты не определён.')
+  }
 }
-
 </script>
 
 <template>
@@ -110,7 +124,6 @@ const handleBuyConfirm = () => {
         <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" />
 
         <h2 class="title title-1">Планеты</h2>
-        <button @click="modalTest">test</button>
 
         <div class="planets-list">
           <div v-for="planet in planets" :key="planet.id" class="planet-card">
@@ -138,7 +151,7 @@ const handleBuyConfirm = () => {
                 </div>
               </div>
             </div>
-            <UiButton @click="handlePlanetClick({ index: planet.id, planet })">Атаковать</UiButton>
+            <UiButton @click="buyPlanet({ index: planet.id })">Атаковать</UiButton>
           </div>
         </div>
       </div>
