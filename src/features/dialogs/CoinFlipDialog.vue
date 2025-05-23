@@ -10,6 +10,8 @@ import UiDialog from '@/shared/ui/UiDialog.vue'
 import ConnectWalletBanner from '@/features/ConnectWalletBanner.vue';
 import { useTonWallet } from '@/utils/useTonWallet';
 import { tonConnectUI } from '@/utils/tonconnect';
+import UiDivider from '@/shared/ui/UiDivider.vue';
+import UiInput from '@/shared/ui/UiInput.vue';
 
 import axios from 'axios';
 
@@ -103,6 +105,11 @@ async function depositFormTon() {
           </div>
 
           <UiDivider value="Пополнить вручную" />
+
+          <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
+            value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
+          <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
+
 
           <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
             value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
