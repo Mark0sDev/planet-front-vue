@@ -5,7 +5,7 @@ import gsap from 'gsap'
 
 import UiButton from '@/shared/ui/UiButton.vue'
 import SpinPriceCard from '@/entities/SpinPriceCard.vue'
-import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
+
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 
 import NftImage1 from '@/shared/assets/nfts/nft-1.webp'
@@ -146,7 +146,7 @@ function recenter() {
     <!-- заголовок + баннер -->
     <div class="roulette-content">
       <h2 class="title title-1">Рулетка</h2>
-      <DailyDrawBanner />
+
     </div>
 
     <div class="roulette-wrapper">
