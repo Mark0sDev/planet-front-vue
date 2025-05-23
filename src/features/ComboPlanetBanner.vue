@@ -29,18 +29,17 @@ const handleButtonClick = () => {
 
     <div class="combo-text">Атакуй планеты и зарабатывай TON</div>
     <div class="card-div">
-      <div class="statistics-icon" style="background-color: rgb(39, 175, 249);"><svg data-v-d639372b=""
-          xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none" stroke-width="0">
+      <div class="statistics-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none" stroke-width="0">
           <path fill="#fff"
             d="m21.161 7.22-7.846 12.494a1.058 1.058 0 0 1-1.794-.006L3.828 7.214A2.2 2.2 0 0 1 3.5 6.05a2.29 2.29 0 0 1 2.324-2.255h13.362c1.277 0 2.314 1.005 2.314 2.25 0 .412-.116.82-.339 1.175M5.718 6.8l5.723 8.826V5.912H6.316c-.592 0-.857.392-.598.89m7.84 8.826L19.283 6.8c.265-.497-.006-.89-.599-.89H13.56z">
           </path>
-        </svg></div>
+        </svg>
+      </div>
       <div class="combo-accent">
-
         Начни всего с <span>1 TON</span>
       </div>
     </div>
-
 
     <UiButton class="combo-planet-button" @click="handleButtonClick" color="blue">
       НАЧАТЬ СЕЙЧАС
@@ -49,74 +48,60 @@ const handleButtonClick = () => {
 </template>
 
 <style scoped lang="scss">
-@use '@/app/styles/mixins' as mixins;
-
-.card-div {
-  display: flex;
-
-  align-items: center;
-  margin-bottom: 16px;
-
-  .combo-accent {
-    margin-left: 10px;
-    font-weight: 400;
-    
-  }
-
-}
-
 .combo-planet-card {
   width: 100%;
-  padding: 10px;
-  padding-top: 6px;
-  background: rgba(30, 34, 55, 0.84);
-  flex: none;
-  border-radius: 12px;
-  border: 1px solid #32315f;
+  padding: 18px 14px;
+  background: linear-gradient(135deg, #1e2237, #181b2d);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
-  .decor {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .bg-image {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
+.decor {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .combo-text {
   font-size: 16px;
-  font-weight: 600;
-  color: var(--font);
-  margin-bottom: 10px;
-  margin-right: -10px;
-  margin-left: -10px;
-  padding: 0 10px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.11);
-  position: relative;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 10;
 }
 
-.combo-accent {
+.card-div {
   display: flex;
   align-items: center;
-  gap: 5px;
-  
-  position: relative;
-  z-index: 10;
-  font-size: 20px;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
 
-  img {
-    width: 31px;
-    height: 31px;
-  }
+.statistics-icon {
+  background: #27aff9;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.combo-accent {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
 
   span {
     color: #27aff9;
@@ -125,11 +110,13 @@ const handleButtonClick = () => {
 }
 
 .combo-planet-button {
-  color: var(--font);
-  position: relative;
-  padding-left: 40px;
-  padding-right: 40px;
+  color: #fff;
+  font-weight: 600;
   width: 100%;
-  z-index: 10;
+  border-radius: 12px;
+  font-size: 14px;
+  padding: 12px;
+  background: linear-gradient(135deg, #30c5ff, #007bff);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
 }
 </style>

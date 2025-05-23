@@ -45,16 +45,20 @@ body {
   height: 100%;
 }
 
-html, body, #app {
+html,
+body,
+#app {
   height: 100%;
   overflow: hidden;
 }
+
 #app {
   display: flex;
   flex-direction: column;
   max-width: 100%;
   width: 100%;
   overflow: hidden;
+
 }
 
 .page {
@@ -68,11 +72,63 @@ html, body, #app {
   overflow: auto;
   height: 100%;
   padding-bottom: 84px;
+  position: relative;
+  z-index: 0;
 
   &.home-page {
     background-image: url('@/shared/assets/bg/home.webp');
   }
+
+  &:not(.home-page) {
+    // Левая верхняя планета
+    &::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: -40px;
+      width: 160px;
+      height: 160px;
+      background-image: url('@/shared/assets/planets/planet-2/level-0.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: -1;
+      animation: float 6s ease-in-out infinite;
+      animation-delay: 0s;
+    }
+
+    // Центральная + правая верхняя планеты (двойной фон)
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        url('@/shared/assets/planets/planet-8/level-0.png'),
+        url('@/shared/assets/planets/planet-4/level-0.png');
+      background-repeat: no-repeat;
+      background-size: 180px 180px, 140px 140px;
+      background-position:
+        20% 55%,   // центральная, смещена влево
+        right -30px top -30px; // правая верхняя
+      opacity: 0.3;
+      animation: float 7s ease-in-out infinite;
+      animation-delay: 0.5s;
+    }
+  }
 }
+
+@keyframes float {
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-10px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+
 
 .scrolled-list {
   flex: 1;
@@ -83,6 +139,7 @@ html, body, #app {
   &::-webkit-scrollbar {
     width: 2px;
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: #4746c8;
     border-radius: 10px;
@@ -94,4 +151,3 @@ html, body, #app {
   line-height: 1;
   font-weight: 600;
 }
-
