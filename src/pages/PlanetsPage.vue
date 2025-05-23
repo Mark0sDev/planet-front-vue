@@ -6,6 +6,8 @@ import {
   user_id
 } from '@/utils/telegramUser';
 
+import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
+
 import api from '@/utils/api';
 import PageLoader from './PageLoader.vue'
 import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
@@ -27,6 +29,10 @@ const showCongratsDialog = ref(false);
 const formLoaders = reactive({
   buyPlanet: false,
 });
+
+const showResult = ref(false)
+const modalText = ref<string>('')
+const modalText2 = ref<string>('')
 
 const timerId = ref<ReturnType<typeof setTimeout> | null>(null)
 const dialogTimerId = ref<ReturnType<typeof setTimeout> | null>(null)
@@ -125,14 +131,17 @@ async function handleBuyConfirm() {
   try {
     const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
     if (res.data.status == 1) {
-      showBuyModal.value = false;
+
     } else {
-      alert('test');
+      showResult.value = true
+      modalText.value = "Недостаточно TON на балансе"
+      modalText2.value = "Доступно к выводу: "
     }
   } catch (error) {
     tg.showAlert("Error:" + error);
   } finally {
     formLoaders.buyPlanet = false;
+    showBuyModal.value = false;
   }
 }
 
@@ -144,6 +153,7 @@ async function handleBuyConfirm() {
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
         <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" :loading="formLoaders.buyPlanet" />
+        <CoinFlipDialog v-model="showResult" :text="modalText" :text2="modalText2" :status="'lose'" />
 
         <h2 class="title title-1">Планеты</h2>
 
