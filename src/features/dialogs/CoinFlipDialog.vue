@@ -9,9 +9,8 @@ interface Props {
   text2?: string
   status: 'win' | 'lose'
 }
-const props = withDefaults(defineProps<Props>(), {
-  text: 'Вы успешно атаковали планету!',
-})
+
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'update:modelValue', v: boolean): void
@@ -24,10 +23,10 @@ function close() {
 
 <template>
   <UiDialog :model-value="props.modelValue" @update:modelValue="emit('update:modelValue', $event)">
-    <div :class="['congrats-modal', status]">
-      <h2 class="modal-title title-1">{{ text }}</h2>
-      <p class="modal-text" v-if="text2">{{ text2 }}</p>
-      <UiButton @click="close" color="accent" class="congrats-modal-btn"> Продолжить </UiButton>
+    <div :class="['congrats-modal', props.status]">
+      <h2 class="modal-title title-1">{{ props.text }}</h2>
+      <p class="modal-text" v-if="props.text2">{{ props.text2 }}</p>
+      <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
     </div>
   </UiDialog>
 </template>
