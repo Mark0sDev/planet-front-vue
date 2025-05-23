@@ -5,12 +5,25 @@ let audio: HTMLAudioElement | null = null
 
 const STORAGE_KEY = 'app-music-muted'
 
+let canUseStorage = true
+
+try {
+    localStorage.setItem('__test__', '1')
+    localStorage.removeItem('__test__')
+} catch {
+    canUseStorage = false
+}
+
 function loadStoredMuteState() {
+    if (!canUseStorage) return
     const stored = localStorage.getItem(STORAGE_KEY)
-    isMuted.value = stored === 'true' // true = выключено
+    if (stored !== null) {
+        isMuted.value = stored === 'true'
+    }
 }
 
 function saveMuteState() {
+    if (!canUseStorage) return
     localStorage.setItem(STORAGE_KEY, isMuted.value.toString())
 }
 

@@ -62,7 +62,7 @@ const getUser = async () => {
   });
 };
 
-tg.showAlert(planet1.value + " test");
+
 
 const handlePlanetClick = ({ index, planet }: { index: number; planet: (typeof planets)[number] }) => {
   if (sceneActive.value) return
