@@ -153,7 +153,7 @@ async function withdrawalForm() {
     } else {
       showResult.value = true
       modalText.value = "Недостаточно TON на балансе"
-      modalText2.value = "Доступно к выводу: " + balanceActionCards.value
+      modalText2.value = "Доступно к выводу: " + user.value.balance_ton + " TON";
     }
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
