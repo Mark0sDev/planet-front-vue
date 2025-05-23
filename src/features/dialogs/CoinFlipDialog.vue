@@ -7,8 +7,6 @@ import { defineProps, defineEmits } from 'vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import UiDialog from '@/shared/ui/UiDialog.vue'
 
-
-import UiDivider from '@/shared/ui/UiDivider.vue';
 import UiInput from '@/shared/ui/UiInput.vue';
 
 interface Props {
@@ -41,12 +39,10 @@ function close() {
       <div v-if="walletUp">
         <div class="wallet-connect">
 
-          <UiDivider value="Пополнить вручную" />
-
           <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
             value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
           <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
-
+          <p class="modal-text">Или перейдите на страницу <a href="/balance">Баланс</a> для пополнения в один клик</p>
         </div>
       </div>
       <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
