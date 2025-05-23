@@ -59,4 +59,10 @@ function close() {
     margin-bottom: 12px;
   }
 }
+
+.modal-text {
+  margin-bottom: 18px;
+  font-size: 16px;
+  color: white;
+}
 </style>
