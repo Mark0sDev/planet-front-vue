@@ -2,7 +2,7 @@
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import {
   initData,
-  user_id, tg
+  user_id
 } from '@/utils/telegramUser';
 
 import api from '@/utils/api';
@@ -12,6 +12,7 @@ import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
 import UiButton from '@/shared/ui/UiButton.vue'
 import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/AttackScene.vue'
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
+import buyPlanetModal from '@/features/dialogs/buyPlanetModal.vue';
 
 const SCENE_DURATION_MS = 4_500
 const DIALOG_DELAY_MS = 300
@@ -45,24 +46,18 @@ const planets = [
   },
 ]
 
-const planet1 = ref(0);
+const planet1 = ref(0)
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const response = await api.post('/users/getUser', {
       initData,
       user_id
-    });
-
-    const data = response.data;
-    planet1.value = data.planet_1;
-
-
-
-  });
-};
-
-tg.showAlert(planet1.value + " вtest");
+    })
+    const data = response.data
+    planet1.value = data.planet_1
+  })
+}
 
 const handlePlanetClick = ({ index, planet }: { index: number; planet: (typeof planets)[number] }) => {
   if (sceneActive.value) return
@@ -93,8 +88,18 @@ onBeforeUnmount(() => {
 })
 
 onMounted(() => {
-  getUser();
-});
+  getUser()
+})
+
+const showBuyModal = ref(false)
+const modalTest = () => {
+  showBuyModal.value = true
+}
+
+const handleBuyConfirm = () => {
+  alert('Покупка подтверждена!')
+}
+
 </script>
 
 <template>
@@ -102,7 +107,11 @@ onMounted(() => {
   <div class="page planets-page">
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
+        <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" />
+
         <h2 class="title title-1">Планеты</h2>
+        <button @click="modalTest">test</button>
+
         <div class="planets-list">
           <div v-for="planet in planets" :key="planet.id" class="planet-card">
             <div class="card-title">{{ planet.name }}</div>
@@ -141,7 +150,6 @@ onMounted(() => {
 
     <CongratsDialog v-model="showCongratsDialog" text-template="Вы успешно атаковали планету #{{planet}}!"
       :text-params="{ planet: attackedPlanetId ?? '' }" />
-
   </div>
 </template>
 
@@ -152,7 +160,6 @@ onMounted(() => {
   border-radius: 10px;
   background-position: top right;
   background-repeat: no-repeat;
-
   background-size: cover;
   background-image: url('@/shared/assets/bg/planet-card-bg.png');
 }
@@ -166,7 +173,6 @@ onMounted(() => {
   text-transform: uppercase;
   color: var(--font);
 }
-
 
 .card-body {
   display: flex;
