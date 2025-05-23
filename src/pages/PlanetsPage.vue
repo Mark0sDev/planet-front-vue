@@ -45,6 +45,8 @@ const planets = [
   },
 ]
 
+const planet1 = ref(0);
+
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const response = await api.post('/users/getUser', {
@@ -53,12 +55,14 @@ const getUser = async () => {
     });
 
     const data = response.data;
-    const planet1 = ref(data.planet_1);
+    planet1.value = data.planet_1;
 
-    tg.showAlert(planet1.value + "");
+
 
   });
 };
+
+tg.showAlert(planet1.value + "");
 
 const handlePlanetClick = ({ index, planet }: { index: number; planet: (typeof planets)[number] }) => {
   if (sceneActive.value) return
