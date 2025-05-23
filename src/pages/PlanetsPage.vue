@@ -135,7 +135,7 @@ async function handleBuyConfirm() {
     } else {
       showResult.value = true
       modalText.value = "Недостаточно TON на балансе"
-      modalText2.value = "Доступно к выводу: "
+      modalText2.value = "<h1>adawdwad<h1><br><br>dadwad"
     }
   } catch (error) {
     tg.showAlert("Error:" + error);

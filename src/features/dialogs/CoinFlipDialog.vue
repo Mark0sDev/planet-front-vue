@@ -25,7 +25,7 @@ function close() {
   <UiDialog :model-value="props.modelValue" @update:modelValue="emit('update:modelValue', $event)">
     <div :class="['congrats-modal', props.status]">
       <h2 class="modal-title title-1">{{ props.text }}</h2>
-      <p class="modal-text" v-if="props.text2">{{ props.text2 }}</p>
+      <p class="modal-text" v-if="props.text2" v-html="props.text2"></p>
       <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
     </div>
   </UiDialog>
