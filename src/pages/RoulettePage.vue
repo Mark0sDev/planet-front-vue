@@ -90,6 +90,7 @@ async function spin() {
   try {
     const { data } = await axios.get<SpinResponse>('https://twinbyai.ru/spin')
     prizeId = data.prize_id
+    alert(prizeId);
   } catch (err) {
     alert('[roulette] spin error' + err)
     isSpinning.value = false
