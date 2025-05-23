@@ -129,6 +129,14 @@ async function depositFormTon() {
   border: 1px solid #32315f;
   @include mixins.bg-cover;
 
+  // Добавлено для скролла при переполнении
+  max-height: 80vh;
+  overflow-y: auto;
+
+  // Добавлено для приоритета поверх других модалок
+  z-index: 9999;
+  position: relative;
+
   &.win {
     background-image: url('@/shared/assets/bg/level-card-bg.png');
     background-position: 70% bottom;
@@ -149,6 +157,7 @@ async function depositFormTon() {
   font-size: 16px;
   color: white;
 }
+
 .spinner {
   width: 18px;
   height: 18px;
