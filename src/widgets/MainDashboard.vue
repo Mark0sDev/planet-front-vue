@@ -43,7 +43,7 @@ const handleButtonClick = () => {
 
       <UiButton class="home-header-button" size="sm" color="blue" @click="onWalletClick">
         <TonIcon />
-        {{ isWalletConnected ? formattedAddress : 'Connect TON' }}
+        {{ isWalletConnected ? formattedAddress : 'Connect' }}
       </UiButton>
 
       <LanguageSelect />

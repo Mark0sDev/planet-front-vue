@@ -91,7 +91,7 @@ async function spin() {
     const { data } = await axios.get<SpinResponse>('https://twinbyai.ru/spin')
     prizeId = data.prize_id
   } catch (err) {
-    console.error('[roulette] spin error', err)
+    alert('[roulette] spin error' + err)
     isSpinning.value = false
     return
   }
@@ -168,11 +168,7 @@ function recenter() {
       </UiButton>
     </div>
 
-    <CongratsDialog
-      :image-src="lootObj.image"
-      :text="`Вы выиграли ${lootObj.title}`"
-      v-model="showLoot"
-    />
+    <CongratsDialog :image-src="lootObj.image" :text="`Вы выиграли ${lootObj.title}`" v-model="showLoot" />
 
     <div style="visibility: hidden; position: absolute; pointer-events: none">
       <div ref="cardRef" class="card">
@@ -187,6 +183,7 @@ function recenter() {
 .roulette-content {
   padding: 0 16px;
 }
+
 .roulette-page {
   display: flex;
   justify-content: space-between;
@@ -222,6 +219,7 @@ function recenter() {
   overflow: hidden;
   padding: 0 32px;
 }
+
 .roulette-track {
   display: flex;
 }
@@ -238,12 +236,14 @@ function recenter() {
   flex-direction: column;
   align-items: center;
 }
+
 .card-img {
   width: 128px;
   height: 128px;
   object-fit: contain;
   border-radius: 10px;
 }
+
 .card-title {
   margin-top: 4px;
   font-size: 16px;
@@ -254,6 +254,7 @@ function recenter() {
 .roulette-controls {
   padding: 0 16px 16px;
 }
+
 .spin-btn {
   margin-left: auto;
 }
