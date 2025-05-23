@@ -6,7 +6,8 @@ import UiDialog from '@/shared/ui/UiDialog.vue'
 interface Props {
   modelValue: boolean
   text?: string
-  text2?: string
+  text2?: string,
+  walletUp?: boolean
   status: 'win' | 'lose'
 }
 
@@ -25,7 +26,11 @@ function close() {
   <UiDialog :model-value="props.modelValue" @update:modelValue="emit('update:modelValue', $event)">
     <div :class="['congrats-modal', props.status]">
       <h2 class="modal-title title-1">{{ props.text }}</h2>
-      <p class="modal-text" v-if="props.text2" v-html="props.text2"></p>
+      <p class="modal-text" v-if="props.text2">{{ props.text2 }}</p>
+
+      <div v-if="walletUp">
+        TEST
+      </div>
       <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
     </div>
   </UiDialog>

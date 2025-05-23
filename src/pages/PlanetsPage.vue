@@ -32,7 +32,7 @@ const formLoaders = reactive({
 
 const showResult = ref(false)
 const modalText = ref<string>('')
-const modalText2 = ref<string>('')
+const walletUp = ref(false);
 
 const timerId = ref<ReturnType<typeof setTimeout> | null>(null)
 const dialogTimerId = ref<ReturnType<typeof setTimeout> | null>(null)
@@ -135,7 +135,7 @@ async function handleBuyConfirm() {
     } else {
       showResult.value = true
       modalText.value = "Недостаточно TON на балансе"
-      modalText2.value = "<h1>adawdwad<h1><br><br>dadwad"
+      walletUp.value = true
     }
   } catch (error) {
     tg.showAlert("Error:" + error);
@@ -153,7 +153,7 @@ async function handleBuyConfirm() {
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
         <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" :loading="formLoaders.buyPlanet" />
-        <CoinFlipDialog v-model="showResult" :text="modalText" :text2="modalText2" :status="'lose'" />
+        <CoinFlipDialog v-model="showResult" :text="modalText" :wallet-up="walletUp" :status="'lose'" />
 
         <h2 class="title title-1">Планеты</h2>
 
