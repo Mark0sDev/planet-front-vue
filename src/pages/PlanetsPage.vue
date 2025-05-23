@@ -102,7 +102,7 @@ const buyPlanet = ({ index }: { index: number }) => {
     selectedPlanetId.value = index
     showBuyModal.value = true
   } else {
-    handlePlanetClick({ index, planet }) // <-- здесь исправление
+    handlePlanetClick({ index, planet })
   }
 }
 

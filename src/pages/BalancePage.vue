@@ -12,6 +12,8 @@ import type { Transaction } from '@/entities/TransactionCard.vue';
 import { useTonWallet } from '@/utils/useTonWallet';
 import { tonConnectUI } from '@/utils/tonconnect';
 
+import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
+
 import type { HistoryItemApi } from '@/types/api.types';
 
 import PageLoader from './PageLoader.vue';
@@ -25,7 +27,10 @@ import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 import axios from 'axios';
 import { useI18n } from 'vue-i18n'
 
+const showResult = ref(false)
 const { t } = useI18n()
+const modalText = ref<string>('')
+const win = ref(false)
 
 const { isWalletConnected } = useTonWallet();
 
@@ -144,6 +149,10 @@ async function withdrawalForm() {
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
       showWithdrawalTon.value = true
+    } else {
+      win.value = false
+      showResult.value = true
+      modalText.value = "Недостаточно TON на балансе\n\nTEst"
     }
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
@@ -192,6 +201,7 @@ onMounted(() => {
 
 <template>
   <PageLoader ref="loaderRef" />
+  <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
   <div class="balance-page page">
     <div class="balance-title title-1">Баланс</div>
     <div class="balance-cards">
