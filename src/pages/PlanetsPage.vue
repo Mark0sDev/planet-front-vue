@@ -2,8 +2,7 @@
 import { ref, onBeforeUnmount, onMounted } from 'vue'
 import {
   initData,
-  user_id,
-  tg
+  user_id, tg
 } from '@/utils/telegramUser';
 
 import api from '@/utils/api';
@@ -54,7 +53,10 @@ const getUser = async () => {
     });
 
     const data = response.data;
-    tg.showAlert(data + '');
+    const planet1 = ref(data.data);
+
+    tg.showAlert(planet1.value + "");
+
   });
 };
 
