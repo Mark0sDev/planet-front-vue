@@ -17,7 +17,6 @@ interface Props {
   status: 'win' | 'lose'
 }
 
-
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
