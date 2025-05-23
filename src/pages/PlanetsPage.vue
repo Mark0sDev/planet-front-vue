@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onBeforeUnmount, reactive, onMounted } from 'vue'
 import {
+  tg,
   initData,
   user_id
 } from '@/utils/telegramUser';
@@ -126,9 +127,8 @@ async function handleBuyConfirm() {
     if (res.data.status == 1) {
       showBuyModal.value = false;
     }
-
   } catch (error) {
-    console.error(error);
+    tg.showAlert(error);
   } finally {
     formLoaders.buyPlanet = false;
   }
