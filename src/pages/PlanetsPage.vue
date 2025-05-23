@@ -1,6 +1,13 @@
 <script setup lang="ts">
-import { ref, onBeforeUnmount } from 'vue'
+import { ref, onBeforeUnmount, onMounted } from 'vue'
+import {
+  initData,
+  user_id,
+  tg
+} from '@/utils/telegramUser';
 
+import api from '@/utils/api';
+import PageLoader from './PageLoader.vue'
 import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
 
 import UiButton from '@/shared/ui/UiButton.vue'
@@ -25,18 +32,31 @@ const currentPlanet = ref<Pick<AttackSceneProps, 'currentLevel' | 'planetSrc'>>(
 })
 const planetLevel = ref(-1)
 
+const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 const planets = [
   {
     id: 0,
     planetDisplayId: 1,
-    name: 'Test',
+    name: 'Аурелия',
     imageSrc: PlanetImage1,
-    income: '10%',
-    cost: '5 TON',
-    cycleTime: '6 ч',
+    income: '4.8%',
+    cost: '1 TON',
+    cycleTime: '4 ч',
     earned: '10 TON',
   },
 ]
+
+const getUser = async () => {
+  await loaderRef.value?.withLoader(async () => {
+    const response = await api.post('/users/getUser', {
+      initData,
+      user_id
+    });
+
+    const data = response.data;
+    tg.showAlert(data + '');
+  });
+};
 
 const handlePlanetClick = ({ index, planet }: { index: number; planet: (typeof planets)[number] }) => {
   if (sceneActive.value) return
@@ -66,10 +86,13 @@ onBeforeUnmount(() => {
   if (dialogTimerId.value) clearTimeout(dialogTimerId.value)
 })
 
-
+onMounted(() => {
+  getUser();
+});
 </script>
 
 <template>
+  <PageLoader ref="loaderRef" />
   <div class="page planets-page">
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
