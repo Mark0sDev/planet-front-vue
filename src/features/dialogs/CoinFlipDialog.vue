@@ -81,7 +81,6 @@ async function depositFormTon() {
       <p class="modal-text" v-if="props.text2">{{ props.text2 }}</p>
 
       <div v-if="walletUp">
-        <p class="modal-text">У Вас недостаточно TON на балансе, пополнить баланс:</p>
         <div class="wallet-connect">
           <ConnectWalletBanner />
 
