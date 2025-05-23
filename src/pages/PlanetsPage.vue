@@ -110,18 +110,19 @@ const buyPlanet = ({ index }: { index: number }) => {
   }
 }
 
-const buyPlanetApi = async () => {
+const buyPlanetApi = async ({ planetId }: { planetId: number }) => {
   return await api.post('/users/buyPlanet', {
     initData,
     user_id,
+    planetId
   });
 };
+
 
 async function handleBuyConfirm() {
   formLoaders.buyPlanet = true;
   try {
-    const res = await buyPlanetApi();
-
+    const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
     alert(res.data);
 
   } catch (error) {
