@@ -84,10 +84,10 @@ body,
     &::before {
       content: '';
       position: absolute;
-      top: -40px;
-      left: -40px;
-      width: 160px;
-      height: 160px;
+      top: 0;
+      left: 0;
+      width: 140px;
+      height: 140px;
       background-image: url('@/shared/assets/planets/planet-2/level-0.png');
       background-size: cover;
       background-repeat: no-repeat;
@@ -98,27 +98,23 @@ body,
       animation-delay: 0s;
     }
 
-    // Центральная + правая верхняя планеты (двойной фон)
+    // Центральная (смещённая влево)
     &::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 55%;
+      left: 20%;
+      transform: translate(-50%, -50%);
+      width: 180px;
+      height: 180px;
+      background-image: url('@/shared/assets/planets/planet-2/level-0.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0.3;
       pointer-events: none;
       z-index: -1;
-      background-image:
-        url('@/shared/assets/planets/planet-8/level-0.png'),
-        url('@/shared/assets/planets/planet-4/level-0.png');
-      background-repeat: no-repeat;
-      background-size: 180px 180px, 140px 140px;
-      background-position:
-        20% 55%,   // центральная, смещена влево
-        right -30px top -30px; // правая верхняя
-      opacity: 0.3;
       animation: float 7s ease-in-out infinite;
-      animation-delay: 0.5s;
+      animation-delay: 1s;
     }
   }
 }
