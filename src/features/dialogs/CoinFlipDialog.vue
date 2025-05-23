@@ -133,8 +133,7 @@ async function depositFormTon() {
   max-height: 80vh;
   overflow-y: auto;
 
-  // Добавлено для приоритета поверх других модалок
-  z-index: 9999;
+  
   position: relative;
 
   &.win {
