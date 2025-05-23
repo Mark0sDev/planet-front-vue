@@ -30,6 +30,8 @@ import { useI18n } from 'vue-i18n'
 const showResult = ref(false)
 const { t } = useI18n()
 const modalText = ref<string>('')
+const modalText2 = ref<string>('')
+
 const win = ref(false)
 
 const { isWalletConnected } = useTonWallet();
@@ -152,7 +154,8 @@ async function withdrawalForm() {
     } else {
       win.value = false
       showResult.value = true
-      modalText.value = "Недостаточно TON на балансе\n\nTEst"
+      modalText.value = "Недостаточно TON на балансе"
+      modalText2.value = "Доступно к выводу: "
     }
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
@@ -201,7 +204,7 @@ onMounted(() => {
 
 <template>
   <PageLoader ref="loaderRef" />
-  <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
+  <CoinFlipDialog v-model="showResult" :text="modalText" :text2="modalText2" :status="win ? 'win' : 'lose'" />
   <div class="balance-page page">
     <div class="balance-title title-1">Баланс</div>
     <div class="balance-cards">
