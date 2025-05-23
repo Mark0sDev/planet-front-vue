@@ -109,11 +109,6 @@ async function depositFormTon() {
             value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
           <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
 
-
-          <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
-            value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
-          <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
-
         </div>
       </div>
       <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
@@ -153,5 +148,15 @@ async function depositFormTon() {
   margin-bottom: 18px;
   font-size: 16px;
   color: white;
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
 }
 </style>
