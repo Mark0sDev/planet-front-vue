@@ -123,7 +123,9 @@ async function handleBuyConfirm() {
   formLoaders.buyPlanet = true;
   try {
     const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
-    alert(res.data);
+    if (res.data.status == 1) {
+      showBuyModal.value = false;
+    }
 
   } catch (error) {
     console.error(error);
