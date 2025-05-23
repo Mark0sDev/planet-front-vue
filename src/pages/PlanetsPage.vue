@@ -53,7 +53,7 @@ const getUser = async () => {
     });
 
     const data = response.data;
-    const planet1 = ref(data.palnet1);
+    const planet1 = ref(data.planet_1);
 
     tg.showAlert(planet1.value + "");
 
