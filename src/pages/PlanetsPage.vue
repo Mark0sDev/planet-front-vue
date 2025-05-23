@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onBeforeUnmount, onMounted } from 'vue'
+import { ref, onBeforeUnmount, reactive, onMounted } from 'vue'
 import {
   initData,
   user_id
@@ -21,7 +21,11 @@ const attackedPlanetId = ref<number | null>(null)
 
 const showList = ref(true)
 const sceneActive = ref(false)
-const showCongratsDialog = ref(false)
+const showCongratsDialog = ref(false);
+
+const formLoaders = reactive({
+  buyPlanet: false,
+});
 
 const timerId = ref<ReturnType<typeof setTimeout> | null>(null)
 const dialogTimerId = ref<ReturnType<typeof setTimeout> | null>(null)
@@ -106,14 +110,27 @@ const buyPlanet = ({ index }: { index: number }) => {
   }
 }
 
+const buyPlanetApi = async () => {
+  return await api.post('/users/buyPlanet', {
+    initData,
+    user_id,
+  });
+};
 
-const handleBuyConfirm = () => {
-  if (selectedPlanetId.value !== null) {
-    alert(`Покупка планеты #${selectedPlanetId.value} подтверждена!`)
-  } else {
-    alert('Ошибка: ID планеты не определён.')
+async function handleBuyConfirm() {
+  formLoaders.buyPlanet = true;
+  try {
+    const res = await buyPlanetApi();
+
+    alert(res.data);
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    formLoaders.buyPlanet = false;
   }
 }
+
 </script>
 
 <template>
@@ -121,7 +138,7 @@ const handleBuyConfirm = () => {
   <div class="page planets-page">
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
-        <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" />
+        <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" :loading="formLoaders.buyPlanet" />
 
         <h2 class="title title-1">Планеты</h2>
 
@@ -167,6 +184,17 @@ const handleBuyConfirm = () => {
 </template>
 
 <style scoped lang="scss">
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .planet-card {
   padding: 10px;
   border: 1px solid #32315f;
