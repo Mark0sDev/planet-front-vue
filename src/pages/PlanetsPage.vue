@@ -32,7 +32,6 @@ const planets = [
   }
 ]
 
-// Reactive state
 const showList = ref(true)
 const sceneActive = ref(false)
 const showCongratsDialog = ref(false)
@@ -72,7 +71,15 @@ const AttackPlanet = async (planetId: number) => {
     const attack = await AttackPlanetApi(planetId);
 
     if (attack.data.status === 1) {
-      alert('Planet attack successful');
+      const rawTime = attack.data.time;
+      const newTime = attack.data.new_date;
+      const planetId = attackedPlanetId.value;
+
+      if (planetId !== null) {
+        createCountdown(rawTime, newTime, (formatted) => {
+          countdownPerPlanet.value[planetId] = formatted;
+        });
+      }
     }
   } catch {
     tg.showAlert('Planet attack error, please try again.')
