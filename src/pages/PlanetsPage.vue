@@ -16,9 +16,11 @@ import UiButton from '@/shared/ui/UiButton.vue'
 import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/AttackScene.vue'
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 import buyPlanetModal from '@/features/dialogs/buyPlanetModal.vue';
+import { createCountdown } from '@/utils/useCountdown'
 
 const SCENE_DURATION_MS = 4_500
 const DIALOG_DELAY_MS = 300
+const countdownText = ref('')
 
 const attackedPlanetId = ref<number | null>(null)
 
@@ -134,6 +136,9 @@ async function handleBuyConfirm() {
     if (res.data.status == 1) {
       planet1.value = 1;
       attackedPlanetId.value = selectedPlanetId.value;
+      createCountdown(res.data.time, res.data.new_time, (formatted) => {
+        countdownText.value = formatted
+      })
 
       showCongratsDialog2.value = true;
 
@@ -156,6 +161,7 @@ async function handleBuyConfirm() {
   <PageLoader ref="loaderRef" />
   <div class="page planets-page">
     <transition name="fade-slide" mode="out-in">
+      {{ countdownText !== '00:00:00' ? countdownText : 'Атаковать снова' }}
       <div v-if="showList" key="planets" class="content">
         <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" :loading="formLoaders.buyPlanet" />
         <CoinFlipDialog v-model="showResult" :text="modalText" :wallet-up="walletUp" :status="'lose'" />
