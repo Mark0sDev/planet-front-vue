@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import { NAVIGATION } from '@/app/router/navigation.ts'
 import MiniGameIcon from '@/shared/assets/icons/minigame.svg'
-import TonIcon from '@/shared/assets/icons/ton-vector.svg'
+
 import { AppRoutes } from '@/app/router/router.ts'
 
 const route = useRoute()
@@ -18,31 +18,19 @@ function isEarnButton(path: string) {
 
 <template>
   <nav class="bottom-nav">
-    <router-link 
-      v-for="item in NAVIGATION" 
-      :key="item.path" 
-      :to="item.path" 
-      :class="{ 
-        active: isActive(item.path),
-        'earn-button': isEarnButton(item.path)
-      }"
-      class="nav-item"
-    >
+    <router-link v-for="item in NAVIGATION" :key="item.path" :to="item.path" :class="{
+      active: isActive(item.path),
+      'earn-button': isEarnButton(item.path)
+    }" class="nav-item">
       <div v-if="isEarnButton(item.path)" class="earn-content">
         <div class="earn-circle">
-          <component 
-            :is="item.icon" 
-            class="earn-icon" 
-          />
+          <component :is="item.icon" class="earn-icon" />
         </div>
         <span class="earn-text">{{ item.label }}</span>
       </div>
-      
+
       <template v-else>
-        <component 
-          :is="item.icon" 
-          :class="['nav-icon', { 'no-fill': item.icon === MiniGameIcon }]" 
-        />
+        <component :is="item.icon" :class="['nav-icon', { 'no-fill': item.icon === MiniGameIcon }]" />
         <span>{{ item.label }}</span>
       </template>
     </router-link>
@@ -101,7 +89,7 @@ function isEarnButton(path: string) {
   // Стили для кнопки "Заработать"
   &.earn-button {
     width: 80px;
-    
+
     .earn-content {
       display: flex;
       flex-direction: column;
@@ -109,7 +97,7 @@ function isEarnButton(path: string) {
       position: relative;
       top: -10px;
     }
-    
+
     .earn-circle {
       width: 50px;
       height: 50px;
@@ -119,22 +107,22 @@ function isEarnButton(path: string) {
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 8px rgba(108, 234, 241, 0.3);
-      
+
       .earn-icon {
         width: 24px;
         height: 24px;
-        
+
         path {
           fill: #ffffff !important;
         }
       }
     }
-    
+
     .earn-text {
-      color: var(--accent);
-      font-weight: 600;
+      color: var(--font);
+      font-weight: normal;
       margin-top: 4px;
-      font-size: 11px;
+      font-size: 12px;
     }
 
     &.active {
@@ -142,10 +130,12 @@ function isEarnButton(path: string) {
         background: linear-gradient(135deg, #5dd9e0 0%, #3d9bfd 100%);
         box-shadow: 0 2px 12px rgba(93, 217, 224, 0.4);
       }
-      
+
       .earn-text {
         color: var(--accent);
+        font-weight: 600;
       }
     }
   }
-}</style>
+}
+</style>
