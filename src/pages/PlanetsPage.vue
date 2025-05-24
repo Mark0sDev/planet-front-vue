@@ -68,8 +68,23 @@ const getUser = async () => {
     })
     const data = response.data
 
+    const now = new Date(data.date.replace(/-/g, '/')).getTime()
+
     for (let i = 1; i <= planets.length; i++) {
       planetStates.value[i] = data[`planet_${i}`] || 0
+
+      const planetTimeKey = `time_planet_${i}`
+      const rawTime = data[planetTimeKey]
+
+      if (rawTime) {
+        const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
+
+        if (planetTime > now) {
+          createCountdown(data.date, rawTime, (formatted) => {
+            countdownPerPlanet.value[i] = formatted
+          })
+        }
+      }
     }
   })
 }
