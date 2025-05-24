@@ -44,9 +44,8 @@ const planetLevel = ref(-1)
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 
-// Хранилище таймеров и состояния купленности планет
 const countdownPerPlanet = ref<Record<number, string>>({})
-const planetStates = ref<Record<number, number>>({}) // planet_id -> 0 | 1
+const planetStates = ref<Record<number, number>>({})
 
 const planets = [
   {
@@ -59,16 +58,6 @@ const planets = [
     cycleTime: '4 ч',
     earned: '10 TON',
   },
-  {
-    id: 2,
-    planetDisplayId: 1,
-    name: 'вфвфв',
-    imageSrc: PlanetImage1,
-    income: '4.8%',
-    cost: '1 TON',
-    cycleTime: '4 ч',
-    earned: '10 TON',
-  }
 ]
 
 const getUser = async () => {
@@ -79,7 +68,6 @@ const getUser = async () => {
     })
     const data = response.data
 
-    // универсально: planet_1, planet_2 и т.д.
     for (let i = 1; i <= planets.length; i++) {
       planetStates.value[i] = data[`planet_${i}`] || 0
     }
