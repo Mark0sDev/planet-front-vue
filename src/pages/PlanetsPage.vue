@@ -69,10 +69,10 @@ const buyPlanetApi = ({ planetId }: { planetId: number }) =>
 const AttackPlanet = async (planetId: number) => {
   formLoaders.attackPlanet = true
   try {
-    const attcak = await AttackPlanetApi(planetId)
+    const attack = await AttackPlanetApi(planetId);
 
-    if (attcak.status == 1) {
-      alert('test');
+    if (attack.status === 1) {
+      alert('Planet attack successful');
     }
   } catch {
     tg.showAlert('Planet attack error, please try again.')
