@@ -160,8 +160,10 @@ async function handleBuyConfirm() {
 <template>
   <PageLoader ref="loaderRef" />
   <div class="page planets-page">
-    <transition name="fade-slide" mode="out-in">
+    <div>
       {{ countdownText !== '00:00:00' ? countdownText : 'Атаковать снова' }}
+    </div>
+    <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
         <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" :loading="formLoaders.buyPlanet" />
         <CoinFlipDialog v-model="showResult" :text="modalText" :wallet-up="walletUp" :status="'lose'" />
