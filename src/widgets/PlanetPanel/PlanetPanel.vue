@@ -65,20 +65,11 @@ const fixedPoints = [
 </script>
 <template>
   <section class="planet-panel">
-    <AttackScene
-      :current-level="currentLevel"
-      :fixed-points="fixedPoints"
-      :planet-src="planets[rerenderAttackScene]"
-      :ufo-src="UfoImage"
-      :key="rerenderAttackScene"
-    />
+    <AttackScene :current-level="currentLevel" :fixed-points="fixedPoints" :planet-src="planets[rerenderAttackScene]"
+      :ufo-src="UfoImage" :key="rerenderAttackScene" />
     <div class="level-card">
       <div class="level-info">
-        <img
-          src="../../shared/assets/planets/planet-1.png"
-          alt="Мини-планета"
-          class="level-thumb"
-        />
+        <img src="../../shared/assets/planets/planet-1.png" alt="Мини-планета" class="level-thumb" />
         <div class="level-texts">
           <div class="level-title">Уровень {{ currentLevel + 1 }}</div>
           <div class="level-progress">Осталось: {{ maxLevel - currentLevel }}/{{ maxLevel }}</div>

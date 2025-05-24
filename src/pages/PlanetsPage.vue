@@ -16,38 +16,8 @@ import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 import buyPlanetModal from '@/features/dialogs/buyPlanetModal.vue'
 import { createCountdown } from '@/utils/useCountdown'
 
-const SCENE_DURATION_MS = 4_500
+const SCENE_DURATION_MS = 4500
 const DIALOG_DELAY_MS = 300
-
-const attackedPlanetId = ref<number | null>(null)
-const showList = ref(true)
-const sceneActive = ref(false)
-const showCongratsDialog = ref(false)
-const showCongratsDialog2 = ref(false)
-
-const formLoaders = reactive({
-  buyPlanet: false,
-})
-
-const showResult = ref(false)
-const modalText = ref<string>('')
-const walletUp = ref(false)
-
-const timerId = ref<ReturnType<typeof setTimeout> | null>(null)
-const dialogTimerId = ref<ReturnType<typeof setTimeout> | null>(null)
-
-const currentPlanet = ref<Pick<AttackSceneProps, 'currentLevel' | 'planetSrc'>>({
-  currentLevel: -1,
-  planetSrc: ''
-})
-const planetLevel = ref(-1)
-
-const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
-
-const countdownPerPlanet = ref<Record<number, string>>({})
-const planetStates = ref<Record<number, number>>({})
-
-
 
 const planets = [
   {
@@ -61,82 +31,75 @@ const planets = [
     earned: 0,
   }
 ]
-const AttackPlanet = async () => {
-  alert('test');
+
+// Reactive state
+const showList = ref(true)
+const sceneActive = ref(false)
+const showCongratsDialog = ref(false)
+const showCongratsDialog2 = ref(false)
+const showResult = ref(false)
+const modalText = ref('')
+const walletUp = ref(false)
+const showBuyModal = ref(false)
+const selectedPlanetId = ref<number | null>(null)
+const attackedPlanetId = ref<number | null>(null)
+const planetLevel = ref(-1)
+
+const currentPlanet = ref<Pick<AttackSceneProps, 'currentLevel' | 'planetSrc'>>({
+  currentLevel: -1,
+  planetSrc: ''
+})
+
+const timerId = ref<ReturnType<typeof setTimeout> | null>(null)
+const dialogTimerId = ref<ReturnType<typeof setTimeout> | null>(null)
+
+const countdownPerPlanet = ref<Record<number, string>>({})
+const planetStates = ref<Record<number, number>>({})
+const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
+
+const formLoaders = reactive({
+  buyPlanet: false,
+  attackPlanet: false
+})
+
+// API Calls
+const AttackPlanetApi = (planetId: number) => api.post('/users/attackPlanet', { initData, user_id, planetId })
+const buyPlanetApi = ({ planetId }: { planetId: number }) =>
+  api.post('/users/buyPlanet', { initData, user_id, planetId })
+
+// Core logic
+const AttackPlanet = async (planetId: number) => {
+  formLoaders.attackPlanet = true
+  try {
+    await AttackPlanetApi(planetId)
+  } catch {
+    tg.showAlert('Planet attack error, please try again.')
+  } finally {
+    formLoaders.attackPlanet = false
+  }
 }
 
-const getUser = async () => {
-  await loaderRef.value?.withLoader(async () => {
-    const response = await api.post('/users/getUser', {
-      initData,
-      user_id
-    })
-    const data = response.data
-
-    planets.forEach((planet) => {
-      const incomeKey = `planet_${planet.id}_income`
-      if (incomeKey in data) {
-        planet.earned = data[incomeKey]
-      }
-    })
-
-    const now = new Date(data.date.replace(/-/g, '/')).getTime()
-
-    for (let i = 1; i <= planets.length; i++) {
-      planetStates.value[i] = data[`planet_${i}`] || 0
-
-      const planetTimeKey = `time_planet_${i}`
-      const rawTime = data[planetTimeKey]
-
-      if (rawTime) {
-        const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
-
-        if (planetTime > now) {
-          createCountdown(data.date, rawTime, (formatted) => {
-            countdownPerPlanet.value[i] = formatted
-          })
-        }
-      }
-    }
-  })
-}
-
-const handlePlanetClick = ({ index, planet }: { index: number; planet: (typeof planets)[number] }) => {
-  AttackPlanet();
-
+const handlePlanetClick = ({ index, planet }: { index: number; planet: typeof planets[number] }) => {
   if (sceneActive.value) return
 
   sceneActive.value = true
   showList.value = false
-
   currentPlanet.value = { currentLevel: index, planetSrc: planet.imageSrc }
   planetLevel.value = -1
   attackedPlanetId.value = planet.planetDisplayId
 
-  setTimeout(() => (planetLevel.value = index), 1_000)
+  AttackPlanet(planet.planetDisplayId)
+  setTimeout(() => (planetLevel.value = index), 1000)
 
   timerId.value = setTimeout(() => {
     showList.value = true
     sceneActive.value = false
   }, SCENE_DURATION_MS)
 
-  dialogTimerId.value = setTimeout(
-    () => (showCongratsDialog.value = true),
-    SCENE_DURATION_MS + DIALOG_DELAY_MS,
-  )
+  dialogTimerId.value = setTimeout(() => {
+    showCongratsDialog.value = true
+  }, SCENE_DURATION_MS + DIALOG_DELAY_MS)
 }
-
-onBeforeUnmount(() => {
-  if (timerId.value) clearTimeout(timerId.value)
-  if (dialogTimerId.value) clearTimeout(dialogTimerId.value)
-})
-
-onMounted(() => {
-  getUser()
-})
-
-const showBuyModal = ref(false)
-const selectedPlanetId = ref<number | null>(null)
 
 const buyPlanet = ({ index }: { index: number }) => {
   const planet = planets.find(p => p.id === index)
@@ -150,25 +113,18 @@ const buyPlanet = ({ index }: { index: number }) => {
   }
 }
 
-const buyPlanetApi = async ({ planetId }: { planetId: number }) => {
-  return await api.post('/users/buyPlanet', {
-    initData,
-    user_id,
-    planetId
-  })
-}
-
-async function handleBuyConfirm() {
+const handleBuyConfirm = async () => {
+  const planetId = selectedPlanetId.value!
   formLoaders.buyPlanet = true
   try {
-    const res = await buyPlanetApi({ planetId: selectedPlanetId.value! })
-    if (res.data.status == 1) {
-      const id = selectedPlanetId.value!
-      planetStates.value[id] = 1
-      attackedPlanetId.value = id
+    const res = await buyPlanetApi({ planetId })
+
+    if (res.data.status === 1) {
+      planetStates.value[planetId] = 1
+      attackedPlanetId.value = planetId
 
       createCountdown(res.data.time, res.data.new_time, (formatted) => {
-        countdownPerPlanet.value[id] = formatted
+        countdownPerPlanet.value[planetId] = formatted
       })
 
       showCongratsDialog2.value = true
@@ -178,12 +134,47 @@ async function handleBuyConfirm() {
       walletUp.value = true
     }
   } catch (error) {
-    tg.showAlert('Error:' + error)
+    tg.showAlert('Error: ' + error)
   } finally {
     formLoaders.buyPlanet = false
     showBuyModal.value = false
   }
 }
+
+const getUser = async () => {
+  await loaderRef.value?.withLoader(async () => {
+    const { data } = await api.post('/users/getUser', { initData, user_id })
+
+    const now = new Date(data.date.replace(/-/g, '/')).getTime()
+
+    planets.forEach((planet) => {
+      const incomeKey = `planet_${planet.id}_income`
+      if (incomeKey in data) planet.earned = data[incomeKey]
+
+      const id = planet.id
+      planetStates.value[id] = data[`planet_${id}`] || 0
+
+      const rawTime = data[`time_planet_${id}`]
+      if (rawTime) {
+        const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
+        if (planetTime > now) {
+          createCountdown(data.date, rawTime, (formatted) => {
+            countdownPerPlanet.value[id] = formatted
+          })
+        }
+      }
+    })
+  })
+}
+
+onMounted(() => {
+  getUser()
+})
+
+onBeforeUnmount(() => {
+  if (timerId.value) clearTimeout(timerId.value)
+  if (dialogTimerId.value) clearTimeout(dialogTimerId.value)
+})
 </script>
 
 <template>
@@ -191,11 +182,9 @@ async function handleBuyConfirm() {
   <div class="page planets-page">
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
-        <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" :loading="formLoaders.buyPlanet" />
+        <buyPlanetModal v-model="showBuyModal" :loading="formLoaders.buyPlanet" @confirm="handleBuyConfirm" />
         <CoinFlipDialog v-model="showResult" :text="modalText" :wallet-up="walletUp" :status="'lose'" />
-
         <h2 class="title title-1">Планеты</h2>
-
         <div class="planets-list">
           <div v-for="planet in planets" :key="planet.id" class="planet-card">
             <div class="card-title">{{ planet.name }}</div>
@@ -222,11 +211,13 @@ async function handleBuyConfirm() {
                 </div>
               </div>
             </div>
-
             <UiButton class="planet_button"
-              :disabled="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'"
+              :disabled="formLoaders.attackPlanet || (countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00')"
               @click="buyPlanet({ index: planet.id })">
-              <template v-if="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
+              <template v-if="formLoaders.attackPlanet">
+                <span class="spinner" />
+              </template>
+              <template v-else-if="countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
                 {{ countdownPerPlanet[planet.id] }}
               </template>
               <template v-else>
@@ -236,7 +227,6 @@ async function handleBuyConfirm() {
           </div>
         </div>
       </div>
-
       <div v-else key="attack" class="attack-wrapper">
         <AttackScene :current-level="planetLevel" :planet-src="currentPlanet.planetSrc" />
       </div>
@@ -244,7 +234,6 @@ async function handleBuyConfirm() {
 
     <CongratsDialog v-model="showCongratsDialog" text-template="Вы успешно атаковали планету #{{planet}}!"
       :text-params="{ planet: attackedPlanetId ?? '' }" />
-
     <CongratsDialog v-model="showCongratsDialog2" text-template="Вы купили #{{planet}}!"
       :text-params="{ planet: attackedPlanetId ?? '' }" />
   </div>
@@ -281,7 +270,6 @@ async function handleBuyConfirm() {
   margin-bottom: 5px;
   font-size: 16px;
   font-weight: 600;
-  line-height: 1.2;
   text-transform: uppercase;
   color: var(--font);
 }
@@ -293,17 +281,16 @@ async function handleBuyConfirm() {
   margin-bottom: 5px;
 }
 
-.card-content {
-  max-width: 100%;
-  width: 100%;
-}
-
 .card-image {
   width: 96px;
 
   img {
     width: 100%;
   }
+}
+
+.card-content {
+  width: 100%;
 }
 
 .card-line {
