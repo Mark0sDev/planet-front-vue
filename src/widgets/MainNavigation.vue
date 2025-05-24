@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import { NAVIGATION } from '@/app/router/navigation.ts'
 import MiniGameIcon from '@/shared/assets/icons/minigame.svg'
-
+import TonIcon from '@/shared/assets/icons/ton-vector.svg'
 import { AppRoutes } from '@/app/router/router.ts'
 
 const route = useRoute()
@@ -28,18 +28,23 @@ function isEarnButton(path: string) {
       }"
       class="nav-item"
     >
-      <component 
-        :is="item.icon" 
-        :class="[
-          'nav-icon', 
-          { 
-            'no-fill': item.icon === MiniGameIcon,
-            'earn-icon': isEarnButton(item.path)
-          }
-        ]" 
-      />
-
-      <span>{{ item.label }}</span>
+      <div v-if="isEarnButton(item.path)" class="earn-content">
+        <div class="earn-circle">
+          <component 
+            :is="item.icon" 
+            class="earn-icon" 
+          />
+        </div>
+        <span class="earn-text">{{ item.label }}</span>
+      </div>
+      
+      <template v-else>
+        <component 
+          :is="item.icon" 
+          :class="['nav-icon', { 'no-fill': item.icon === MiniGameIcon }]" 
+        />
+        <span>{{ item.label }}</span>
+      </template>
     </router-link>
   </nav>
 </template>
@@ -76,7 +81,6 @@ function isEarnButton(path: string) {
   width: 64px;
   position: relative;
   transition: all 0.2s;
-  border-radius: 12px;
 
   svg path {
     transition: all 0.2s;
@@ -84,7 +88,6 @@ function isEarnButton(path: string) {
 
   span {
     margin-top: 6px;
-    transition: all 0.2s;
   }
 
   &.active {
@@ -97,31 +100,51 @@ function isEarnButton(path: string) {
 
   // Стили для кнопки "Заработать"
   &.earn-button {
-    background: linear-gradient(135deg, #6ceaf1 0%, #4facfe 100%);
-    color: #ffffff;
-    font-weight: 600;
-    box-shadow: 0 2px 10px rgba(108, 234, 241, 0.3);
+    width: 80px;
     
-    span {
-      color: #ffffff;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    .earn-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      top: -10px;
     }
-
-    .earn-icon path {
-      fill: #ffffff !important;
+    
+    .earn-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6ceaf1 0%, #4facfe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(108, 234, 241, 0.3);
+      
+      .earn-icon {
+        width: 24px;
+        height: 24px;
+        
+        path {
+          fill: #ffffff !important;
+        }
+      }
     }
-
-    &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 15px rgba(108, 234, 241, 0.4);
+    
+    .earn-text {
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 4px;
+      font-size: 11px;
     }
 
     &.active {
-      background: linear-gradient(135deg, #5dd9e0 0%, #3d9bfd 100%);
-      color: #ffffff;
+      .earn-circle {
+        background: linear-gradient(135deg, #5dd9e0 0%, #3d9bfd 100%);
+        box-shadow: 0 2px 12px rgba(93, 217, 224, 0.4);
+      }
       
-      span {
-        color: #ffffff;
+      .earn-text {
+        color: var(--accent);
       }
     }
   }
