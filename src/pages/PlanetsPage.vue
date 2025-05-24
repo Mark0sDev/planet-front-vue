@@ -62,16 +62,18 @@ const formLoaders = reactive({
   attackPlanet: false
 })
 
-// API Calls
 const AttackPlanetApi = (planetId: number) => api.post('/users/attackPlanet', { initData, user_id, planetId })
 const buyPlanetApi = ({ planetId }: { planetId: number }) =>
   api.post('/users/buyPlanet', { initData, user_id, planetId })
 
-// Core logic
 const AttackPlanet = async (planetId: number) => {
   formLoaders.attackPlanet = true
   try {
-    await AttackPlanetApi(planetId)
+    const attcak = await AttackPlanetApi(planetId)
+
+    if (attcak.status == 1) {
+      alert('test');
+    }
   } catch {
     tg.showAlert('Planet attack error, please try again.')
   } finally {
@@ -89,6 +91,7 @@ const handlePlanetClick = ({ index, planet }: { index: number; planet: typeof pl
   attackedPlanetId.value = planet.planetDisplayId
 
   AttackPlanet(planet.planetDisplayId)
+
   setTimeout(() => (planetLevel.value = index), 1000)
 
   timerId.value = setTimeout(() => {
