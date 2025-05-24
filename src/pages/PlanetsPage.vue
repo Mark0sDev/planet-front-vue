@@ -213,7 +213,7 @@ async function handleBuyConfirm() {
                 </div>
                 <div class="card-line card-line--accent">
                   <span>Заработано</span>
-                  <span>{{ planet.earned }} <img src="/icons/ton.svg" alt="ton" /></span>
+                  <span>{{ planet.earned }} TON <img src="/icons/ton.svg" alt="ton" /></span>
                 </div>
               </div>
             </div>
