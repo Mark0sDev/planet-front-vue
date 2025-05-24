@@ -4,38 +4,37 @@ import {
   tg,
   initData,
   user_id
-} from '@/utils/telegramUser';
+} from '@/utils/telegramUser'
 
 import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
 
-import api from '@/utils/api';
+import api from '@/utils/api'
 import PageLoader from './PageLoader.vue'
 import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
 
 import UiButton from '@/shared/ui/UiButton.vue'
 import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/AttackScene.vue'
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
-import buyPlanetModal from '@/features/dialogs/buyPlanetModal.vue';
+import buyPlanetModal from '@/features/dialogs/buyPlanetModal.vue'
 import { createCountdown } from '@/utils/useCountdown'
 
 const SCENE_DURATION_MS = 4_500
 const DIALOG_DELAY_MS = 300
-const countdownText = ref('')
 
 const attackedPlanetId = ref<number | null>(null)
 
 const showList = ref(true)
 const sceneActive = ref(false)
-const showCongratsDialog = ref(false);
-const showCongratsDialog2 = ref(false);
+const showCongratsDialog = ref(false)
+const showCongratsDialog2 = ref(false)
 
 const formLoaders = reactive({
   buyPlanet: false,
-});
+})
 
 const showResult = ref(false)
 const modalText = ref<string>('')
-const walletUp = ref(false);
+const walletUp = ref(false)
 
 const timerId = ref<ReturnType<typeof setTimeout> | null>(null)
 const dialogTimerId = ref<ReturnType<typeof setTimeout> | null>(null)
@@ -47,6 +46,8 @@ const currentPlanet = ref<Pick<AttackSceneProps, 'currentLevel' | 'planetSrc'>>(
 const planetLevel = ref(-1)
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
+const countdownPerPlanet = ref<Record<number, string>>({})
+
 const planets = [
   {
     id: 1,
@@ -125,44 +126,41 @@ const buyPlanetApi = async ({ planetId }: { planetId: number }) => {
     initData,
     user_id,
     planetId
-  });
-};
-
+  })
+}
 
 async function handleBuyConfirm() {
-  formLoaders.buyPlanet = true;
+  formLoaders.buyPlanet = true
   try {
-    const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
+    const res = await buyPlanetApi({ planetId: selectedPlanetId.value! })
     if (res.data.status == 1) {
-      planet1.value = 1;
-      attackedPlanetId.value = selectedPlanetId.value;
+      planet1.value = 1
+      attackedPlanetId.value = selectedPlanetId.value
+
+      // запустить таймер для конкретной планеты
+      const id = selectedPlanetId.value!
       createCountdown(res.data.time, res.data.new_time, (formatted) => {
-        countdownText.value = formatted
+        countdownPerPlanet.value[id] = formatted
       })
 
-      showCongratsDialog2.value = true;
-
+      showCongratsDialog2.value = true
     } else {
       showResult.value = true
-      modalText.value = "Недостаточно TON на балансе"
+      modalText.value = 'Недостаточно TON на балансе'
       walletUp.value = true
     }
   } catch (error) {
-    tg.showAlert("Error:" + error);
+    tg.showAlert('Error:' + error)
   } finally {
-    formLoaders.buyPlanet = false;
-    showBuyModal.value = false;
+    formLoaders.buyPlanet = false
+    showBuyModal.value = false
   }
 }
-
 </script>
 
 <template>
   <PageLoader ref="loaderRef" />
   <div class="page planets-page">
-    <div>
-      {{ countdownText !== '00:00:00' ? countdownText : 'Атаковать снова' }}
-    </div>
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
         <buyPlanetModal @confirm="handleBuyConfirm" v-model="showBuyModal" :loading="formLoaders.buyPlanet" />
@@ -196,7 +194,16 @@ async function handleBuyConfirm() {
                 </div>
               </div>
             </div>
-            <UiButton @click="buyPlanet({ index: planet.id })">Атаковать</UiButton>
+
+            <UiButton :disabled="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'"
+              @click="buyPlanet({ index: planet.id })">
+              <template v-if="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
+                {{ countdownPerPlanet[planet.id] }}
+              </template>
+              <template v-else>
+                Атаковать
+              </template>
+            </UiButton>
           </div>
         </div>
       </div>
@@ -213,6 +220,7 @@ async function handleBuyConfirm() {
       :text-params="{ planet: attackedPlanetId ?? '' }" />
   </div>
 </template>
+
 
 <style scoped lang="scss">
 .spinner {
