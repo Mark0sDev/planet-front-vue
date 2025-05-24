@@ -71,7 +71,7 @@ const AttackPlanet = async (planetId: number) => {
   try {
     const attack = await AttackPlanetApi(planetId);
 
-    if (attack.status === 1) {
+    if (attack.data.status === 1) {
       alert('Planet attack successful');
     }
   } catch {
