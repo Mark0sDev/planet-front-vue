@@ -61,6 +61,9 @@ const planets = [
     earned: 0,
   }
 ]
+const AttackPlanet = async () => {
+  alert('test');
+}
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
@@ -76,7 +79,7 @@ const getUser = async () => {
         planet.earned = data[incomeKey]
       }
     })
-    
+
     const now = new Date(data.date.replace(/-/g, '/')).getTime()
 
     for (let i = 1; i <= planets.length; i++) {
@@ -99,6 +102,8 @@ const getUser = async () => {
 }
 
 const handlePlanetClick = ({ index, planet }: { index: number; planet: (typeof planets)[number] }) => {
+  AttackPlanet();
+
   if (sceneActive.value) return
 
   sceneActive.value = true
