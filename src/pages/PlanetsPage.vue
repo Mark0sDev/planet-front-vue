@@ -131,7 +131,7 @@ async function handleBuyConfirm() {
   try {
     const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
     if (res.data.status == 1) {
-
+      alert(res.data.time);
     } else {
       showResult.value = true
       modalText.value = "Недостаточно TON на балансе"
