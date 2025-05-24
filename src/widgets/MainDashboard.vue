@@ -7,7 +7,7 @@ import { useTonWallet } from '@/utils/useTonWallet'
 import { useMusic } from '@/utils/useMusic'
 
 import ComboPlanetCard from '@/features/ComboPlanetBanner.vue'
-import RouletteBanner from '@/features/RouletteBanner.vue'
+
 import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import LanguageSelect from '@/shared/ui/LanguageSelect.vue'
@@ -51,7 +51,7 @@ const handleButtonClick = () => {
     </div>
 
     <DailyDrawBanner />
-    <RouletteBanner />
+
     <ComboPlanetCard />
   </section>
 </template>
