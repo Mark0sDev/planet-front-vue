@@ -25,6 +25,7 @@ const attackedPlanetId = ref<number | null>(null)
 const showList = ref(true)
 const sceneActive = ref(false)
 const showCongratsDialog = ref(false);
+const showCongratsDialog2 = ref(false);
 
 const formLoaders = reactive({
   buyPlanet: false,
@@ -132,7 +133,8 @@ async function handleBuyConfirm() {
     const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
     if (res.data.status == 1) {
       planet1.value = 1;
-  
+      showCongratsDialog2.value = true;
+
     } else {
       showResult.value = true
       modalText.value = "Недостаточно TON на балансе"
@@ -195,6 +197,9 @@ async function handleBuyConfirm() {
     </transition>
 
     <CongratsDialog v-model="showCongratsDialog" text-template="Вы успешно атаковали планету #{{planet}}!"
+      :text-params="{ planet: attackedPlanetId ?? '' }" />
+
+    <CongratsDialog v-model="showCongratsDialog2" text-template="Вы купили #{{planet}}!"
       :text-params="{ planet: attackedPlanetId ?? '' }" />
   </div>
 </template>
