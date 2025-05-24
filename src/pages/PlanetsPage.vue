@@ -58,6 +58,16 @@ const planets = [
     cost: '1 TON',
     cycleTime: '4 ч',
     earned: '10 TON',
+  },
+  {
+    id: 2,
+    planetDisplayId: 1,
+    name: 'ввв',
+    imageSrc: PlanetImage1,
+    income: '4.8%',
+    cost: '1 TON',
+    cycleTime: '4 ч',
+    earned: '10 TON',
   }
 ]
 
