@@ -72,11 +72,11 @@ const getUser = async () => {
 
     planets.forEach((planet) => {
       const incomeKey = `planet_${planet.id}_income`
-      if (incomeKey in data.data) {
-        planet.earned = data.data.incomeKey
+      if (incomeKey in data) {
+        planet.earned = data[incomeKey]
       }
     })
-
+    
     const now = new Date(data.date.replace(/-/g, '/')).getTime()
 
     for (let i = 1; i <= planets.length; i++) {
