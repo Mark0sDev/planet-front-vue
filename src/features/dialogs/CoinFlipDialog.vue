@@ -41,7 +41,8 @@ function close() {
           <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
             value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
           <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
-          <p class="modal-text">Или перейдите на страницу <a href="/balance">Баланс</a> для пополнения в один клик</p>
+          <p class="modal-text">Или перейдите на страницу <a style="color: #6ceaf1;" href="/balance">Баланс</a> для
+            пополнения в один клик</p>
         </div>
       </div>
       <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
