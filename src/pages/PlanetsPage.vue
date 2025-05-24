@@ -133,6 +133,8 @@ async function handleBuyConfirm() {
     const res = await buyPlanetApi({ planetId: selectedPlanetId.value! });
     if (res.data.status == 1) {
       planet1.value = 1;
+      attackedPlanetId.value = selectedPlanetId.value;
+
       showCongratsDialog2.value = true;
 
     } else {
