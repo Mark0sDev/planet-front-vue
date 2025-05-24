@@ -194,7 +194,8 @@ async function handleBuyConfirm() {
               </div>
             </div>
 
-            <UiButton :disabled="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'"
+            <UiButton class="planet_button"
+              :disabled="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'"
               @click="buyPlanet({ index: planet.id })">
               <template v-if="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
                 {{ countdownPerPlanet[planet.id] }}
@@ -230,6 +231,10 @@ async function handleBuyConfirm() {
   animation: spin 0.6s linear infinite;
   display: inline-block;
   vertical-align: middle;
+}
+
+.planet_button {
+  margin-top: 7px;
 }
 
 .planet-card {
