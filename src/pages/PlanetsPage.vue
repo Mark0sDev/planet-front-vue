@@ -7,11 +7,9 @@ import {
 } from '@/utils/telegramUser'
 
 import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
-
 import api from '@/utils/api'
 import PageLoader from './PageLoader.vue'
 import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
-
 import UiButton from '@/shared/ui/UiButton.vue'
 import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/AttackScene.vue'
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
@@ -22,7 +20,6 @@ const SCENE_DURATION_MS = 4_500
 const DIALOG_DELAY_MS = 300
 
 const attackedPlanetId = ref<number | null>(null)
-
 const showList = ref(true)
 const sceneActive = ref(false)
 const showCongratsDialog = ref(false)
@@ -46,7 +43,10 @@ const currentPlanet = ref<Pick<AttackSceneProps, 'currentLevel' | 'planetSrc'>>(
 const planetLevel = ref(-1)
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
+
+// Хранилище таймеров и состояния купленности планет
 const countdownPerPlanet = ref<Record<number, string>>({})
+const planetStates = ref<Record<number, number>>({}) // planet_id -> 0 | 1
 
 const planets = [
   {
@@ -58,20 +58,8 @@ const planets = [
     cost: '1 TON',
     cycleTime: '4 ч',
     earned: '10 TON',
-  },
-  {
-    id: 2,
-    planetDisplayId: 1,
-    name: 'ввв',
-    imageSrc: PlanetImage1,
-    income: '4.8%',
-    cost: '1 TON',
-    cycleTime: '4 ч',
-    earned: '10 TON',
   }
 ]
-
-const planet1 = ref(0)
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
@@ -80,7 +68,11 @@ const getUser = async () => {
       user_id
     })
     const data = response.data
-    planet1.value = data.planet_1
+
+    // универсально: planet_1, planet_2 и т.д.
+    for (let i = 1; i <= planets.length; i++) {
+      planetStates.value[i] = data[`planet_${i}`] || 0
+    }
   })
 }
 
@@ -123,7 +115,7 @@ const buyPlanet = ({ index }: { index: number }) => {
   const planet = planets.find(p => p.id === index)
   if (!planet) return
 
-  if (planet1.value === 0) {
+  if (planetStates.value[index] === 0) {
     selectedPlanetId.value = index
     showBuyModal.value = true
   } else {
@@ -144,11 +136,10 @@ async function handleBuyConfirm() {
   try {
     const res = await buyPlanetApi({ planetId: selectedPlanetId.value! })
     if (res.data.status == 1) {
-      planet1.value = 1
-      attackedPlanetId.value = selectedPlanetId.value
-
-      // запустить таймер для конкретной планеты
       const id = selectedPlanetId.value!
+      planetStates.value[id] = 1
+      attackedPlanetId.value = id
+
       createCountdown(res.data.time, res.data.new_time, (formatted) => {
         countdownPerPlanet.value[id] = formatted
       })
@@ -205,14 +196,13 @@ async function handleBuyConfirm() {
               </div>
             </div>
 
-            <UiButton class="button_planet"
-              :disabled="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'"
+            <UiButton :disabled="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'"
               @click="buyPlanet({ index: planet.id })">
               <template v-if="!!countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
                 {{ countdownPerPlanet[planet.id] }}
               </template>
               <template v-else>
-                Атаковать
+                {{ planetStates[planet.id] === 0 ? 'Купить' : 'Атаковать' }}
               </template>
             </UiButton>
           </div>
@@ -231,7 +221,6 @@ async function handleBuyConfirm() {
       :text-params="{ planet: attackedPlanetId ?? '' }" />
   </div>
 </template>
-
 
 <style scoped lang="scss">
 .spinner {
@@ -275,10 +264,6 @@ async function handleBuyConfirm() {
 .card-content {
   max-width: 100%;
   width: 100%;
-}
-
-.button_planet {
-  margin-top: 7px;
 }
 
 .card-image {
@@ -325,9 +310,7 @@ async function handleBuyConfirm() {
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition:
-    opacity 0.4s ease,
-    transform 0.4s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .fade-slide-enter-from,
