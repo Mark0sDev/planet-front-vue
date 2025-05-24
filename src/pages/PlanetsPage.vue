@@ -47,6 +47,8 @@ const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 const countdownPerPlanet = ref<Record<number, string>>({})
 const planetStates = ref<Record<number, number>>({})
 
+
+
 const planets = [
   {
     id: 1,
@@ -56,7 +58,7 @@ const planets = [
     income: '4.8%',
     cost: '1 TON',
     cycleTime: '4 ч',
-    earned: '10 TON',
+    earned: 0,
   }
 ]
 
@@ -67,6 +69,13 @@ const getUser = async () => {
       user_id
     })
     const data = response.data
+
+    planets.forEach((planet) => {
+      const incomeKey = `planet_${planet.id}_income`
+      if (incomeKey in data.data) {
+        planet.earned = data.data[incomeKey]
+      }
+    })
 
     const now = new Date(data.date.replace(/-/g, '/')).getTime()
 
