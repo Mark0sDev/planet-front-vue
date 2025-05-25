@@ -164,13 +164,15 @@ const getUser = async () => {
       const id = planet.id
       planetStates.value[id] = data[`planet_${id}`] || 0
 
-      const rawTime = data[`time_planet_${id}`]
-      if (rawTime) {
-        const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
-        if (planetTime > now) {
-          createCountdown(data.date, rawTime, (formatted) => {
-            countdownPerPlanet.value[id] = formatted
-          })
+      if (data[`planet_${id}`] != 0) {
+        const rawTime = data[`time_planet_${id}`]
+        if (rawTime) {
+          const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
+          if (planetTime > now) {
+            createCountdown(data.date, rawTime, (formatted) => {
+              countdownPerPlanet.value[id] = formatted
+            })
+          }
         }
       }
     })
