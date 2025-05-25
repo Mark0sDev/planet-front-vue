@@ -73,7 +73,7 @@ const getUser = async () => {
       id: item.id,
       title:
         item.type === 1 ? 'Вывод' : item.type === 2 ? 'Пополнение' :
-          item.type === 3 ? 'Доход' : item.type === 4 ? 'Штраф' : 'Транзакция',
+          item.type === 3 ? 'Доход' : item.type === 4 ? 'Реферальный доход' : 'Транзакция',
       date: item.date,
       amount: item.sum,
       type: item.type === 1 ? 'expense' : 'income'
