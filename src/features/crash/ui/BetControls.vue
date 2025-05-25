@@ -14,16 +14,16 @@ const emit = defineEmits(['update:amount', 'bet'])
 
 const amount = ref(props.amount)
 
-watch(amount, (val) => emit('update:amount', parseFloat(val.toFixed(2))))
+watch(amount, (val) => emit('update:amount', parseFloat(val.toFixed(5))))
 
 function decrementAmount() {
   if (amount.value > 0.1) {
-    amount.value = parseFloat((amount.value - 0.1).toFixed(2))
+    amount.value = parseFloat((amount.value - 0.1).toFixed(5))
   }
 }
 
 function incrementAmount() {
-  amount.value = parseFloat((amount.value + 0.1).toFixed(2))
+  amount.value = parseFloat((amount.value + 0.1).toFixed(5))
 }
 
 function onInput(e: Event) {
@@ -31,12 +31,12 @@ function onInput(e: Event) {
   if (inputValue >= 0.1) {
     amount.value = inputValue
   } else {
-    ;(e.target as HTMLInputElement).value = amount.value.toFixed(2)
+    ;(e.target as HTMLInputElement).value = amount.value.toFixed(5)
   }
 }
 
 function addAmount(value: number) {
-  amount.value = parseFloat((amount.value + value).toFixed(2))
+  amount.value = parseFloat((amount.value + value).toFixed(5))
 }
 </script>
 
@@ -51,7 +51,7 @@ function addAmount(value: number) {
           size="sm"
           placeholder="0.1"
           @input="onInput"
-          :value="amount.toFixed(2)"
+          :value="amount.toFixed(5)"
           min="0.1"
           type="number"
           step="0.1"
