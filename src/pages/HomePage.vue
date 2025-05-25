@@ -58,7 +58,7 @@ const getUser = async () => {
 
     usersCount.value = data.usersCount;
     withdrawalCount.value = data.withdrawalCount;
-    withdrawalSum.value = data.withdrawalSum;
+    withdrawalSum.value = data.withdrawalSum || 0;
 
     transactions.value = data.lastsWithdrawal.map((item: LastWithdrawalItem) => ({
       id: item.id,
