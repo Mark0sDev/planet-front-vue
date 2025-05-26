@@ -19,7 +19,18 @@ import { createCountdown } from '@/utils/useCountdown'
 const SCENE_DURATION_MS = 4500
 const DIALOG_DELAY_MS = 300
 
-const planets = [
+type Planet = {
+  id: number
+  planetDisplayId: number
+  name: string
+  imageSrc: string
+  income: string
+  cost: string
+  cycleTime: string
+  earned: number
+}
+
+const planets = ref<Planet[]>([
   {
     id: 1,
     planetDisplayId: 1,
@@ -30,7 +41,7 @@ const planets = [
     cycleTime: '4 ч',
     earned: 0,
   }
-]
+])
 
 const showList = ref(true)
 const sceneActive = ref(false)
@@ -61,24 +72,26 @@ const formLoaders = reactive({
   attackPlanet: false
 })
 
-const AttackPlanetApi = (planetId: number) => api.post('/users/attackPlanet', { initData, user_id, planetId })
+const AttackPlanetApi = (planetId: number) =>
+  api.post('/users/attackPlanet', { initData, user_id, planetId })
+
 const buyPlanetApi = ({ planetId }: { planetId: number }) =>
   api.post('/users/buyPlanet', { initData, user_id, planetId })
 
 const AttackPlanet = async (planetId: number) => {
   formLoaders.attackPlanet = true
   try {
-    const attack = await AttackPlanetApi(planetId);
+    const attack = await AttackPlanetApi(planetId)
 
     if (attack.data.status === 1) {
-      const rawTime = attack.data.time;
-      const newTime = attack.data.new_date;
-      const planetId = attackedPlanetId.value;
+      const rawTime = attack.data.time
+      const newTime = attack.data.new_date
+      const planetId = attackedPlanetId.value
 
       if (planetId !== null) {
         createCountdown(rawTime, newTime, (formatted) => {
-          countdownPerPlanet.value[planetId] = formatted;
-        });
+          countdownPerPlanet.value[planetId] = formatted
+        })
       }
     }
   } catch {
@@ -88,7 +101,7 @@ const AttackPlanet = async (planetId: number) => {
   }
 }
 
-const handlePlanetClick = ({ index, planet }: { index: number; planet: typeof planets[number] }) => {
+const handlePlanetClick = ({ index, planet }: { index: number; planet: Planet }) => {
   if (sceneActive.value) return
 
   sceneActive.value = true
@@ -112,7 +125,7 @@ const handlePlanetClick = ({ index, planet }: { index: number; planet: typeof pl
 }
 
 const buyPlanet = ({ index }: { index: number }) => {
-  const planet = planets.find(p => p.id === index)
+  const planet = planets.value.find(p => p.id === index)
   if (!planet) return
 
   if (planetStates.value[index] === 0) {
@@ -157,14 +170,14 @@ const getUser = async () => {
 
     const now = new Date(data.date.replace(/-/g, '/')).getTime()
 
-    planets.forEach((planet) => {
+    planets.value.forEach((planet) => {
       const incomeKey = `planet_${planet.id}_income`
       if (incomeKey in data) planet.earned = data[incomeKey]
 
       const id = planet.id
       planetStates.value[id] = data[`planet_${id}`] || 0
 
-      if (data[`planet_${id}`] != 0) {
+      if (data[`planet_${id}`] !== 0) {
         const rawTime = data[`time_planet_${id}`]
         if (rawTime) {
           const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
@@ -176,7 +189,6 @@ const getUser = async () => {
         }
       }
     })
-
   })
 }
 
