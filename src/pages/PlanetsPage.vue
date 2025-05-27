@@ -25,7 +25,8 @@ type Planet = {
   name: string
   imageSrc: string
   income: string
-  cost: string
+  cost: string,
+  income_final: string
   cycleTime: string
   earned: number
 }
@@ -35,6 +36,7 @@ const planets = ref<Planet[]>([
     id: 1,
     planetDisplayId: 1,
     name: 'Аурелия',
+    income_final: "1.2 TON",
     imageSrc: PlanetImage1,
     income: '4.8%',
     cost: '1 TON',
@@ -212,43 +214,94 @@ onBeforeUnmount(() => {
         <h2 class="title title-1">Планеты</h2>
         <div class="planets-list">
           <div v-for="planet in planets" :key="planet.id" class="planet-card">
-            <div class="card-title">{{ planet.name }}</div>
-            <div class="card-body">
+            <div class="card-header">
               <div class="card-image">
                 <img :src="planet.imageSrc" alt="planet" />
               </div>
-              <div class="card-content">
-                <div class="card-line">
+              <div class="card-title">{{ planet.name }}</div>
+            </div>
+
+            <div class="card-grid-row">
+              <div class="stat-item">
+                <div class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24">
+                    <line x1="19" x2="5" y1="5" y2="19" stroke="currentColor" stroke-width="2" />
+                    <circle cx="6.5" cy="6.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+                    <circle cx="17.5" cy="17.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+                  </svg>
                   <span>Доходность</span>
-                  <span>{{ planet.income }}</span>
                 </div>
-                <div class="card-line">
+                <div class="stat-value">{{ planet.income }}%</div>
+              </div>
+
+              <div class="stat-item">
+                <div class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"
+                      fill="currentColor" />
+                  </svg>
                   <span>Стоимость</span>
-                  <span>{{ planet.cost }} <img src="/icons/ton.svg" alt="ton" /></span>
                 </div>
-                <div class="card-line">
+                <div class="stat-value">{{ planet.cost }} <img src="/icons/ton.svg" alt="ton" class="ton-icon" /></div>
+              </div>
+
+              <div class="stat-item">
+                <div class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z"
+                      fill="currentColor" />
+                  </svg>
+                  <span>Прибыль</span>
+                </div>
+                <div class="stat-value">{{ planet.income_final }} <img src="/icons/ton.svg" alt="ton"
+                    class="ton-icon" /></div>
+              </div>
+
+              <div class="stat-item">
+                <div class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7V12.25L17 14.92L16.25 16.15L11 13V7H12.5Z"
+                      fill="currentColor" />
+                  </svg>
                   <span>Время цикла</span>
-                  <span>{{ planet.cycleTime }}</span>
                 </div>
-                <div class="card-line card-line--accent">
+                <div class="stat-value">{{ planet.cycleTime }}</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">
+                  <svg class="stat-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"
+                      fill="currentColor" />
+                  </svg>
                   <span>Заработано</span>
-                  <span>{{ planet.earned }} TON <img src="/icons/ton.svg" alt="ton" /></span>
+                </div>
+                <div class="stat-value">{{ planet.earned }} <img src="/icons/ton.svg" alt="ton" class="ton-icon" />
                 </div>
               </div>
+              <UiButton class="planet_button"
+                :disabled="formLoaders.attackPlanet || (countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00')"
+                @click="buyPlanet({ index: planet.id })">
+                <template v-if="formLoaders.attackPlanet">
+                  <span class="spinner" />
+                </template>
+                <template v-else-if="countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
+                  {{ countdownPerPlanet[planet.id] }}
+                </template>
+                <template v-else>
+                  {{ planetStates[planet.id] === 0 ? 'Купить' : 'Атаковать' }}
+                </template>
+              </UiButton>
             </div>
-            <UiButton class="planet_button"
-              :disabled="formLoaders.attackPlanet || (countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00')"
-              @click="buyPlanet({ index: planet.id })">
-              <template v-if="formLoaders.attackPlanet">
-                <span class="spinner" />
-              </template>
-              <template v-else-if="countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
-                {{ countdownPerPlanet[planet.id] }}
-              </template>
-              <template v-else>
-                {{ planetStates[planet.id] === 0 ? 'Купить' : 'Атаковать' }}
-              </template>
-            </UiButton>
+
+
+
+
+
+
           </div>
         </div>
       </div>
@@ -263,8 +316,135 @@ onBeforeUnmount(() => {
       :text-params="{ planet: attackedPlanetId ?? '' }" />
   </div>
 </template>
-
 <style scoped lang="scss">
+.page {
+  padding: 20px;
+}
+
+.title {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 10px rgba(108, 234, 241, 0.5);
+}
+
+.planets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.planet-card {
+  padding: 10px;
+  border: 1px solid #32315f;
+  border-radius: 10px;
+  background-image: url('@/shared/assets/bg/planet-card-bg.png');
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-image {
+  width: 64px;
+
+  img {
+    width: 100%;
+    border-radius: 6px;
+  }
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--font);
+}
+
+.card-grid-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.stat-item {
+  flex: 1 1 25%;
+  min-width: 160px;
+  background: rgba(44, 50, 85, 0.65); // более глубокий, единый цвет
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.stat-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.stat-icon {
+  width: 16px;
+  height: 16px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.stat-value {
+  color: #ffffff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+// Акцент для блока доходности (первый в списке)
+.stat-item:nth-child(1) .stat-value {
+  color: #6ceaf1;
+}
+
+.ton-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.card-line--accent {
+  background-color: rgba(108, 234, 241, 0.54);
+  padding: 4px 6px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    color: var(--font);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.planet_button {
+  margin-top: 7px;
+}
+
 .spinner {
   width: 18px;
   height: 18px;
@@ -276,91 +456,10 @@ onBeforeUnmount(() => {
   vertical-align: middle;
 }
 
-.planet_button {
-  margin-top: 7px;
-}
-
-.planet-card {
-  padding: 10px;
-  border: 1px solid #32315f;
-  border-radius: 10px;
-  background-position: top right;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('@/shared/assets/bg/planet-card-bg.png');
-}
-
-.card-title {
-  text-align: center;
-  margin-bottom: 5px;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--font);
-}
-
-.card-body {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 5px;
-}
-
-.card-image {
-  width: 96px;
-
-  img {
-    width: 100%;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-}
-
-.card-content {
-  width: 100%;
-}
-
-.card-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px 5px;
-  border-radius: 4px;
-
-  &--accent {
-    background-color: rgba(108, 234, 241, 0.54);
-
-    span img {
-      width: 14px;
-      height: 14px;
-    }
-  }
-
-  span {
-    color: var(--font);
-    line-height: 20px;
-
-    &:last-child {
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 1px;
-
-      img {
-        width: 18px;
-        height: 18px;
-      }
-    }
-  }
-}
-
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.fade-slide-enter-from,
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
 }
 
 .attack-wrapper {
@@ -371,14 +470,13 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 
-.title {
-  margin-bottom: 10px;
-  text-align: center;
-}
+@media (max-width: 768px) {
+  .card-grid-row {
+    flex-direction: column;
+  }
 
-.planets-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  .stat-item {
+    flex: 1 1 100%;
+  }
 }
 </style>
