@@ -38,7 +38,7 @@ const planets = ref<Planet[]>([
     name: 'Аурелия',
     income_final: "1.2 TON",
     imageSrc: PlanetImage1,
-    income: '4.8%',
+    income: '6%',
     cost: '1 TON',
     cycleTime: '4 ч',
     earned: 0,
