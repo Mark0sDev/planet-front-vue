@@ -206,7 +206,7 @@ onBeforeUnmount(() => {
 
 <template>
   <PageLoader ref="loaderRef" />
-  <div class="page planets-page">
+  <div class="friends-page page">
     <transition name="fade-slide" mode="out-in">
       <div v-if="showList" key="planets" class="content">
         <buyPlanetModal v-model="showBuyModal" :loading="formLoaders.buyPlanet" @confirm="handleBuyConfirm" />
@@ -215,61 +215,65 @@ onBeforeUnmount(() => {
         <div class="planets-list">
           <div v-for="planet in planets" :key="planet.id" class="planet-card">
             <div class="card-header">
-              <div class="card-image">
-                <img :src="planet.imageSrc" alt="planet" />
+              <div>
+                <div class="card-image">
+                  <img :src="planet.imageSrc" alt="planet" />
+                </div>
+                <div class="card-title">{{ planet.name }}</div>
               </div>
-              <div class="card-title">{{ planet.name }}</div>
+
+              <div class="card-grid-row">
+                <div class="stat-item">
+                  <div class="stat-label">
+                    <svg class="stat-icon" viewBox="0 0 24 24">
+                      <line x1="19" x2="5" y1="5" y2="19" stroke="currentColor" stroke-width="2" />
+                      <circle cx="6.5" cy="6.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+                      <circle cx="17.5" cy="17.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+                    </svg>
+                    <span>Доходность</span>
+                  </div>
+                  <div class="stat-value">{{ planet.income }}</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">
+                    <svg class="stat-icon" viewBox="0 0 24 24">
+                      <path
+                        d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"
+                        fill="currentColor" />
+                    </svg>
+                    <span>Стоимость</span>
+                  </div>
+                  <div class="stat-value">{{ planet.cost }}
+
+                  </div>
+                </div>
+
+                <div class="stat-item">
+                  <div class="stat-label">
+                    <svg class="stat-icon" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z"
+                        fill="currentColor" />
+                    </svg>
+                    <span>Прибыль</span>
+                  </div>
+                  <div class="stat-value">{{ planet.income_final }}</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">
+                    <svg class="stat-icon" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7V12.25L17 14.92L16.25 16.15L11 13V7H12.5Z"
+                        fill="currentColor" />
+                    </svg>
+                    <span>Время цикла</span>
+                  </div>
+                  <div class="stat-value">{{ planet.cycleTime }}</div>
+                </div>
+              </div>
             </div>
 
             <div class="card-grid-row">
-              <div class="stat-item">
-                <div class="stat-label">
-                  <svg class="stat-icon" viewBox="0 0 24 24">
-                    <line x1="19" x2="5" y1="5" y2="19" stroke="currentColor" stroke-width="2" />
-                    <circle cx="6.5" cy="6.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
-                    <circle cx="17.5" cy="17.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
-                  </svg>
-                  <span>Доходность</span>
-                </div>
-                <div class="stat-value">{{ planet.income }}%</div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-label">
-                  <svg class="stat-icon" viewBox="0 0 24 24">
-                    <path
-                      d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"
-                      fill="currentColor" />
-                  </svg>
-                  <span>Стоимость</span>
-                </div>
-                <div class="stat-value">{{ planet.cost }} <img src="/icons/ton.svg" alt="ton" class="ton-icon" /></div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-label">
-                  <svg class="stat-icon" viewBox="0 0 24 24">
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z"
-                      fill="currentColor" />
-                  </svg>
-                  <span>Прибыль</span>
-                </div>
-                <div class="stat-value">{{ planet.income_final }} <img src="/icons/ton.svg" alt="ton"
-                    class="ton-icon" /></div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-label">
-                  <svg class="stat-icon" viewBox="0 0 24 24">
-                    <path
-                      d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7V12.25L17 14.92L16.25 16.15L11 13V7H12.5Z"
-                      fill="currentColor" />
-                  </svg>
-                  <span>Время цикла</span>
-                </div>
-                <div class="stat-value">{{ planet.cycleTime }}</div>
-              </div>
               <div class="stat-item">
                 <div class="stat-label">
                   <svg class="stat-icon" viewBox="0 0 24 24">
@@ -317,17 +321,9 @@ onBeforeUnmount(() => {
   </div>
 </template>
 <style scoped lang="scss">
-.page {
-  padding: 20px;
-}
-
 .title {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 700;
   text-align: center;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 10px rgba(108, 234, 241, 0.5);
+  margin-bottom: 10px;
 }
 
 .planets-list {
@@ -339,6 +335,7 @@ onBeforeUnmount(() => {
 .planet-card {
   padding: 10px;
   border: 1px solid #32315f;
+  padding-bottom: 2px;
   border-radius: 10px;
   background-image: url('@/shared/assets/bg/planet-card-bg.png');
   background-position: top right;
@@ -352,11 +349,12 @@ onBeforeUnmount(() => {
 .card-header {
   display: flex;
   align-items: center;
+
   gap: 10px;
 }
 
 .card-image {
-  width: 64px;
+  width: 90px;
 
   img {
     width: 100%;
@@ -375,6 +373,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -394,7 +393,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: rgba(255, 255, 255, 0.85);
+  color: white;
   font-size: 14px;
   line-height: 1.2;
 }
@@ -402,7 +401,7 @@ onBeforeUnmount(() => {
 .stat-icon {
   width: 16px;
   height: 16px;
-  color: white;
+  color: #6ceaf1;
   flex-shrink: 0;
 }
 
@@ -414,10 +413,6 @@ onBeforeUnmount(() => {
   gap: 4px;
 }
 
-// Акцент для блока доходности (первый в списке)
-.stat-item:nth-child(1) .stat-value {
-  color: #6ceaf1;
-}
 
 .ton-icon {
   width: 16px;
@@ -441,9 +436,6 @@ onBeforeUnmount(() => {
   }
 }
 
-.planet_button {
-  margin-top: 7px;
-}
 
 .spinner {
   width: 18px;
