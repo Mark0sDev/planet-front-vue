@@ -17,11 +17,13 @@ import LightningIcon from '@/shared/assets/icons/lightning.svg'
 import PlanetIcon from '@/shared/assets/icons/planet.svg'
 import TonIcon from '@/shared/assets/icons/ton.svg'
 
-import UiButton from '@/shared/ui/UiButton.vue'
 import PageLoader from './PageLoader.vue';
-
+/*
 import { useRouter } from 'vue-router'
-import { AppRoutes } from '@/app/router/router.ts'
+import UiButton from '@/shared/ui/UiButton.vue'
+import { AppRoutes } from '@/app/router/router.ts' */
+
+
 import { onMounted, ref } from 'vue';
 
 import TransactionCard, { type Transaction } from '@/entities/TransactionCard.vue'
@@ -29,11 +31,13 @@ import { type LastWithdrawalItem } from '@/types/api.types'
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
 
+/*
 const router = useRouter()
+
 
 const leaderRouter = () => {
   router.push(AppRoutes.LEADERS)
-}
+}*/
 
 const usersCount = ref('0');
 const withdrawalCount = ref('0');
@@ -102,6 +106,7 @@ onMounted(() => {
           </StatisticsCard>
         </div>
       </div>
+      <!-- 
       <div data-v-971a35de="" class="top-users">
 
         <div data-v-0ca09cec="" data-v-971a35de="" class="top-user-card first-place">
@@ -123,6 +128,7 @@ onMounted(() => {
 
         </div>
       </div>
+      -->
       <div class="last-withdrawals">
         <h2 class="title title-1">Последние выводы</h2>
         <div class="last-withdrawals-list">
@@ -174,6 +180,7 @@ onMounted(() => {
 
 .statistics {
   margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 .title {
