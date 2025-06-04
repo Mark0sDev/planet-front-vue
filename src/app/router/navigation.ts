@@ -18,9 +18,9 @@ export const NAVIGATION: NavItem[] = [
   { path: AppRoutes.HOME, label: 'Главная', icon: HomeIcon },
 
   //{ path: AppRoutes.MINIGAME, label: 'Игры', icon: MiniGameIcon },
- 
+
   { path: AppRoutes.FRIENDS, label: 'Друзья', icon: FriendsIcon },
-   { path: AppRoutes.PLANETS, label: 'Заработать', icon: TonIcon },
+  { path: AppRoutes.PLANETS, label: 'Заработать', icon: TonIcon },
   { path: AppRoutes.TASKS, label: 'Задания', icon: TasksIcon },
   { path: AppRoutes.BALANCE, label: 'Баланс', icon: BalanceIcon },
 ]

@@ -10,6 +10,7 @@ import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
 import api from '@/utils/api'
 import PageLoader from './PageLoader.vue'
 import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
+import PlanetImage2 from '@/shared/assets/planets/planet-2/level-0.png'
 import UiButton from '@/shared/ui/UiButton.vue'
 import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/AttackScene.vue'
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
@@ -42,7 +43,18 @@ const planets = ref<Planet[]>([
     cost: '1 TON',
     cycleTime: '4 ч',
     earned: 0,
-  }
+  },
+  {
+    id: 1,
+    planetDisplayId: 1,
+    name: 'Селестия',
+    income_final: "130 TON",
+    imageSrc: PlanetImage2,
+    income: '6%',
+    cost: '100 TON',
+    cycleTime: '3 ч',
+    earned: 0,
+  },
 ])
 
 const showList = ref(true)
