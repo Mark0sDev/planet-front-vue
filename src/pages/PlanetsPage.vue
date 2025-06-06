@@ -86,11 +86,13 @@ const formLoaders = reactive({
   attackPlanet: false
 })
 
+const buyPlanetApi = ({ planetId }: { planetId: number }) =>
+  api.post('/users/buyPlanet', { initData, user_id, planetId })
+
+
 const AttackPlanetApi = (planetId: number) =>
   api.post('/users/attackPlanet', { initData, user_id, planetId })
 
-const buyPlanetApi = ({ planetId }: { planetId: number }) =>
-  api.post('/users/buyPlanet', { initData, user_id, planetId })
 
 const AttackPlanet = async (planetId: number) => {
   formLoaders.attackPlanet = true
@@ -100,7 +102,6 @@ const AttackPlanet = async (planetId: number) => {
     if (attack.data.status === 1) {
       const rawTime = attack.data.time
       const newTime = attack.data.new_date
-      const planetId = attackedPlanetId.value
 
       if (planetId !== null) {
         createCountdown(rawTime, newTime, (formatted) => {
@@ -114,6 +115,7 @@ const AttackPlanet = async (planetId: number) => {
     formLoaders.attackPlanet = false
   }
 }
+
 
 const handlePlanetClick = ({ index, planet }: { index: number; planet: Planet }) => {
   if (sceneActive.value) return
