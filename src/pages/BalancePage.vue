@@ -145,9 +145,9 @@ async function withdrawalForm() {
         ...user.value,
         withdrawal_ton: parseFloat(String(user.value.withdrawal_ton || 0)) + sum,
         balance_ton: Math.max(user.value.balance_ton - sum, 0),
-        balance_payments_ton: Math.max(user.value.balance_payments_ton - sum, 0)
+        balance_payments_ton: user.value.balance_payments_ton - sum
       };
-
+      
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
       showWithdrawalTon.value = true
