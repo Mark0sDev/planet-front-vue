@@ -46,7 +46,7 @@ const planets = ref<Planet[]>([
   },
   {
     id: 2,
-    planetDisplayId: 1,
+    planetDisplayId: 2,
     name: 'Селестия',
     income_final: "130 TON",
     imageSrc: PlanetImage2,
