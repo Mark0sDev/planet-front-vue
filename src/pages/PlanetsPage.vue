@@ -50,7 +50,7 @@ const planets = ref<Planet[]>([
     name: 'Селестия',
     income_final: "130 TON",
     imageSrc: PlanetImage2,
-    income: '1.6%',
+    income: '6%',
     cost: '100 TON',
     cycleTime: '6 ч',
     earned: 0,

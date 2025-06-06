@@ -141,11 +141,12 @@ async function withdrawalForm() {
 
       const sum = parseFloat(sum_withdrawal.value);
 
-      const current_withdrawal_ton = parseFloat(String(user.value.withdrawal_ton));
-      user.value.withdrawal_ton = current_withdrawal_ton + sum;
-
-      user.value.balance_ton -= sum;
-      user.value.balance_payments_ton -= sum;
+      user.value = {
+        ...user.value,
+        withdrawal_ton: parseFloat(String(user.value.withdrawal_ton || 0)) + sum,
+        balance_ton: Math.max(user.value.balance_ton - sum, 0),
+        balance_payments_ton: Math.max(user.value.balance_payments_ton - sum, 0)
+      };
 
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
