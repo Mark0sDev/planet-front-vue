@@ -42,6 +42,7 @@ const leaderRouter = () => {
 const usersCount = ref('0');
 const withdrawalCount = ref('0');
 const withdrawalSum = ref('0');
+const buyPlanetCount = ref('0');
 const transactions = ref<Transaction[]>([])
 
 const getUser = async () => {
@@ -63,6 +64,7 @@ const getUser = async () => {
     usersCount.value = data.usersCount;
     withdrawalCount.value = data.withdrawalCount;
     withdrawalSum.value = data.withdrawalSum || 0;
+    buyPlanetCount.value = data.buyPlanetCount || 0;
 
     transactions.value = data.lastsWithdrawal.map((item: LastWithdrawalItem) => ({
       id: item.id,
@@ -98,7 +100,7 @@ onMounted(() => {
           <StatisticsCard :value="withdrawalCount" color="#17d686" text="Всего выводов">
             <LightningIcon />
           </StatisticsCard>
-          <StatisticsCard value="326" color="#FBA704" text="Всего куплено планет">
+          <StatisticsCard :value="buyPlanetCount" color="#FBA704" text="Всего куплено планет">
             <PlanetIcon />
           </StatisticsCard>
           <StatisticsCard :value="withdrawalSum" color="#27aff9" text="Всего выведено TON">
