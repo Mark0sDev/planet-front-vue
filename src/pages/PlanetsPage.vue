@@ -48,7 +48,7 @@ const planets = ref<Planet[]>([
     id: 2,
     planetDisplayId: 2,
     name: 'Селестия',
-    income_final: "130 TON",
+    income_final: "126 TON",
     imageSrc: PlanetImage2,
     income: '6%',
     cost: '100 TON',
@@ -314,12 +314,6 @@ onBeforeUnmount(() => {
                 </template>
               </UiButton>
             </div>
-
-
-
-
-
-
           </div>
         </div>
       </div>
