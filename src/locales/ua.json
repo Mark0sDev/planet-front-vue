@@ -1,15 +1,28 @@
 {
+    "combo": {
+        "text": "Атакуй планети та заробляй TON",
+        "startFrom": "Почни всього з",
+        "button": "ПОЧАТИ ЗАРАЗ"
+    },
+    "statistics": {
+        "title": "Статистика",
+        "users": "Користувачі, які вже заробляють",
+        "totalWithdrawals": "Усього виведень",
+        "totalPlanetsBought": "Усього куплено планет",
+        "totalTonWithdrawn": "Усього виведено TON",
+        "latestWithdrawals": "Останні виведення"
+    },
     "tasks_page": "Завдання завантажуються, зайдіть трохи пізніше...",
     "tabs": {
         "level1": "1 рівень",
         "level2": "2 рівень",
         "level3": "3 рівень"
     },
-    "friends_banner": "<h2 class='info-title'>Отримуйте <span>10%</span> за <span>кожну<br/>покупку</span> планети вашим рефералом</h2><p class='info-description'>Ви отримуєте реферальну винагороду кожного разу, коли ваш реферал купує планету</p>",
+    "friends_banner": "<h2 class='info-title'>Отримуй <span>10%</span> за <span>кожну<br/>покупку</span> планети вашим рефералом</h2><p class='info-description'>Ви отримуєте реферальну нагороду кожного разу, коли Ваш реферал купує планету</p>",
     "friends_text": "Друзі",
-    "withdrawal_success": "Запит на вивід успішно створено<br><br>TON надійдуть на гаманець протягом 30 секунд",
+    "withdrawal_success": "Заявка на виведення успішно створена<br><br>TON надійдуть на гаманець протягом 30 секунд",
     "withdraw_title": "Виведення балансу",
     "transactions_history_title": "Історія транзакцій",
     "invite_btn_text": "Запросити друзів",
-    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> НАПРЯМУ <span style='color: #27aff9;'>У TON</span><br>ВІД ВАШИХ ДРУЗІВ"
+    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> НАПРЯМУ <span style='color: #27aff9;'>В TON</span><br>ВІД ВАШИХ ДРУЗІВ"
 }

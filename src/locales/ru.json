@@ -1,4 +1,17 @@
 {
+    "combo": {
+        "text": "Атакуй планеты и зарабатывай TON",
+        "startFrom": "Начни всего с",
+        "button": "НАЧАТЬ СЕЙЧАС"
+    },
+    "statistics": {
+        "title": "Статистика",
+        "users": "Пользователи, которые уже зарабатывают",
+        "totalWithdrawals": "Всего выводов",
+        "totalPlanetsBought": "Всего куплено планет",
+        "totalTonWithdrawn": "Всего выведено TON",
+        "latestWithdrawals": "Последние выводы"
+    },
     "tasks_page": "Задания загружаются, приходите немного позже...",
     "tabs": {
         "level1": "1 уровень",

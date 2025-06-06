@@ -1,15 +1,28 @@
 {
-    "tasks_page": "Tasks are loading, please come back a bit later...",
+    "combo": {
+        "text": "Attack planets and earn TON",
+        "startFrom": "Start from just",
+        "button": "START NOW"
+    },
+    "statistics": {
+        "title": "Statistics",
+        "users": "Users already earning",
+        "totalWithdrawals": "Total withdrawals",
+        "totalPlanetsBought": "Total planets bought",
+        "totalTonWithdrawn": "Total TON withdrawn",
+        "latestWithdrawals": "Latest withdrawals"
+    },
+    "tasks_page": "Tasks are loading, please check back later...",
     "tabs": {
         "level1": "Level 1",
         "level2": "Level 2",
         "level3": "Level 3"
     },
-    "friends_banner": "<h2 class='info-title'>Get <span>10%</span> for <span>every<br/>planet</span> your referral buys</h2><p class='info-description'>You earn a referral reward every time your friend buys a planet</p>",
+    "friends_banner": "<h2 class='info-title'>Get <span>10%</span> for <span>each<br/>planet purchase</span> by your referral</h2><p class='info-description'>You receive a referral reward every time your referral buys a planet</p>",
     "friends_text": "Friends",
-    "withdrawal_success": "Withdrawal request successfully created<br><br>TON will be credited to your wallet within 30 seconds",
-    "withdraw_title": "Withdraw Balance",
+    "withdrawal_success": "Withdrawal request created successfully<br><br>TON will arrive in your wallet within 30 seconds",
+    "withdraw_title": "Balance Withdrawal",
     "transactions_history_title": "Transaction History",
-    "invite_btn_text": "Invite friends",
+    "invite_btn_text": "Invite Friends",
     "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> DIRECTLY <span style='color: #27aff9;'>IN TON</span><br>FROM YOUR FRIENDS"
 }

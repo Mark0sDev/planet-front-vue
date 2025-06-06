@@ -8,6 +8,9 @@ import {
   language_code
 } from '@/utils/telegramUser'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 import api from '@/utils/api';
 import MainDashboard from '@/widgets/MainDashboard.vue'
 
@@ -92,18 +95,18 @@ onMounted(() => {
     <div class="page-wrapper">
       <MainDashboard />
       <div class="statistics">
-        <div class="title title-1">Статистикаа</div>
+        <div class="title title-1">{{ t('statistics.title') }}</div>
         <div class="statistics-inner">
-          <StatisticsCard :value="usersCount" color="#763FF1" text="Пользователи, которые уже зарабатывают">
+          <StatisticsCard :value="usersCount" color="#763FF1" :text="t('statistics.users')">
             <UsersIcon />
           </StatisticsCard>
-          <StatisticsCard :value="withdrawalCount" color="#17d686" text="Всего выводов">
+          <StatisticsCard :value="withdrawalCount" color="#17d686" :text="t('statistics.totalWithdrawals')">
             <LightningIcon />
           </StatisticsCard>
-          <StatisticsCard :value="buyPlanetCount" color="#FBA704" text="Всего куплено планет">
+          <StatisticsCard :value="buyPlanetCount" color="#FBA704" :text="t('statistics.totalPlanetsBought')">
             <PlanetIcon />
           </StatisticsCard>
-          <StatisticsCard :value="withdrawalSum" color="#27aff9" text="Всего выведено TON">
+          <StatisticsCard :value="withdrawalSum" color="#27aff9" :text="t('statistics.totalTonWithdrawn')">
             <TonIcon stroke-width="0" />
           </StatisticsCard>
         </div>
@@ -132,7 +135,7 @@ onMounted(() => {
       </div>
       -->
       <div class="last-withdrawals">
-        <h2 class="title title-1">Последние выводы</h2>
+        <h2 class="title title-1">{{ t('statistics.latestWithdrawals') }}</h2>
         <div class="last-withdrawals-list">
           <TransactionCard v-for="transaction in transactions" :key="transaction.id" :transaction="transaction" />
         </div>

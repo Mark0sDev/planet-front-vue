@@ -2,11 +2,14 @@
 import UiButton from '@/shared/ui/UiButton.vue'
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
 const handleButtonClick = () => {
   router.push(AppRoutes.PLANETS)
 }
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -27,7 +30,7 @@ const handleButtonClick = () => {
       </defs>
     </svg>
 
-    <div class="combo-text">Атакуй планеты и зарабатывай TON</div>
+    <div class="combo-text">{{ t('combo.text') }}</div>
     <div class="card-div">
       <div class="statistics-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none" stroke-width="0">
@@ -37,12 +40,12 @@ const handleButtonClick = () => {
         </svg>
       </div>
       <div class="combo-accent">
-        Начни всего с <span>1 TON</span>
+        {{ t('combo.startFrom') }} <span>1 TON</span>
       </div>
     </div>
 
     <UiButton class="combo-planet-button" @click="handleButtonClick" color="blue">
-      НАЧАТЬ СЕЙЧАС
+      {{ t('combo.button') }}
     </UiButton>
   </div>
 </template>
@@ -95,7 +98,7 @@ const handleButtonClick = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
 
 .combo-accent {
