@@ -8,7 +8,7 @@ import { useMusic } from '@/utils/useMusic'
 
 import ComboPlanetCard from '@/features/ComboPlanetBanner.vue'
 
-import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
+//import DailyDrawBanner from '@/features/DailyDrawBanner.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import LanguageSelect from '@/shared/ui/LanguageSelect.vue'
 
@@ -50,7 +50,7 @@ const handleButtonClick = () => {
 
     </div>
 
-    <DailyDrawBanner />
+    <!--   <DailyDrawBanner />-->
 
     <ComboPlanetCard />
   </section>
