@@ -45,14 +45,14 @@ const planets = ref<Planet[]>([
     earned: 0,
   },
   {
-    id: 1,
+    id: 2,
     planetDisplayId: 1,
     name: 'Селестия',
     income_final: "130 TON",
     imageSrc: PlanetImage2,
-    income: '6%',
+    income: '1.6%',
     cost: '100 TON',
-    cycleTime: '3 ч',
+    cycleTime: '6 ч',
     earned: 0,
   },
 ])
@@ -332,6 +332,8 @@ onBeforeUnmount(() => {
       :text-params="{ planet: attackedPlanetId ?? '' }" />
   </div>
 </template>
+
+
 <style scoped lang="scss">
 .title {
   text-align: center;
@@ -376,6 +378,8 @@ onBeforeUnmount(() => {
 
 .card-title {
   font-size: 18px;
+
+  margin-top: 15px;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--font);
