@@ -3,6 +3,9 @@
 import { dailyTasks, otherTasks } from '@/shared/mock/tasks.ts'
 import TaskCard from '@/entities/TaskCard/TaskCard.vue'
 import DailyAction from '@/features/DailyAction.vue'*/
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <template>
@@ -19,6 +22,7 @@ import DailyAction from '@/features/DailyAction.vue'*/
 <TaskCard v-for="task in dailyTasks" :key="task.id" :task="task" />
 <h2 class="title-1">Список заданий</h2>
 <TaskCard v-for="task in otherTasks" :key="task.id" :task="task" />-->
+    <h1 style="text-align: center; margin-top: 20px;">{{ t('tasks_page') }}</h1>
   </div>
 </template>
 
