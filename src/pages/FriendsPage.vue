@@ -119,7 +119,8 @@ onMounted(() => {
     <InviteFriendBanner />
     <ReferralInfoBanner />
 
-    <h2 class="friends-title title-1 top-1">Реферальная статистика</h2>
+    <h2 class="friends-title title-1 top-1">{{ t('friends.referral_stats') }}</h2>
+
 
     <div class="top-users">
 
@@ -129,7 +130,7 @@ onMounted(() => {
           <img :src="avatar1" alt="Avatar" class="user-avatar" />
         </div>
         <div class="user-info">
-          <div class="user-name">1 Уровень</div>
+          <div class="user-name">{{ t('friends.level_1') }}</div>
           <div class="user-statistic">
             <div class="user-score">{{ referralCount1 }}</div>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -156,7 +157,7 @@ onMounted(() => {
           <img :src="avatar2" alt="Avatar" class="user-avatar" />
         </div>
         <div class="user-info">
-          <div class="user-name">2 Уровень</div>
+          <div class="user-name">{{ t('friends.level_2') }}</div>
           <div class="user-statistic">
 
             <div class="user-score">{{ referralCount2 }}</div>
@@ -185,7 +186,7 @@ onMounted(() => {
           <img :src="avatar3" alt="Avatar" class="user-avatar" />
         </div>
         <div class="user-info">
-          <div class="user-name">3 Уровень</div>
+          <div class="user-name">{{ t('friends.level_3') }}</div>
           <div class="user-statistic">
 
             <div class="user-score">{{ referralCount3 }}</div>
@@ -209,7 +210,8 @@ onMounted(() => {
       </div>
     </div>
 
-    <h2 class="friends-title title-1">Ваши рефералы</h2>
+    <h2 class="friends-title title-1">{{ t('friends.your_referrals') }}</h2>
+
 
     <div class="tabs-switcher">
       <button v-for="tab in tabs" :key="tab.id" :class="['tab', { 'is-active': activeTab === tab.id }]"

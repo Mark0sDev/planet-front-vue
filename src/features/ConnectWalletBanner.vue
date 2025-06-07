@@ -3,6 +3,8 @@ import WalletIcon from '@/shared/assets/icons/wallet.svg'
 import UiButton from '@/shared/ui/UiButton.vue'
 
 import { useTonWallet } from '@/utils/useTonWallet'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const { isWalletConnected, formattedAddress, onWalletClick } = useTonWallet()
 </script>
@@ -11,12 +13,12 @@ const { isWalletConnected, formattedAddress, onWalletClick } = useTonWallet()
   <div class="connect-wallet">
     <div class="wallet-info">
       <WalletIcon />
-      Подключить <br />
-      кошелек
+      <div v-html="t('balance.connect_wallet')"></div>
     </div>
+
     <UiButton class="wallet-button" @click="onWalletClick" size="sm" color="accent"> {{ isWalletConnected ?
       formattedAddress : 'Connect Wallet'
-      }}</UiButton>
+    }}</UiButton>
   </div>
 </template>
 

@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import CopyIcon from '@/shared/assets/icons/copy.svg'
 import CheckIcon from '@/shared/assets/icons/small-check.svg'
 import TonIcon from '@/shared/assets/icons/mini-ton-vector.svg'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 interface CustomInput {
   type: 'max' | 'copy' | 'icon'
@@ -87,7 +89,7 @@ const onInput = (event: Event) => {
     </div>
 
     <div v-if="custom?.type === 'max'" class="max-value-available">
-      <span>Доступно:</span>
+      <span>{{ t('balance.available') }}</span>
       <span>{{ custom?.maxValue || 0 }}</span>
     </div>
 

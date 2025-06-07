@@ -16,6 +16,8 @@ import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/Attack
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 import buyPlanetModal from '@/features/dialogs/buyPlanetModal.vue'
 import { createCountdown } from '@/utils/useCountdown'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const SCENE_DURATION_MS = 4500
 const DIALOG_DELAY_MS = 300
@@ -225,7 +227,9 @@ onBeforeUnmount(() => {
       <div v-if="showList" key="planets" class="content">
         <buyPlanetModal v-model="showBuyModal" :loading="formLoaders.buyPlanet" @confirm="handleBuyConfirm" />
         <CoinFlipDialog v-model="showResult" :text="modalText" :wallet-up="walletUp" :status="'lose'" />
-        <h2 class="title title-1">Планеты</h2>
+
+        <h2 class="title title-1">{{ t('planet.title') }}</h2>
+
         <div class="planets-list">
           <div v-for="planet in planets" :key="planet.id" class="planet-card">
             <div class="card-header">
@@ -244,10 +248,11 @@ onBeforeUnmount(() => {
                       <circle cx="6.5" cy="6.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
                       <circle cx="17.5" cy="17.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
                     </svg>
-                    <span>Доходность</span>
+                    <span>{{ t('planet.income') }}</span>
                   </div>
                   <div class="stat-value">{{ planet.income }}</div>
                 </div>
+
                 <div class="stat-item">
                   <div class="stat-label">
                     <svg class="stat-icon" viewBox="0 0 24 24">
@@ -255,11 +260,9 @@ onBeforeUnmount(() => {
                         d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"
                         fill="currentColor" />
                     </svg>
-                    <span>Стоимость</span>
+                    <span>{{ t('planet.cost') }}</span>
                   </div>
-                  <div class="stat-value">{{ planet.cost }}
-
-                  </div>
+                  <div class="stat-value">{{ planet.cost }}</div>
                 </div>
 
                 <div class="stat-item">
@@ -269,10 +272,11 @@ onBeforeUnmount(() => {
                         d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM16.59 7.58L10 14.17L7.41 11.59L6 13L10 17L18 9L16.59 7.58Z"
                         fill="currentColor" />
                     </svg>
-                    <span>Прибыль</span>
+                    <span>{{ t('planet.profit') }}</span>
                   </div>
                   <div class="stat-value">{{ planet.income_final }}</div>
                 </div>
+
                 <div class="stat-item">
                   <div class="stat-label">
                     <svg class="stat-icon" viewBox="0 0 24 24">
@@ -280,7 +284,7 @@ onBeforeUnmount(() => {
                         d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12.5 7V12.25L17 14.92L16.25 16.15L11 13V7H12.5Z"
                         fill="currentColor" />
                     </svg>
-                    <span>Время цикла</span>
+                    <span>{{ t('planet.cycle_time') }}</span>
                   </div>
                   <div class="stat-value">{{ planet.cycleTime }}</div>
                 </div>
@@ -295,14 +299,18 @@ onBeforeUnmount(() => {
                       d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"
                       fill="currentColor" />
                   </svg>
-                  <span>Заработано</span>
+                  <span>{{ t('planet.earned') }}</span>
                 </div>
-                <div class="stat-value">{{ planet.earned }} <img src="/icons/ton.svg" alt="ton" class="ton-icon" />
+                <div class="stat-value">
+                  {{ planet.earned }}
+                  <img src="/icons/ton.svg" alt="ton" class="ton-icon" />
                 </div>
               </div>
+
               <UiButton class="planet_button"
                 :disabled="formLoaders.attackPlanet || (countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00')"
                 @click="buyPlanet({ index: planet.id })">
+
                 <template v-if="formLoaders.attackPlanet">
                   <span class="spinner" />
                 </template>
@@ -310,13 +318,15 @@ onBeforeUnmount(() => {
                   {{ countdownPerPlanet[planet.id] }}
                 </template>
                 <template v-else>
-                  {{ planetStates[planet.id] === 0 ? 'Купить' : 'Атаковать' }}
+                  {{ planetStates[planet.id] === 0 ? t('planet.buy') : t('planet.attack') }}
                 </template>
+
               </UiButton>
             </div>
           </div>
         </div>
       </div>
+
       <div v-else key="attack" class="attack-wrapper">
         <AttackScene :current-level="planetLevel" :planet-src="currentPlanet.planetSrc" />
       </div>
@@ -328,6 +338,7 @@ onBeforeUnmount(() => {
       :text-params="{ planet: attackedPlanetId ?? '' }" />
   </div>
 </template>
+
 
 
 <style scoped lang="scss">

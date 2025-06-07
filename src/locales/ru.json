@@ -1,4 +1,12 @@
 {
+    "tasks": {
+        "every_day_tasks_title": "Ежедневные задания",
+        "osnova_tasks": "Основные задания",
+        "banner_text": "Выполняй наши простые задания<br>и зарабатывай TON без вложений!",
+        "ads_button": "Смотреть рекламу",
+        "tasks_ads": "Посмотреть рекламу",
+        "tasks_ads_desc": "Смотри рекламу каждые <span style='color: #FFCD1D;'>3 часа</span>, получай <span style='color: #27aff9;'>0.00001 TON</span>"
+    },
     "nav": {
         "home": "Главная",
         "minigame": "Игры",
@@ -8,6 +16,18 @@
         "balance": "Баланс"
     },
     "balance": {
+        "available": "Доступно:",
+        "withdraw": "Вывести",
+        "withdrawn_all_time": "Выведено за все время:",
+        "tip_wallet": "Адрес кошелька TON",
+        "not_enough_ton": "Недостаточно TON на балансе",
+        "available_for_withdrawal": "Доступно к выводу: {amount} TON",
+        "tip_wallet_address": "Адрес кошелька TON",
+        "tip_memo": "Комментарий (MEMO)",
+        "placeholder_wallet": "Введите адрес кошелька TON",
+        "placeholder_amount": "Введите количество TON",
+        "connect_wallet": "Подключить<br />кошелек",
+        "manual_topup": "Пополнить вручную",
         "title_out": "Доступно к выводу:",
         "wallet_title": "Кошелек",
         "web3_deposit": "WEB3 Пополнение",
@@ -27,11 +47,27 @@
         "totalTonWithdrawn": "Всего выведено TON",
         "latestWithdrawals": "Последние выводы"
     },
-    "tasks_page": "Задания загружаются, приходите немного позже...",
     "tabs": {
         "level1": "1 уровень",
         "level2": "2 уровень",
         "level3": "3 уровень"
+    },
+    "friends": {
+        "referral_stats": "Реферальная статистика",
+        "your_referrals": "Ваши рефералы",
+        "level_1": "1 Уровень",
+        "level_2": "2 Уровень",
+        "level_3": "3 Уровень"
+    },
+    "planet": {
+        "title": "Планеты",
+        "income": "Доходность",
+        "cost": "Стоимость",
+        "profit": "Прибыль",
+        "cycle_time": "Время цикла",
+        "earned": "Заработано",
+        "buy": "Купить",
+        "attack": "Атаковать"
     },
     "friends_banner": "<h2 class='info-title'>Получай <span>10%</span> за <span>каждую<br/>покупку</span> планеты вашим рефералом</h2><p class='info-description'>Вы получаете реферальную награду каждый раз, когда Ваш реферал покупает планету</p>",
     "friends_text": "Друзья",

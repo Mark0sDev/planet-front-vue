@@ -154,8 +154,9 @@ async function withdrawalForm() {
       showWithdrawalTon.value = true
     } else {
       showResult.value = true
-      modalText.value = "Недостаточно TON на балансе"
-      modalText2.value = "Доступно к выводу: " + user.value.balance_payments_ton + " TON";
+      modalText.value = t('balance.not_enough_ton')
+      modalText2.value = t('balance.available_for_withdrawal', { amount: user.value.balance_payments_ton })
+
     }
   } catch {
     tg.showAlert("Withdrawal error, please try again later.");
@@ -247,11 +248,12 @@ onMounted(() => {
 
       </div>
 
-      <UiDivider value="Пополнить вручную" />
+      <UiDivider :value="t('balance.manual_topup')" />
 
-      <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
+
+      <UiInput :custom="{ type: 'copy' }" :tip="t('balance.tip_wallet_address')" class="input"
         value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
-      <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
+      <UiInput :custom="{ type: 'copy' }" :tip="t('balance.tip_memo')" class="input" :value="user_id" disabled />
 
     </div>
 
@@ -260,21 +262,22 @@ onMounted(() => {
       <form @submit.prevent="withdrawalForm">
         <div class="withdrawal-modal">
           <div class="inputs">
-            <UiInput tip="TON wallet address" v-model="wallet_withdrawal" required="" type="text"
-              placeholder="Введите адрес" />
+            <UiInput :tip="t('balance.tip_wallet')" v-model="wallet_withdrawal" required="" type="text"
+              :placeholder="t('balance.placeholder_wallet')" />
             <UiInput v-model="sum_withdrawal" :custom="{ type: 'max', maxValue: balanceActionCards[1].payments }"
-              tip="TON" type="number" step="0.00001" min="0.00001" required="" placeholder="Введите количество" />
+              tip="TON" type="number" step="0.00001" min="0.00001" required=""
+              :placeholder="t('balance.placeholder_amount')" />
           </div>
           <UiButton :disabled="formLoaders.withdrawalTon" class="withdrawal-modal-button" color="blue">
             <template v-if="formLoaders.withdrawalTon">
               <span class="spinner" />
             </template>
             <template v-else>
-              Вывести
+              {{ t('balance.withdraw') }}
             </template>
           </UiButton>
           <div class="withdrawal-all-time">
-            <span>Выведено за все время:</span>
+            <span>{{ t('balance.withdrawn_all_time') }}</span>
             <div class="value">
               <span>{{ user.withdrawal_ton.toFixed(5) }}</span>
               <SmallTonIcon class="SmallTonIcon" />
