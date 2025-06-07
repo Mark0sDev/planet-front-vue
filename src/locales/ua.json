@@ -1,4 +1,19 @@
 {
+    "nav": {
+        "home": "Головна",
+        "minigame": "Ігри",
+        "friends": "Друзі",
+        "earn": "Заробити",
+        "tasks": "Завдання",
+        "balance": "Баланс"
+    },
+    "balance": {
+        "title_out": "Доступно для виводу:",
+        "wallet_title": "Гаманець",
+        "web3_deposit": "WEB3 Поповнення",
+        "enter_amount": "Введіть суму TON:",
+        "deposit": "Поповнити"
+    },
     "combo": {
         "text": "Атакуй планети та заробляй TON",
         "startFrom": "Почни всього з",
@@ -7,10 +22,10 @@
     "statistics": {
         "title": "Статистика",
         "users": "Користувачі, які вже заробляють",
-        "totalWithdrawals": "Усього виведень",
-        "totalPlanetsBought": "Усього куплено планет",
-        "totalTonWithdrawn": "Усього виведено TON",
-        "latestWithdrawals": "Останні виведення"
+        "totalWithdrawals": "Всього виводів",
+        "totalPlanetsBought": "Куплено планет",
+        "totalTonWithdrawn": "Виведено TON",
+        "latestWithdrawals": "Останні виводи"
     },
     "tasks_page": "Завдання завантажуються, зайдіть трохи пізніше...",
     "tabs": {
@@ -18,11 +33,11 @@
         "level2": "2 рівень",
         "level3": "3 рівень"
     },
-    "friends_banner": "<h2 class='info-title'>Отримуй <span>10%</span> за <span>кожну<br/>покупку</span> планети вашим рефералом</h2><p class='info-description'>Ви отримуєте реферальну нагороду кожного разу, коли Ваш реферал купує планету</p>",
+    "friends_banner": "<h2 class='info-title'>Отримуй <span>10%</span> за <span>кожну<br/>покупку</span> планети вашим рефералом</h2><p class='info-description'>Ви отримуєте реферальну нагороду щоразу, коли ваш реферал купує планету</p>",
     "friends_text": "Друзі",
-    "withdrawal_success": "Заявка на виведення успішно створена<br><br>TON надійдуть на гаманець протягом 30 секунд",
-    "withdraw_title": "Виведення балансу",
+    "withdrawal_success": "Заявку на вивід успішно створено<br><br>TON надійдуть на гаманець протягом 30 секунд",
+    "withdraw_title": "Вивід балансу",
     "transactions_history_title": "Історія транзакцій",
     "invite_btn_text": "Запросити друзів",
-    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> НАПРЯМУ <span style='color: #27aff9;'>В TON</span><br>ВІД ВАШИХ ДРУЗІВ"
+    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> ПРЯМО <span style='color: #27aff9;'>У TON</span><br>ВІД ВАШИХ ДРУЗІВ"
 }

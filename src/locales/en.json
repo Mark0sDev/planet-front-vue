@@ -1,4 +1,19 @@
 {
+    "nav": {
+        "home": "Home",
+        "minigame": "Games",
+        "friends": "Friends",
+        "earn": "Earn",
+        "tasks": "Tasks",
+        "balance": "Balance"
+    },
+    "balance": {
+        "title_out": "Available to withdraw:",
+        "wallet_title": "Wallet",
+        "web3_deposit": "WEB3 Deposit",
+        "enter_amount": "Enter TON amount:",
+        "deposit": "Deposit"
+    },
     "combo": {
         "text": "Attack planets and earn TON",
         "startFrom": "Start from just",
@@ -8,21 +23,21 @@
         "title": "Statistics",
         "users": "Users already earning",
         "totalWithdrawals": "Total withdrawals",
-        "totalPlanetsBought": "Total planets bought",
-        "totalTonWithdrawn": "Total TON withdrawn",
+        "totalPlanetsBought": "Planets purchased",
+        "totalTonWithdrawn": "TON withdrawn",
         "latestWithdrawals": "Latest withdrawals"
     },
-    "tasks_page": "Tasks are loading, please check back later...",
+    "tasks_page": "Tasks are loading, come back a bit later...",
     "tabs": {
         "level1": "Level 1",
         "level2": "Level 2",
         "level3": "Level 3"
     },
-    "friends_banner": "<h2 class='info-title'>Get <span>10%</span> for <span>each<br/>planet purchase</span> by your referral</h2><p class='info-description'>You receive a referral reward every time your referral buys a planet</p>",
+    "friends_banner": "<h2 class='info-title'>Get <span>10%</span> from <span>every<br/>planet purchase</span> by your referral</h2><p class='info-description'>You receive a referral reward each time your referral buys a planet</p>",
     "friends_text": "Friends",
-    "withdrawal_success": "Withdrawal request created successfully<br><br>TON will arrive in your wallet within 30 seconds",
-    "withdraw_title": "Balance Withdrawal",
-    "transactions_history_title": "Transaction History",
-    "invite_btn_text": "Invite Friends",
-    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> DIRECTLY <span style='color: #27aff9;'>IN TON</span><br>FROM YOUR FRIENDS"
+    "withdrawal_success": "Withdrawal request successfully created<br><br>TON will arrive in your wallet within 30 seconds",
+    "withdraw_title": "Withdraw balance",
+    "transactions_history_title": "Transaction history",
+    "invite_btn_text": "Invite friends",
+    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> STRAIGHT <span style='color: #27aff9;'>IN TON</span><br>FROM YOUR FRIENDS"
 }

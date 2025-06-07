@@ -1,4 +1,19 @@
 {
+    "nav": {
+        "home": "Главная",
+        "minigame": "Игры",
+        "friends": "Друзья",
+        "earn": "Заработать",
+        "tasks": "Задания",
+        "balance": "Баланс"
+    },
+    "balance": {
+        "title_out": "Доступно к выводу:",
+        "wallet_title": "Кошелек",
+        "web3_deposit": "WEB3 Пополнение",
+        "enter_amount": "Введите сумму TON:",
+        "deposit": "Пополнить"
+    },
     "combo": {
         "text": "Атакуй планеты и зарабатывай TON",
         "startFrom": "Начни всего с",

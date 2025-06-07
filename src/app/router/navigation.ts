@@ -1,9 +1,7 @@
 import { AppRoutes } from '@/app/router/router.ts'
 
 import HomeIcon from '@/shared/assets/icons/home.svg'
-
 import FriendsIcon from '@/shared/assets/icons/friends.svg'
-//import MiniGameIcon from '@/shared/assets/icons/minigame.svg'
 import TasksIcon from '@/shared/assets/icons/tasks.svg'
 import BalanceIcon from '@/shared/assets/icons/balance.svg'
 import TonIcon from '@/shared/assets/icons/ton-vector.svg'
@@ -15,12 +13,9 @@ export interface NavItem {
 }
 
 export const NAVIGATION: NavItem[] = [
-  { path: AppRoutes.HOME, label: 'Главная', icon: HomeIcon },
-
-  //{ path: AppRoutes.MINIGAME, label: 'Игры', icon: MiniGameIcon },
-
-  { path: AppRoutes.FRIENDS, label: 'Друзья', icon: FriendsIcon },
-  { path: AppRoutes.PLANETS, label: 'Заработать', icon: TonIcon },
-  { path: AppRoutes.TASKS, label: 'Задания', icon: TasksIcon },
-  { path: AppRoutes.BALANCE, label: 'Баланс', icon: BalanceIcon },
+  { path: AppRoutes.HOME, label: 'nav.home', icon: HomeIcon },
+  { path: AppRoutes.FRIENDS, label: 'nav.friends', icon: FriendsIcon },
+  { path: AppRoutes.PLANETS, label: 'nav.earn', icon: TonIcon },
+  { path: AppRoutes.TASKS, label: 'nav.tasks', icon: TasksIcon },
+  { path: AppRoutes.BALANCE, label: 'nav.balance', icon: BalanceIcon },
 ]

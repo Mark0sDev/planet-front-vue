@@ -4,7 +4,7 @@ import { ref, watch, defineProps, defineEmits } from 'vue'
 defineOptions({ name: 'UiDialog' })
 
 // Принимаем внешний v-model
-const props = defineProps<{ modelValue: boolean }>()
+const props = defineProps<{ modelValue: boolean, }>()
 const emit = defineEmits<{
   (e: 'update:modelValue', v: boolean): void
 }>()

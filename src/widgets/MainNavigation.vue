@@ -2,9 +2,10 @@
 import { useRoute } from 'vue-router'
 import { NAVIGATION } from '@/app/router/navigation.ts'
 import MiniGameIcon from '@/shared/assets/icons/minigame.svg'
-
+import { useI18n } from 'vue-i18n'
 import { AppRoutes } from '@/app/router/router.ts'
 
+const { t } = useI18n()
 const route = useRoute()
 
 function isActive(path: string) {
@@ -18,20 +19,29 @@ function isEarnButton(path: string) {
 
 <template>
   <nav class="bottom-nav">
-    <router-link v-for="item in NAVIGATION" :key="item.path" :to="item.path" :class="{
-      active: isActive(item.path),
-      'earn-button': isEarnButton(item.path)
-    }" class="nav-item">
+    <router-link
+      v-for="item in NAVIGATION"
+      :key="item.path"
+      :to="item.path"
+      :class="{
+        active: isActive(item.path),
+        'earn-button': isEarnButton(item.path)
+      }"
+      class="nav-item"
+    >
       <div v-if="isEarnButton(item.path)" class="earn-content">
         <div class="earn-circle">
           <component :is="item.icon" class="earn-icon" />
         </div>
-        <span class="earn-text">{{ item.label }}</span>
+        <span class="earn-text">{{ t(item.label) }}</span>
       </div>
 
       <template v-else>
-        <component :is="item.icon" :class="['nav-icon', { 'no-fill': item.icon === MiniGameIcon }]" />
-        <span>{{ item.label }}</span>
+        <component
+          :is="item.icon"
+          :class="['nav-icon', { 'no-fill': item.icon === MiniGameIcon }]"
+        />
+        <span>{{ t(item.label) }}</span>
       </template>
     </router-link>
   </nav>
@@ -86,7 +96,6 @@ function isEarnButton(path: string) {
     }
   }
 
-  // Стили для кнопки "Заработать"
   &.earn-button {
     width: 80px;
 

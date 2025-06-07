@@ -26,9 +26,10 @@ import TransactionCard from '@/entities/TransactionCard.vue';
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
 import axios from 'axios';
 import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const showResult = ref(false)
-const { t } = useI18n()
+
 const modalText = ref<string>('')
 const modalText2 = ref<string>('')
 
@@ -147,7 +148,7 @@ async function withdrawalForm() {
         balance_ton: Math.max(user.value.balance_ton - sum, 0),
         balance_payments_ton: user.value.balance_payments_ton - sum
       };
-      
+
       wallet_withdrawal.value = '';
       sum_withdrawal.value = '';
       showWithdrawalTon.value = true
@@ -209,29 +210,29 @@ onMounted(() => {
     <div class="balance-cards">
       <BalanceActionCard :card="balanceActionCards[1]" @action="handleCardAction">
         <template #description>
-          Доступно к выводу:<br />
+          {{ t('balance.title_out') }}<br />
           <span class="ton">{{ balanceActionCards[1].payments.toFixed(5) }} TON</span>
         </template>
       </BalanceActionCard>
 
       <BalanceActionCard :card="balanceActionCards[0]" @action="handleCardAction">
         <template #description>
-          Доступно к выводу:<br />
+          {{ t('balance.title_out') }}<br />
           <span class="stars">{{ balanceActionCards[0].payments.toFixed(5) }} STARS</span>
         </template>
       </BalanceActionCard>
     </div>
 
-    <div class="title-1">Кошелек</div>
+    <div class="title-1">{{ t('balance.wallet_title') }}</div>
     <div class="wallet-connect">
       <ConnectWalletBanner />
 
       <div v-if="isWalletConnected">
         <form @submit.prevent="depositFormTon">
-          <UiDivider value="WEB3 Пополнение" />
+          <UiDivider :value="t('balance.web3_deposit')" />
 
-          <UiInput v-model="amountDepositTon" required tip="Введите сумму TON:" class="input" type="number" step="0.1"
-            placeholder="TON" min="0.1" />
+          <UiInput v-model="amountDepositTon" required :tip="t('balance.enter_amount')" class="input" type="number"
+            step="0.1" placeholder="TON" min="0.1" />
 
           <UiButton class="button" type="submit" :disabled="formLoaders.depositTon"
             style="margin-top: 10px; margin-bottom: 10px;">
@@ -239,10 +240,11 @@ onMounted(() => {
               <span class="spinner" />
             </template>
             <template v-else>
-              Пополнить
+              {{ t('balance.deposit') }}
             </template>
           </UiButton>
         </form>
+
       </div>
 
       <UiDivider value="Пополнить вручную" />
@@ -284,7 +286,7 @@ onMounted(() => {
 
     <div class="title-1">{{ t('transactions_history_title') }}</div>
     <TransactionCard v-for="tx in transactions" :key="tx.id" :transaction="tx" />
-    <CongratsDialog :text="t('withdrawal_success')" v-model="showWithdrawalTon" />
+    <CongratsDialog v-model="showWithdrawalTon" :text-template="t('withdrawal_success')" />
   </div>
 </template>
 
