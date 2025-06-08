@@ -196,16 +196,28 @@ const getUser = async () => {
       planetStates.value[id] = data[`planet_${id}`] || 0
 
       if (data[`planet_${id}`] !== 0) {
-        const rawTime = data[`time_planet_${id}`]
+        const rawTime = data[`time_planet_${id}`] 
         if (rawTime) {
-          const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
+          const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime() + 2000
+
           if (planetTime > now) {
-            createCountdown(data.date, rawTime, (formatted) => {
+            const adjustedTime = new Date(planetTime)
+            const pad = (n: number) => n.toString().padStart(2, '0')
+            const formattedAdjusted =
+              adjustedTime.getFullYear() + '-' +
+              pad(adjustedTime.getMonth() + 1) + '-' +
+              pad(adjustedTime.getDate()) + ' ' +
+              pad(adjustedTime.getHours()) + ':' +
+              pad(adjustedTime.getMinutes()) + ':' +
+              pad(adjustedTime.getSeconds())
+
+            createCountdown(data.date, formattedAdjusted, (formatted) => {
               countdownPerPlanet.value[id] = formatted
             })
           }
         }
       }
+
     })
   })
 }
