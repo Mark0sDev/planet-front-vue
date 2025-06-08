@@ -200,12 +200,14 @@ const getUser = async () => {
         if (rawTime) {
           const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime()
           if (planetTime > now) {
-            createCountdown(data.date, rawTime, (formatted) => {
+            const adjustedRawTime = new Date(planetTime + 2000).toISOString().replace(/T/, ' ').replace(/\..+/, '')
+            createCountdown(data.date, adjustedRawTime, (formatted) => {
               countdownPerPlanet.value[id] = formatted
             })
           }
         }
       }
+
     })
   })
 }
