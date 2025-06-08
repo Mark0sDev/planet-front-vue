@@ -22,7 +22,7 @@ import TonIcon from '@/shared/assets/icons/ton.svg'
 
 import PageLoader from './PageLoader.vue'
 
-import { onMounted, ref } from 'vue'
+import { onMounted, nextTick, ref } from 'vue'
 
 import TransactionCard, { type Transaction } from '@/entities/TransactionCard.vue'
 import { type LastWithdrawalItem } from '@/types/api.types'
@@ -53,8 +53,10 @@ const getUser = async () => {
     })
 
     if (userResponse.data.check_story == 0) {
-      console.log('story');
-      showStories.value = true;
+      showStories.value = true
+      nextTick(() => {
+        showStory(0)
+      })
     }
 
     const { data } = await api.post('/users/getStatistic', {
@@ -127,11 +129,6 @@ onMounted(() => {
   getUser()
   storyRefs.value = Array.from(document.querySelectorAll('.story')) as HTMLElement[]
   totalStories.value = storyRefs.value.length
-  if (showStories.value) {
-    showStory(0)
-  } else {
-    isVisible.value = false
-  }
 
 })
 </script>
