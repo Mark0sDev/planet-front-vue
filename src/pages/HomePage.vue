@@ -52,9 +52,10 @@ const getUser = async () => {
       startParam
     })
 
-
-    showStories.value = Number(userResponse.data.check_story) === 0
-
+    if (userResponse.data.check_story == 0) {
+      showStories.value = true;
+    }
+ 
     const { data } = await api.post('/users/getStatistic', {
       initData,
       user_id
