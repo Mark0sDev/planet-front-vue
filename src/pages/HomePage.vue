@@ -34,7 +34,7 @@ const withdrawalCount = ref('0')
 const withdrawalSum = ref('0')
 const buyPlanetCount = ref('0')
 const transactions = ref<Transaction[]>([])
-const showStories = ref(true)
+const showStories = ref(false)
 
 const currentStoryIndex = ref(0)
 const totalStories = ref(0)
