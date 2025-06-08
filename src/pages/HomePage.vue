@@ -56,6 +56,9 @@ const getUser = async () => {
       showStories.value = true
       nextTick(() => {
         showStory(0)
+
+        storyRefs.value = Array.from(document.querySelectorAll('.story')) as HTMLElement[]
+        totalStories.value = storyRefs.value.length
       })
     }
 
@@ -127,8 +130,6 @@ const closeStories = () => {
 
 onMounted(() => {
   getUser()
-  storyRefs.value = Array.from(document.querySelectorAll('.story')) as HTMLElement[]
-  totalStories.value = storyRefs.value.length
 
 })
 </script>
