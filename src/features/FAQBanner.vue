@@ -1,11 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+</script>
 
 <template>
   <div class="faq-banner">
     <h2 class="title title-1">FAQ</h2>
-    <p class="text">
-      Lorem ipsum dolor sit amet, <br />
-      consectetur adipisci elit, sed .
+    <p v-html="t('faq.title_banner')" class="text">
+
     </p>
   </div>
 </template>

@@ -1,36 +1,68 @@
 {
+  "wallet": {
+    "address": "TON Wallet Address",
+    "memo": "Comment (MEMO)",
+    "orGoTo": "Or go to",
+    "balancePage": "Balance",
+    "toTopUp": "to top up in one click"
+  },
+  "common": {
+    "continue": "Continue"
+  },
+  "faq": {
+    "refferal2": "Will I get any reward for inviting friends?",
+    "refferal_ans2": "Of course! We generously reward those who invite new friends to our project.<br><br>You will receive 10% in three levels (5%-3%-2%) from each purchase made by your referral.",
+    "refferal1": "Can I invite my friends?",
+    "refferal_ans1": "Yes, on the <a style='color: #6ceaf1;' href='/friends'>Friends</a> page you can invite your friends and see all referral stats there.",
+    "balance3": "How long does deposit and withdrawal take?",
+    "balance_ans3": "Deposits and withdrawals in TON are instant. It usually takes no more than 30 seconds.",
+    "balance2": "How to withdraw balance?",
+    "balance_ans2": "Go to the <a style='color: #6ceaf1;' href='/balance'>Balance</a> page, enter your wallet and press MAX<br><br>Minimum withdrawal is 0.1 TON.",
+    "balance1": "How to top up the balance?",
+    "balance_ans1": "Simply go to the <a style='color: #6ceaf1;' href='/balance'>Balance</a> page, connect your TON wallet or use the direct transfer via <a style='color: #6ceaf1;' href='/balance'>MEMO</a>.",
+    "what_civilization3": "How to start playing?",
+    "what_civilization_ans3": "To start, top up your <a style='color: #6ceaf1;' href='/balance'>Balance</a> and buy your first <a style='color: #6ceaf1;' href='/planets'>Planet</a>.",
+    "what_civilization2": "Can I earn here?",
+    "what_civilization_ans2": "Yes, you earn rewards in TON while playing.<br><br>But remember, CivilizationTon is a game where all deposits are voluntary donations.",
+    "what_civilization_ans": "Civilization is a unique P2E game where you earn rewards in TON.",
+    "what_civilization": "What is CivilizationTon?",
+    "game": "Game",
+    "balance": "Balance",
+    "refs": "Referrals",
+    "title_banner": "Detailed instructions<br>on how to join the civilization"
+  },
   "story": {
     "aboutTitle": "About the Project",
     "aboutSubtitle": "Attack planets, earn TON, and level up!",
     "feature1": {
       "title": "Start with just 1 TON",
-      "text": "Minimum entry — accessible to everyone"
+      "text": "Minimum entry — affordable for everyone"
     },
     "feature2": {
-      "title": "Really fast profit",
-      "text": "Planet cycles are very quick, everyone has time to earn"
+      "title": "Fast real profits",
+      "text": "Planet cycles are fast, everyone has a chance to earn"
     },
     "feature3": {
       "title": "Instant withdrawals",
-      "text": "TON withdrawals take just 5 seconds"
+      "text": "Withdrawals take just 5 seconds"
     },
     "feature4": {
-      "title": "No investments",
-      "text": "Earn without investments by completing our tasks"
+      "title": "No investments needed",
+      "text": "Earn by completing tasks with no investments"
     },
     "footer1": "Don't miss your chance to earn TON now!",
     "refTitle": "Referral System",
-    "refSubtitle": "Get 10% from every purchase made by your referral",
+    "refSubtitle": "Earn 10% from every purchase your referral makes",
     "refFeature1": {
       "title": "3 levels",
-      "text": "3-level referral system lets you earn from the activity of your friends and their friends too"
+      "text": "Multi-level referral system lets you earn even from friends of your friends"
     },
     "refFeature2": {
       "title": "No tokens",
-      "text": "Get real TON for your friends' purchases"
+      "text": "Earn real TON from your friends' purchases"
     },
-    "footer2": "Earn TON together with your friends",
-    "ctaTitle": "Don't miss out!",
+    "footer2": "Earn TON with your friends",
+    "ctaTitle": "Don't miss the chance!",
     "ctaSubtitle": "Start right now:",
     "ctaBuy": "Buy your first planet",
     "ctaTopUp": "Top up balance"
@@ -38,10 +70,10 @@
   "tasks": {
     "every_day_tasks_title": "Daily Tasks",
     "osnova_tasks": "Main Tasks",
-    "banner_text": "Complete our simple tasks<br>and earn TON without investments!",
+    "banner_text": "Complete simple tasks<br>and earn TON without investment!",
     "ads_button": "Watch Ad",
-    "tasks_ads": "Watch Advertisement",
-    "tasks_ads_desc": "Watch ads every <span style='color: #FFCD1D;'>3 hours</span>, earn <span style='color: #27aff9;'>0.00001 TON</span>"
+    "tasks_ads": "Watch an ad",
+    "tasks_ads_desc": "Watch an ad every <span style='color: #FFCD1D;'>3 hours</span> and get <span style='color: #27aff9;'>0.00001 TON</span>"
   },
   "nav": {
     "home": "Home",
@@ -55,33 +87,33 @@
     "available": "Available:",
     "withdraw": "Withdraw",
     "withdrawn_all_time": "Withdrawn all time:",
-    "tip_wallet": "TON wallet address",
-    "not_enough_ton": "Not enough TON balance",
-    "available_for_withdrawal": "Available for withdrawal: {amount} TON",
-    "tip_wallet_address": "TON wallet address",
+    "tip_wallet": "TON Wallet Address",
+    "not_enough_ton": "Not enough TON on balance",
+    "available_for_withdrawal": "Available to withdraw: {amount} TON",
+    "tip_wallet_address": "TON Wallet Address",
     "tip_memo": "Comment (MEMO)",
     "placeholder_wallet": "Enter TON wallet address",
-    "placeholder_amount": "Enter TON amount",
+    "placeholder_amount": "Enter amount of TON",
     "connect_wallet": "Connect<br />wallet",
     "manual_topup": "Manual top-up",
     "title_out": "Available for withdrawal:",
     "wallet_title": "Wallet",
     "web3_deposit": "WEB3 Deposit",
     "enter_amount": "Enter TON amount:",
-    "deposit": "Deposit"
+    "deposit": "Top up"
   },
   "combo": {
     "text": "Attack planets and earn TON",
-    "startFrom": "Start with just",
+    "startFrom": "Start from just",
     "button": "START NOW"
   },
   "statistics": {
     "title": "Statistics",
     "users": "Users already earning",
-    "totalWithdrawals": "Total Withdrawals",
-    "totalPlanetsBought": "Total Planets Bought",
-    "totalTonWithdrawn": "Total TON Withdrawn",
-    "latestWithdrawals": "Latest Withdrawals"
+    "totalWithdrawals": "Total withdrawals",
+    "totalPlanetsBought": "Total planets bought",
+    "totalTonWithdrawn": "Total TON withdrawn",
+    "latestWithdrawals": "Latest withdrawals"
   },
   "tabs": {
     "level1": "Level 1",
@@ -89,7 +121,7 @@
     "level3": "Level 3"
   },
   "friends": {
-    "referral_stats": "Referral Statistics",
+    "referral_stats": "Referral Stats",
     "your_referrals": "Your Referrals",
     "level_1": "Level 1",
     "level_2": "Level 2",
@@ -97,7 +129,7 @@
   },
   "planet": {
     "title": "Planets",
-    "income": "Income",
+    "income": "Yield",
     "cost": "Cost",
     "profit": "Profit",
     "cycle_time": "Cycle Time",
@@ -105,11 +137,11 @@
     "buy": "Buy",
     "attack": "Attack"
   },
-  "friends_banner": "<h2 class='info-title'>Get <span>10%</span> for <span>each<br/>planet purchase</span> by your referral</h2><p class='info-description'>You receive a referral reward every time your referral buys a planet</p>",
+  "friends_banner": "<h2 class='info-title'>Earn <span>10%</span> from <span>every<br/>purchase</span> made by your referral</h2><p class='info-description'>You earn a referral reward every time your referral buys a planet</p>",
   "friends_text": "Friends",
-  "withdrawal_success": "Withdrawal request successfully created<br><br>TON will arrive in your wallet within 30 seconds",
-  "withdraw_title": "Balance Withdrawal",
+  "withdrawal_success": "Withdrawal request created successfully<br><br>TON will arrive in your wallet within 30 seconds",
+  "withdraw_title": "Withdraw Balance",
   "transactions_history_title": "Transaction History",
-  "invite_btn_text": "Invite Friends",
+  "invite_btn_text": "Invite friends",
   "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> STRAIGHT <span style='color: #27aff9;'>IN TON</span><br>FROM YOUR FRIENDS"
 }

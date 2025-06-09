@@ -16,7 +16,8 @@ interface Props {
   walletUp?: boolean
   status: 'win' | 'lose'
 }
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
@@ -37,18 +38,21 @@ function close() {
 
       <div v-if="walletUp">
         <div class="wallet-connect">
-
-          <UiInput :custom="{ type: 'copy' }" tip="Адрес кошелька TON" class="input"
+          <UiInput :custom="{ type: 'copy' }" :tip="t('wallet.address')" class="input"
             value="UQA-uKB7lRsIzdjVzYCYDOkbPKUMeRZcCgehRHhX7hOwZ5SW" disabled />
-          <UiInput :custom="{ type: 'copy' }" tip="Комментарий (MEMO)" class="input" :value="user_id" disabled />
-          <p class="modal-text">Или перейдите на страницу <a style="color: #6ceaf1;" href="/balance">Баланс</a> для
-            пополнения в один клик</p>
+          <UiInput :custom="{ type: 'copy' }" :tip="t('wallet.memo')" class="input" :value="user_id" disabled />
+          <p class="modal-text">
+            {{ t('wallet.orGoTo') }}
+            <a style="color: #6ceaf1;" href="/balance">{{ t('wallet.balancePage') }}</a>
+            {{ t('wallet.toTopUp') }}
+          </p>
         </div>
       </div>
-      <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
+      <UiButton @click="close" color="accent" class="congrats-modal-btn">{{ t('common.continue') }}</UiButton>
     </div>
   </UiDialog>
 </template>
+
 
 <style scoped lang="scss">
 @use '@/app/styles/mixins' as mixins;
