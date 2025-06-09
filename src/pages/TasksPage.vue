@@ -46,12 +46,14 @@ const getUser = async () => {
 
     const data = response.data;
 
-    const now = new Date(data.date.replace(/-/g, '/')).getTime()
-    const rawTime = new Date(data.check_ads_1.replace(/-/g, '/')).getTime()
+    const now = data.date;
+    const rawTime = data.check_ads_1;
 
     if (rawTime) {
       if (rawTime > now) {
-        alert('test');
+        createCountdown(now, rawTime, (formatted) => {
+          adsTimer.value = formatted
+        })
       }
     }
   })
