@@ -73,7 +73,7 @@
     "banner_text": "Complete simple tasks<br>and earn TON without investment!",
     "ads_button": "Watch Ad",
     "tasks_ads": "Watch an ad",
-    "tasks_ads_desc": "Watch an ad every <span style='color: #FFCD1D;'>3 hours</span> and get <span style='color: #27aff9;'>0.00001 TON</span>"
+    "tasks_ads_desc": "Watch an ad every <span style='color: #FFCD1D;'>3 hours</span> and get <span style='color: #27aff9;'>0.0001 TON</span>"
   },
   "nav": {
     "home": "Home",
