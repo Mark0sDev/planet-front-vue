@@ -47,8 +47,7 @@ const getUser = async () => {
     const data = response.data;
 
     const now = new Date(data.date.replace(/-/g, '/')).getTime()
-    const baseTime = data.check_ads_1;
-    const rawTime = new Date(baseTime.replace(/-/g, '/')).getTime()
+    const rawTime = new Date(data.check_ads_1.replace(/-/g, '/')).getTime()
 
     if (rawTime) {
       if (rawTime > now) {
