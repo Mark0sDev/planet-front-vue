@@ -11,6 +11,8 @@ import {
 import PageLoader from './PageLoader.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 
+
+//const countdownTasks1 = ref<Record<number, string>>({})
 /*
 import { type Task, TaskStatus } from '@/entities/TaskCard/types.ts'
 import inviteFriendsAvatar from '@/shared/assets/avatars/invite-avatar.jpg'
@@ -44,7 +46,14 @@ const getUser = async () => {
 
     const data = response.data;
 
-    console.log(data);
+    const now = new Date(data.date.replace(/-/g, '/')).getTime()
+    const rawTime = data.check_ads_1;
+
+    if (rawTime) {
+      if (rawTime > now) {
+        alert('test');
+      }
+    }
   })
 }
 
