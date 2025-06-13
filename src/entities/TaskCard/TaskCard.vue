@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
 import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
 import api from '@/utils/api'
 import { createCountdown } from '@/utils/useCountdown'
-
 
 const props = defineProps<TaskCardProps & { blockTimer?: string }>()
 const emit = defineEmits<{
@@ -14,9 +13,7 @@ const emit = defineEmits<{
 
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
-
-
-const storyBlockTimer = computed(() => props.blockTimer || null)
+const blockTimer = ref<string | null>(props.blockTimer || null)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -59,12 +56,9 @@ const handleCheckClick = async () => {
     if (data.status == 1) {
       if (props.task.id == 1) {
         createCountdown(data.time, data.new_date, (formatted) => {
-          console.log(formatted)
-          //storyBlockTimer.value = formatted
+          blockTimer.value = formatted
         })
-      }
-
-      if (props.task.id != 1) {
+      } else {
         visible.value = false
         setTimeout(() => {
           emit('taskChecked', props.task.id)
@@ -88,8 +82,8 @@ const handleCheckClick = async () => {
         </div>
       </div>
 
-      <div v-if="storyBlockTimer" class="block-timer">
-        {{ storyBlockTimer }}
+      <div v-if="blockTimer" class="block-timer">
+        {{ blockTimer }}
       </div>
 
       <div v-else-if="task.checkButton" style="display: flex; flex-direction: column; width: 33%;">
