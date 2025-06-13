@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
 import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
 import api from '@/utils/api'
+import { createCountdown } from '@/utils/useCountdown'
+
 
 const props = defineProps<TaskCardProps & { blockTimer?: string }>()
 const emit = defineEmits<{
@@ -13,8 +15,7 @@ const emit = defineEmits<{
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
 
-// Используем computed для реактивности
-const storyBlockTimer = computed(() => props.blockTimer || null)
+const storyBlockTimer = ref(props.blockTimer || null)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -56,7 +57,9 @@ const handleCheckClick = async () => {
     const data = response.data
     if (data.status == 1) {
       if (props.task.id == 1) {
-        // Таймер будет обновляться через пропс из tasksPage.vue
+        createCountdown(data.time, data.new_date, (formatted) => {
+          storyBlockTimer.value = formatted
+        })
       }
 
       if (props.task.id != 1) {
