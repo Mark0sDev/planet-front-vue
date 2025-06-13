@@ -14,35 +14,41 @@ import { createCountdown } from '@/utils/useCountdown'
 const { t } = useI18n()
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
-declare function show_8998929(): Promise<void>;
+declare function show_8998929(): Promise<void>
 
 const adsTimer = ref('')
-const storyBlockTimer = ref('') // новая переменная
+const storyBlockTimer = ref('')
+
+interface TaskFromApi {
+  id: number
+  user_id: number
+  tasks_id: number
+}
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const response = await api.post('/users/getUser', {
       initData,
       user_id
-    });
+    })
 
-    const data = response.data;
-    const now = data.date;
-    const adsRawTime = data.check_ads_1;
-    const storyRawTime = data.check_story_tasks;
+    const data = response.data
+    const now = data.date
+    const adsRawTime = data.check_ads_1
+    const storyRawTime = data.check_story_tasks
 
     if (adsRawTime && adsRawTime > now) {
       createCountdown(now, adsRawTime, (formatted) => {
-        adsTimer.value = formatted;
-      });
+        adsTimer.value = formatted
+      })
     }
 
     if (storyRawTime && storyRawTime > now) {
       createCountdown(now, storyRawTime, (formatted) => {
-        storyBlockTimer.value = formatted;
-      });
+        storyBlockTimer.value = formatted
+      })
     }
-  });
+  })
 }
 
 const adsSuccess = () =>
@@ -59,7 +65,7 @@ async function adsClaim() {
   })
 }
 
-const dailyTasks: Task[] = [
+const dailyTasks = ref<Task[]>([
   {
     id: 1,
     title: 'Пригласить 5 друзей',
@@ -68,7 +74,7 @@ const dailyTasks: Task[] = [
     timer: 'Награда: 0.001 TON',
     checkButton: true,
   }
-];
+])
 
 const getTasks = async () => {
   await loaderRef.value?.withLoader(async () => {
@@ -76,14 +82,18 @@ const getTasks = async () => {
       initData,
       user_id,
     })
-    console.log(data);
 
+    const completedTaskIds = (data.tasks as TaskFromApi[]).map(task => task.tasks_id)
+
+    dailyTasks.value = dailyTasks.value.filter(
+      (task) => !completedTaskIds.includes(task.id)
+    )
   })
 }
 
 onMounted(() => {
   getUser()
-  getTasks();
+  getTasks()
 })
 </script>
 
@@ -133,7 +143,6 @@ onMounted(() => {
   </div>
 </template>
 
-
 <style scoped>
 .tasks-page .title-1 {
   margin-bottom: 10px;
@@ -146,14 +155,8 @@ onMounted(() => {
   padding-bottom: 2px;
   color: #ffffff;
   border: 1px solid #32315f;
-
-
-
   background-image: url('@/shared/assets/bg/benefit-2-bg.png');
-
 }
-
-
 
 .daily-action-card {
   width: 100%;
@@ -162,8 +165,6 @@ onMounted(() => {
   margin-bottom: 12px;
   transition: background 0.3s;
   border: 1px solid #32315f;
-
-
 }
 
 .tasks-banner {
@@ -171,20 +172,18 @@ onMounted(() => {
   width: 100%;
   background-image: url('@/shared/assets/bg/tasks-banner-bg.jpg');
   border: 1px solid #32315f;
-
   background-size: cover;
   background-repeat: no-repeat;
-
   padding: 18px;
   border-radius: 30px;
   overflow: hidden;
   margin-bottom: 10px;
   padding: 31px 22px;
+}
 
-  p {
-    font-size: 12px;
-    font-weight: 300;
-  }
+.tasks-banner p {
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .tasks-banner-inner {
@@ -200,14 +199,12 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+}
 
-  .card-icon {
-    flex: none;
-    width: 31px;
-    height: 31px;
-  }
-
-
+.card-icon {
+  flex: none;
+  width: 31px;
+  height: 31px;
 }
 
 .card-title {
