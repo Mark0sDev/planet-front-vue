@@ -5,7 +5,12 @@ import UiButton from '@/shared/ui/UiButton.vue'
 import { tg, user_id, language_code } from '@/utils/telegramUser'
 
 const props = defineProps<TaskCardProps & { blockTimer?: string }>()
+const emit = defineEmits<{
+  (e: 'taskChecked', id: number): void
+}>()
+
 const checkEnabled = ref(props.task.disabledCheck === false)
+const visible = ref(true)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -39,33 +44,39 @@ const handleGoClick = () => {
 
 const handleCheckClick = () => {
   console.log('Проверка задачи ID:', props.task.id)
+  visible.value = false
+  setTimeout(() => {
+    emit('taskChecked', props.task.id)
+  }, 300)
 }
 </script>
 
 <template>
-  <div class="task-card claim-card">
-    <div class="task-info">
-      <img :src="task.avatar" alt="Task Avatar" class="task-avatar" />
-      <div class="task-texts">
-        <div class="task-title">{{ task.title }}</div>
-        <div class="task-reward" v-if="task.timer">{{ task.timer }}</div>
+  <transition name="fade-slide">
+    <div v-if="visible" class="task-card claim-card">
+      <div class="task-info">
+        <img :src="task.avatar" alt="Task Avatar" class="task-avatar" />
+        <div class="task-texts">
+          <div class="task-title">{{ task.title }}</div>
+          <div class="task-reward" v-if="task.timer">{{ task.timer }}</div>
+        </div>
+      </div>
+
+      <div v-if="blockTimer" class="block-timer">
+        {{ blockTimer }}
+      </div>
+
+      <div v-else-if="task.checkButton" style="display: flex; flex-direction: column; width: 33%;">
+        <UiButton v-if="task.link" color="yellow" class="task-action" size="sm" @click="handleGoClick">
+          Перейти
+        </UiButton>
+
+        <UiButton class="task-action" size="sm" :disabled="!checkEnabled" @click="handleCheckClick">
+          Проверить
+        </UiButton>
       </div>
     </div>
-
-    <div v-if="blockTimer" class="block-timer">
-      {{ blockTimer }}
-    </div>
-
-    <div v-else-if="task.checkButton" style="display: flex; flex-direction: column; width: 33%;">
-      <UiButton v-if="task.link" color="yellow" class="task-action" size="sm" @click="handleGoClick">
-        Перейти
-      </UiButton>
-
-      <UiButton class="task-action" size="sm" :disabled="!checkEnabled" @click="handleCheckClick">
-        Проверить
-      </UiButton>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped lang="scss">
@@ -81,6 +92,7 @@ const handleCheckClick = () => {
   margin-bottom: 12px;
   color: #ffffff;
   border: 1px solid #32315f;
+  transition: all 0.3s ease;
 }
 
 .task-info {
@@ -120,7 +132,7 @@ const handleCheckClick = () => {
   line-height: 1;
 }
 
-.task-action + .task-action {
+.task-action+.task-action {
   margin-top: 10px;
 }
 
@@ -139,5 +151,15 @@ const handleCheckClick = () => {
   font-size: 14px;
   font-weight: 600;
   opacity: 0.7;
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>
