@@ -42,8 +42,7 @@ const handleGoClick = () => {
     window.open(props.task.link, '_blank')
   }
 }
-
-const localBlockTimer = ref(props.blockTimer)
+const blockTimer = ref(props.blockTimer || '')
 
 const handleCheckClick = async () => {
   try {
@@ -56,7 +55,7 @@ const handleCheckClick = async () => {
     const data = response.data
     if (data.status == 1) {
       if (props.task.id != 1) {
-        localBlockTimer.value = 'test';
+        blockTimer.value = 'test';
       }
       if (props.task.id != 1) {
         visible.value = false
