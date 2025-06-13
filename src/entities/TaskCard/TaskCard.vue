@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
 import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
@@ -12,7 +12,9 @@ const emit = defineEmits<{
 
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
-const storyBlockTimer = ref<string | null>(props.blockTimer || null)
+
+// Используем computed для реактивности
+const storyBlockTimer = computed(() => props.blockTimer || null)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -37,10 +39,9 @@ const handleGoClick = () => {
           name: '💎 GO EARN'
         }
       })
-      return
+    } else {
+      window.open(props.task.link, '_blank')
     }
-
-    window.open(props.task.link, '_blank')
   }
 }
 
@@ -55,8 +56,7 @@ const handleCheckClick = async () => {
     const data = response.data
     if (data.status == 1) {
       if (props.task.id == 1) {
-
-        storyBlockTimer.value = '00:59:59' // или полученное с API значение
+        // Таймер будет обновляться через пропс из tasksPage.vue
       }
 
       if (props.task.id != 1) {
@@ -66,12 +66,10 @@ const handleCheckClick = async () => {
         }, 300)
       }
     }
-
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error)
   }
 }
-
 </script>
 
 <template>
