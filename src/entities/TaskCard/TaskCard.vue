@@ -12,7 +12,7 @@ const emit = defineEmits<{
 
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
-const localBlockTimer = ref<string | null>(props.blockTimer || null)
+const storyBlockTimer = ref<string | null>(props.blockTimer || null)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -56,7 +56,7 @@ const handleCheckClick = async () => {
     if (data.status == 1) {
       if (props.task.id == 1) {
 
-        localBlockTimer.value = '00:59:59' // или полученное с API значение
+        storyBlockTimer.value = '00:59:59' // или полученное с API значение
       }
 
       if (props.task.id != 1) {
@@ -85,8 +85,8 @@ const handleCheckClick = async () => {
         </div>
       </div>
 
-      <div v-if="localBlockTimer" class="block-timer">
-        {{ localBlockTimer }}
+      <div v-if="storyBlockTimer" class="block-timer">
+        {{ storyBlockTimer }}
       </div>
 
       <div v-else-if="task.checkButton" style="display: flex; flex-direction: column; width: 33%;">
