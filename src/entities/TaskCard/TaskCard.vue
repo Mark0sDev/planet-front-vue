@@ -2,31 +2,26 @@
 import { ref } from 'vue'
 import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
-
 import { tg, user_id, language_code } from '@/utils/telegramUser'
 
-const { task } = defineProps<TaskCardProps>()
-
-const checkEnabled = ref(task.disabledCheck === false)
-
+const props = defineProps<TaskCardProps & { blockTimer?: string }>()
+const checkEnabled = ref(props.task.disabledCheck === false)
 
 const handleGoClick = () => {
-  if (task.link) {
+  if (props.task.link) {
     setTimeout(() => {
       checkEnabled.value = true
-    }, 3000);
+    }, 3000)
 
-    if (task.link == 'story') {
-      let msg = 'https://t.me/CivilizationTon_bot/app?startapp=' + user_id;
-
-      const mediaUrl = 'https://www.planetton.app/story.png';
+    if (props.task.link === 'story') {
+      let msg = 'https://t.me/CivilizationTon_bot/app?startapp=' + user_id
+      const mediaUrl = 'https://www.planetton.app/story.png'
 
       if (language_code === 'ru' || language_code === 'ua') {
-        msg += ' 🪐 6% в сутки, получай TON уже сейчас! 💎 #CivilizationTon_bot';
+        msg += ' 🪐 6% в сутки, получай TON уже сейчас! 💎 #CivilizationTon_bot'
       } else {
-        msg += ' 🪐 6% daily, start earning TON now! 💎 #CivilizationTon_bot';
+        msg += ' 🪐 6% daily, start earning TON now! 💎 #CivilizationTon_bot'
       }
-
 
       tg.shareToStory(mediaUrl, {
         text: msg,
@@ -34,17 +29,17 @@ const handleGoClick = () => {
           url: 'https://t.me/CivilizationTon_bot/app?startapp=' + user_id,
           name: '💎 GO EARN'
         }
-      });
-      return;
+      })
+      return
     }
-    window.open(task.link, '_blank')
+
+    window.open(props.task.link, '_blank')
   }
 }
 
 const handleCheckClick = () => {
-  console.log('Проверка задачи ID:', task.id)
+  console.log('Проверка задачи ID:', props.task.id)
 }
-
 </script>
 
 <template>
@@ -53,13 +48,15 @@ const handleCheckClick = () => {
       <img :src="task.avatar" alt="Task Avatar" class="task-avatar" />
       <div class="task-texts">
         <div class="task-title">{{ task.title }}</div>
-        <div class="task-reward" v-if="task.timer">
-          {{ task.timer }}
-        </div>
+        <div class="task-reward" v-if="task.timer">{{ task.timer }}</div>
       </div>
     </div>
 
-    <div style="display: flex; flex-direction: column; width: 33%;">
+    <div v-if="blockTimer" class="block-timer">
+      {{ blockTimer }}
+    </div>
+
+    <div v-else-if="task.checkButton" style="display: flex; flex-direction: column; width: 33%;">
       <UiButton v-if="task.link" color="yellow" class="task-action" size="sm" @click="handleGoClick">
         Перейти
       </UiButton>
@@ -123,7 +120,7 @@ const handleCheckClick = () => {
   line-height: 1;
 }
 
-.task-action+.task-action {
+.task-action + .task-action {
   margin-top: 10px;
 }
 
@@ -134,5 +131,13 @@ const handleCheckClick = () => {
 .task-action:disabled {
   pointer-events: none;
   opacity: 0.6;
+}
+
+.block-timer {
+  width: 33%;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.7;
 }
 </style>

@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import api from '@/utils/api'
 import { ref, onMounted } from 'vue'
-
-
 import { initData, user_id } from '@/utils/telegramUser'
-
 import PageLoader from './PageLoader.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
-
 import { type Task, TaskStatus } from '@/entities/TaskCard/types.ts'
-import inviteFriendsAvatar from '@/shared/assets/avatars/invite-avatar.jpg'
-import TasksStory from '@/shared/assets/avatars/avatar-2.jpg'
+import inviteFriendsAvatar from '@/shared/assets/avatars/avatar-1.jpg'
+import TasksStory from '@/shared/assets/avatars/avatar-3.jpg'
 import TaskCard from '@/entities/TaskCard/TaskCard.vue'
-
 import { useI18n } from 'vue-i18n'
 import { createCountdown } from '@/utils/useCountdown'
 
@@ -20,7 +15,9 @@ const { t } = useI18n()
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 declare function show_8998929(): Promise<void>;
+
 const adsTimer = ref('')
+const storyBlockTimer = ref('') // новая переменная
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
@@ -30,16 +27,22 @@ const getUser = async () => {
     });
 
     const data = response.data;
-
     const now = data.date;
-    const rawTime = data.check_ads_1;
+    const adsRawTime = data.check_ads_1;
+    const storyRawTime = data.check_story_tasks;
 
-    if (rawTime && rawTime > now) {
-      createCountdown(now, rawTime, (formatted) => {
-        adsTimer.value = formatted
-      })
+    if (adsRawTime && adsRawTime > now) {
+      createCountdown(now, adsRawTime, (formatted) => {
+        adsTimer.value = formatted;
+      });
     }
-  })
+
+    if (storyRawTime && storyRawTime > now) {
+      createCountdown(now, storyRawTime, (formatted) => {
+        storyBlockTimer.value = formatted;
+      });
+    }
+  });
 }
 
 const adsSuccess = () =>
@@ -59,16 +62,6 @@ async function adsClaim() {
 const dailyTasks: Task[] = [
   {
     id: 1,
-    title: 'Опубликовать историю Telegram',
-    avatar: inviteFriendsAvatar,
-    status: TaskStatus.CLAIM,
-    timer: 'Награда: 0.001 TON',
-    checkButton: false,
-    link: 'story',
-    disabledCheck: true,
-  },
-  {
-    id: 2,
     title: 'Пригласить 5 друзей',
     avatar: TasksStory,
     status: TaskStatus.CLAIM,
@@ -112,6 +105,17 @@ onMounted(() => {
     </div>
 
     <h2 class="title-1">{{ t('tasks.osnova_tasks') }}</h2>
+
+    <TaskCard :task="{
+      id: 1,
+      title: 'Опубликовать историю Telegram',
+      avatar: inviteFriendsAvatar,
+      status: TaskStatus.CLAIM,
+      checkButton: true,
+      link: 'story',
+      timer: 'Награда: 0.001 TON',
+      disabledCheck: true
+    }" :blockTimer="storyBlockTimer" />
 
     <TaskCard v-for="task in dailyTasks" :key="task.id" :task="task" />
   </div>
