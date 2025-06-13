@@ -43,6 +43,8 @@ const handleGoClick = () => {
   }
 }
 
+const localBlockTimer = ref(props.blockTimer)
+
 const handleCheckClick = async () => {
   try {
     const response = await api.post('/users/checkTasks', {
@@ -53,6 +55,9 @@ const handleCheckClick = async () => {
 
     const data = response.data
     if (data.status == 1) {
+      if (props.task.id != 1) {
+        localBlockTimer.value = 'test';
+      }
       if (props.task.id != 1) {
         visible.value = false
         setTimeout(() => {
