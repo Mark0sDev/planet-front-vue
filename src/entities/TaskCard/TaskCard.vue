@@ -12,6 +12,7 @@ const emit = defineEmits<{
 
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
+const taskCompleted = ref(false)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -42,7 +43,6 @@ const handleGoClick = () => {
     window.open(props.task.link, '_blank')
   }
 }
-const blockTimer = ref(props.blockTimer || '')
 
 const handleCheckClick = async () => {
   try {
@@ -55,13 +55,13 @@ const handleCheckClick = async () => {
     const data = response.data
     if (data.status == 1) {
       if (props.task.id != 1) {
-        blockTimer.value = 'test';
+        taskCompleted.value = true
       }
       if (props.task.id != 1) {
-        visible.value = false
         setTimeout(() => {
+          visible.value = false
           emit('taskChecked', props.task.id)
-        }, 300)
+        }, 800)
       }
     }
 
@@ -69,7 +69,6 @@ const handleCheckClick = async () => {
     console.error('Ошибка при выполнении запроса:', error)
   }
 }
-
 </script>
 
 <template>
@@ -87,14 +86,30 @@ const handleCheckClick = async () => {
         {{ blockTimer }}
       </div>
 
-      <div v-else-if="task.checkButton" style="display: flex; flex-direction: column; width: 33%;">
-        <UiButton v-if="task.link" color="yellow" class="task-action" size="sm" @click="handleGoClick">
-          Перейти
-        </UiButton>
+      <div v-else class="task-actions">
+        <template v-if="!taskCompleted">
+          <UiButton
+            v-if="task.checkButton && task.link"
+            color="yellow"
+            class="task-action"
+            size="sm"
+            @click="handleGoClick"
+          >
+            Перейти
+          </UiButton>
 
-        <UiButton class="task-action" size="sm" :disabled="!checkEnabled" @click="handleCheckClick">
-          Проверить
-        </UiButton>
+          <UiButton
+            v-if="task.checkButton"
+            class="task-action"
+            size="sm"
+            :disabled="!checkEnabled"
+            @click="handleCheckClick"
+          >
+            Проверить
+          </UiButton>
+        </template>
+
+        <div v-else class="done-text">✅ Выполнено</div>
       </div>
     </div>
   </transition>
@@ -146,6 +161,12 @@ const handleCheckClick = async () => {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
 .task-action {
   width: auto;
   color: black;
@@ -153,7 +174,7 @@ const handleCheckClick = async () => {
   line-height: 1;
 }
 
-.task-action+.task-action {
+.task-action + .task-action {
   margin-top: 10px;
 }
 
@@ -172,6 +193,14 @@ const handleCheckClick = async () => {
   font-size: 14px;
   font-weight: 600;
   opacity: 0.7;
+}
+
+.done-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #32ff9c;
+  text-align: center;
+  margin-top: 6px;
 }
 
 .fade-slide-enter-active,
