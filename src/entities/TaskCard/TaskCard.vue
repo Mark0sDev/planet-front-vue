@@ -2,7 +2,8 @@
 import { ref } from 'vue'
 import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
-import { tg, user_id, language_code } from '@/utils/telegramUser'
+import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
+import api from '@/utils/api'
 
 const props = defineProps<TaskCardProps & { blockTimer?: string }>()
 const emit = defineEmits<{
@@ -42,13 +43,25 @@ const handleGoClick = () => {
   }
 }
 
-const handleCheckClick = () => {
-  console.log('Проверка задачи ID:', props.task.id)
-  visible.value = false
-  setTimeout(() => {
-    emit('taskChecked', props.task.id)
-  }, 300)
+const handleCheckClick = async () => {
+  try {
+    const response = await api.post('/users/checkTasks', {
+      initData,
+      user_id,
+      id: props.task.id,
+    })
+
+    const data = response.data
+    alert(data)
+    visible.value = false
+    setTimeout(() => {
+      emit('taskChecked', props.task.id)
+    }, 300)
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса:', error)
+  }
 }
+
 </script>
 
 <template>
