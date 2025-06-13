@@ -54,8 +54,8 @@ const handleCheckClick = async () => {
 
     const data = response.data
     if (data.status == 1) {
-      if (props.task.id != 1) {
-        alert('test');
+      if (props.task.id == 1) {
+
         localBlockTimer.value = '00:59:59' // или полученное с API значение
       }
 
