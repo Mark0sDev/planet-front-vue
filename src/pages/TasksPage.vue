@@ -72,7 +72,7 @@ const dailyTasks: Task[] = [
 
 const getTasks = async () => {
   await loaderRef.value?.withLoader(async () => {
-    const { data } = await api.post('/users/getTasksUser', {
+    const { data } = await api.post('/users/getTasks', {
       initData,
       user_id,
     })
