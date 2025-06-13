@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
 import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
@@ -15,7 +15,8 @@ const emit = defineEmits<{
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
 
-const storyBlockTimer = ref(props.blockTimer || null)
+
+const storyBlockTimer = computed(() => props.blockTimer || null)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -58,7 +59,8 @@ const handleCheckClick = async () => {
     if (data.status == 1) {
       if (props.task.id == 1) {
         createCountdown(data.time, data.new_date, (formatted) => {
-          storyBlockTimer.value = formatted
+          console.log(formatted)
+          //storyBlockTimer.value = formatted
         })
       }
 
