@@ -15,7 +15,7 @@ const handleGoClick = () => {
     if (task.link == 'story') {
       let msg = 'https://t.me/CivilizationTon_bot/app?startapp=' + user_id;
 
-      const mediaUrl = 'https://www.planetton.app/img/story.png';
+      const mediaUrl = 'https://www.planetton.app/story.png';
 
       if (language_code === 'ru' || language_code === 'ua') {
         msg += ' 🪐 6% в сутки, получай TON уже сейчас! 💎 #CivilizationTon_bot';
