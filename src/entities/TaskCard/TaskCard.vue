@@ -52,11 +52,15 @@ const handleCheckClick = async () => {
     })
 
     const data = response.data
-    alert(data)
-    visible.value = false
-    setTimeout(() => {
-      emit('taskChecked', props.task.id)
-    }, 300)
+    if (data.status == 1) {
+      if (props.task.id != 1) {
+        visible.value = false
+        setTimeout(() => {
+          emit('taskChecked', props.task.id)
+        }, 300)
+      }
+    }
+
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error)
   }
