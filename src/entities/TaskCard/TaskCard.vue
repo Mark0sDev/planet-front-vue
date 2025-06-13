@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
 import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
@@ -13,7 +13,16 @@ const emit = defineEmits<{
 
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
-const blockTimer = ref<string | null>(props.blockTimer || null)
+
+const blockTimer = ref<string | null>(props.blockTimer ?? null)
+
+watch(
+  () => props.blockTimer,
+  (newVal) => {
+    blockTimer.value = newVal ?? null
+  }
+)
+
 
 const handleGoClick = () => {
   if (props.task.link) {
