@@ -73,6 +73,7 @@ const dailyTasks = ref<Task[]>([
     status: TaskStatus.CLAIM,
     timer: 'Награда: 0.001 TON',
     checkButton: true,
+    disabledCheck: false
   }
 ])
 
