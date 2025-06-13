@@ -4,16 +4,22 @@ import { defineProps, defineEmits, withDefaults } from 'vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import UiDialog from '@/shared/ui/UiDialog.vue'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+declare function show_8998929(): Promise<void>;
 interface Props {
   modelValue: boolean
   textTemplate?: string
   textParams?: Record<string, string | number>
   imageSrc?: string
+  showExtraButton?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   textTemplate: 'Действие выполнено успешно!',
   textParams: () => ({}),
+  showExtraButton: false,
 })
 
 const emit = defineEmits<{
@@ -23,6 +29,13 @@ const emit = defineEmits<{
 function close() {
   emit('update:modelValue', false)
 }
+
+function adsClaim() {
+  show_8998929();
+  
+  emit('update:modelValue', false)
+}
+
 
 const renderedText = computed(() => {
   return props.textTemplate.replace(/\{\{(.*?)\}\}/g, (_, key) => {
@@ -38,7 +51,15 @@ const renderedText = computed(() => {
       <h2 class="modal-title title-1">Успешно!</h2>
       <img class="congrats-modal-image" v-if="imageSrc" :src="imageSrc" alt="" />
       <p class="modal-text" v-html="renderedText"></p>
-      <UiButton @click="close" color="accent" class="congrats-modal-btn">Продолжить</UiButton>
+      <div class="button-group">
+        <UiButton @click="close" color="accent" class="congrats-modal-btn">
+          {{ t('congrats.continue') }}
+        </UiButton>
+        <UiButton v-if="props.showExtraButton" @click="adsClaim" color="yellow" class="congrats-modal-btn">
+          {{ t('congrats.watchAd') }}
+        </UiButton>
+
+      </div>
     </div>
   </UiDialog>
 </template>
@@ -70,6 +91,13 @@ const renderedText = computed(() => {
     height: 128px;
     border-radius: 10px;
     margin: 10px auto;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 }
 </style>

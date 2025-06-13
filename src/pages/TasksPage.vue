@@ -1,32 +1,17 @@
 <script setup lang="ts">
+import api from '@/utils/api'
+import { ref, onMounted } from 'vue'
 
-import api from '@/utils/api';
-import { ref, onMounted } from 'vue';
 
-import {
-  initData,
-  user_id,
-} from '@/utils/telegramUser';
+import { initData, user_id } from '@/utils/telegramUser'
 
 import PageLoader from './PageLoader.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 
-
-//const countdownTasks1 = ref<Record<number, string>>({})
-/*
 import { type Task, TaskStatus } from '@/entities/TaskCard/types.ts'
 import inviteFriendsAvatar from '@/shared/assets/avatars/invite-avatar.jpg'
+import TasksStory from '@/shared/assets/avatars/avatar-2.jpg'
 import TaskCard from '@/entities/TaskCard/TaskCard.vue'
-const dailyTasks: Task[] = [
-  {
-    id: 1,
-    title: 'Пригласи 10 друзей',
-    avatar: inviteFriendsAvatar,
-    reward: '0.0005',
-    status: TaskStatus.CLAIM,
-    timer: '00:00:00 до следующей награды',
-  },
-];*/
 
 import { useI18n } from 'vue-i18n'
 import { createCountdown } from '@/utils/useCountdown'
@@ -49,12 +34,10 @@ const getUser = async () => {
     const now = data.date;
     const rawTime = data.check_ads_1;
 
-    if (rawTime) {
-      if (rawTime > now) {
-        createCountdown(now, rawTime, (formatted) => {
-          adsTimer.value = formatted
-        })
-      }
+    if (rawTime && rawTime > now) {
+      createCountdown(now, rawTime, (formatted) => {
+        adsTimer.value = formatted
+      })
     }
   })
 }
@@ -63,15 +46,36 @@ const adsSuccess = () =>
   api.post('/users/adsSuccess', { initData, user_id })
 
 async function adsClaim() {
-  await show_8998929();
-  const ads = await adsSuccess();
+  await show_8998929()
+  const ads = await adsSuccess()
   const rawTime = ads.data.time
   const newTime = ads.data.new_date
+
   createCountdown(rawTime, newTime, (formatted) => {
     adsTimer.value = formatted
   })
-
 }
+
+const dailyTasks: Task[] = [
+  {
+    id: 1,
+    title: 'Опубликовать историю Telegram',
+    avatar: inviteFriendsAvatar,
+    status: TaskStatus.CLAIM,
+    timer: 'Награда: 0.001 TON',
+    checkButton: false,
+    link: 'story',
+    disabledCheck: true,
+  },
+  {
+    id: 2,
+    title: 'Пригласить 5 друзей',
+    avatar: TasksStory,
+    status: TaskStatus.CLAIM,
+    timer: 'Награда: 0.001 TON',
+    checkButton: true,
+  }
+];
 
 onMounted(() => {
   getUser()
@@ -80,22 +84,21 @@ onMounted(() => {
 
 <template>
   <PageLoader ref="loaderRef" />
+
   <div class="tasks-page page">
     <div class="tasks-banner">
       <div class="tasks-banner-inner">
         <h2 class="banner-title title-1">{{ t('nav.tasks') }}</h2>
-        <p v-html="t('tasks.banner_text')">
-
-        </p>
+        <p v-html="t('tasks.banner_text')"></p>
       </div>
     </div>
+
     <h2 class="title-1">{{ t('tasks.every_day_tasks_title') }}</h2>
 
     <div class="daily-action-card balance-action-card">
       <div class="card-head">
         <div class="card-icon">
-
-          <img e src="/icons/ton.svg" alt="" />
+          <img src="/icons/ton.svg" alt="" />
         </div>
         <div class="card-head-inner">
           <div class="card-title">{{ t('tasks.tasks_ads') }}</div>
@@ -106,17 +109,14 @@ onMounted(() => {
         <template v-if="adsTimer">{{ adsTimer }}</template>
         <template v-else>{{ t('tasks.ads_button') }}</template>
       </UiButton>
-      <div class="card-reward variant-yellow">
-        <slot name="reward"> </slot>
-      </div>
     </div>
 
     <h2 class="title-1">{{ t('tasks.osnova_tasks') }}</h2>
-    <!-- 
+
     <TaskCard v-for="task in dailyTasks" :key="task.id" :task="task" />
-    -->
   </div>
 </template>
+
 
 <style scoped>
 .tasks-page .title-1 {

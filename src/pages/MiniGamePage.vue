@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts">/*
 import UiButton from '@/shared/ui/UiButton.vue'
 import SlotsIcon from '@/shared/assets/icons/slot-machine.svg'
 import { useRouter } from 'vue-router'
@@ -8,13 +8,14 @@ const router = useRouter()
 
 const spinRouter = () => router.push(AppRoutes.ROULETTE)
 const crashRouter = () => router.push(AppRoutes.CRASH)
-const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)
+const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)*/
 </script>
 
 <template>
     <div class="page">
+      
         <h2 class="title title-1">Мини-Игры</h2>
-
+  <!-- 
         <div class="game-card appear-delay-1">
             <div class="card-header">
                 <h3>Рулетка</h3>
@@ -49,7 +50,9 @@ const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)
             </div>
             <UiButton @click="coinFlipRouter">Играть в Орёл и Решку</UiButton>
         </div>
+        -->
     </div>
+    
 </template>
 
 <style scoped lang="scss">

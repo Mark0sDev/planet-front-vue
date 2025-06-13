@@ -8,9 +8,11 @@ export interface Task {
   id: number
   title: string
   avatar: string
-  reward: string
   status: TaskStatus
   timer?: string
+  checkButton: boolean
+  link?: string
+  disabledCheck?: boolean
 }
 
 export interface TaskCardProps {

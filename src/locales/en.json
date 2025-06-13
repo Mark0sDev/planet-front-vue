@@ -76,6 +76,7 @@
     "tasks_ads_desc": "Watch an ad every <span style='color: #FFCD1D;'>3 hours</span> and get <span style='color: #27aff9;'>0.0001 TON</span>"
   },
   "nav": {
+    "game": "Games",
     "home": "Home",
     "minigame": "Games",
     "friends": "Friends",

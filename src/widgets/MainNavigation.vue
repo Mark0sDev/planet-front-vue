@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { NAVIGATION } from '@/app/router/navigation.ts'
-import MiniGameIcon from '@/shared/assets/icons/minigame.svg'
+
 import { useI18n } from 'vue-i18n'
 import { AppRoutes } from '@/app/router/router.ts'
 
@@ -13,7 +13,15 @@ function isActive(path: string) {
 }
 
 function isEarnButton(path: string) {
+  return path === AppRoutes.PLANETS || path === AppRoutes.MINIGAME
+}
+
+function isPlanets(path: string) {
   return path === AppRoutes.PLANETS
+}
+
+function isMiniGame(path: string) {
+  return path === AppRoutes.MINIGAME
 }
 </script>
 
@@ -25,7 +33,9 @@ function isEarnButton(path: string) {
       :to="item.path"
       :class="{
         active: isActive(item.path),
-        'earn-button': isEarnButton(item.path)
+        'earn-button': isEarnButton(item.path),
+        'planets-button': isPlanets(item.path),
+        'minigame-button': isMiniGame(item.path)
       }"
       class="nav-item"
     >
@@ -39,7 +49,7 @@ function isEarnButton(path: string) {
       <template v-else>
         <component
           :is="item.icon"
-          :class="['nav-icon', { 'no-fill': item.icon === MiniGameIcon }]"
+          class="nav-icon"
         />
         <span>{{ t(item.label) }}</span>
       </template>
@@ -91,7 +101,7 @@ function isEarnButton(path: string) {
   &.active {
     color: var(--accent);
 
-    svg:not(.no-fill) path {
+    svg path {
       fill: #6ceaf1;
     }
   }
@@ -111,11 +121,9 @@ function isEarnButton(path: string) {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #6ceaf1 0%, #4facfe 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(108, 234, 241, 0.3);
 
       .earn-icon {
         width: 24px;
@@ -134,17 +142,25 @@ function isEarnButton(path: string) {
       font-size: 12px;
     }
 
-    &.active {
-      .earn-circle {
-        background: linear-gradient(135deg, #5dd9e0 0%, #3d9bfd 100%);
-        box-shadow: 0 2px 12px rgba(93, 217, 224, 0.4);
-      }
-
-      .earn-text {
-        color: var(--accent);
-        font-weight: 600;
-      }
+    &.active .earn-text {
+      color: var(--accent);
     }
+  }
+
+  &.planets-button .earn-circle {
+    background: linear-gradient(135deg, #6ceaf1 0%, #4facfe 100%);
+  }
+
+  &.planets-button.active .earn-circle {
+    background: linear-gradient(135deg, #5dd9e0 0%, #3d9bfd 100%);
+  }
+
+  &.minigame-button .earn-circle {
+    background: linear-gradient(135deg, #c86ef1 0%, #814dfd 100%);
+  }
+
+  &.minigame-button.active .earn-circle {
+    background: linear-gradient(135deg, #a74de0 0%, #6b3dfd 100%);
   }
 }
 </style>

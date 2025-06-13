@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onBeforeUnmount, reactive, onMounted } from 'vue'
+import { ref, onBeforeUnmount, reactive, onMounted, computed } from 'vue'
 import {
   tg,
   initData,
@@ -29,6 +29,7 @@ type Planet = {
   imageSrc: string
   income: string
   cost: string,
+  claim: string,
   income_final: string
   cycleTime: string
   earned: number
@@ -43,6 +44,7 @@ const planets = ref<Planet[]>([
     imageSrc: PlanetImage1,
     income: '6%',
     cost: '1 TON',
+    claim: "0.01 TON",
     cycleTime: '4 ч',
     earned: 0,
   },
@@ -54,6 +56,7 @@ const planets = ref<Planet[]>([
     imageSrc: PlanetImage2,
     income: '6%',
     cost: '100 TON',
+    claim: "1.5 TON",
     cycleTime: '6 ч',
     earned: 0,
   },
@@ -91,10 +94,8 @@ const formLoaders = reactive({
 const buyPlanetApi = ({ planetId }: { planetId: number }) =>
   api.post('/users/buyPlanet', { initData, user_id, planetId })
 
-
 const AttackPlanetApi = (planetId: number) =>
   api.post('/users/attackPlanet', { initData, user_id, planetId })
-
 
 const AttackPlanet = async (planetId: number) => {
   formLoaders.attackPlanet = true
@@ -117,7 +118,6 @@ const AttackPlanet = async (planetId: number) => {
     formLoaders.attackPlanet = false
   }
 }
-
 
 const handlePlanetClick = ({ index, planet }: { index: number; planet: Planet }) => {
   if (sceneActive.value) return
@@ -196,7 +196,7 @@ const getUser = async () => {
       planetStates.value[id] = data[`planet_${id}`] || 0
 
       if (data[`planet_${id}`] !== 0) {
-        const rawTime = data[`time_planet_${id}`] 
+        const rawTime = data[`time_planet_${id}`]
         if (rawTime) {
           const planetTime = new Date(rawTime.replace(/-/g, '/')).getTime() + 2000
 
@@ -221,6 +221,10 @@ const getUser = async () => {
     })
   })
 }
+
+const boughtPlanet = computed(() => {
+  return planets.value.find(p => p.id === attackedPlanetId.value || p.planetDisplayId === attackedPlanetId.value)
+})
 
 onMounted(() => {
   getUser()
@@ -277,6 +281,7 @@ onBeforeUnmount(() => {
                   <div class="stat-value">{{ planet.cost }}</div>
                 </div>
 
+
                 <div class="stat-item">
                   <div class="stat-label">
                     <svg class="stat-icon" viewBox="0 0 24 24">
@@ -300,8 +305,29 @@ onBeforeUnmount(() => {
                   </div>
                   <div class="stat-value">{{ planet.cycleTime }}</div>
                 </div>
+
+                <div class="stat-item">
+                  <div class="stat-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="stat-icon">
+                      <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                      <path d="M18 12h.01" />
+                      <path d="M19 22v-6" />
+                      <path d="m22 19-3-3-3 3" />
+                      <path d="M6 12h.01" />
+                      <circle cx="12" cy="12" r="2" />
+                    </svg>
+                    <span>{{ t('planet.claim') }}</span>
+                  </div>
+                  <div class="stat-value">{{ planet.claim }}</div>
+                </div>
               </div>
+
+
             </div>
+
+
 
             <div class="card-grid-row">
               <div class="stat-item">
@@ -344,16 +370,28 @@ onBeforeUnmount(() => {
       </div>
     </transition>
 
-    <CongratsDialog v-model="showCongratsDialog" text-template="Вы успешно атаковали планету #{{planet}}!"
-      :text-params="{ planet: attackedPlanetId ?? '' }" />
-    <CongratsDialog v-model="showCongratsDialog2" text-template="Вы купили #{{planet}}!"
-      :text-params="{ planet: attackedPlanetId ?? '' }" />
+    <CongratsDialog v-model="showCongratsDialog" :text-template="t('congrats.attack', {
+      name: boughtPlanet?.name,
+      time: boughtPlanet?.cycleTime,
+      reward: boughtPlanet?.claim
+    })" :text-params="{}" :show-extra-button="true" />
+
+    <CongratsDialog v-model="showCongratsDialog2" :text-template="t('congrats.buy', {
+      name: boughtPlanet?.name,
+      time: boughtPlanet?.cycleTime,
+      reward: boughtPlanet?.claim
+    })" :text-params="{}" :show-extra-button="true" />
+
   </div>
 </template>
 
 
 
 <style scoped lang="scss">
+.page {
+  padding-bottom: 120px;
+}
+
 .title {
   text-align: center;
   margin-bottom: 10px;

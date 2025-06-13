@@ -76,6 +76,7 @@
         "tasks_ads_desc": "Дивись рекламу кожні <span style='color: #FFCD1D;'>3 години</span>, отримуй <span style='color: #27aff9;'>0.0001 TON</span>"
     },
     "nav": {
+        "game": "Игры",
         "home": "Головна",
         "minigame": "Ігри",
         "friends": "Друзі",

@@ -1,53 +1,71 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { type TaskCardProps, TaskStatus } from '@/entities/TaskCard/types.ts'
+import { ref } from 'vue'
+import { type TaskCardProps } from '@/entities/TaskCard/types.ts'
 import UiButton from '@/shared/ui/UiButton.vue'
+
+import { tg, user_id, language_code } from '@/utils/telegramUser'
 
 const { task } = defineProps<TaskCardProps>()
 
-const buttonText = computed(() => {
-  const map = {
-    [TaskStatus.START]: 'Start',
-    [TaskStatus.CLAIM]: 'Claim',
-    [TaskStatus.DONE]: 'Done',
-  }
-  return map[task.status] || ''
-})
+const checkEnabled = ref(task.disabledCheck === false)
 
-const cardClass = computed(() => {
-  return {
-    'start-card': task.status === TaskStatus.START,
-    'claim-card': task.status === TaskStatus.CLAIM,
-    'done-card': task.status === TaskStatus.DONE,
+
+const handleGoClick = () => {
+  if (task.link) {
+    if (task.link == 'story') {
+      let msg = 'https://t.me/CivilizationTon_bot/app?startapp=' + user_id;
+
+      const mediaUrl = 'https://www.planetton.app/img/story.png';
+
+      if (language_code === 'ru' || language_code === 'ua') {
+        msg += ' 🪐 6% в сутки, получай TON уже сейчас! 💎 #CivilizationTon_bot';
+      } else {
+        msg += ' 🪐 6% daily, start earning TON now! 💎 #CivilizationTon_bot';
+      }
+
+
+      tg.shareToStory(mediaUrl, {
+        text: msg,
+        widget_link: {
+          url: 'https://t.me/CivilizationTon_bot/app?startapp=' + user_id,
+          name: '💎 GO EARN'
+        }
+      });
+      return;
+    }
+    window.open(task.link, '_blank')
   }
-})
+
+  checkEnabled.value = true
+}
+
+const handleCheckClick = () => {
+  console.log('Проверка задачи ID:', task.id)
+}
+
 </script>
 
 <template>
-  <div class="task-card" :class="cardClass">
+  <div class="task-card claim-card">
     <div class="task-info">
       <img :src="task.avatar" alt="Task Avatar" class="task-avatar" />
-
       <div class="task-texts">
         <div class="task-title">{{ task.title }}</div>
-
-        <div class="task-reward">
-          <template v-if="task.timer">
-            {{ task.timer }}
-          </template>
-          <template v-else> {{ task.reward }} TON </template>
+        <div class="task-reward" v-if="task.timer">
+          {{ task.timer }}
         </div>
       </div>
     </div>
 
-    <UiButton
-      class="task-action"
-      :color="task.status === 'claim' ? 'accent' : 'white'"
-      :disabled="task.status === 'done'"
-      size="sm"
-    >
-      {{ buttonText }}
-    </UiButton>
+    <div style="display: flex; flex-direction: column; width: 33%;">
+      <UiButton v-if="task.link" color="yellow" class="task-action" size="sm" @click="handleGoClick">
+        Перейти
+      </UiButton>
+
+      <UiButton class="task-action" size="sm" :disabled="!checkEnabled" @click="handleCheckClick">
+        Проверить
+      </UiButton>
+    </div>
   </div>
 </template>
 
@@ -95,23 +113,24 @@ const cardClass = computed(() => {
   font-weight: 400;
   color: rgba(255, 255, 255, 0.7);
 }
+
 .task-action {
   width: auto;
+  color: black;
   padding: 5px 10px;
   line-height: 1;
 }
 
-.start-card {
-  background-image: url('@/shared/assets/bg/user-card-bg.png');
+.task-action+.task-action {
+  margin-top: 10px;
 }
-.done-card {
-  background-image: url('@/shared/assets/bg/referal-bg.png');
-}
+
 .claim-card {
   background-image: url('@/shared/assets/bg/level-card-bg.png');
 }
 
 .task-action:disabled {
   pointer-events: none;
+  opacity: 0.6;
 }
 </style>
