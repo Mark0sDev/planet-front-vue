@@ -12,6 +12,10 @@ const checkEnabled = ref(task.disabledCheck === false)
 
 const handleGoClick = () => {
   if (task.link) {
+    setTimeout(() => {
+      checkEnabled.value = true
+    }, 3000);
+
     if (task.link == 'story') {
       let msg = 'https://t.me/CivilizationTon_bot/app?startapp=' + user_id;
 
@@ -35,8 +39,6 @@ const handleGoClick = () => {
     }
     window.open(task.link, '_blank')
   }
-
-  checkEnabled.value = true
 }
 
 const handleCheckClick = () => {
