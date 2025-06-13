@@ -7,12 +7,11 @@ import api from '@/utils/api'
 
 const props = defineProps<TaskCardProps & { blockTimer?: string }>()
 const emit = defineEmits<{
-  (e: 'taskChecked', id: number): void
+  (e: 'taskChecked', id: number, timer?: string): void
 }>()
 
 const checkEnabled = ref(props.task.disabledCheck === false)
 const visible = ref(true)
-const localBlockTimer = ref<string | null>(props.blockTimer || null)
 
 const handleGoClick = () => {
   if (props.task.link) {
@@ -55,23 +54,21 @@ const handleCheckClick = async () => {
     const data = response.data
     if (data.status == 1) {
       if (props.task.id == 1) {
-        alert('test');
-        localBlockTimer.value = '00:59:59' // или полученное с API значение
+        const timer = '00:59:59' // или data.blockTimer
+        emit('taskChecked', props.task.id, timer)
+        return
       }
 
-      if (props.task.id != 1) {
-        visible.value = false
-        setTimeout(() => {
-          emit('taskChecked', props.task.id)
-        }, 300)
-      }
+      visible.value = false
+      setTimeout(() => {
+        emit('taskChecked', props.task.id)
+      }, 300)
     }
 
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error)
   }
 }
-
 </script>
 
 <template>
@@ -85,8 +82,8 @@ const handleCheckClick = async () => {
         </div>
       </div>
 
-      <div v-if="localBlockTimer" class="block-timer">
-        {{ localBlockTimer }}
+      <div v-if="blockTimer" class="block-timer">
+        {{ blockTimer }}
       </div>
 
       <div v-else-if="task.checkButton" style="display: flex; flex-direction: column; width: 33%;">
