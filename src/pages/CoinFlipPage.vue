@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import UiButton from '@/shared/ui/UiButton.vue'
 import UiInput from '@/shared/ui/UiInput.vue'
 import TonIcon from '@/shared/assets/icons/ton.svg'
+import api from '@/utils/api';
+import PageLoader from './PageLoader.vue';
+
 import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+import {
+  initData,
+  user_id,
+} from '@/utils/telegramUser';
+
 
 const rotating = ref(false)
 const selectedSide = ref<number>(1)
@@ -12,7 +23,25 @@ const coinEl = ref<HTMLElement | null>(null)
 const win = ref(false)
 const showResult = ref(false)
 const modalText = ref<string>('')
+
 const lastFlipResult = ref<number>(1)
+const bet = ref<string>('0.1')
+const amountButtons = [0.1, 0.2, 0.5, 1, 2, 3]
+
+const selectAmount = (value: number) => {
+  bet.value = value.toString()
+}
+const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
+
+const getUser = async () => {
+  await loaderRef.value?.withLoader(async () => {
+    const [userApi] = await Promise.all([
+      api.post('/users/getUser', { initData, user_id }),
+    ])
+
+    alert(userApi);
+  });
+};
 
 const startFlip = async () => {
   if (rotating.value || !coinEl.value) return
@@ -42,119 +71,93 @@ const startFlip = async () => {
     modalText.value = win.value ? 'Вы выиграли!' : 'Увы, не повезло...'
   }, 2600)
 }
+
+
+onMounted(() => {
+  getUser();
+});
 </script>
 
 <template>
-  <div class="page coinflip-page">
-    <h2 class="title title-1">Мини-Игры</h2>
-    <div class="game-card">
-      <div class="card-header">
-        <h3>Выбор стороны</h3>
+  <PageLoader ref="loaderRef" />
+  <template v-if="user_id != 7981172932">
+    <h1 style="text-align: center; margin-top: 50px; font-size: 25px;">SOON DEV PAGE</h1>
+  </template>
+  <template v-else>
+    <div class="page coinflip-page">
+      <h2 class="title title-1">{{ t('minigame.coint_flip_title') }}</h2>
 
-      </div>
+      <div class="game-card">
 
-      <div class="coin" ref="coinEl"></div>
+        <div class="coin" ref="coinEl"></div>
 
-      <div class="bet-block">
-        <div class="bet-row">
-          <span class="bet-label">Ваша ставка:</span>
-          <UiInput placeholder="Ставка" value="0.1" :custom="{ type: 'icon' }">
+        <div class="bet-block">
+          <div class="bet-label">Ваша ставка:</div>
+
+          <div class="amount-buttons">
+            <button v-for="amount in amountButtons" :key="amount" :class="{ selected: bet === amount.toString() }"
+              @click="selectAmount(amount)">
+              {{ amount }}
+              <TonIcon class="coin-bet-icon" />
+            </button>
+          </div>
+
+          <UiInput placeholder="Введите ставку" v-model="bet" :custom="{ type: 'icon' }">
             <TonIcon class="coin-bet-icon" />
           </UiInput>
-        </div>
 
-        <div class="choice-row">
           <div class="choice-options">
             <label :class="{ selected: selectedSide === 1 }">
               <input type="radio" :value="1" v-model="selectedSide" />
               <img src="/src/shared/assets/coinFlip/coin-1.png" alt="Front" />
-
             </label>
+
             <label :class="{ selected: selectedSide === 2 }">
               <input type="radio" :value="2" v-model="selectedSide" />
               <img src="/src/shared/assets/coinFlip/coin-2.png" alt="Back" />
-
             </label>
           </div>
+
+          <UiButton color="yellow" @click="startFlip" :disabled="rotating">
+            Крутить
+          </UiButton>
         </div>
-
-        <UiButton color="yellow" @click="startFlip" :disabled="rotating">
-          Крутить
-        </UiButton>
       </div>
-    </div>
 
-    <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
-  </div>
+      <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
+    </div>
+  </template>
+
 </template>
 
 <style scoped lang="scss">
 .title {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-align: center;
 }
 
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .game-card {
-  background: #1f1f35;
+  background: #1e1d2e;
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
   color: white;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h3 {
-    font-size: 18px;
-    font-weight: 600;
-  }
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 10px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  line-height: 1;
-  color: white;
-  background: linear-gradient(135deg, #ff6ec4, #7873f5);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
 
 .coin {
-  width: 164px;
-  height: 164px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
-  position: relative;
-  z-index: 10;
-  transform-style: preserve-3d;
   margin: 0 auto;
+  transform-style: preserve-3d;
   transition: transform 0s;
-  box-shadow: 0 0 32px rgba(0, 255, 255, 0.2);
-  border: 2px solid rgba(0, 255, 255, 0.3);
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), transparent);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent);
+  border: 2px solid rgba(0, 255, 255, 0.25);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
 
   &::before,
   &::after {
@@ -163,11 +166,11 @@ const startFlip = async () => {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    backface-visibility: hidden;
     background-size: cover;
     background-position: center;
     top: 0;
     left: 0;
+    backface-visibility: hidden;
   }
 
   &::before {
@@ -181,46 +184,76 @@ const startFlip = async () => {
 }
 
 .bet-block {
-  background: linear-gradient(145deg, rgba(40, 44, 60, 0.6), rgba(25, 27, 40, 0.6));
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
-  padding: 16px;
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.02);
+  background: #2a2c45;
+  border-radius: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .bet-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #aaa;
-  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ccc;
+}
+
+.amount-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  button {
+    background: #1f2030;
+    color: white;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+      background: #27293d;
+    }
+
+    &.selected {
+      background: #3a3d65;
+      border-color: var(--accent, #00bcd4);
+      transform: scale(1.05);
+    }
+
+    svg {
+
+      height: 20px;
+    }
+  }
 }
 
 .choice-options {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 16px;
 
   label {
     width: 88px;
     height: 88px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #1d1f2b, #1a1c28);
-    box-shadow:
-      inset 2px 2px 4px rgba(0, 0, 0, 0.4),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    background: #25273a;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
 
     &.selected {
-      border: 2px solid var(--accent);
+      border: 2px solid var(--accent, #00bcd4);
       transform: scale(1.08);
     }
 
@@ -231,22 +264,13 @@ const startFlip = async () => {
     img {
       width: 54px;
       height: 54px;
-      object-fit: contain;
       pointer-events: none;
-      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
-    }
-
-    span {
-      position: absolute;
-      bottom: -18px;
-      font-size: 12px;
-      color: #aaa;
     }
   }
 }
 
 .coin-bet-icon {
-  width: 24px;
-  height: 24px;
+
+  height: 20px;
 }
 </style>

@@ -1,21 +1,34 @@
-<script setup lang="ts">/*
+<script setup lang="ts">
 import UiButton from '@/shared/ui/UiButton.vue'
-import SlotsIcon from '@/shared/assets/icons/slot-machine.svg'
+//import SlotsIcon from '@/shared/assets/icons/slot-machine.svg'
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 
-const spinRouter = () => router.push(AppRoutes.ROULETTE)
-const crashRouter = () => router.push(AppRoutes.CRASH)
-const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)*/
+//const spinRouter = () => router.push(AppRoutes.ROULETTE)
+//const crashRouter = () => router.push(AppRoutes.CRASH)
+const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)
 </script>
 
 <template>
     <div class="page">
-      
-        <h2 class="title title-1">Мини-Игры</h2>
-  <!-- 
+        <h2 class="title title-1">{{ t('minigame.title') }}</h2>
+        <div class="game-card appear-delay-3">
+            <div class="card-header">
+                <h3>{{ t('minigame.coint_flip_title') }}</h3>
+                <div class="hot-label">HOT</div>
+            </div>
+            <div class="game-body">
+                <img src="/coin.png" class="icon" />
+                <p>{{ t('minigame.coint_flip_desc') }}</p>
+            </div>
+            <UiButton @click="coinFlipRouter">{{ t('minigame.play') }}</UiButton>
+        </div>
+
+        <!-- 
         <div class="game-card appear-delay-1">
             <div class="card-header">
                 <h3>Рулетка</h3>
@@ -38,21 +51,8 @@ const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)*/
             </div>
             <UiButton @click="crashRouter">Играть в краш</UiButton>
         </div>
-
-        <div class="game-card appear-delay-3">
-            <div class="card-header">
-                <h3>Coin-Flip (Орёл и Решка)</h3>
-
-            </div>
-            <div class="game-body">
-                <img src="/coin.png" class="icon" />
-                <p>Выбирай правильную сторону и получай выигрыш</p>
-            </div>
-            <UiButton @click="coinFlipRouter">Играть в Орёл и Решку</UiButton>
-        </div>
         -->
     </div>
-    
 </template>
 
 <style scoped lang="scss">
@@ -92,6 +92,16 @@ const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)*/
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
+        }
+
+        .hot-label {
+            background: #ff004c;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
         }
     }
 
