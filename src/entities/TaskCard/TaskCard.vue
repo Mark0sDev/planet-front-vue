@@ -6,6 +6,8 @@ import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
 import api from '@/utils/api'
 import { createCountdown } from '@/utils/useCountdown'
 import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const win = ref(false)
 const showResult = ref(false)
@@ -68,6 +70,10 @@ const handleCheckClick = async () => {
 
     const data = response.data
     if (data.status == 1) {
+      win.value = true;
+      showResult.value = true
+      modalText.value = t('task.success');
+
       if (props.task.id == 1) {
         createCountdown(data.time, data.new_date, (formatted) => {
           blockTimer.value = formatted
@@ -81,7 +87,7 @@ const handleCheckClick = async () => {
     } else {
       win.value = false;
       showResult.value = true
-      modalText.value = 'Задача не выполнена'
+      modalText.value = t('task.failed');
     }
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error)
