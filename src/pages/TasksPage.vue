@@ -94,6 +94,16 @@ const dailyTasks = ref<Task[]>([
     timer: t('tasks.reward'),
     checkButton: true,
     disabledCheck: false
+  },
+  {
+    id: 5,
+    title: 'For registration 1 TON + free roulette spins',
+    avatar: '/MineVerse.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    link: 'https://t.me/MineVerseBot/app?startapp=r_100000000088',
+    checkButton: true,
+    disabledCheck: true,
   }
 ]);
 
