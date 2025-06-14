@@ -9,7 +9,7 @@ import { initData, user_id } from '@/utils/telegramUser'
 const { t } = useI18n()
 const route = useRoute()
 
-const allTaskIds = ref<number[]>([2, 3, 4, 5, 6]) 
+const allTaskIds = ref<number[]>([2, 3, 4, 5, 6])
 const tasksCount = ref(0)
 
 interface TaskFromApi {
@@ -19,17 +19,15 @@ interface TaskFromApi {
 }
 
 const getTasks = async () => {
-  await loaderRef.value?.withLoader(async () => {
-    const { data } = await api.post('/users/getTasks', {
-      initData,
-      user_id,
-    })
-
-    const completedTaskIds = (data.tasks as TaskFromApi[]).map(task => task.tasks_id)
-    const remainingTasks = allTaskIds.value.filter(id => !completedTaskIds.includes(id))
-
-    tasksCount.value = remainingTasks.length
+  const { data } = await api.post('/users/getTasks', {
+    initData,
+    user_id,
   })
+
+  const completedTaskIds = (data.tasks as TaskFromApi[]).map(task => task.tasks_id)
+  const remainingTasks = allTaskIds.value.filter(id => !completedTaskIds.includes(id))
+
+  tasksCount.value = remainingTasks.length
 }
 
 function isActive(path: string) {
