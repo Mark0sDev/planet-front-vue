@@ -54,14 +54,14 @@ const startFlip = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 50))
 
-  try {
-    const { data } = await api.post('/users/CoinFlip', {
-      initData,
-      user_id,
-      bet: bet.value,
-      side: selectedSide.value
-    });
+  const { data } = await api.post('/users/CoinFlip', {
+    initData,
+    user_id,
+    bet: bet.value,
+    side: selectedSide.value
+  });
 
+  if (data.status == 1) {
     balance_ton.value -= betAmount
 
     lastFlipResult.value = data.flip
@@ -79,11 +79,14 @@ const startFlip = async () => {
       showResult.value = true
       modalText.value = win.value ? 'Вы выиграли!' : 'Увы, не повезло...'
     }, 2600)
-  } catch (error) {
-    rotating.value = false
-    alert('Ошибка при отправке ставки')
-    console.error(error)
+  } else {
+    win.value = false;
+    showResult.value = true
+    modalText.value = 'Недостаточно TON на балансе';
   }
+
+
+
 }
 
 
