@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+
 import UiButton from '@/shared/ui/UiButton.vue'
 import UiInput from '@/shared/ui/UiInput.vue'
 import TonIcon from '@/shared/assets/icons/ton.svg'
@@ -52,7 +52,12 @@ const startFlip = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 50))
 
-  const { data } = await axios.get('https://twinbyai.ru/flip')
+  const { data } = await api.post('/users/withdrawalTon', {
+    initData,
+    user_id,
+    bet
+  });
+
   lastFlipResult.value = data.flip
 
   const fullSpins = 6
