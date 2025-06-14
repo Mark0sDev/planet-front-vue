@@ -137,66 +137,8 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.balance-action-card {
-  width: 100%;
-  border-radius: 15px;
-  padding: 10px;
-  padding-bottom: 2px;
-  color: #ffffff;
-  border: 1px solid #32315f;
-
-  &.white {
-    background-image: url('@/shared/assets/bg/benefit-1-bg.png');
-  }
-
-  &.accent {
-    background-image: url('@/shared/assets/bg/benefit-2-bg.png');
-  }
-}
-
-.balance-icon {
-  width: 31px;
-  height: 31px;
-  border-radius: 50%;
-}
-
 .balance-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 11px;
-
-  margin-bottom: 10px;
-}
-
-.balance-name {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.balance-amount {
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.balance-description {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 10px;
-  margin-right: -10px;
-  margin-left: -10px;
-  font-weight: 500;
-
-  .ton {
-    color: #27aff9;
-
-  }
-
-  .stars {
-    color: #FFCD1D;
-
-  }
+  border-bottom: none;
 }
 
 .title {
