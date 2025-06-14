@@ -83,6 +83,8 @@ const startFlip = async () => {
     win.value = false;
     showResult.value = true
     modalText.value = 'Недостаточно TON на балансе';
+
+    rotating.value = false
   }
 
 
