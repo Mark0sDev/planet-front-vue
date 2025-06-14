@@ -67,7 +67,7 @@ async function adsClaim() {
 
 const dailyTasks = ref<Task[]>([
   {
-    id: 1,
+    id: 2,
     title: 'Пригласить 5 друзей',
     avatar: TasksStory,
     status: TaskStatus.CLAIM,
