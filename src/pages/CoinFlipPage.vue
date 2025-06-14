@@ -52,7 +52,7 @@ const startFlip = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 50))
 
-  const { data } = await api.post('/users/withdrawalTon', {
+  const { data } = await api.post('/users/CoinFlip', {
     initData,
     user_id,
     bet
