@@ -55,7 +55,7 @@ const startFlip = async () => {
   const { data } = await api.post('/users/CoinFlip', {
     initData,
     user_id,
-    bet
+    bet: bet.value
   });
 
   lastFlipResult.value = data.flip
