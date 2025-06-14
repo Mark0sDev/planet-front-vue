@@ -68,6 +68,12 @@
         "ctaTopUp": "Пополнить баланс"
     },
     "tasks": {
+        "subscribeChannel": "Подписаться на канал",
+        "subscribeChat": "Подписаться на чат",
+        "inviteFriends": "Пригласить 5 друзей",
+        "reward": "Награда: 0.001 TON",
+        "storyTitle": "Опубликовать историю Telegram",
+        "storyReward": "Награда: 0.001 TON",
         "every_day_tasks_title": "Ежедневные задания",
         "osnova_tasks": "Основные задания",
         "banner_text": "Выполняй наши простые задания<br>и зарабатывай TON без вложений!",

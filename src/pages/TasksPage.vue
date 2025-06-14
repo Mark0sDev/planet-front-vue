@@ -68,14 +68,34 @@ async function adsClaim() {
 const dailyTasks = ref<Task[]>([
   {
     id: 2,
-    title: 'Пригласить 5 друзей',
+    title: t('tasks.subscribeChannel'),
+    avatar: '/avatar_channel.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    checkButton: true,
+    disabledCheck: false,
+    link: 'https://t.me/CivilizationTon',
+  },
+  {
+    id: 3,
+    title: t('tasks.subscribeChat'),
+    avatar: '/avatar_chat.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    checkButton: true,
+    disabledCheck: false,
+    link: 'https://t.me/CivilizationTon_chat',
+  },
+  {
+    id: 4,
+    title: t('tasks.inviteFriends'),
     avatar: TasksStory,
     status: TaskStatus.CLAIM,
-    timer: 'Награда: 0.001 TON',
+    timer: t('tasks.reward'),
     checkButton: true,
     disabledCheck: false
   }
-])
+]);
 
 const getTasks = async () => {
   await loaderRef.value?.withLoader(async () => {
@@ -131,14 +151,15 @@ onMounted(() => {
 
     <TaskCard :task="{
       id: 1,
-      title: 'Опубликовать историю Telegram',
+      title: t('tasks.storyTitle'),
       avatar: inviteFriendsAvatar,
       status: TaskStatus.CLAIM,
       checkButton: true,
       link: 'story',
-      timer: 'Награда: 0.001 TON',
+      timer: t('tasks.storyReward'),
       disabledCheck: true
     }" :blockTimer="storyBlockTimer" />
+
 
     <TaskCard v-for="task in dailyTasks" :key="task.id" :task="task" />
   </div>

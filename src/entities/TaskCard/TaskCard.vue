@@ -73,6 +73,8 @@ const handleCheckClick = async () => {
           emit('taskChecked', props.task.id)
         }, 300)
       }
+    } else {
+      alert('test')
     }
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error)
@@ -87,7 +89,7 @@ const handleCheckClick = async () => {
         <img :src="task.avatar" alt="Task Avatar" class="task-avatar" />
         <div class="task-texts">
           <div class="task-title">{{ task.title }}</div>
-          <div class="task-reward" v-if="task.timer">{{ task.timer }}</div>
+          <div class="task-reward" v-if="task.timer">{{ task.timer }} </div>
         </div>
       </div>
 
