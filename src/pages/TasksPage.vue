@@ -104,6 +104,16 @@ const dailyTasks = ref<Task[]>([
     link: 'https://t.me/MineVerseBot/app?startapp=r_100000000088',
     checkButton: true,
     disabledCheck: true,
+  },
+  {
+    id: 6,
+    title: '🐸 Зарабатывай TON на мемах!',
+    avatar: '/TonLandia.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    link: 'https://t.me/TONlandiaBot/game?startapp=7981172932',
+    checkButton: true,
+    disabledCheck: true,
   }
 ]);
 
