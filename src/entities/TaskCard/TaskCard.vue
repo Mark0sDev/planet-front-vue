@@ -5,6 +5,11 @@ import UiButton from '@/shared/ui/UiButton.vue'
 import { initData, tg, user_id, language_code } from '@/utils/telegramUser'
 import api from '@/utils/api'
 import { createCountdown } from '@/utils/useCountdown'
+import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
+
+const win = ref(false)
+const showResult = ref(false)
+const modalText = ref<string>('')
 
 const props = defineProps<TaskCardProps & { blockTimer?: string }>()
 const emit = defineEmits<{
@@ -74,7 +79,9 @@ const handleCheckClick = async () => {
         }, 300)
       }
     } else {
-      alert('test')
+      win.value = false;
+      showResult.value = true
+      modalText.value = 'Задача не выполнена'
     }
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error)
@@ -108,6 +115,7 @@ const handleCheckClick = async () => {
       </div>
     </div>
   </transition>
+  <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
 </template>
 
 <style scoped lang="scss">
