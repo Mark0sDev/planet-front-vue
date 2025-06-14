@@ -44,6 +44,8 @@ const getUser = async () => {
 const startFlip = async () => {
   if (rotating.value || !coinEl.value) return
 
+  const betAmount = parseFloat(bet.value)
+
   rotating.value = true
   showResult.value = false
 
@@ -52,29 +54,38 @@ const startFlip = async () => {
 
   await new Promise(resolve => setTimeout(resolve, 50))
 
-  const { data } = await api.post('/users/CoinFlip', {
-    initData,
-    user_id,
-    bet: bet.value,
-    side: selectedSide.value
-  });
+  try {
+    const { data } = await api.post('/users/CoinFlip', {
+      initData,
+      user_id,
+      bet: bet.value,
+      side: selectedSide.value
+    });
 
-  lastFlipResult.value = data.flip
+    balance_ton.value -= betAmount
 
-  const fullSpins = 6
-  const finalAngle = data.flip === 1 ? 0 : 180
-  const targetRotation = fullSpins * 360 + finalAngle
+    lastFlipResult.value = data.flip
 
-  coinEl.value.style.transition = 'transform 2.5s ease-out'
-  coinEl.value.style.transform = `rotateX(${targetRotation}deg)`
+    const fullSpins = 6
+    const finalAngle = data.flip === 1 ? 0 : 180
+    const targetRotation = fullSpins * 360 + finalAngle
 
-  setTimeout(() => {
+    coinEl.value.style.transition = 'transform 2.5s ease-out'
+    coinEl.value.style.transform = `rotateX(${targetRotation}deg)`
+
+    setTimeout(() => {
+      rotating.value = false
+      win.value = data.flip === selectedSide.value
+      showResult.value = true
+      modalText.value = win.value ? 'Вы выиграли!' : 'Увы, не повезло...'
+    }, 2600)
+  } catch (error) {
     rotating.value = false
-    win.value = data.flip === selectedSide.value
-    showResult.value = true
-    modalText.value = win.value ? 'Вы выиграли!' : 'Увы, не повезло...'
-  }, 2600)
+    alert('Ошибка при отправке ставки')
+    console.error(error)
+  }
 }
+
 
 onMounted(() => {
   getUser()
@@ -116,7 +127,7 @@ onMounted(() => {
           </button>
         </div>
 
-        <UiInput placeholder="Введите ставку" type="number" v-model="bet" :custom="{ type: 'icon' }">
+        <UiInput required placeholder="Введите ставку" type="number" v-model="bet" :custom="{ type: 'icon' }">
           <TonIcon class="coin-bet-icon" />
         </UiInput>
 
