@@ -72,7 +72,7 @@ const handleCheckClick = async () => {
     if (data.status == 1) {
       win.value = true;
       showResult.value = true
-      modalText.value = t('task.success');
+      modalText.value = t('tasks.success');
 
       if (props.task.id == 1) {
         createCountdown(data.time, data.new_date, (formatted) => {
@@ -87,7 +87,7 @@ const handleCheckClick = async () => {
     } else {
       win.value = false;
       showResult.value = true
-      modalText.value = t('task.failed');
+      modalText.value = t('tasks.failed');
     }
   } catch (error) {
     console.error('Ошибка при выполнении запроса:', error)
