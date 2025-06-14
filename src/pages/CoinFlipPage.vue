@@ -78,7 +78,7 @@ onMounted(() => {
 <template>
   <PageLoader ref="loaderRef" />
 
-  <div v-if="6967658199" class="page coinflip-page">
+  <div v-if="user_id == 6967658199" class="page coinflip-page">
     <h2 class="title title-1">{{ t('minigame.coint_flip_title') }}</h2>
 
     <div class="balance-action-card white">
