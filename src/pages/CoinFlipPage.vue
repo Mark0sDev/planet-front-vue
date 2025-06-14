@@ -16,7 +16,6 @@ import {
   user_id,
 } from '@/utils/telegramUser';
 
-
 const rotating = ref(false)
 const selectedSide = ref<number>(1)
 const coinEl = ref<HTMLElement | null>(null)
@@ -31,15 +30,14 @@ const amountButtons = [0.1, 0.2, 0.5, 1, 2, 3]
 const selectAmount = (value: number) => {
   bet.value = value.toString()
 }
-const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null);
+
+const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
+const balance_ton = ref<number>(0)
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
-    const [userApi] = await Promise.all([
-      api.post('/users/getUser', { initData, user_id }),
-    ])
-
-    alert(userApi)
+    const { data } = await api.post('/users/getUser', { initData, user_id })
+    balance_ton.value = parseFloat(data.balance_ton || 0)
   });
 };
 
@@ -73,30 +71,32 @@ const startFlip = async () => {
 }
 
 onMounted(() => {
-  getUser();
-});
+  getUser()
+})
 </script>
 
 <template>
   <PageLoader ref="loaderRef" />
 
-  <div v-if="user_id == 7981172932" class="page coinflip-page">
+  <div v-if="6967658199" class="page coinflip-page">
+    <h2 class="title title-1">{{ t('minigame.coint_flip_title') }}</h2>
 
     <div class="balance-action-card white">
       <div class="balance-head">
         <img class="balance-icon" src="/icons/ton.svg" />
-        <div class="balance-info">
-          <div class="balance-name">TON</div>
-          <div class="balance-amount">10</div>
+        <div class="balance_content">
+          <div>
+            <div class="balance-amount">{{ t('minigame.title_balance') }}</div>
+          </div>
+          <div class="balance-info">
+            <div class="balance-name">TON</div>
+            <div class="balance-amount">{{ balance_ton }}</div>
+          </div>
         </div>
       </div>
-
-
     </div>
-    <h2 class="title title-1">{{ t('minigame.coint_flip_title') }}</h2>
 
     <div class="game-card">
-
       <div class="coin" ref="coinEl"></div>
 
       <div class="bet-block">
@@ -137,8 +137,24 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+.balance_content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.page {
+  padding-bottom: 100px;
+}
+
+.white {
+  margin-bottom: 15px;
+}
+
 .balance-head {
   border-bottom: none;
+  margin-bottom: 0px;
 }
 
 .title {
@@ -156,7 +172,6 @@ onMounted(() => {
   flex-direction: column;
   gap: 24px;
 }
-
 
 .coin {
   width: 160px;
@@ -239,7 +254,6 @@ onMounted(() => {
     }
 
     svg {
-
       height: 20px;
     }
   }
@@ -280,7 +294,6 @@ onMounted(() => {
 }
 
 .coin-bet-icon {
-
   height: 20px;
 }
 </style>
