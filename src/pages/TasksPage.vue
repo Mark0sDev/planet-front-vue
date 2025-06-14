@@ -134,6 +134,26 @@ const dailyTasks = ref<Task[]>([
     link: 'https://t.me/divergentRF',
     checkButton: true,
     disabledCheck: false,
+  },
+  {
+    id: 9,
+    title: t('tasks.subscribeChannel'),
+    avatar: '/leha.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    link: 'https://t.me/team_krm',
+    checkButton: true,
+    disabledCheck: false,
+  },
+  {
+    id: 10,
+    title: t('tasks.subscribeChannel'),
+    avatar: '/vadim.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    link: 'https://t.me/vadim_maslow',
+    checkButton: true,
+    disabledCheck: false,
   }
 ]);
 
