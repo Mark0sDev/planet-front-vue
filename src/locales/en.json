@@ -1,164 +1,164 @@
 {
   "wallet": {
-    "address": "TON wallet address",
+    "address": "TON Wallet Address",
     "memo": "Comment (MEMO)",
-    "orGoTo": "Or go to the page",
-    "balancePage": "Balance",
+    "orGoTo": "Or go to the",
+    "balancePage": "Balance page",
     "toTopUp": "to top up in one click"
   },
   "common": {
     "continue": "Continue"
   },
   "faq": {
-    "refferal2": "Will I receive a reward for inviting friends?",
-    "refferal_ans2": "Absolutely! We generously reward those who bring new friends to our project<br><br>You will receive 10% across three levels (5%-3%-2%) from every purchase your referral makes.",
+    "refferal2": "Will I get any reward for inviting friends?",
+    "refferal_ans2": "Of course! We generously reward those who invite new friends to our project.<br><br>You will receive 10% in three levels (5%-3%-2%) from every purchase your referral makes.",
     "refferal1": "Can I invite my friends?",
-    "refferal_ans1": "Yes, on the page <a style='color: #6ceaf1;' href='/friends'>Friends</a> you can invite your friends and view full referral statistics on the same page",
-    "balance3": "How fast is the balance topped up and withdrawn?",
-    "balance_ans3": "Deposits and withdrawals in TON are instant and take no more than 30 seconds",
-    "balance2": "How do I withdraw the balance?",
-    "balance_ans2": "На странице <a style='color: #6ceaf1;' href='/balance'>Balance</a> there is a form for withdrawing TON. Enter your wallet address and click the MAX button<br><br>Minimum withdrawal amount is 0.1 TON",
+    "refferal_ans1": "Yes, on the <a style='color: #6ceaf1;' href='/friends'>Friends</a> page you can invite your friends and see full statistics about your referrals.",
+    "balance3": "How long does it take to deposit or withdraw?",
+    "balance_ans3": "Deposits and withdrawals of TON are instant. It usually takes no more than 30 seconds.",
+    "balance2": "How to withdraw balance?",
+    "balance_ans2": "On the <a style='color: #6ceaf1;' href='/balance'>Balance</a> page, there is a form to withdraw TON. You need to enter your wallet address and click the MAX button.<br><br>The minimum withdrawal amount is 0.1 TON.",
     "balance1": "How to top up the balance?",
-    "balance_ans1": "Simply go to the page <a style='color: #6ceaf1;' href='/balance'>Balance</a>, connect your TON wallet or use a direct transfer via <a style='color: #6ceaf1;' href='/balance'>MEMO</a>,",
+    "balance_ans1": "You simply need to go to the <a style='color: #6ceaf1;' href='/balance'>Balance</a> page, connect your TON wallet, or use a direct transfer via <a style='color: #6ceaf1;' href='/balance'>MEMO</a>.",
     "what_civilization3": "How to start playing?",
-    "what_civilization_ans3": "To start, you need to top up your <a style='color: #6ceaf1;' href='/balance'>Balance</a> and buy your first <a style='color: #6ceaf1;' href='/planets'>Planet</a>",
+    "what_civilization_ans3": "To get started, top up your <a style='color: #6ceaf1;' href='/balance'>Balance</a> and buy your first <a style='color: #6ceaf1;' href='/planets'>Planet</a>.",
     "what_civilization2": "Can I earn money here?",
-    "what_civilization_ans2": "Yes, you actually receive rewards in TON for playing.<br><br>However, please note that CivilizationTon is a game where all top-ups are considered voluntary donations. ",
-    "what_civilization_ans": "Civilization is a unique P2E game where you can earn rewards in TON",
+    "what_civilization_ans2": "Yes, you really earn rewards in TON for playing.<br><br>But keep in mind that CivilizationTon is a game where all top-ups are voluntary donations.",
     "what_civilization": "What is CivilizationTon?",
-    "game": "Игра",
+    "what_civilization_ans": "Civilization is a unique P2E game where you can earn rewards in TON.",
+    "game": "Game",
     "balance": "Balance",
-    "refs": "Рефералы",
-    "title_banner": "Подробная инструкция,<br>как участвовать в цивилизации"
+    "refs": "Referrals",
+    "title_banner": "Detailed guide<br>on how to join Civilization"
   },
   "story": {
-    "aboutTitle": "О проекте",
-    "aboutSubtitle": "Атакуй планеты, зарабатывай TON и прокачивай свой уровень!",
+    "aboutTitle": "About the project",
+    "aboutSubtitle": "Attack planets, earn TON and level up!",
     "feature1": {
-      "title": "Начни всего в 1 TON",
-      "text": "Минимальный вход — доступен каждому"
+      "title": "Start with just 1 TON",
+      "text": "Minimum entry — affordable for everyone"
     },
     "feature2": {
-      "title": "Реально быстрая прибыль",
-      "text": "Циклы планет очень быстрые, заработать успеют все"
+      "title": "Really fast profit",
+      "text": "Planet cycles are very fast, everyone will earn in time"
     },
     "feature3": {
-      "title": "Моментальные выводы",
-      "text": "Вывод TON приходит буквально за 5 секунд"
+      "title": "Instant withdrawals",
+      "text": "TON withdrawals take only 5 seconds"
     },
     "feature4": {
-      "title": "Без вложений",
-      "text": "Зарабатывай без вложений, выполняя наши задания"
+      "title": "No investment",
+      "text": "Earn without investing by completing tasks"
     },
-    "footer1": "Не упусти возможность получать TON уже сейчас!",
-    "refTitle": "Реферальная система",
-    "refSubtitle": "Получай 10% с каждой покупки Вашего реферала",
+    "footer1": "Don’t miss your chance to earn TON now!",
+    "refTitle": "Referral system",
+    "refSubtitle": "Earn 10% from every purchase your referral makes",
     "refFeature1": {
-      "title": "3 уровня",
-      "text": "3-х уровневая реферальная система позволит получать TON за активность ваших друзей и даже друзей их друзей"
+      "title": "3 levels",
+      "text": "The 3-level referral system lets you earn from the activity of your friends and their friends"
     },
     "refFeature2": {
-      "title": "Никаких токенов",
-      "text": "Получай реальные TON за покупки твоих друзей"
+      "title": "No tokens",
+      "text": "Receive real TON for your friends’ purchases"
     },
-    "footer2": "Зарабатывай TON вместе с друзьями",
-    "ctaTitle": "Не упусти возможность!",
-    "ctaSubtitle": "Начни прямо сейчас:",
-    "ctaBuy": "Купить первую планету",
-    "ctaTopUp": "Пополнить баланс"
+    "footer2": "Earn TON with friends",
+    "ctaTitle": "Don’t miss out!",
+    "ctaSubtitle": "Start right now:",
+    "ctaBuy": "Buy your first planet",
+    "ctaTopUp": "Top up balance"
   },
   "tasks": {
-    "StartBot": "Запустить бота",
-    "success": "Задание успешно выполнено",
-    "failed": "Задача не выполнена",
-    "subscribeChannel": "Подписаться на канал",
-    "subscribeChat": "Подписаться на чат",
-    "inviteFriends": "Пригласить 5 друзей",
-    "reward": "Награда: 0.001 TON",
-    "storyTitle": "Опубликовать историю Telegram",
-    "storyReward": "Награда: 0.001 TON",
-    "every_day_tasks_title": "Ежедневные задания",
-    "osnova_tasks": "Основные задания",
-    "banner_text": "Выполняй наши простые задания<br>и зарабатывай TON без вложений!",
-    "ads_button": "Смотреть рекламу",
-    "tasks_ads": "Посмотреть рекламу",
-    "tasks_ads_desc": "Смотри рекламу каждые <span style='color: #FFCD1D;'>3 часа</span>, получай <span style='color: #27aff9;'>0.0001 TON</span>"
+    "StartBot": "Start the bot",
+    "success": "Task completed successfully",
+    "failed": "Task not completed",
+    "subscribeChannel": "Subscribe to the channel",
+    "subscribeChat": "Subscribe to the chat",
+    "inviteFriends": "Invite 5 friends",
+    "reward": "Reward: 0.001 TON",
+    "storyTitle": "Post a Telegram Story",
+    "storyReward": "Reward: 0.001 TON",
+    "every_day_tasks_title": "Daily tasks",
+    "osnova_tasks": "Main tasks",
+    "banner_text": "Complete simple tasks<br>and earn TON without investments!",
+    "ads_button": "Watch ad",
+    "tasks_ads": "Watch ad",
+    "tasks_ads_desc": "Watch an ad every <span style='color: #FFCD1D;'>3 hours</span> to get <span style='color: #27aff9;'>0.0001 TON</span>"
   },
   "nav": {
-    "game": "Игры",
-    "home": "Главная",
-    "minigame": "Игры",
+    "game": "Games",
+    "home": "Home",
+    "minigame": "Games",
     "friends": "Friends",
-    "earn": "Заработать",
-    "tasks": "Задания",
+    "earn": "Earn",
+    "tasks": "Tasks",
     "balance": "Balance"
   },
   "balance": {
-    "available": "Доступно:",
-    "withdraw": "Вывести",
-    "withdrawn_all_time": "Выведено за все время:",
-    "tip_wallet": "TON wallet address",
-    "not_enough_ton": "Недостаточно TON на балансе",
-    "available_for_withdrawal": "Доступно к выводу: {amount} TON",
-    "tip_wallet_address": "TON wallet address",
+    "available": "Available:",
+    "withdraw": "Withdraw",
+    "withdrawn_all_time": "Withdrawn all time:",
+    "tip_wallet": "TON Wallet Address",
+    "not_enough_ton": "Not enough TON balance",
+    "available_for_withdrawal": "Available to withdraw: {amount} TON",
+    "tip_wallet_address": "TON Wallet Address",
     "tip_memo": "Comment (MEMO)",
-    "placeholder_wallet": "Введите адрес кошелька TON",
-    "placeholder_amount": "Введите количество TON",
-    "connect_wallet": "Подключить<br />кошелек",
-    "manual_topup": "Пополнить вручную",
-    "title_out": "Доступно к выводу:",
-    "wallet_title": "Кошелек",
-    "web3_deposit": "WEB3 Пополнение",
-    "enter_amount": "Введите сумму TON:",
-    "deposit": "Пополнить"
+    "placeholder_wallet": "Enter TON wallet address",
+    "placeholder_amount": "Enter amount of TON",
+    "connect_wallet": "Connect<br />Wallet",
+    "manual_topup": "Manual Top Up",
+    "title_out": "Available to withdraw:",
+    "wallet_title": "Wallet",
+    "web3_deposit": "WEB3 Deposit",
+    "enter_amount": "Enter TON amount:",
+    "deposit": "Top up"
   },
   "combo": {
-    "text": "Атакуй планеты и зарабатывай TON",
-    "startFrom": "Начни всего с",
-    "button": "НАЧАТЬ СЕЙЧАС"
+    "text": "Attack planets and earn TON",
+    "startFrom": "Start with just",
+    "button": "START NOW"
   },
   "statistics": {
-    "title": "Статистика",
-    "users": "Пользователи, которые уже зарабатывают",
-    "totalWithdrawals": "Всего выводов",
-    "totalPlanetsBought": "Всего куплено планет",
-    "totalTonWithdrawn": "Всего выведено TON",
-    "latestWithdrawals": "Последние выводы"
+    "title": "Statistics",
+    "users": "Users already earning",
+    "totalWithdrawals": "Total withdrawals",
+    "totalPlanetsBought": "Total planets bought",
+    "totalTonWithdrawn": "Total TON withdrawn",
+    "latestWithdrawals": "Latest withdrawals"
   },
   "tabs": {
-    "level1": "1 уровень",
-    "level2": "2 уровень",
-    "level3": "3 уровень"
+    "level1": "Level 1",
+    "level2": "Level 2",
+    "level3": "Level 3"
   },
   "friends": {
-    "referral_stats": "Реферальная статистика",
-    "your_referrals": "Ваши рефералы",
-    "level_1": "1 Уровень",
-    "level_2": "2 Уровень",
-    "level_3": "3 Уровень"
+    "referral_stats": "Referral Statistics",
+    "your_referrals": "Your Referrals",
+    "level_1": "Level 1",
+    "level_2": "Level 2",
+    "level_3": "Level 3"
   },
   "congrats": {
     "continue": "Continue",
-    "watchAd": "Посмотреть рекламу",
-    "buy": "Вы успешно купили планету {name}!<br><br>Через {time} вы получите награду {reward}",
-    "attack": "Вы успешно атаковали планету {name}!<br><br>Через {time} вы получите награду {reward}<br><br>🤝 Если есть желание поддержать проект, можете посмотреть 3-х секундную рекламу:"
+    "watchAd": "Watch Ad",
+    "buy": "You successfully bought the planet {name}!<br><br>You will receive your reward of {reward} in {time}",
+    "attack": "You successfully attacked the planet {name}!<br><br>You will receive your reward of {reward} in {time}<br><br>🤝 If you want to support the project, you can watch a 3-second ad:"
   },
   "planet": {
-    "title": "Планеты",
-    "income": "Доходность",
-    "claim": "Доход за цикл",
-    "cost": "Стоимость",
-    "profit": "Прибыль",
-    "cycle_time": "Время цикла",
-    "earned": "Заработано",
-    "buy": "Купить",
-    "attack": "Атаковать"
+    "title": "Planets",
+    "income": "Profitability",
+    "claim": "Cycle Income",
+    "cost": "Cost",
+    "profit": "Profit",
+    "cycle_time": "Cycle Time",
+    "earned": "Earned",
+    "buy": "Buy",
+    "attack": "Attack"
   },
-  "friends_banner": "<h2 class='info-title'>Получай <span>10%</span> за <span>каждую<br/>покупку</span> планеты вашим рефералом</h2><p class='info-description'>Вы получаете реферальную награду каждый раз, когда Ваш реферал покупает планету</p>",
+  "friends_banner": "<h2 class='info-title'>Earn <span>10%</span> for <span>every<br/>planet</span> your referral buys</h2><p class='info-description'>You receive a referral reward every time your referral buys a planet</p>",
   "friends_text": "Friends",
-  "withdrawal_success": "Заявка на вывод успешно создана<br><br>TON поступят на кошелёк в течение 30 секунд",
-  "withdraw_title": "Вывод баланса",
-  "transactions_history_title": "История транзакций",
-  "invite_btn_text": "Пригласить друзей",
-  "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> ПРЯМО <span style='color: #27aff9;'>В TON</span><br>ОТ ВАШИХ ДРУЗЕЙ"
+  "withdrawal_success": "Withdrawal request successfully created<br><br>TON will be credited within 30 seconds",
+  "withdraw_title": "Withdraw balance",
+  "transactions_history_title": "Transaction history",
+  "invite_btn_text": "Invite friends",
+  "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> DIRECTLY <span style='color: #27aff9;'>IN TON</span><br>FROM YOUR FRIENDS"
 }
