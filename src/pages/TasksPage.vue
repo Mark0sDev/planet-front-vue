@@ -114,6 +114,16 @@ const dailyTasks = ref<Task[]>([
     link: 'https://t.me/TONlandiaBot/game?startapp=7981172932',
     checkButton: true,
     disabledCheck: true,
+  },
+  {
+    id: 7,
+    title: t('tasks.subscribeChannel'),
+    avatar: '/bunssiness_karman.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    link: 'https://t.me/Karpushkin_invest_NEWS',
+    checkButton: true,
+    disabledCheck: false,
   }
 ]);
 
