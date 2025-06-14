@@ -25,8 +25,6 @@ interface TaskFromApi {
   tasks_id: number
 }
 
-const dailyTasks = ref<Task[]>([])
-
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const response = await api.post('/users/getUser', {
@@ -67,6 +65,38 @@ async function adsClaim() {
   })
 }
 
+const dailyTasks = ref<Task[]>([
+  {
+    id: 2,
+    title: t('tasks.subscribeChannel'),
+    avatar: '/avatar_channel.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    checkButton: true,
+    disabledCheck: false,
+    link: 'https://t.me/CivilizationTon',
+  },
+  {
+    id: 3,
+    title: t('tasks.subscribeChat'),
+    avatar: '/avatar_chat.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    checkButton: true,
+    disabledCheck: false,
+    link: 'https://t.me/CivilizationTon_chat',
+  },
+  {
+    id: 4,
+    title: t('tasks.inviteFriends'),
+    avatar: TasksStory,
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    checkButton: true,
+    disabledCheck: false
+  }
+]);
+
 const getTasks = async () => {
   await loaderRef.value?.withLoader(async () => {
     const { data } = await api.post('/users/getTasks', {
@@ -76,39 +106,9 @@ const getTasks = async () => {
 
     const completedTaskIds = (data.tasks as TaskFromApi[]).map(task => task.tasks_id)
 
-    const allTasks: Task[] = [
-      {
-        id: 2,
-        title: t('tasks.subscribeChannel'),
-        avatar: '/avatar_channel.jpg',
-        status: TaskStatus.CLAIM,
-        timer: t('tasks.reward'),
-        checkButton: true,
-        disabledCheck: false,
-        link: 'https://t.me/CivilizationTon',
-      },
-      {
-        id: 3,
-        title: t('tasks.subscribeChat'),
-        avatar: '/avatar_chat.jpg',
-        status: TaskStatus.CLAIM,
-        timer: t('tasks.reward'),
-        checkButton: true,
-        disabledCheck: false,
-        link: 'https://t.me/CivilizationTon_chat',
-      },
-      {
-        id: 4,
-        title: t('tasks.inviteFriends'),
-        avatar: TasksStory,
-        status: TaskStatus.CLAIM,
-        timer: t('tasks.reward'),
-        checkButton: true,
-        disabledCheck: false
-      }
-    ]
-
-    dailyTasks.value = allTasks.filter(task => !completedTaskIds.includes(task.id))
+    dailyTasks.value = dailyTasks.value.filter(
+      (task) => !completedTaskIds.includes(task.id)
+    )
   })
 }
 
@@ -159,6 +159,7 @@ onMounted(() => {
       timer: t('tasks.storyReward'),
       disabledCheck: true
     }" :blockTimer="storyBlockTimer" />
+
 
     <TaskCard v-for="task in dailyTasks" :key="task.id" :task="task" />
   </div>
