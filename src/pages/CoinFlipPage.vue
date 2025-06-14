@@ -39,7 +39,7 @@ const getUser = async () => {
       api.post('/users/getUser', { initData, user_id }),
     ])
 
-    alert(userApi);
+    alert(userApi)
   });
 };
 
@@ -72,7 +72,6 @@ const startFlip = async () => {
   }, 2600)
 }
 
-
 onMounted(() => {
   getUser();
 });
@@ -80,57 +79,126 @@ onMounted(() => {
 
 <template>
   <PageLoader ref="loaderRef" />
-  <template v-if="user_id != 7981172932">
-    <h1 style="text-align: center; margin-top: 50px; font-size: 25px;">SOON DEV PAGE</h1>
-  </template>
-  <template v-else>
-    <div class="page coinflip-page">
-      <h2 class="title title-1">{{ t('minigame.coint_flip_title') }}</h2>
 
-      <div class="game-card">
+  <div v-if="user_id == 7981172932" class="page coinflip-page">
 
-        <div class="coin" ref="coinEl"></div>
-
-        <div class="bet-block">
-          <div class="bet-label">Ваша ставка:</div>
-
-          <div class="amount-buttons">
-            <button v-for="amount in amountButtons" :key="amount" :class="{ selected: bet === amount.toString() }"
-              @click="selectAmount(amount)">
-              {{ amount }}
-              <TonIcon class="coin-bet-icon" />
-            </button>
-          </div>
-
-          <UiInput placeholder="Введите ставку" v-model="bet" :custom="{ type: 'icon' }">
-            <TonIcon class="coin-bet-icon" />
-          </UiInput>
-
-          <div class="choice-options">
-            <label :class="{ selected: selectedSide === 1 }">
-              <input type="radio" :value="1" v-model="selectedSide" />
-              <img src="/src/shared/assets/coinFlip/coin-1.png" alt="Front" />
-            </label>
-
-            <label :class="{ selected: selectedSide === 2 }">
-              <input type="radio" :value="2" v-model="selectedSide" />
-              <img src="/src/shared/assets/coinFlip/coin-2.png" alt="Back" />
-            </label>
-          </div>
-
-          <UiButton color="yellow" @click="startFlip" :disabled="rotating">
-            Крутить
-          </UiButton>
+    <div class="balance-action-card white">
+      <div class="balance-head">
+        <img class="balance-icon" src="/icons/ton.svg" />
+        <div class="balance-info">
+          <div class="balance-name">TON</div>
+          <div class="balance-amount">10</div>
         </div>
       </div>
 
-      <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
-    </div>
-  </template>
 
+    </div>
+    <h2 class="title title-1">{{ t('minigame.coint_flip_title') }}</h2>
+
+    <div class="game-card">
+
+      <div class="coin" ref="coinEl"></div>
+
+      <div class="bet-block">
+        <div class="bet-label">Ваша ставка:</div>
+
+        <div class="amount-buttons">
+          <button v-for="amount in amountButtons" :key="amount" :class="{ selected: bet === amount.toString() }"
+            @click="selectAmount(amount)">
+            {{ amount }}
+            <TonIcon class="coin-bet-icon" />
+          </button>
+        </div>
+
+        <UiInput placeholder="Введите ставку" type="number" v-model="bet" :custom="{ type: 'icon' }">
+          <TonIcon class="coin-bet-icon" />
+        </UiInput>
+
+        <div class="choice-options">
+          <label :class="{ selected: selectedSide === 1 }">
+            <input type="radio" :value="1" v-model="selectedSide" />
+            <img src="/src/shared/assets/coinFlip/coin-1.png" alt="Front" />
+          </label>
+
+          <label :class="{ selected: selectedSide === 2 }">
+            <input type="radio" :value="2" v-model="selectedSide" />
+            <img src="/src/shared/assets/coinFlip/coin-2.png" alt="Back" />
+          </label>
+        </div>
+
+        <UiButton color="yellow" @click="startFlip" :disabled="rotating">
+          Крутить
+        </UiButton>
+      </div>
+    </div>
+
+    <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
+  </div>
 </template>
 
 <style scoped lang="scss">
+.balance-action-card {
+  width: 100%;
+  border-radius: 15px;
+  padding: 10px;
+  padding-bottom: 2px;
+  color: #ffffff;
+  border: 1px solid #32315f;
+
+  &.white {
+    background-image: url('@/shared/assets/bg/benefit-1-bg.png');
+  }
+
+  &.accent {
+    background-image: url('@/shared/assets/bg/benefit-2-bg.png');
+  }
+}
+
+.balance-icon {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+}
+
+.balance-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 11px;
+
+  margin-bottom: 10px;
+}
+
+.balance-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.balance-amount {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.balance-description {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+  margin-right: -10px;
+  margin-left: -10px;
+  font-weight: 500;
+
+  .ton {
+    color: #27aff9;
+
+  }
+
+  .stars {
+    color: #FFCD1D;
+
+  }
+}
+
 .title {
   margin-bottom: 12px;
   text-align: center;

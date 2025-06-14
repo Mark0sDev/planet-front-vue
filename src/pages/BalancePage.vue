@@ -216,7 +216,7 @@ onMounted(() => {
         </template>
       </BalanceActionCard>
 
-      <BalanceActionCard :card="balanceActionCards[0]" @action="handleCardAction">
+      <BalanceActionCard :card="balanceActionCards[0]">
         <template #description>
           {{ t('balance.title_out') }}<br />
           <span class="stars">{{ balanceActionCards[0].payments.toFixed(5) }} STARS</span>
@@ -265,7 +265,7 @@ onMounted(() => {
             <UiInput :tip="t('balance.tip_wallet')" v-model="wallet_withdrawal" required="" type="text"
               :placeholder="t('balance.placeholder_wallet')" />
             <UiInput v-model="sum_withdrawal" :custom="{ type: 'max', maxValue: balanceActionCards[1].payments }"
-              tip="TON" type="number" step="0.00001" min="0.00001" required=""
+              tip="TON" type="number" step="0.00001" min="0.1" required=""
               :placeholder="t('balance.placeholder_amount')" />
           </div>
           <UiButton :disabled="formLoaders.withdrawalTon" class="withdrawal-modal-button" color="blue">
