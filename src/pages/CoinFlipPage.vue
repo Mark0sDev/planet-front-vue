@@ -143,7 +143,7 @@ onMounted(() => {
 <template>
   <PageLoader ref="loaderRef" />
 
-  <div v-if="user_id == 6967658199" class="page coinflip-page">
+  <div class="page coinflip-page">
     <div class="balance-action-card white">
       <div class="balance-head">
         <img class="balance-icon" src="/icons/ton.svg" />
