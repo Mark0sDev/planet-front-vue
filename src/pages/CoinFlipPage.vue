@@ -46,6 +46,15 @@ const startFlip = async () => {
 
   const betAmount = parseFloat(bet.value)
 
+  if (betAmount < 0.1) {
+    win.value = false;
+    showResult.value = true
+    modalText.value = 'Минимальная ставка 0.1 TON';
+
+    rotating.value = false
+    return;
+  }
+
   rotating.value = true
   showResult.value = false
 
@@ -57,9 +66,10 @@ const startFlip = async () => {
   const { data } = await api.post('/users/CoinFlip', {
     initData,
     user_id,
-    bet: bet.value,
+    bet: betAmount,
     side: selectedSide.value
   });
+
 
   if (data.status == 1) {
     balance_ton.value -= betAmount
@@ -132,7 +142,7 @@ onMounted(() => {
           </button>
         </div>
 
-        <UiInput required placeholder="Введите ставку" min="0.1" step="0.1" type="number" v-model.number="bet"
+        <UiInput required placeholder="Введите ставку" min="0.1" step="0.1" type="number" v-model="bet"
           :custom="{ type: 'icon' }">
           <TonIcon class="coin-bet-icon" />
         </UiInput>
