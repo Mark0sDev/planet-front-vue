@@ -79,7 +79,10 @@ const startFlip = async () => {
   })
 
   if (data.status === 1) {
-    balance_ton.value = Number((balance_ton.value - betAmount).toFixed(5))
+    if (data.win == 0) {
+      balance_ton.value = Number((balance_ton.value - betAmount).toFixed(5))
+    }
+
     lastFlipResult.value = data.flip
 
     const fullSpins = 6
