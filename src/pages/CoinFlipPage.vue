@@ -38,7 +38,7 @@ const formRef = ref<HTMLFormElement | null>(null)
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const { data } = await api.post('/users/getUser', { initData, user_id })
-    balance_ton.value = parseFloat(data.balance_ton || 0)
+    balance_ton.value = Number(parseFloat(data.balance_ton || 0).toFixed(5))
   })
 }
 
@@ -79,7 +79,7 @@ const startFlip = async () => {
   })
 
   if (data.status === 1) {
-    balance_ton.value -= betAmount
+    balance_ton.value = Number((balance_ton.value - betAmount).toFixed(5))
     lastFlipResult.value = data.flip
 
     const fullSpins = 6
@@ -107,6 +107,7 @@ onMounted(() => {
   getUser()
 })
 </script>
+
 
 <template>
   <PageLoader ref="loaderRef" />
