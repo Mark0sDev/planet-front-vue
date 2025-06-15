@@ -35,6 +35,10 @@ const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 const balance_ton = ref<number>(0)
 const formRef = ref<HTMLFormElement | null>(null)
 
+// Анимация изменения баланса
+const balanceChange = ref<number | null>(null)
+const balanceChangeColor = ref<'green' | 'red'>('green')
+
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const { data } = await api.post('/users/getUser', { initData, user_id })
@@ -89,12 +93,15 @@ const startFlip = async () => {
     coinEl.value.style.transform = `rotateX(${targetRotation}deg)`
 
     setTimeout(() => {
-      if (data.win == 0) {
-        balance_ton.value = Number((balance_ton.value - betAmount).toFixed(5))
-      } else {
-        balance_ton.value = Number((balance_ton.value + betAmount).toFixed(5))
-      }
-      
+      const balanceDiff = data.win == 0 ? -betAmount : betAmount
+      balanceChangeColor.value = balanceDiff > 0 ? 'green' : 'red'
+      balanceChange.value = balanceDiff
+      balance_ton.value = Number((balance_ton.value + balanceDiff).toFixed(5))
+
+      setTimeout(() => {
+        balanceChange.value = null
+      }, 2000)
+
       rotating.value = false
       win.value = data.flip === selectedSide.value
       showResult.value = true
@@ -113,7 +120,6 @@ onMounted(() => {
 })
 </script>
 
-
 <template>
   <PageLoader ref="loaderRef" />
 
@@ -129,7 +135,14 @@ onMounted(() => {
           </div>
           <div class="balance-info">
             <div class="balance-name">TON</div>
-            <div class="balance-amount">{{ balance_ton }}</div>
+            <div class="balance-amount">
+              {{ balance_ton }}
+              <transition name="fade-move">
+                <span v-if="balanceChange !== null" :class="['balance-change', balanceChangeColor]">
+                  {{ balanceChange > 0 ? '+' : '' }}{{ balanceChange.toFixed(2) }}
+                </span>
+              </transition>
+            </div>
           </div>
         </div>
       </div>
@@ -175,8 +188,6 @@ onMounted(() => {
     <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
   </div>
 </template>
-
-
 
 <style scoped lang="scss">
 .balance_content {
@@ -337,5 +348,43 @@ onMounted(() => {
 
 .coin-bet-icon {
   height: 20px;
+}
+
+.balance-change {
+  position: absolute;
+  margin-left: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  animation: floatUp 2s ease-out;
+}
+
+.balance-change.green {
+  color: #4caf50;
+}
+
+.balance-change.red {
+  color: #f44336;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.fade-move-enter-active,
+.fade-move-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-move-enter-from,
+.fade-move-leave-to {
+  opacity: 0;
 }
 </style>
