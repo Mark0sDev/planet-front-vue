@@ -33,17 +33,37 @@ const selectAmount = (value: number) => {
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 const balance_ton = ref<number>(0)
+const displayedBalance = ref<number>(0)
+const balanceColor = ref<'normal' | 'green' | 'red'>('normal')
 const formRef = ref<HTMLFormElement | null>(null)
-
-// Анимация изменения баланса
-const balanceChange = ref<number | null>(null)
-const balanceChangeColor = ref<'green' | 'red'>('green')
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const { data } = await api.post('/users/getUser', { initData, user_id })
     balance_ton.value = Number(parseFloat(data.balance_ton || 0).toFixed(5))
+    displayedBalance.value = balance_ton.value
   })
+}
+
+const animateBalanceChange = (target: number) => {
+  const diff = target - displayedBalance.value
+  const steps = 30
+  const stepValue = diff / steps
+  let currentStep = 0
+
+  balanceColor.value = diff > 0 ? 'green' : 'red'
+
+  const interval = setInterval(() => {
+    displayedBalance.value = Number((displayedBalance.value + stepValue).toFixed(5))
+    currentStep++
+    if (currentStep >= steps) {
+      displayedBalance.value = target
+      clearInterval(interval)
+      setTimeout(() => {
+        balanceColor.value = 'normal'
+      }, 1000)
+    }
+  }, 30)
 }
 
 const handleSubmit = () => {
@@ -94,13 +114,9 @@ const startFlip = async () => {
 
     setTimeout(() => {
       const balanceDiff = data.win == 0 ? -betAmount : betAmount
-      balanceChangeColor.value = balanceDiff > 0 ? 'green' : 'red'
-      balanceChange.value = balanceDiff
-      balance_ton.value = Number((balance_ton.value + balanceDiff).toFixed(5))
-
-      setTimeout(() => {
-        balanceChange.value = null
-      }, 2000)
+      const newBalance = Number((balance_ton.value + balanceDiff).toFixed(5))
+      balance_ton.value = newBalance
+      animateBalanceChange(newBalance)
 
       rotating.value = false
       win.value = data.flip === selectedSide.value
@@ -135,13 +151,14 @@ onMounted(() => {
           </div>
           <div class="balance-info">
             <div class="balance-name">TON</div>
-            <div class="balance-amount">
-              {{ balance_ton }}
-              <transition name="fade-move">
-                <span v-if="balanceChange !== null" :class="['balance-change', balanceChangeColor]">
-                  {{ balanceChange > 0 ? '+' : '' }}{{ balanceChange.toFixed(2) }}
-                </span>
-              </transition>
+            <div
+              class="balance-amount"
+              :class="{
+                green: balanceColor === 'green',
+                red: balanceColor === 'red'
+              }"
+            >
+              {{ displayedBalance.toFixed(5) }}
             </div>
           </div>
         </div>
@@ -350,41 +367,13 @@ onMounted(() => {
   height: 20px;
 }
 
-.balance-change {
-  position: absolute;
-  margin-left: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  animation: floatUp 2s ease-out;
-}
-
-.balance-change.green {
+.balance-amount.green {
   color: #4caf50;
+  transition: color 0.3s;
 }
 
-.balance-change.red {
+.balance-amount.red {
   color: #f44336;
-}
-
-@keyframes floatUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-.fade-move-enter-active,
-.fade-move-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-move-enter-from,
-.fade-move-leave-to {
-  opacity: 0;
+  transition: color 0.3s;
 }
 </style>
