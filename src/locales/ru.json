@@ -1,5 +1,14 @@
 {
     "minigame": {
+        "bet_label": "Ваша ставка:",
+        "placeholder_bet": "Введите ставку",
+        "coin_front": "Орел",
+        "coin_back": "Решка",
+        "spin_button": "Крутить",
+        "too_low_bet": "Минимальная ставка 0.1 TON",
+        "win": "Вы выиграли!",
+        "lose": "Увы, не повезло...",
+        "insufficient_balance": "Недостаточно TON на балансе",
         "title_balance": "Ваш баланс:",
         "coint_flip_desc": "Выбирай правильную сторону и получай X2 к ставке",
         "play": "Играть",

@@ -4,8 +4,8 @@ import { ref, onMounted } from 'vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import UiInput from '@/shared/ui/UiInput.vue'
 import TonIcon from '@/shared/assets/icons/ton.svg'
-import api from '@/utils/api';
-import PageLoader from './PageLoader.vue';
+import api from '@/utils/api'
+import PageLoader from './PageLoader.vue'
 
 import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
 import { useI18n } from 'vue-i18n'
@@ -14,7 +14,7 @@ const { t } = useI18n()
 import {
   initData,
   user_id,
-} from '@/utils/telegramUser';
+} from '@/utils/telegramUser'
 
 const rotating = ref(false)
 const selectedSide = ref<number>(1)
@@ -33,13 +33,23 @@ const selectAmount = (value: number) => {
 
 const loaderRef = ref<InstanceType<typeof PageLoader> | null>(null)
 const balance_ton = ref<number>(0)
+const formRef = ref<HTMLFormElement | null>(null)
 
 const getUser = async () => {
   await loaderRef.value?.withLoader(async () => {
     const { data } = await api.post('/users/getUser', { initData, user_id })
     balance_ton.value = parseFloat(data.balance_ton || 0)
-  });
-};
+  })
+}
+
+const handleSubmit = () => {
+  if (!formRef.value?.checkValidity()) {
+    formRef.value?.reportValidity()
+    return
+  }
+
+  startFlip()
+}
 
 const startFlip = async () => {
   if (rotating.value || !coinEl.value) return
@@ -47,12 +57,10 @@ const startFlip = async () => {
   const betAmount = parseFloat(bet.value)
 
   if (betAmount < 0.1) {
-    win.value = false;
+    win.value = false
     showResult.value = true
-    modalText.value = 'Минимальная ставка 0.1 TON';
-
-    rotating.value = false
-    return;
+    modalText.value = t('minigame.too_low_bet')
+    return
   }
 
   rotating.value = true
@@ -68,12 +76,10 @@ const startFlip = async () => {
     user_id,
     bet: betAmount,
     side: selectedSide.value
-  });
+  })
 
-
-  if (data.status == 1) {
+  if (data.status === 1) {
     balance_ton.value -= betAmount
-
     lastFlipResult.value = data.flip
 
     const fullSpins = 6
@@ -87,20 +93,15 @@ const startFlip = async () => {
       rotating.value = false
       win.value = data.flip === selectedSide.value
       showResult.value = true
-      modalText.value = win.value ? 'Вы выиграли!' : 'Увы, не повезло...'
+      modalText.value = win.value ? t('minigame.win') : t('minigame.lose')
     }, 2600)
   } else {
-    win.value = false;
+    win.value = false
     showResult.value = true
-    modalText.value = 'Недостаточно TON на балансе';
-
+    modalText.value = t('minigame.insufficient_balance')
     rotating.value = false
   }
-
-
-
 }
-
 
 onMounted(() => {
   getUser()
@@ -131,18 +132,18 @@ onMounted(() => {
     <div class="game-card">
       <div class="coin" ref="coinEl"></div>
 
-      <div class="bet-block">
-        <div class="bet-label">Ваша ставка:</div>
+      <form @submit.prevent="handleSubmit" ref="formRef" class="bet-block">
+        <div class="bet-label">{{ t('minigame.bet_label') }}</div>
 
         <div class="amount-buttons">
           <button v-for="amount in amountButtons" :key="amount" :class="{ selected: bet === amount.toString() }"
-            @click="selectAmount(amount)">
+            type="button" @click="selectAmount(amount)">
             {{ amount }}
             <TonIcon class="coin-bet-icon" />
           </button>
         </div>
 
-        <UiInput required placeholder="Введите ставку" min="0.1" step="0.1" type="number" v-model="bet"
+        <UiInput required :placeholder="t('minigame.placeholder_bet')" min="0.1" step="0.1" type="number" v-model="bet"
           :custom="{ type: 'icon' }">
           <TonIcon class="coin-bet-icon" />
         </UiInput>
@@ -150,24 +151,26 @@ onMounted(() => {
         <div class="choice-options">
           <label :class="{ selected: selectedSide === 1 }">
             <input type="radio" :value="1" v-model="selectedSide" />
-            <img src="/src/shared/assets/coinFlip/coin-1.png" alt="Front" />
+            <img src="/src/shared/assets/coinFlip/coin-1.png" :alt="t('minigame.coin_front')" />
           </label>
 
           <label :class="{ selected: selectedSide === 2 }">
             <input type="radio" :value="2" v-model="selectedSide" />
-            <img src="/src/shared/assets/coinFlip/coin-2.png" alt="Back" />
+            <img src="/src/shared/assets/coinFlip/coin-2.png" :alt="t('minigame.coin_back')" />
           </label>
         </div>
 
-        <UiButton color="yellow" @click="startFlip" :disabled="rotating">
-          Крутить
+        <UiButton color="yellow" :disabled="rotating" type="submit">
+          {{ t('minigame.spin_button') }}
         </UiButton>
-      </div>
+      </form>
     </div>
 
     <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
   </div>
 </template>
+
+
 
 <style scoped lang="scss">
 .balance_content {
