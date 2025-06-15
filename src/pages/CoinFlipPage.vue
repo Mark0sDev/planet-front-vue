@@ -132,7 +132,7 @@ onMounted(() => {
           </button>
         </div>
 
-        <UiInput required placeholder="Введите ставку" min="0.1" step="0.1" type="number" v-model="bet"
+        <UiInput required placeholder="Введите ставку" min="0.1" step="0.1" type="number" v-model.number="bet"
           :custom="{ type: 'icon' }">
           <TonIcon class="coin-bet-icon" />
         </UiInput>
