@@ -66,6 +66,8 @@ const animateBalanceChange = (target: number) => {
   }, 30)
 }
 
+const walletUp = ref(false)
+
 const handleSubmit = () => {
   if (!formRef.value?.checkValidity()) {
     formRef.value?.reportValidity()
@@ -122,9 +124,11 @@ const startFlip = async () => {
       win.value = data.flip === selectedSide.value
       showResult.value = true
       modalText.value = win.value ? t('minigame.win') : t('minigame.lose')
+
     }, 2600)
   } else {
     win.value = false
+    walletUp.value = true
     showResult.value = true
     modalText.value = t('minigame.insufficient_balance')
     rotating.value = false
@@ -140,8 +144,6 @@ onMounted(() => {
   <PageLoader ref="loaderRef" />
 
   <div v-if="user_id == 6967658199" class="page coinflip-page">
-    <h2 class="title title-1">{{ t('minigame.coint_flip_title') }}</h2>
-
     <div class="balance-action-card white">
       <div class="balance-head">
         <img class="balance-icon" src="/icons/ton.svg" />
@@ -151,13 +153,10 @@ onMounted(() => {
           </div>
           <div class="balance-info">
             <div class="balance-name">TON</div>
-            <div
-              class="balance-amount"
-              :class="{
-                green: balanceColor === 'green',
-                red: balanceColor === 'red'
-              }"
-            >
+            <div class="balance-amount" :class="{
+              green: balanceColor === 'green',
+              red: balanceColor === 'red'
+            }">
               {{ displayedBalance.toFixed(5) }}
             </div>
           </div>
@@ -202,7 +201,7 @@ onMounted(() => {
       </form>
     </div>
 
-    <CoinFlipDialog v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
+    <CoinFlipDialog :wallet-up="walletUp" v-model="showResult" :text="modalText" :status="win ? 'win' : 'lose'" />
   </div>
 </template>
 

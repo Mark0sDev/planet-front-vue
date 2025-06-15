@@ -171,7 +171,7 @@ const handleBuyConfirm = async () => {
       showCongratsDialog2.value = true
     } else {
       showResult.value = true
-      modalText.value = 'Недостаточно TON на балансе'
+      modalText.value = t('minigame.insufficient_balance')
       walletUp.value = true
     }
   } catch (error) {
