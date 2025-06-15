@@ -81,6 +81,8 @@ const startFlip = async () => {
   if (data.status === 1) {
     if (data.win == 0) {
       balance_ton.value = Number((balance_ton.value - betAmount).toFixed(5))
+    } else {
+      balance_ton.value = Number((balance_ton.value + betAmount).toFixed(5))
     }
 
     lastFlipResult.value = data.flip
