@@ -34,6 +34,11 @@ const faqCards = computed(() => ({
       title: t('faq.what_civilization2'),
       text: t('faq.what_civilization_ans2'),
     },
+    {
+      id: 4,
+      title: t('faq.what_civilization4'),
+      text: t('faq.what_civilization_ans4'),
+    },
   ],
   [ETabsID.BALANCE]: [
     {

@@ -301,7 +301,5 @@ onMounted(() => {
   font-weight: 500;
 }
 
-.card-button {
-  margin-bottom: 10px;
-}
+
 </style>

@@ -14,6 +14,7 @@ const { t } = useI18n()
 import api from '@/utils/api'
 import MainDashboard from '@/widgets/MainDashboard.vue'
 
+
 import StatisticsCard from '@/entities/StatisticsCard.vue'
 import UsersIcon from '@/shared/assets/icons/users.svg'
 import LightningIcon from '@/shared/assets/icons/lightning.svg'
@@ -298,10 +299,13 @@ onMounted(() => {
   </div>
 
   <div class="home-page page">
+
+
     <img class="bg-decor ufo" src="@/shared/assets/bg/ufo.webp" alt="" />
     <img class="bg-decor meteor" src="@/shared/assets/bg/metheor.webp" alt="" />
     <div class="page-wrapper">
       <MainDashboard />
+
       <div class="statistics">
         <div class="title title-1">{{ t('statistics.title') }}</div>
         <div class="statistics-inner">

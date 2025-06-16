@@ -236,7 +236,7 @@ onMounted(() => {
   top: -6px;
   right: -6px;
   background-color: #0000ff;
-  color: #000;
+  color: white;
   font-size: 9px;
   font-weight: bold;
   padding: 2px 5px;

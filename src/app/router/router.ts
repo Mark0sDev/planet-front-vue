@@ -5,6 +5,7 @@ export enum AppRoutes {
   MINIGAME = '/minigame',
   TASKS = '/tasks',
   BALANCE = '/balance',
+  GIFT_TELEGRAM = '/gift_telegram',
   PLANETS = '/planets',
   CRASH = '/crash',
   FAQ = '/faq',

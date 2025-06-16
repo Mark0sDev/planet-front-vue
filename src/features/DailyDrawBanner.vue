@@ -8,7 +8,14 @@ import animation3 from '@/shared/assets/animations/lolpop-1.json'
 import animation4 from '@/shared/assets/animations/lolpop-2.json'
 import animation5 from '@/shared/assets/animations/bdaycandle-1.json'
 import animation6 from '@/shared/assets/animations/bdaycandle-2.json'
-import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
+
+import { useRouter } from 'vue-router'
+import { AppRoutes } from '@/app/router/router.ts'
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
+const router = useRouter()
 
 const animations = [animation1, animation2, animation3, animation4, animation5, animation6]
 
@@ -17,10 +24,8 @@ let intervalId: number | undefined
 
 const rerenderAnimation = ref<number>(-1)
 
-const showCongratsDialog = ref(false)
-
 const handleButtonClick = () => {
-  showCongratsDialog.value = true
+  router.push(AppRoutes.GIFT_TELEGRAM)
 }
 
 onMounted(() => {
@@ -64,15 +69,13 @@ onBeforeUnmount(() => {
         </transition>
       </div>
       <div class="content">
-        <div class="title">
-          Розыгрыш <span>10 подарков</span><br />
-          каждый день
+        <div v-html="t('daily_prize')" class="title">
+
         </div>
         <UiButton @click="handleButtonClick" color="yellow">Участвовать</UiButton>
       </div>
     </div>
 
-    <CongratsDialog text="Вы приняли участие в розыгрыше" v-model="showCongratsDialog" />
   </div>
 </template>
 

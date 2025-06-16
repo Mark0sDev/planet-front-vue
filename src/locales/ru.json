@@ -1,4 +1,5 @@
 {
+    "daily_prize": "Розыгрыш <span style='color: #eda400;'>5 подарков</span><br />каждую неделю",
     "minigame": {
         "bet_label": "Ваша ставка:",
         "placeholder_bet": "Введите ставку",
@@ -39,7 +40,9 @@
         "what_civilization3": "Как начать играть?",
         "what_civilization_ans3": "Чтобы начать, Вам необходимо пополнить <a style='color: #6ceaf1;' href='/balance'>Баланс</a> и купить свою первую <a style='color: #6ceaf1;' href='/planets'>Планету</a>",
         "what_civilization2": "Здесь можно заработать?",
-        "what_civilization_ans2": "Да, за игру Вы действительно получаете награды прямо в TON.<br><br>Но необходимо понимать, что CivilizationTon - это игра, где все пополнения являются добровольными пожертвованиями. ",
+        "what_civilization_ans2": "Да, за игру Вы действительно получаете награды прямо в TON.<br><br>Но необходимо понимать, что CivilizationTon - это игра, где все пополнения являются добровольными пожертвованиями.",
+        "what_civilization4": "Можно ли использовать несколько аккаунтов?",
+        "what_civilization_ans4": "Нет, это строго запрещено, за это Ваш аккаунт будет заблокирован",
         "what_civilization_ans": "Civilization - Уникальная P2E игра, в которой Вы сможете получать награды в TON",
         "what_civilization": "Что такое CivilizationTon?",
         "game": "Игра",
@@ -98,6 +101,7 @@
         "banner_text": "Выполняй наши простые задания<br>и зарабатывай TON без вложений!",
         "ads_button": "Смотреть рекламу",
         "tasks_ads": "Посмотреть рекламу",
+        "tasks_ads2": "Посмотреть 20 реклам за неделю",
         "tasks_ads_desc": "Смотри рекламу каждые <span style='color: #FFCD1D;'>3 часа</span>, получай <span style='color: #27aff9;'>0.0001 TON</span>"
     },
     "nav": {
@@ -176,5 +180,7 @@
     "withdraw_title": "Вывод баланса",
     "transactions_history_title": "История транзакций",
     "invite_btn_text": "Пригласить друзей",
-    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> ПРЯМО <span style='color: #27aff9;'>В TON</span><br>ОТ ВАШИХ ДРУЗЕЙ"
+    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> ПРЯМО <span style='color: #27aff9;'>В TON</span><br>ОТ ВАШИХ ДРУЗЕЙ",
+    "gift_banner_text": "<span style='color: #eda400;'>5</span> ПОДАРКОВ<br>КАЖДУЮ <span style='color: #eda400;'>НЕДЕЛЮ</span>",
+    "gift_banner": "<h2 style='margin-bottom: 0' class='info-title'>Выполняй <span style='color: #27aff9'>простые</span> задания и получи шанс выиграть <span style='color: #eda400'>Telegram Подарок</span></h2>"
 }

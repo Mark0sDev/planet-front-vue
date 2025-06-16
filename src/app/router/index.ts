@@ -7,6 +7,7 @@ import FriendsPage from '@/pages/FriendsPage.vue'
 import MiniGame from '@/pages/MiniGamePage.vue'
 import TasksPage from '@/pages/TasksPage.vue'
 import BalancePage from '@/pages/BalancePage.vue'
+import GiftTelegramPage from '@/pages/GiftTelegramPage.vue'
 import PlanetsPage from '@/pages/PlanetsPage.vue'
 
 import CrashPage from '@/pages/crashPage.vue'
@@ -16,6 +17,7 @@ import CoinFlipPage from '@/pages/CoinFlipPage.vue'
 
 const routes = [
   { path: AppRoutes.HOME, component: HomePage },
+  { path: AppRoutes.GIFT_TELEGRAM, component: GiftTelegramPage },
   { path: AppRoutes.LEADERS, component: LeadersPage },
   { path: AppRoutes.MINIGAME, component: MiniGame },
   { path: AppRoutes.FRIENDS, component: FriendsPage },
