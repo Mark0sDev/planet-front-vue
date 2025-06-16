@@ -11,6 +11,8 @@ import api from '@/utils/api'
 import PageLoader from './PageLoader.vue'
 import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
 import PlanetImage2 from '@/shared/assets/planets/planet-2/level-0.png'
+import PlanetImage3 from '@/shared/assets/planets/planet-3/level-0.png'
+
 import UiButton from '@/shared/ui/UiButton.vue'
 import AttackScene, { type AttackSceneProps } from '@/widgets/PlanetPanel/AttackScene.vue'
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
@@ -28,11 +30,15 @@ type Planet = {
   name: string
   imageSrc: string
   income: string
-  cost: string,
-  claim: string,
+  cost: string
+  claim: string
   income_final: string
   cycleTime: string
   earned: number
+  pin: boolean
+  freeze: boolean
+  hoot: boolean,
+  limited: boolean,
 }
 
 const planets = ref<Planet[]>([
@@ -47,6 +53,10 @@ const planets = ref<Planet[]>([
     claim: "0.01 TON",
     cycleTime: '4 ч',
     earned: 0,
+    pin: false,
+    freeze: false,
+    hoot: false,
+    limited: false
   },
   {
     id: 2,
@@ -59,8 +69,36 @@ const planets = ref<Planet[]>([
     claim: "1.5 TON",
     cycleTime: '6 ч',
     earned: 0,
+    pin: false,
+    freeze: false,
+    hoot: true,
+    limited: false
+  },
+  {
+    id: 3,
+    planetDisplayId: 3,
+    name: 'Орианна',
+    income_final: "72 TON",
+    imageSrc: PlanetImage3,
+    income: '4%',
+    cost: '50 TON',
+    claim: "0.5 TON",
+    cycleTime: '6 ч',
+    earned: 0,
+    pin: true,
+    freeze: true,
+    hoot: false,
+    limited: true
   },
 ])
+
+
+const sortedPlanets = computed(() =>
+  planets.value.slice().sort((a, b) => {
+    if (a.pin === b.pin) return 0
+    return a.pin ? -1 : 1
+  })
+)
 
 const showList = ref(true)
 const sceneActive = ref(false)
@@ -146,10 +184,10 @@ const buyPlanet = ({ index }: { index: number }) => {
   const planet = planets.value.find(p => p.id === index)
   if (!planet) return
 
-  if (planetStates.value[index] === 0) {
+  if (planetStates.value[index] === 0 && !planet.freeze) {
     selectedPlanetId.value = index
     showBuyModal.value = true
-  } else {
+  } else if (!planet.freeze) {
     handlePlanetClick({ index, planet })
   }
 }
@@ -247,7 +285,9 @@ onBeforeUnmount(() => {
         <h2 class="title title-1">{{ t('planet.title') }}</h2>
 
         <div class="planets-list">
-          <div v-for="planet in planets" :key="planet.id" class="planet-card">
+          <div v-for="planet in sortedPlanets" :key="planet.id" class="planet-card">
+            <div v-if="planet.limited" class="label-limited">LIMITED</div>
+            <div v-if="planet.hoot" class="label-hot">HOT</div>
             <div class="card-header">
               <div>
                 <div class="card-image">
@@ -281,7 +321,6 @@ onBeforeUnmount(() => {
                   </div>
                   <div class="stat-value">{{ planet.cost }}</div>
                 </div>
-
 
                 <div class="stat-item">
                   <div class="stat-label">
@@ -325,10 +364,7 @@ onBeforeUnmount(() => {
                 </div>
               </div>
 
-
             </div>
-
-
 
             <div class="card-grid-row">
               <div class="stat-item">
@@ -347,10 +383,13 @@ onBeforeUnmount(() => {
               </div>
 
               <UiButton class="planet_button"
-                :disabled="formLoaders.attackPlanet || (countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00')"
+                :disabled="planet.freeze || formLoaders.attackPlanet || (countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00')"
                 @click="buyPlanet({ index: planet.id })">
 
-                <template v-if="formLoaders.attackPlanet">
+                <template v-if="planet.freeze">
+                  99 PLANET
+                </template>
+                <template v-else-if="formLoaders.attackPlanet">
                   <span class="spinner" />
                 </template>
                 <template v-else-if="countdownPerPlanet[planet.id] && countdownPerPlanet[planet.id] !== '00:00:00'">
@@ -386,8 +425,6 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-
-
 <style scoped lang="scss">
 .page {
   padding-bottom: 120px;
@@ -405,6 +442,7 @@ onBeforeUnmount(() => {
 }
 
 .planet-card {
+  position: relative;
   padding: 10px;
   border: 1px solid #32315f;
   padding-bottom: 2px;
@@ -418,10 +456,34 @@ onBeforeUnmount(() => {
   gap: 8px;
 }
 
+.label-hot {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #ff4d4f;
+  color: #ffffff;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-weight: 600;
+  transform: rotate(-10deg);
+}
+
+.label-limited {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #7939e9;
+  color: #ffffff;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-weight: 600;
+  transform: rotate(-10deg);
+}
+
+
 .card-header {
   display: flex;
   align-items: center;
-
   gap: 10px;
 }
 
@@ -436,7 +498,6 @@ onBeforeUnmount(() => {
 
 .card-title {
   font-size: 18px;
-
   margin-top: 15px;
   font-weight: 600;
   text-transform: uppercase;
@@ -454,7 +515,7 @@ onBeforeUnmount(() => {
 .stat-item {
   flex: 1 1 25%;
   min-width: 160px;
-  background: rgba(44, 50, 85, 0.65); // более глубокий, единый цвет
+  background: rgba(44, 50, 85, 0.65);
   border-radius: 10px;
   padding: 12px;
   display: flex;
@@ -487,29 +548,10 @@ onBeforeUnmount(() => {
   gap: 4px;
 }
 
-
 .ton-icon {
   width: 16px;
   height: 16px;
 }
-
-.card-line--accent {
-  background-color: rgba(108, 234, 241, 0.54);
-  padding: 4px 6px;
-  border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  span {
-    color: var(--font);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-}
-
 
 .spinner {
   width: 18px;
