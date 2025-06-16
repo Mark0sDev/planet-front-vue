@@ -10,7 +10,7 @@ import { initData, user_id } from '@/utils/telegramUser'
 const { t } = useI18n()
 const route = useRoute()
 
-const allTaskIds = ref<number[]>([2, 3, 4, 5, 6, 7, 8, 9, 10])
+const allTaskIds = ref<number[]>([2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
 const tasksCount = ref(0)
 
 interface TaskFromApi {
