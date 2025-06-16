@@ -271,10 +271,11 @@ onBeforeUnmount(() => {
 
                 <div class="stat-item">
                   <div class="stat-label">
-                    <svg class="stat-icon" viewBox="0 0 24 24">
-                      <path
-                        d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.93V12H5V6.3L12 3.19V11.99Z"
-                        fill="currentColor" />
+                    <svg class="stat-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 3h12l4 6-10 13L2 9Z" />
+                      <path d="M11 3 8 9l4 13 4-13-3-6" />
+                      <path d="M2 9h20" />
                     </svg>
                     <span>{{ t('planet.cost') }}</span>
                   </div>

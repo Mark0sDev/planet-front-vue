@@ -54,26 +54,20 @@ onMounted(() => {
 
 <template>
   <nav class="bottom-nav">
-    <router-link
-      v-for="item in NAVIGATION"
-      :key="item.path"
-      :to="item.path"
-      :class="{
-        active: isActive(item.path),
-        'earn-button': isEarnButton(item.path),
-        'planets-button': isPlanets(item.path),
-        'minigame-button': isMiniGame(item.path)
-      }"
-      class="nav-item"
-    >
+    <router-link v-for="item in NAVIGATION" :key="item.path" :to="item.path" :class="{
+      active: isActive(item.path),
+      'earn-button': isEarnButton(item.path),
+      'planets-button': isPlanets(item.path),
+      'minigame-button': isMiniGame(item.path)
+    }" class="nav-item">
       <div v-if="isEarnButton(item.path)" class="earn-content">
         <div class="earn-circle">
           <component :is="item.icon" class="earn-icon" />
-          <span
-            v-if="item.path === AppRoutes.MINIGAME"
-            class="new-badge"
-          >
+          <span v-if="item.path === AppRoutes.MINIGAME" class="new-badge">
             NEW
+          </span>
+          <span v-if="item.path === AppRoutes.PLANETS" class="earn-badge">
+            EARN
           </span>
         </div>
         <span class="earn-text">{{ t(item.label) }}</span>
@@ -82,10 +76,7 @@ onMounted(() => {
       <template v-else>
         <div class="nav-icon-wrapper">
           <component :is="item.icon" class="nav-icon" />
-          <span
-            v-if="item.path === AppRoutes.TASKS && tasksCount > 0"
-            class="task-badge"
-          >
+          <span v-if="item.path === AppRoutes.TASKS && tasksCount > 0" class="task-badge">
             {{ tasksCount }}
           </span>
         </div>
@@ -231,6 +222,21 @@ onMounted(() => {
   right: -6px;
   background-color: #ff47e0;
   color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.earn-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: #0000ff;
+  color: #000;
   font-size: 9px;
   font-weight: bold;
   padding: 2px 5px;
