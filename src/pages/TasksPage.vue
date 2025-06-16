@@ -154,6 +154,16 @@ const dailyTasks = ref<Task[]>([
     link: 'https://t.me/vadim_maslow',
     checkButton: true,
     disabledCheck: false,
+  },
+  {
+    id: 11,
+    title: t('tasks.subscribeChannel'),
+    avatar: '/sablu.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    link: 'https://t.me/tonythehunter',
+    checkButton: true,
+    disabledCheck: false,
   }
 ]);
 
@@ -300,6 +310,4 @@ onMounted(() => {
   margin-top: 5px;
   font-weight: 500;
 }
-
-
 </style>
