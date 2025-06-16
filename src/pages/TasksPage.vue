@@ -164,7 +164,17 @@ const dailyTasks = ref<Task[]>([
     link: 'https://t.me/tonythehunter',
     checkButton: true,
     disabledCheck: false,
-  }
+  },
+  {
+    id: 12,
+    title: t('tasks.StartBot'),
+    avatar: '/moneymining.jpg',
+    status: TaskStatus.CLAIM,
+    timer: t('tasks.reward'),
+    link: 'https://t.me/Money_Mining_Bot/MoneyMiningGame?startapp=5238888786',
+    checkButton: true,
+    disabledCheck: true,
+  },
 ]);
 
 const getTasks = async () => {
