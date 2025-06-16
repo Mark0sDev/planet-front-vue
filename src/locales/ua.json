@@ -1,4 +1,5 @@
 {
+    "daily_prize": "Розіграш <span style='color: #eda400;'>5 подарунків</span><br />щотижня",
     "minigame": {
         "bet_label": "Ваша ставка:",
         "placeholder_bet": "Введіть ставку",
@@ -10,76 +11,78 @@
         "lose": "На жаль, не пощастило...",
         "insufficient_balance": "Недостатньо TON на балансі",
         "title_balance": "Ваш баланс:",
-        "coint_flip_desc": "Обирай правильну сторону та отримуй X2 від ставки",
+        "coint_flip_desc": "Обери правильну сторону і отримай X2 до ставки",
         "play": "Грати",
         "title": "Міні-Ігри",
-        "coint_flip_title": "Coin Flip (Орел або Решка)"
+        "coint_flip_title": "Орел чи Решка"
     },
     "wallet": {
-        "address": "Адреса гаманця TON",
+        "address": "Адреса TON-гаманця",
         "memo": "Коментар (MEMO)",
         "orGoTo": "Або перейдіть на",
-        "balancePage": "сторінку Баланс",
-        "toTopUp": "щоб поповнити в один клік"
+        "balancePage": "Баланс",
+        "toTopUp": "для поповнення в один клік"
     },
     "common": {
         "continue": "Продовжити"
     },
     "faq": {
         "refferal2": "Чи отримаю я винагороду за запрошення друзів?",
-        "refferal_ans2": "Звичайно! Ми щедро нагороджуємо тих, хто запрошує друзів до нашого проєкту.<br><br>Ви будете отримувати 10% у три рівні (5%-3%-2%) з кожної покупки вашим рефералом.",
+        "refferal_ans2": "Звичайно! Ми щедро винагороджуємо тих, хто запрошує нових друзів у наш проєкт.<br><br>Ви отримаєте 10% у три рівні (5%-3%-2%) з кожної покупки вашим рефералом.",
         "refferal1": "Чи можу я запрошувати друзів?",
-        "refferal_ans1": "Так, на сторінці <a style='color: #6ceaf1;' href='/friends'>Друзі</a> Ви можете запрошувати друзів та переглядати всю статистику.",
-        "balance3": "Скільки часу займає поповнення та вивід?",
-        "balance_ans3": "Поповнення та виведення TON відбуваються миттєво. Це займає не більше 30 секунд.",
+        "refferal_ans1": "Так, на сторінці <a style='color: #6ceaf1;' href='/friends'>Друзі</a> ви можете запросити своїх друзів та переглянути всю статистику по рефералах.",
+        "balance3": "Скільки часу займає поповнення або вивід?",
+        "balance_ans3": "Поповнення і вивід TON відбуваються миттєво. Зазвичай не більше 30 секунд.",
         "balance2": "Як вивести баланс?",
-        "balance_ans2": "На сторінці <a style='color: #6ceaf1;' href='/balance'>Баланс</a> є форма для виводу TON. Вкажіть адресу гаманця та натисніть MAX.<br><br>Мінімальна сума виводу 0.1 TON.",
+        "balance_ans2": "На сторінці <a style='color: #6ceaf1;' href='/balance'>Баланс</a> введіть адресу гаманця та натисніть кнопку MAX.<br><br>Мінімальна сума для виводу — 0.1 TON.",
         "balance1": "Як поповнити баланс?",
-        "balance_ans1": "Перейдіть на сторінку <a style='color: #6ceaf1;' href='/balance'>Баланс</a>, підключіть свій TON гаманець або скористайтеся прямим переказом через <a style='color: #6ceaf1;' href='/balance'>MEMO</a>.",
+        "balance_ans1": "Просто перейдіть на сторінку <a style='color: #6ceaf1;' href='/balance'>Баланс</a>, підключіть свій TON-гаманець або скористайтеся прямим переказом через <a style='color: #6ceaf1;' href='/balance'>MEMO</a>.",
         "what_civilization3": "Як почати грати?",
-        "what_civilization_ans3": "Щоб почати, поповніть <a style='color: #6ceaf1;' href='/balance'>Баланс</a> та придбайте свою першу <a style='color: #6ceaf1;' href='/planets'>Планету</a>.",
-        "what_civilization2": "Чи можна тут заробити?",
-        "what_civilization_ans2": "Так, за гру ви отримуєте реальні нагороди в TON.<br><br>Але пам’ятайте, що CivilizationTon — це гра, де всі поповнення є добровільними пожертвами.",
+        "what_civilization_ans3": "Щоб почати, поповніть <a style='color: #6ceaf1;' href='/balance'>баланс</a> і купіть свою першу <a style='color: #6ceaf1;' href='/planets'>планету</a>.",
+        "what_civilization2": "Тут можна заробити?",
+        "what_civilization_ans2": "Так, за гру ви дійсно отримуєте винагороди в TON.<br><br>Проте CivilizationTon — це гра, де всі поповнення є добровільними пожертвами.",
+        "what_civilization4": "Чи можна мати кілька акаунтів?",
+        "what_civilization_ans4": "Ні, це суворо заборонено. Ваш акаунт буде заблоковано.",
+        "what_civilization_ans": "Civilization — унікальна P2E-гра, в якій ви зможете отримувати нагороди в TON.",
         "what_civilization": "Що таке CivilizationTon?",
-        "what_civilization_ans": "Civilization — унікальна P2E гра, де ви можете отримувати нагороди в TON.",
         "game": "Гра",
         "balance": "Баланс",
         "refs": "Реферали",
-        "title_banner": "Детальна інструкція,<br>як приєднатися до цивілізації"
+        "title_banner": "Детальна інструкція,<br>як брати участь у цивілізації"
     },
     "story": {
         "aboutTitle": "Про проєкт",
-        "aboutSubtitle": "Атакуй планети, заробляй TON і підвищуй рівень!",
+        "aboutSubtitle": "Атакуй планети, заробляй TON і прокачуй рівень!",
         "feature1": {
             "title": "Почни всього з 1 TON",
             "text": "Мінімальний вхід — доступний кожному"
         },
         "feature2": {
             "title": "Швидкий прибуток",
-            "text": "Цикли планет дуже швидкі, заробити встигають усі"
+            "text": "Цикли планет дуже короткі — встигнуть усі"
         },
         "feature3": {
-            "title": "Миттєві виплати",
-            "text": "Виплати в TON надходять за 5 секунд"
+            "title": "Миттєвий вивід",
+            "text": "TON приходить буквально за 5 секунд"
         },
         "feature4": {
             "title": "Без вкладень",
             "text": "Заробляй без вкладень, виконуючи наші завдання"
         },
-        "footer1": "Не втрать шанс отримувати TON вже зараз!",
+        "footer1": "Не прогав шанс отримати TON вже зараз!",
         "refTitle": "Реферальна система",
         "refSubtitle": "Отримуй 10% з кожної покупки вашим рефералом",
         "refFeature1": {
-            "title": "3 рівня",
-            "text": "3-рівнева система дозволяє отримувати TON за активність друзів і їхніх друзів"
+            "title": "3 рівні",
+            "text": "Три рівні рефералів дозволяють заробляти з активності друзів і їхніх друзів"
         },
         "refFeature2": {
-            "title": "Без токенів",
-            "text": "Отримуй реальні TON за покупки друзів"
+            "title": "Жодних токенів",
+            "text": "Отримуй справжні TON за покупки твоїх друзів"
         },
         "footer2": "Заробляй TON разом з друзями",
-        "ctaTitle": "Не втрать шанс!",
-        "ctaSubtitle": "Почни прямо зараз:",
+        "ctaTitle": "Не пропусти можливість!",
+        "ctaSubtitle": "Почни просто зараз:",
         "ctaBuy": "Купити першу планету",
         "ctaTopUp": "Поповнити баланс"
     },
@@ -95,15 +98,16 @@
         "storyReward": "Нагорода: 0.001 TON",
         "every_day_tasks_title": "Щоденні завдання",
         "osnova_tasks": "Основні завдання",
-        "banner_text": "Виконуй прості завдання<br>та заробляй TON без вкладень!",
+        "banner_text": "Виконуй прості завдання<br>і заробляй TON без вкладень!",
         "ads_button": "Дивитися рекламу",
         "tasks_ads": "Переглянути рекламу",
+        "tasks_ads2": "Переглянути 20 реклам за тиждень",
         "tasks_ads_desc": "Дивись рекламу кожні <span style='color: #FFCD1D;'>3 години</span> та отримуй <span style='color: #27aff9;'>0.0001 TON</span>"
     },
     "nav": {
         "game": "Ігри",
         "home": "Головна",
-        "minigame": "Міні-Ігри",
+        "minigame": "Ігри",
         "friends": "Друзі",
         "earn": "Заробити",
         "tasks": "Завдання",
@@ -113,13 +117,13 @@
         "available": "Доступно:",
         "withdraw": "Вивести",
         "withdrawn_all_time": "Виведено за весь час:",
-        "tip_wallet": "Адреса гаманця TON",
+        "tip_wallet": "Адреса TON-гаманця",
         "not_enough_ton": "Недостатньо TON на балансі",
         "available_for_withdrawal": "Доступно до виводу: {amount} TON",
-        "tip_wallet_address": "Адреса гаманця TON",
+        "tip_wallet_address": "Адреса TON-гаманця",
         "tip_memo": "Коментар (MEMO)",
-        "placeholder_wallet": "Введіть адресу гаманця TON",
-        "placeholder_amount": "Введіть кількість TON",
+        "placeholder_wallet": "Введіть адресу TON-гаманця",
+        "placeholder_amount": "Введіть суму TON",
         "connect_wallet": "Підключити<br />гаманець",
         "manual_topup": "Поповнити вручну",
         "title_out": "Доступно до виводу:",
@@ -135,10 +139,10 @@
     },
     "statistics": {
         "title": "Статистика",
-        "users": "Користувачів уже заробляють",
+        "users": "Користувачі, які вже заробляють",
         "totalWithdrawals": "Усього виведено",
-        "totalPlanetsBought": "Придбано планет",
-        "totalTonWithdrawn": "Виведено TON",
+        "totalPlanetsBought": "Усього куплено планет",
+        "totalTonWithdrawn": "Загалом виведено TON",
         "latestWithdrawals": "Останні виводи"
     },
     "tabs": {
@@ -149,20 +153,20 @@
     "friends": {
         "referral_stats": "Статистика рефералів",
         "your_referrals": "Ваші реферали",
-        "level_1": "1 Рівень",
-        "level_2": "2 Рівень",
-        "level_3": "3 Рівень"
+        "level_1": "1 рівень",
+        "level_2": "2 рівень",
+        "level_3": "3 рівень"
     },
     "congrats": {
         "continue": "Продовжити",
-        "watchAd": "Подивитись рекламу",
-        "buy": "Ви успішно придбали планету {name}!<br><br>Через {time} ви отримаєте нагороду {reward}",
-        "attack": "Ви успішно атакували планету {name}!<br><br>Через {time} ви отримаєте нагороду {reward}<br><br>🤝 Якщо хочете підтримати проєкт, перегляньте 3-секундну рекламу:"
+        "watchAd": "Дивитись рекламу",
+        "buy": "Ви успішно купили планету {name}!<br><br>Через {time} ви отримаєте нагороду {reward}",
+        "attack": "Ви успішно атакували планету {name}!<br><br>Через {time} ви отримаєте нагороду {reward}<br><br>🤝 Якщо бажаєте підтримати проєкт, перегляньте 3-секундну рекламу:"
     },
     "planet": {
         "title": "Планети",
         "income": "Доходність",
-        "claim": "Дохід за цикл",
+        "claim": "Прибуток за цикл",
         "cost": "Вартість",
         "profit": "Прибуток",
         "cycle_time": "Час циклу",
@@ -170,11 +174,13 @@
         "buy": "Купити",
         "attack": "Атакувати"
     },
-    "friends_banner": "<h2 class='info-title'>Отримуйте <span>10%</span> з <span>кожної<br/>покупки</span> планети вашим рефералом</h2><p class='info-description'>Ви отримуєте реферальну нагороду кожного разу, коли ваш реферал купує планету</p>",
+    "friends_banner": "<h2 class='info-title'>Отримуй <span>10%</span> за <span>кожну<br/>покупку</span> планети вашим рефералом</h2><p class='info-description'>Ви отримуєте винагороду кожного разу, коли ваш реферал купує планету</p>",
     "friends_text": "Друзі",
-    "withdrawal_success": "Запит на виведення успішно створено<br><br>TON надійдуть на гаманець протягом 30 секунд",
+    "withdrawal_success": "Запит на вивід успішно створено<br><br>TON надійдуть протягом 30 секунд",
     "withdraw_title": "Виведення балансу",
     "transactions_history_title": "Історія транзакцій",
     "invite_btn_text": "Запросити друзів",
-    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> НАПРЯМУ <span style='color: #27aff9;'>В TON</span><br>ВІД ВАШИХ ДРУЗІВ"
+    "refferal_text_banner": "<span style='color: #27aff9;'>10%</span> НАПРЯМУ <span style='color: #27aff9;'>У TON</span><br>ВІД ВАШИХ ДРУЗІВ",
+    "gift_banner_text": "<span style='color: #eda400;'>5</span> ПОДАРУНКІВ<br>КОЖНОГО <span style='color: #eda400;'>ТИЖНЯ</span>",
+    "gift_banner": "<h2 style='margin-bottom: 0' class='info-title'>Виконуй <span style='color: #27aff9'>простi</span> завдання і отримай шанс виграти <span style='color: #eda400'>Telegram Подарунок</span></h2>"
 }
