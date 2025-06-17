@@ -86,7 +86,7 @@ const planets = ref<Planet[]>([
     cycleTime: '6 ч',
     earned: 0,
     pin: true,
-    freeze: true,
+    freeze: false,
     hoot: false,
     limited: true
   },
