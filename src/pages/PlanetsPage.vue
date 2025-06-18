@@ -5,6 +5,7 @@ import {
   initData,
   user_id
 } from '@/utils/telegramUser'
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 
 import CoinFlipDialog from '@/features/dialogs/CoinFlipDialog.vue'
 import api from '@/utils/api'
@@ -378,7 +379,7 @@ onBeforeUnmount(() => {
                 </div>
                 <div class="stat-value">
                   {{ planet.earned }}
-                  <img src="/icons/ton.svg" alt="ton" class="ton-icon" />
+                  <img :src="tonSvg" alt="ton" class="ton-icon" />
                 </div>
               </div>
 

@@ -134,6 +134,7 @@ const startFlip = async () => {
     rotating.value = false
   }
 }
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 
 onMounted(() => {
   getUser()
@@ -146,7 +147,8 @@ onMounted(() => {
   <div class="page coinflip-page">
     <div class="balance-action-card white">
       <div class="balance-head">
-        <img class="balance-icon" src="/icons/ton.svg" />
+        <img class="balance-icon" :src="tonSvg"
+         />
         <div class="balance_content">
           <div>
             <div class="balance-amount">{{ t('minigame.title_balance') }}</div>

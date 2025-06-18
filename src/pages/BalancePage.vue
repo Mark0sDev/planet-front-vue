@@ -84,13 +84,15 @@ const getUser = async () => {
   });
 };
 
+import starsSvg from '@/shared/assets/images/icons/stars.svg?url';
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 const balanceActionCards = computed<BalanceCardData[]>(() => [
   {
     id: 1,
     name: 'STARS',
     balance: +user.value.balance_stars,
     payments: +user.value.balance_payments_stars,
-    icon: "/icons/stars.svg",
+    icon: starsSvg,
     variant: 'white',
   },
   {
@@ -98,7 +100,7 @@ const balanceActionCards = computed<BalanceCardData[]>(() => [
     name: 'TON',
     balance: +user.value.balance_ton,
     payments: +user.value.balance_payments_ton,
-    icon: "/icons/ton.svg",
+    icon: tonSvg,
     variant: 'accent',
   },
 ]);

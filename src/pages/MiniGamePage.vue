@@ -3,6 +3,7 @@ import UiButton from '@/shared/ui/UiButton.vue'
 //import SlotsIcon from '@/shared/assets/icons/slot-machine.svg'
 import { useRouter } from 'vue-router'
 import { AppRoutes } from '@/app/router/router.ts'
+import coinIcon from '@/shared/assets/images/coin.png'
 
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
@@ -22,7 +23,7 @@ const coinFlipRouter = () => router.push(AppRoutes.COIN_FLIP)
                 <div class="hot-label">HOT</div>
             </div>
             <div class="game-body">
-                <img src="/coin.png" class="icon" />
+                <img :src="coinIcon" class="icon" alt="coin" />
                 <p>{{ t('minigame.coint_flip_desc') }}</p>
             </div>
             <UiButton @click="coinFlipRouter">{{ t('minigame.play') }}</UiButton>

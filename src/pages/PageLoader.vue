@@ -1,11 +1,13 @@
 <template>
     <div v-if="isLoading" class="loader-container">
-        <img src="/icons/loader.png" alt="Loading..." class="loader-img" />
+        <img :src="loaderImg" alt="Loading..." class="loader-img" />
     </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+
+import loaderImg from '@/shared/assets/images/icons/loader.png';
 
 const isLoading = ref(false);
 

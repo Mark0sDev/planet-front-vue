@@ -1,4 +1,6 @@
 import { ref } from 'vue'
+import musicUrl from '@/shared/assets/images/music.mp3'
+
 
 const isMuted = ref(true)
 let audio: HTMLAudioElement | null = null
@@ -19,7 +21,7 @@ function initMusic() {
 
     loadStoredMuteState()
 
-    audio = new Audio('/music.mp3')
+    audio = new Audio(musicUrl)
     audio.loop = true
     audio.volume = 0.1
 

@@ -6,6 +6,20 @@ import PageLoader from './PageLoader.vue'
 import UiButton from '@/shared/ui/UiButton.vue'
 import { type Task, TaskStatus } from '@/entities/TaskCard/types.ts'
 import inviteFriendsAvatar from '@/shared/assets/avatars/avatar-1.jpg'
+
+import avatar_channel from '@/shared/assets/images/avatar_channel.jpg';
+import avatar_chat from '@/shared/assets/images/avatar_chat.jpg';
+import MineVerse from '@/shared/assets/images/MineVerse.jpg';
+
+import bunssiness_karman from '@/shared/assets/images/bunssiness_karman.jpg';
+
+import diver from '@/shared/assets/images/diver.jpg';
+import leha from '@/shared/assets/images/leha.jpg';
+import vadim from '@/shared/assets/images/vadim.jpg';
+
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
+
+
 import TasksStory from '@/shared/assets/avatars/avatar-3.jpg'
 import TaskCard from '@/entities/TaskCard/TaskCard.vue'
 import { useI18n } from 'vue-i18n'
@@ -69,7 +83,7 @@ const dailyTasks = ref<Task[]>([
   {
     id: 2,
     title: t('tasks.subscribeChannel'),
-    avatar: '/avatar_channel.jpg',
+    avatar: avatar_channel,
     status: TaskStatus.CLAIM,
     timer: t('tasks.reward'),
     checkButton: true,
@@ -79,7 +93,7 @@ const dailyTasks = ref<Task[]>([
   {
     id: 3,
     title: t('tasks.subscribeChat'),
-    avatar: '/avatar_chat.jpg',
+    avatar: avatar_chat,
     status: TaskStatus.CLAIM,
     timer: t('tasks.reward'),
     checkButton: true,
@@ -98,7 +112,7 @@ const dailyTasks = ref<Task[]>([
   {
     id: 5,
     title: 'For registration 1 TON + free roulette spins',
-    avatar: '/MineVerse.jpg',
+    avatar: MineVerse,
     status: TaskStatus.CLAIM,
     timer: t('tasks.reward'),
     link: 'https://t.me/MineVerseBot/app?startapp=r_100000000088',
@@ -106,19 +120,9 @@ const dailyTasks = ref<Task[]>([
     disabledCheck: true,
   },
   {
-    id: 6,
-    title: '🐸 Зарабатывай TON на мемах!',
-    avatar: '/TonLandia.jpg',
-    status: TaskStatus.CLAIM,
-    timer: t('tasks.reward'),
-    link: 'https://t.me/TONlandiaBot/game?startapp=7981172932',
-    checkButton: true,
-    disabledCheck: true,
-  },
-  {
     id: 7,
     title: t('tasks.subscribeChannel'),
-    avatar: '/bunssiness_karman.jpg',
+    avatar: bunssiness_karman,
     status: TaskStatus.CLAIM,
     timer: t('tasks.reward'),
     link: 'https://t.me/Karpushkin_invest_NEWS',
@@ -128,7 +132,7 @@ const dailyTasks = ref<Task[]>([
   {
     id: 8,
     title: t('tasks.subscribeChannel'),
-    avatar: '/diver.jpg',
+    avatar: diver,
     status: TaskStatus.CLAIM,
     timer: t('tasks.reward'),
     link: 'https://t.me/divergentRF',
@@ -138,7 +142,7 @@ const dailyTasks = ref<Task[]>([
   {
     id: 9,
     title: t('tasks.subscribeChannel'),
-    avatar: '/leha.jpg',
+    avatar: leha,
     status: TaskStatus.CLAIM,
     timer: t('tasks.reward'),
     link: 'https://t.me/team_krm',
@@ -148,32 +152,12 @@ const dailyTasks = ref<Task[]>([
   {
     id: 10,
     title: t('tasks.subscribeChannel'),
-    avatar: '/vadim.jpg',
+    avatar: vadim,
     status: TaskStatus.CLAIM,
     timer: t('tasks.reward'),
     link: 'https://t.me/vadim_maslow',
     checkButton: true,
     disabledCheck: false,
-  },
-  {
-    id: 11,
-    title: t('tasks.subscribeChannel'),
-    avatar: '/sablu.jpg',
-    status: TaskStatus.CLAIM,
-    timer: t('tasks.reward'),
-    link: 'https://t.me/tonythehunter',
-    checkButton: true,
-    disabledCheck: false,
-  },
-  {
-    id: 12,
-    title: t('tasks.StartBot'),
-    avatar: '/moneymining.jpg',
-    status: TaskStatus.CLAIM,
-    timer: t('tasks.reward'),
-    link: 'https://t.me/Money_Mining_Bot/MoneyMiningGame?startapp=5238888786',
-    checkButton: true,
-    disabledCheck: true,
   },
 ]);
 
@@ -214,7 +198,7 @@ onMounted(() => {
     <div class="daily-action-card balance-action-card">
       <div class="card-head">
         <div class="card-icon">
-          <img src="/icons/ton.svg" alt="" />
+          <img :src="tonSvg" alt="" />
         </div>
         <div class="card-head-inner">
           <div class="card-title">{{ t('tasks.tasks_ads') }}</div>

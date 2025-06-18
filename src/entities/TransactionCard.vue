@@ -27,6 +27,8 @@ const amountClass = computed(() => {
     'expense-amount': transaction.type === 'expense',
   }
 })
+
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 </script>
 
 <template>
@@ -42,7 +44,7 @@ const amountClass = computed(() => {
 
     <div class="transaction-amount" :class="amountClass">
       <span>{{ formattedAmount }}</span>
-      <img src="/icons/ton.svg" alt="TON Icon" class="transaction-icon" />
+      <img :src="tonSvg" alt="TON Icon" class="transaction-icon" />
     </div>
   </div>
 </template>

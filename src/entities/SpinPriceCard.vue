@@ -2,13 +2,15 @@
 defineProps<{
   price: number
 }>()
+
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 </script>
 
 <template>
   <div class="level-card">
     <div class="level-info">Стоимость:</div>
     <div class="level-reward">
-      <img src="/icons/ton.svg" alt="TON" class="reward-icon" />
+      <img :src="tonSvg" alt="TON" class="reward-icon" />
       {{ price }} TON
     </div>
   </div>

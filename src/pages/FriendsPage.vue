@@ -107,6 +107,7 @@ onMounted(() => {
 })
 
 
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 
 </script>
 
@@ -146,7 +147,7 @@ onMounted(() => {
           <div class="user-statistic">
 
             <div class="user-score">{{ referralIncome1 }}</div>
-            <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
+            <img :src="tonSvg" style="width: 18px; height: 18px;" />
           </div>
         </div>
       </div>
@@ -175,7 +176,7 @@ onMounted(() => {
           <div class="user-statistic">
 
             <div class="user-score">{{ referralIncome2 }}</div>
-            <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
+            <img :src="tonSvg" style="width: 18px; height: 18px;" />
           </div>
         </div>
       </div>
@@ -204,7 +205,7 @@ onMounted(() => {
           <div class="user-statistic">
 
             <div class="user-score">{{ referralIncome3 }}</div>
-            <img src="/icons/ton.svg" style="width: 18px; height: 18px;" />
+            <img :src="tonSvg" style="width: 18px; height: 18px;" />
           </div>
         </div>
       </div>

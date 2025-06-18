@@ -5,6 +5,7 @@ import UiButton from '@/shared/ui/UiButton.vue'
 import UiModal from '@/shared/ui/UiModal.vue'
 import AttackPlanetModal from '@/features/modals/AttackPlanetModal.vue'
 import CongratsDialog from '@/features/dialogs/CongratsDialog.vue'
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 
 import PlanetImage1 from '@/shared/assets/planets/planet-1/level-0.png'
 import PlanetImage2 from '@/shared/assets/planets/planet-2/level-0.png'
@@ -78,7 +79,7 @@ const fixedPoints = [
 
       <div class="level-reward">
         +100
-        <img src="/icons/ton.svg" alt="TON" class="reward-icon" />
+        <img :src="tonSvg" alt="TON" class="reward-icon" />
       </div>
     </div>
 

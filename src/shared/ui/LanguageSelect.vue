@@ -3,6 +3,10 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ArrowDownIcon from '@/shared/assets/icons/chevron-down.svg'
 
+import en from '@/shared/assets/images/icons/en.svg?url'
+import ru from '@/shared/assets/images/icons/ru.svg?url'
+import ua from '@/shared/assets/images/icons/ua.svg?url'
+
 interface Flag {
   code: string
   label: string
@@ -20,12 +24,10 @@ const { locale } = useI18n()
 const isOpen = ref<boolean>(false)
 const containerRef = ref<HTMLElement | null>(null)
 
-const getFlagUrl = (lang: Language): string => `/icons/${lang}.svg`
-
 const flags: Flag[] = [
-  { code: Language.EN, label: 'English', src: getFlagUrl(Language.EN) },
-  { code: Language.RU, label: 'Русский', src: getFlagUrl(Language.RU) },
-  { code: Language.UA, label: 'Українська', src: getFlagUrl(Language.UA) },
+  { code: Language.EN, label: 'English', src: en },
+  { code: Language.RU, label: 'Русский', src: ru },
+  { code: Language.UA, label: 'Українська', src: ua },
 ]
 
 const currentLang = (localStorage.getItem('lang') as Language) || Language.RU
@@ -59,7 +61,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
 })
-
 </script>
 
 <template>
@@ -73,7 +74,12 @@ onBeforeUnmount(() => {
 
     <transition name="fade-slide">
       <div v-if="isOpen" class="dropdown">
-        <div v-for="flag in flags" :key="flag.code" @click="selectFlag(flag)" class="dropdown-item">
+        <div
+          v-for="flag in flags"
+          :key="flag.code"
+          @click="selectFlag(flag)"
+          class="dropdown-item"
+        >
           <img :src="flag.src" :alt="flag.label" class="flag-img" />
         </div>
       </div>
@@ -93,7 +99,6 @@ onBeforeUnmount(() => {
   border: 1px solid #32315f;
   background: #19243b;
   border-radius: 10px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,10 +110,6 @@ onBeforeUnmount(() => {
   width: 24px;
   height: 16px;
   object-fit: cover;
-
-  img {
-    width: 24px;
-  }
 }
 
 .arrow {

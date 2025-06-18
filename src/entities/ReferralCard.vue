@@ -9,6 +9,7 @@ export interface Referral {
 interface ReferralCardProps {
   referral: Referral
 }
+import tonSvg from '@/shared/assets/images/icons/ton.svg?url';
 
 defineProps<ReferralCardProps>()
 </script>
@@ -22,7 +23,7 @@ defineProps<ReferralCardProps>()
       </div>
       <div class="referral-balance">
         {{ referral.balance }}
-        <img src="/icons/ton.svg" alt="TON" class="balance-icon" />
+        <img :src="tonSvg" alt="TON" class="balance-icon" />
       </div>
     </div>
   </div>
